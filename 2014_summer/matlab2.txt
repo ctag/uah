@@ -1,0 +1,350 @@
+Christopher Bero
+MA244 - Summer 2014
+Due 7/17/2014
+
+===============
+== Problem 1 ==
+=============== 
+
+-->mtx1 = [3 1 -3 11 10;
+-->5 8 2 -2 7;
+-->2 5 0 -4 14;]
+ mtx1  =
+ 
+    3.    1.  - 3.    11.    10.  
+    5.    8.    2.  - 2.     7.   
+    2.    5.    0.  - 4.     14.  
+ 
+-->mtx1_rr = rref(mtx1)
+ mtx1_rr  =
+ 
+    1.    0.    0.    3.4716981  - 3.  
+    0.    1.    0.  - 2.1886792    4.  
+    0.    0.    1.  - 0.9245283  - 5.  
+ 
+x5 = r;
+x4 = t;
+x3 = 5r + (0.9245283)t
+x2 = -4r + (2.1886792)t
+x1 = 3r - (3.4716981)t
+
+x = { r(3, -4, 5, 0, 1), t(-3.4716981, 2.1886792, 0.9245283, 1, 0) }
+
+1.a:
+Basis of solution space: 
+{ (3, -4, 5, 0, 1), (-3.4716981, 2.1886792, 0.9245283, 1, 0) }
+
+1.b:
+Cannot be a basis for R5 because there are only 2 elements of the basis, 
+and R5 has dimension 5.
+
+-->mtx1B = [3 -4 5 0 1;
+-->-3.4716981 2.1886792 0.9245283 1 0;]
+ mtx1B  =
+ 
+    3.         - 4.           5.           0.    1.  
+  - 3.4716981    2.1886792    0.9245283    1.    0.  
+ 
+-->mtx1ci = [5 -10 19 2 3]
+ mtx1ci  =
+ 
+    5.  - 10.    19.    2.    3.  
+
+Set up system to determine if x is in Span(B):
+3(x1) 	+ -3.4716981(x2)= 5
+-4(x1) 	+ 2.1886792(x2)	= -10
+5(x1) 	+ 0.9245283(x2) = 19
+0(x1) 	+ 1(x2) 	= 2
+1(x1) 	+ 0(x2) 	= 3
+
+-->mtx1ci_ans = rref([mtx1B' mtx1ci'])
+ mtx1ci_ans  =
+ 
+    1.    0.    0.  
+    0.    1.    0.  
+    0.    0.    1.  <- Inconsistent system
+    0.    0.    0.  
+    0.    0.    0.  
+
+1.ci:
+x cannot be in Span(B) and therefore is not in the solution space of the system. 
+
+-->mtx1cii = [7 5 2 -4 3]
+ mtx1cii  =
+ 
+    7.    5.    2.  - 4.    3.  
+
+Set up system to determine if x is in Span(B):
+3(x1) 	+ -3.4716981(x2)= 7
+-4(x1) 	+ 2.1886792(x2)	= 5
+5(x1) 	+ 0.9245283(x2) = 2
+0(x1) 	+ 1(x2) 	= -4
+1(x1) 	+ 0(x2) 	= 3
+
+-->mtx1cii_ans = rref([mtx1B' mtx1cii'])
+ mtx1cii_ans  =
+ 
+    1.    0.    0.  
+    0.    1.    0.  
+    0.    0.    1.  <- Inconsistent system
+    0.    0.    0.  
+    0.    0.    0.  
+
+1.cii:
+x cannot be in Span(B) and therefore is not in the solution space of the system.
+
+===============
+== Problem 2 ==
+===============
+ 
+-->mtx2v1 = [1 2 3 4]
+ mtx2v1  =
+ 
+    1.    2.    3.    4.  
+ 
+-->mtx2v2 = [5 6 7 8]
+ mtx2v2  =
+ 
+    5.    6.    7.    8.  
+ 
+-->mtx2v3 = [-3 4 -2 1]
+ mtx2v3  =
+ 
+  - 3.    4.  - 2.    1.  
+ 
+-->mtx2v4 = [2 10 5 9]
+ mtx2v4  =
+ 
+    2.    10.    5.    9.  
+ 
+-->mtx2vans = rref([mtx2v1' mtx2v2' mtx2v3' mtx2v4'])
+ mtx2vans  =
+ 
+    1.    0.    0.    0.  
+    0.    1.    0.    1.         
+    0.    0.    1.    1.         
+    0.    0.    0.    0.    
+ 
+2.a:
+Solution has free variables, the elements are not linearly independant.
+T={v1, v2, v3, v4} cannot be a basis for M(2x2).
+
+-->mtx2u1 = [2 4 -4 8]
+ mtx2u1  =
+ 
+    2.    4.  - 4.    8.  
+ 
+-->mtx2u2 = [2 2 1 1]
+ mtx2u2  =
+ 
+    2.    2.    1.    1.  
+ 
+-->mtx2u3 = [-1 0 0 2]
+ mtx2u3  =
+ 
+  - 1.    0.    0.    2.  
+ 
+-->mtx2u4 = [5 -2 7 1]
+ mtx2u4  =
+ 
+    5.  - 2.    7.    1.  
+ 
+-->mtx2uans = rref([mtx2u1' mtx2u2' mtx2u3' mtx2u4'])
+ mtx2uans  =
+ 
+    1.    0.    0.    0.  
+    0.    1.    0.    0.  
+    0.    0.    1.    0.  
+    0.    0.    0.    1.  
+
+2.a:
+Solution has no free variables, the elements are linearly independant.
+S={u1, u2, u3, u4} can be a basis for M(2x2).
+
+To find if w=[4 20 0 8] as a linear combination of S:
+2(x1)+	2(x2)+	-1(x3)+	5(x4)	= 4
+4(x1)+	2(x2)+	0(x3)+	-2(x4)	= 20
+-4(x1)+	1(x2)+	0(x3)+	7(x4)	= 0
+8(x1)+	1(x2)+	2(x3)+	1(x4)	= 8
+
+-->mtx2bw = [4 20 0 8]
+ mtx2bw  =
+ 
+    4.    20.    0.    8.  
+ 
+-->mtx2uans = rref([mtx2u1' mtx2u2' mtx2u3' mtx2u4' mtx2bw'])
+ mtx2uans  =
+ 
+    1.    0.    0.    0.  - 1.   
+    0.    1.    0.    0.    10.  
+    0.    0.    1.    0.    4.   
+    0.    0.    0.    1.  - 2.   
+
+2.b:
+matrix w as a linear combination of S:
+-1(u1) + 10(u2) + 4(u3) + -2(u4) = w
+
+-->mtx2cw = [4 20 0 8]
+ mtx2cw  =
+ 
+    4.    20.    0.    8.  
+ 
+To transition basis from standard to S:
+P(S<-Canonical) = [S|C] = [I|P] = [P] = [inv(S)]
+
+-->mtx2S = [2 2 -1 5; 4 2 0 -2; -4 1 0 7; 8 1 2 1]
+ mtx2S  =
+ 
+    2.    2.  - 1.    5.  
+    4.    2.    0.  - 2.  
+  - 4.    1.    0.    7.  
+    8.    1.    2.    1.  
+ 
+-->mtx2Sinv = inv(mtx2S)
+ mtx2Sinv  =
+ 
+    0.1428571  - 0.1071429  - 0.1428571    0.0714286  
+  - 0.1785714    0.5714286    0.3035714  - 0.0892857  
+  - 0.5357143    0.2142857    0.4107143    0.2321429  
+    0.1071429  - 0.1428571    0.0178571    0.0535714  
+ 
+-->mtx2cwS = mtx2Sinv * mtx2cw'
+ mtx2cwS  =
+ 
+  - 1.   
+    10.  
+    4.   
+  - 2.   
+ 
+2.c:
+[w]S =	[-1 10]
+	[4  -2]
+
+===============
+== Problem 3 ==
+===============
+
+-->mtx3A = [4 0 6 9 15; 4 1 12 20 28; 2 -2 11 10 14; 3 -2 2 10 5; -2 2 -4 -6 -3]
+ mtx3A  =
+ 
+    4.    0.    6.     9.     15.  
+    4.    1.    12.    20.    28.  
+    2.  - 2.    11.    10.    14.  
+    3.  - 2.    2.     10.    5.   
+  - 2.    2.  - 4.   - 6.   - 3.   
+ 
+-->mtx3a = (7*eye(5,5)) - mtx3A
+ mtx3a  =
+ 
+    3.    0.  - 6.   - 9.   - 15.  
+  - 4.    6.  - 12.  - 20.  - 28.  
+  - 2.    2.  - 4.   - 10.  - 14.  
+  - 3.    2.  - 2.   - 3.   - 5.   
+    2.  - 2.    4.     6.     10.  
+ 
+-->mtx3a_rr = rref(mtx3a)
+ mtx3a_rr  =
+ 
+    1.    0.    0.    0.    2.  
+    0.    1.    0.    0.    4.  
+    0.    0.    1.    0.    2.  
+    0.    0.    0.    1.    1.  
+    0.    0.    0.    0.    0.  
+
+x5 = r
+x4 = -r
+x3 = -2r
+x2 = -4r
+x1 = -2r
+
+3.a:
+x = { r(-2, -4, -2, -1, 1) }
+Basis for the solution space: { (-2, -4, -2, -1, 1) }
+
+-->mtx3b = (5*eye(5,5)) - mtx3A
+ mtx3b  =
+ 
+    1.    0.  - 6.   - 9.   - 15.  
+  - 4.    4.  - 12.  - 20.  - 28.  
+  - 2.    2.  - 6.   - 10.  - 14.  
+  - 3.    2.  - 2.   - 5.   - 5.   
+    2.  - 2.    4.     6.     8.   
+ 
+-->mtx3b_rr = rref(mtx3b)
+ mtx3b_rr  =
+ 
+    1.    0.    0.    3.    3.  
+    0.    1.    0.    4.    5.  
+    0.    0.    1.    2.    3.  
+    0.    0.    0.    0.    0.  
+    0.    0.    0.    0.    0.  
+ 
+x5 = r
+x4 = t
+x3 = -3r -2t
+x2 = -5r -4t
+x1 = -3r -3t
+
+3.b:
+x = { r(-3, -5, -3, 0, 1), t(-3, -4, -2, 1, 0) }
+Basis for the solution space: { (-3, -5, -3, 0, 1), (-3, -4, -2, 1, 0) }
+
+-->mtx3c = (3*eye(5,5)) - mtx3A
+ mtx3c  =
+ 
+  - 1.    0.  - 6.   - 9.   - 15.  
+  - 4.    2.  - 12.  - 20.  - 28.  
+  - 2.    2.  - 8.   - 10.  - 14.  
+  - 3.    2.  - 2.   - 7.   - 5.   
+    2.  - 2.    4.     6.     6.   
+ 
+-->mtx3c_rr = rref(mtx3c)
+ mtx3c_rr  =
+ 
+    1.    0.    0.    3.    3.  
+    0.    1.    0.    2.    4.  
+    0.    0.    1.    1.    2.  
+    0.    0.    0.    0.    0.  
+    0.    0.    0.    0.    0.  
+ 
+x5 = r
+x4 = t
+x3 = -2r -1t
+x2 = -4r -2t
+x1 = -3r -3t
+
+3.c:
+x = { r(-3, -4, -2, 0, 1), t(-3, -2, -1, 1, 0) }
+Basis for the solution space: { (-3, -4, -2, 0, 1), (-3, -2, -1, 1, 0) }
+
+-->mtx3P = [-2 -4 -2 -1 1; -3 -5 -3 0 1; -3 -4 -2 1 0; -3 -4 -2 0 1; 
+-->-3 -2 -1 1 0]
+ mtx3P  =
+ 
+  - 2.  - 4.  - 2.  - 1.    1.  
+  - 3.  - 5.  - 3.    0.    1.  
+  - 3.  - 4.  - 2.    1.    0.  
+  - 3.  - 4.  - 2.    0.    1.  
+  - 3.  - 2.  - 1.    1.    0.  
+ 
+-->mtx3P = mtx3P'
+ mtx3P  =
+ 
+  - 2.  - 3.  - 3.  - 3.  - 3.  
+  - 4.  - 5.  - 4.  - 4.  - 2.  
+  - 2.  - 3.  - 2.  - 2.  - 1.  
+  - 1.    0.    1.    0.    1.  
+    1.    1.    0.    1.    0.  
+ 
+3.d:
+-->mtx3D = (inv(mtx3P)*mtx3A*mtx3P)
+ mtx3D  =
+ 
+    7.    0.    0.    0.    0.  
+    0.    5.    0.    0.    0.         
+    0.    0.    5.    0.    0.  
+    0.    0.    0.    3.    0.  
+    0.    0.    0.    0.    3.         
+ 
+
+-->exec('SCI/etc/scilab.quit','errcatch',-1);quit;

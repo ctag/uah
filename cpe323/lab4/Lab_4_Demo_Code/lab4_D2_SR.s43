@@ -1,0 +1,33 @@
+/*------------------------------------------------------------------------------
+* Program  : Subroutine that sumps up two integer arrays
+* Input    : The input parameters are:
+              R12 -- array starting address
+              R13 -- the number of elements (assume it is =>1)
+              R14 -- dispay ID (0 for P1&P2 and 1 for P3&P4)
+* Output   : No output parameters
+*------------------------------------------------------------------------------*/
+#include "msp430.h"                     ; #define controlled include file	
+
+    PUBLIC suma_rp
+
+	RSEG CODE
+
+suma_rp:
+        ; save the register R7 on the stack
+        PUSH.W    R7                      ; temporal sum
+        CLR     R7
+lnext:  ADD     @R12+, R7
+        DEC     R13
+        JNZ     lnext
+        BIT     #1, R14                 ; display on P1&P2
+        JNZ     lp34                    ; it's P3&P4
+        MOV.B   R7, P1OUT
+        SWPB    R7
+        MOV.B   R7, P2OUT
+        JMP     lend
+lp34:   MOV.B   R7, P3OUT
+        SWPB    R7
+        MOV.B   R7, P4OUT
+lend:   POP     R7                      ; restore R7
+        RET
+        END

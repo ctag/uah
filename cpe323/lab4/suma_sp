@@ -1,0 +1,25 @@
+#include "msp430.h"
+#PUBLIC suma_sp
+#RSEG CODE
+
+suma_sp:
+	PUSH	R6
+	PUSH	R7
+	
+	CLR		R8
+	CLR		R7
+	CLR		R5
+	
+	MOV		8(SP), R6
+	MOV		10(SP), R7
+	
+lnext:	ADD	R6, R5
+		DEC	R7
+		JNZ	lnext
+	
+	
+	POP		R7
+	POP		R6
+	
+	END
+	

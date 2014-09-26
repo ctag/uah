@@ -1,0 +1,1 @@
+-->exec('SCI/etc/scilab.quit','errcatch',-1);quit;
