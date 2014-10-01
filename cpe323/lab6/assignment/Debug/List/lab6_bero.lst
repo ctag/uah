@@ -1,0 +1,392 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V6.10.2.50871/W32 for MSP430         30/Sep/2014  15:15:25
+# Copyright 1996-2014 IAR Systems AB.
+# Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.10
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  D:\uah\cpe323\lab6\assignment\lab6_bero.c
+#    Command line  =  
+#        D:\uah\cpe323\lab6\assignment\lab6_bero.c -lCN
+#        D:\uah\cpe323\lab6\assignment\Debug\List\ -o
+#        D:\uah\cpe323\lab6\assignment\Debug\Obj\ --no_cse --no_unroll
+#        --no_inline --no_code_motion --no_tbaa --debug -D__MSP430FG4618__ -e
+#        --double=32 --dlib_config "C:\Program Files (x86)\IAR Systems\Embedded
+#        Workbench 7.0\430\lib\dlib\dl430xlsfn.h" --core=430X
+#        --data_model=small -On --multiplier=16 --segment __data16=DATA16
+#        --segment __data20=DATA20 --code_model=large
+#    List file     =  D:\uah\cpe323\lab6\assignment\Debug\List\lab6_bero.lst
+#    Object file   =  D:\uah\cpe323\lab6\assignment\Debug\Obj\lab6_bero.r43
+#
+###############################################################################
+
+D:\uah\cpe323\lab6\assignment\lab6_bero.c
+      1          /*****************************************************************************
+      2           *   TI Experimenter board demo, lab6
+      3           *
+      4           *   Description: 
+      5           *
+      6           *                 MSP430xG461x
+      7           *             -----------------
+      8           *         /|\|                 |
+      9           *          | |                 |
+     10           *          --|RST           |
+     11           P1.0|-->SW1
+     12           P1.1|-->SW2
+     13           *            |             P2.2|-->LED1(GREEN)
+     14           *            |             P2.1|-->LED2(YELLOW)
+     15           *
+     16           *   Christopher Bero <csb0019@uah.edu>
+     17           ****************************************************************************/
+     18          
+     19          #include  <msp430xG46x.h>
+
+   \                                 In  segment DATA16_AN, at 0x50
+   \   unsigned char volatile SCFI0
+   \                     SCFI0:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x52
+   \   unsigned char volatile SCFQCTL
+   \                     SCFQCTL:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x53
+   \   unsigned char volatile FLL_CTL0
+   \                     FLL_CTL0:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x20
+   \   unsigned char const volatile P1IN
+   \                     P1IN:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x23
+   \   unsigned char volatile P1IFG
+   \                     P1IFG:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x24
+   \   unsigned char volatile P1IES
+   \                     P1IES:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x25
+   \   unsigned char volatile P1IE
+   \                     P1IE:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x29
+   \   unsigned char volatile P2OUT
+   \                     P2OUT:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x2a
+   \   unsigned char volatile P2DIR
+   \                     P2DIR:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x160
+   \   unsigned short volatile TACTL
+   \                     TACTL:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x162
+   \   unsigned short volatile TACCTL0
+   \                     TACCTL0:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x172
+   \   unsigned short volatile TACCR0
+   \                     TACCR0:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x120
+   \   unsigned short volatile WDTCTL
+   \                     WDTCTL:
+   \   000000                DS8 2
+     20          
+     21          #define SW1 0x01&P1IN		// B1 - P1.0 switch SW1 
+     22          #define SW2 0x02&P1IN		// B2 - P1.1 switch SW2
+     23          
+
+   \                                 In  segment DATA16_Z, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_zero
+     24          volatile int timerCount = 0;
+   \                     timerCount:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_I, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_copy
+     25          volatile int previousClock = 60;
+   \                     previousClock:
+   \   000000                DS8 2
+   \   000002                REQUIRE `?<Initializer for previousClock>`
+
+   \                                 In  segment DATA16_Z, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_zero
+     26          volatile short int sw2interrupt = 0;
+   \                     sw2interrupt:
+   \   000000                DS8 2
+     27          
+
+   \                                 In  segment CODE, align 2
+     28          void main(void) 
+   \                     main:
+     29          { 
+     30             WDTCTL = WDTPW + WDTHOLD;		// Stop watchdog timer 
+   \   000000   B240805A2001 MOV.W   #0x5a80, &0x120
+     31          
+     32          	FLL_CTL0 |= XCAP18PF;	// Set load capacitance for xtal
+   \   000006   F2D030005300 BIS.B   #0x30, &0x53
+     33          	SCFI0 |= FN_2;					// x2 DCO, 4MHz nominal DCO
+   \   00000C   E2D25000     BIS.B   #0x4, &0x50
+     34          	SCFQCTL = 60;					// (60+1) x 32768 ~~ 2 MHz
+   \   000010   F2403C005200 MOV.B   #0x3c, &0x52
+     35             
+     36          	P2DIR |= 0x06; 		    // Set P2.1 and P2.2 to output direction (0000_0110) 
+   \   000016   F2D006002A00 BIS.B   #0x6, &0x2a
+     37          	P2OUT = 0x02; 		// Set P2OUT to 0000_0010b (LED2 is ON, LED1 is OFF)
+   \   00001C   E2432900     MOV.B   #0x2, &0x29
+     38          	
+     39          	// Screw the loops, we're using TimerA to control out LEDs
+     40          	TA0CCR0 |= 40000-1;		// See below
+   \   000020   B2D03F9C7201 BIS.W   #0x9c3f, &0x172
+     41          		// ACLK ~ 33KHz & SMCLK ~ 2MHz
+     42          		// So we trigger every 32,768 clicks to achieve 1Hz blink (1 second on, 1 second off) with ACLK
+     43          		// Or every 2,000,000 clicks for SMCLK (the one we have to use)
+     44          		// The register value cannot exceed ~60,000, so we must use 40,000 and count to 50
+     45          		// But we really want a 2Hz blink (0.5 sec on, 0.5 sec off), so we only count to 25
+     46          	TA0CCTL0 |= CCIE;		// Enable the clock interrupt
+   \   000026   B2D010006201 BIS.W   #0x10, &0x162
+     47          	TA0CTL |= TASSEL_2 + MC_1;		// Choose SMCLK as the clock, change to TASSEL_1 for ACLK	
+   \   00002C   B2D010026001 BIS.W   #0x210, &0x160
+     48          
+     49          	_EINT();					// Enable interrupts
+   \   000032   32D2         EINT
+     50          	P1IE |= 0x0003;				// P1.0 interrupt enabled
+   \   000034   F2D003002500 BIS.B   #0x3, &0x25
+     51          	P1IES |= 0x0003;			// P1.0 hi -> low edge
+   \   00003A   F2D003002400 BIS.B   #0x3, &0x24
+     52          	P1IFG &= ~0x0003;		// Clear P1.0 IFG
+   \   000040   F2F0FC002300 AND.B   #0xfc, &0x23
+     53          	
+     54          	// P1IE |= BIT0;				// P1.1 interrupt enabled
+     55          	// P1IES |= BIT0;			// P1.1 hi -> low edge
+     56          	// P1IFG &= ~BIT0;		// Clear P1.1 IFG
+     57          	
+     58          	for (;;) { 
+     59          		if ((SW2) != 0 && (sw2interrupt == 1))
+   \                     ??main_0:
+   \   000046   E2B32000     BIT.B   #0x2, &0x20
+   \   00004A   FD2B         JNC     ??main_0
+   \   00004C   9293....     CMP.W   #0x1, &sw2interrupt
+   \   000050   FA23         JNE     ??main_0
+     60          		{
+     61          			SCFQCTL = previousClock;
+   \   000052   1E42....     MOV.W   &previousClock, R14
+   \   000056   C24E5200     MOV.B   R14, &0x52
+     62                                  sw2interrupt = 0;
+   \   00005A   8243....     MOV.W   #0x0, &sw2interrupt
+   \   00005E   F33F         JMP     ??main_0
+   \   000060                REQUIRE WDTCTL
+   \   000060                REQUIRE FLL_CTL0
+   \   000060                REQUIRE SCFI0
+   \   000060                REQUIRE SCFQCTL
+   \   000060                REQUIRE P2DIR
+   \   000060                REQUIRE P2OUT
+   \   000060                REQUIRE TACCR0
+   \   000060                REQUIRE TACCTL0
+   \   000060                REQUIRE TACTL
+   \   000060                REQUIRE P1IE
+   \   000060                REQUIRE P1IES
+   \   000060                REQUIRE P1IFG
+   \   000060                REQUIRE P1IN
+     63          		}
+     64          	} 
+     65          
+     66          }
+     67          
+     68          // Port 1 interrupt service
+     69          #pragma vector = PORT1_VECTOR
+
+   \                                 In  segment ISR_CODE, align 2
+     70          __interrupt void Port1_ISR (void)
+   \                     Port1_ISR:
+     71          {
+   \   000000   0F12         PUSH.W  R15
+     72          	if ((SW1) == 0 && (SW2) != 0)
+   \   000002   D2B32000     BIT.B   #0x1, &0x20
+   \   000006   122C         JC      ??Port1_ISR_0
+   \   000008   E2B32000     BIT.B   #0x2, &0x20
+   \   00000C   0F28         JNC     ??Port1_ISR_0
+     73          	{
+     74          		if (SCFQCTL == 60)
+   \   00000E   F2903C005200 CMP.B   #0x3c, &0x52
+   \   000014   0420         JNE     ??Port1_ISR_1
+     75          		{
+     76          			SCFQCTL = 120;			// Set clock to 4Mhz
+   \   000016   F24078005200 MOV.B   #0x78, &0x52
+   \   00001C   073C         JMP     ??Port1_ISR_0
+     77          		} 
+     78          		else if (SCFQCTL == 120)
+   \                     ??Port1_ISR_1:
+   \   00001E   F29078005200 CMP.B   #0x78, &0x52
+   \   000024   0320         JNE     ??Port1_ISR_0
+     79          		{
+     80          			SCFQCTL = 60;			// Set clock to 2Mhz
+   \   000026   F2403C005200 MOV.B   #0x3c, &0x52
+     81          		}
+     82          	}
+     83          	
+     84          	if ((SW2) == 0 && (SW1) != 0)
+   \                     ??Port1_ISR_0:
+   \   00002C   E2B32000     BIT.B   #0x2, &0x20
+   \   000030   0D2C         JC      ??Port1_ISR_2
+   \   000032   D2B32000     BIT.B   #0x1, &0x20
+   \   000036   0A28         JNC     ??Port1_ISR_2
+     85          	{
+     86          		previousClock = SCFQCTL;
+   \   000038   5F425200     MOV.B   &0x52, R15
+   \   00003C   4F4F         MOV.B   R15, R15
+   \   00003E   824F....     MOV.W   R15, &previousClock
+     87          		sw2interrupt = 1;
+   \   000042   9243....     MOV.W   #0x1, &sw2interrupt
+     88                          
+     89          		SCFQCTL = 30;			// Set clock to 1Mhz
+   \   000046   F2401E005200 MOV.B   #0x1e, &0x52
+     90          		
+     91          		// while ((SW2) == 0)
+     92          		// {
+     93          			
+     94          		// }
+     95          		
+     96          		// SCFQCTL = previousClock;
+     97          	}
+     98              P1IFG &= ~BIT1;		// Clear P1.0 IFG
+   \                     ??Port1_ISR_2:
+   \   00004C   E2C32300     BIC.B   #0x2, &0x23
+     99          	P1IFG &= ~BIT0;		// Clear P1.0 IFG
+   \   000050   D2C32300     BIC.B   #0x1, &0x23
+    100          }
+   \   000054   3F41         POP.W   R15
+   \   000056   0013         RETI
+   \   000058                REQUIRE P1IN
+   \   000058                REQUIRE SCFQCTL
+   \   000058                REQUIRE P1IFG
+    101          
+    102          // TimerA interrupt service
+    103          #pragma vector=TIMER0_A0_VECTOR
+
+   \                                 In  segment ISR_CODE, align 2
+    104             __interrupt void Timer0_A0 (void) {
+   \                     Timer0_A0:
+    105           
+    106              timerCount++;
+   \   000000   9253....     ADD.W   #0x1, &timerCount
+    107          	
+    108          	if (timerCount == 25)
+   \   000004   B2901900.... CMP.W   #0x19, &timerCount
+   \   00000A   0520         JNE     ??Timer0_A0_0
+    109          	{
+    110          		P2OUT ^= 0x06;
+   \   00000C   F2E006002900 XOR.B   #0x6, &0x29
+    111          		timerCount = 0;
+   \   000012   8243....     MOV.W   #0x0, &timerCount
+    112          	}
+    113          }
+   \                     ??Timer0_A0_0:
+   \   000016   0013         RETI
+   \   000018                REQUIRE P2OUT
+
+   \                                 In  segment INTVEC, offset 0x28, root
+   \                     `??Port1_ISR??INTVEC 40`:
+   \   000028   ....         DC16    Port1_ISR
+
+   \                                 In  segment INTVEC, offset 0x2c, root
+   \                     `??Timer0_A0??INTVEC 44`:
+   \   00002C   ....         DC16    Timer0_A0
+
+   \                                 In  segment DATA16_ID, align 2, align-sorted
+   \                     `?<Initializer for previousClock>`:
+   \   000000   3C00         DC16 60
+    114          
+    115          
+    116          
+    117          
+    118          
+    119          
+    120          
+    121          
+    122          
+    123          
+    124          
+    125          
+    126          
+    127          
+    128          
+    129          
+    130          
+    131          
+    132          
+    133          
+    134          
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+      6   Port1_ISR
+      4   Timer0_A0
+      4   main
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       2  ?<Initializer for previousClock>
+       2  ??Port1_ISR??INTVEC 40
+       2  ??Timer0_A0??INTVEC 44
+       1  FLL_CTL0
+       1  P1IE
+       1  P1IES
+       1  P1IFG
+       1  P1IN
+       1  P2DIR
+       1  P2OUT
+      88  Port1_ISR
+       1  SCFI0
+       1  SCFQCTL
+       2  TACCR0
+       2  TACCTL0
+       2  TACTL
+      24  Timer0_A0
+       2  WDTCTL
+      96  main
+       2  previousClock
+       2  sw2interrupt
+       2  timerCount
+
+ 
+  96 bytes in segment CODE
+  17 bytes in segment DATA16_AN
+   2 bytes in segment DATA16_I
+   2 bytes in segment DATA16_ID
+   4 bytes in segment DATA16_Z
+   4 bytes in segment INTVEC
+ 112 bytes in segment ISR_CODE
+ 
+ 208 bytes of CODE  memory
+   2 bytes of CONST memory (+  4 bytes shared)
+   6 bytes of DATA  memory (+ 17 bytes shared)
+
+Errors: none
+Warnings: none
