@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
  *   lab6, TI experimenter board project
  *
  *   Desc:	This program closely follows the guidelines set for
@@ -6,17 +6,18 @@
  *			SW1 and SW2 are interrupt enabled and each affects
  * 			the controller's clock to adjust the blink rate of LED1&2
  *
- *           [MSP430xG461x]
- *     .   .-------._.-------.
- *    /|\  |                 |
- *     |   |                 |
- *     `---|RST              |
- *         |            P1.0 |-->SW1 (labeled)
- *         |            P1.1 |-->SW2 (labeled)
- *         |                 |
- *         |            P2.2 |-->LED1 (GREEN)
- *         |            P2.1 |-->LED2 (YELLOW)
- *         \_________________/   
+ *   .----._.-----.
+ *   |MSP430xG461x|
+ *   |            |
+ *   |        RST |-->
+ *   |            |
+ *   |       P1.0 |-->SW1 (labeled)
+ *   |       P1.1 |-->SW2 (labeled)
+ *   |            |
+ *   |       P2.2 |-->LED1 (GREEN)
+ *   |       P2.1 |-->LED2 (YELLOW)
+ *   |            |
+ *   \____________/ 
  * 
  *   Christopher Bero <csb0019@uah.edu>
  **********************************************************************/
@@ -42,11 +43,11 @@ void main ( void )
 	SCFI0 |= FN_2;			// x2 DCO, 4MHz nominal DCO
 	SCFQCTL = 60;			// (60+1) x 32768 ~~ 2 MHz
 	
-	P2DIR |= 0x06; 		    // Set P2.1 and P2.2 to output direction (0000_0110) 
+	P2DIR |= 0x06;		// Set P2.1 and P2.2 to output direction (0000_0110) 
 	P2OUT = 0x02; 		// Set P2OUT to 0000_0010b (LED2 is ON, LED1 is OFF)
 	
 	// Screw looping, I'm using TimerA to control LEDs
-	TA0CCR0 |= 40000-1;		// See below
+	TA0CCR0 |= 40000-1;	// See below
 		// ACLK ~ 33KHz & SMCLK ~ 2MHz
 		// So we trigger every 32,768 clicks to achieve 1Hz blink (1 second on, 1 second off) with ACLK
 		// Or every 2,000,000 clicks for SMCLK (the one we have to use)
@@ -55,10 +56,10 @@ void main ( void )
 	TA0CCTL0 |= CCIE;			// Enable the clock interrupt
 	TA0CTL |= TASSEL_2 + MC_1;	// Choose SMCLK as the clock, change to TASSEL_1 for ACLK	
 
-	_EINT();				// Enable interrupts
-	P1IE |= 0x0003;			// P1.0 interrupt enabled
-	P1IES |= 0x0003;		// P1.0 hi -> low edge
-	P1IFG &= ~0x0003;		// Clear P1.0 IFG
+	_EINT();			// Enable interrupts
+	P1IE |= 0x0003;		// P1.0 interrupt enabled
+	P1IES |= 0x0003;	// P1.0 hi -> low edge
+	P1IFG &= ~0x0003;	// Clear P1.0 IFG
 	
 	while (1) 
 	{
@@ -69,7 +70,6 @@ void main ( void )
 			sw2Interrupt = 0;
 		}
 	}
-
 }
 
 /*
@@ -78,36 +78,35 @@ void main ( void )
 #pragma vector = PORT1_VECTOR
 __interrupt void Port1_ISR (void)
 {
-  // Constant delay debounce, arbitrary looper value, revise later
-  int factor = (SCFQCTL / 30);
-  int looper = (20 * factor);
-  
-  for (int c = 0; c < looper; c++)
-  {
-    asm("NOP");
-  }
+	// Constant delay debounce, arbitrary looper value
+	int factor = (SCFQCTL / 30);
+	int looper = (20 * factor);
+	
+	for (int c = 0; c < looper; c++)
+	{
+		asm("NOP");
+	}
   
 	if (((SW1) == 0) && ((SW2) != 0))
 	{
 		if (SCFQCTL == 60)
 		{
-			SCFQCTL = 120;			// Set clock to 4Mhz
+			SCFQCTL = 120;	// Set clock to 4Mhz
 		} 
 		else if (SCFQCTL == 120)
 		{
-			SCFQCTL = 60;			// Set clock to 2Mhz
+			SCFQCTL = 60;	// Set clock to 2Mhz
 		}
 	}
-	
 	else if (((SW2) == 0) && ((SW1) != 0) && (sw2Interrupt == 0))
 	{
 		previousClock = SCFQCTL;
 		sw2Interrupt = 1;
-                
-		SCFQCTL = 30;		// Set clock to 1Mhz
+		SCFQCTL = 30;	// Set clock to 1Mhz
 	}
-		P1IFG &= ~BIT1;		// Clear P1.0 IFG
-		P1IFG &= ~BIT0;		// Clear P1.0 IFG
+	
+	P1IFG &= ~BIT1;		// Clear P1.0 IFG
+	P1IFG &= ~BIT0;		// Clear P1.0 IFG
 }
 
 /*
@@ -117,7 +116,6 @@ __interrupt void Port1_ISR (void)
 __interrupt void Timer0_A0 (void) 
 {
 	timerCount++;
-	
 	if (timerCount == 25)
 	{
 		P2OUT ^= 0x06;
@@ -125,14 +123,31 @@ __interrupt void Timer0_A0 (void)
 	}
 }
 
-/*****************
- * General Notes
- *****************
- * Idea:
- * Create project which expoits the 90 ms brain delay
- * 
- * Make sure to encapsulate comparisons with () when using && + ||
- * 
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
