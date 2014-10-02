@@ -2,7 +2,7 @@
 #                                                                              #
 #      IAR Universal Linker V6.0.0.46                                          #
 #                                                                              #
-#           Link time     =  30/Sep/2014  15:15:25                             #
+#           Link time     =  01/Oct/2014  16:12:36                             #
 #           Target CPU    =  MSP430                                            #
 #           List file     =  D:\uah\cpe323\lab6\assignment\Debug\List\lab_demo #
 #                            _c.map                                            #
@@ -247,31 +247,31 @@ DATA16_Z
                                                    main
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
-           sw2interrupt            1104 
+           sw2Interrupt            1104 
     -------------------------------------------------------------------------
 <CODE> 1 (was CODE)
-  Relative segment, address: 319A - 31F9 (0x60 bytes), align: 1
+  Relative segment, address: 31C8 - 3227 (0x60 bytes), align: 1
   Segment part 23.
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
-           main                    319A            Segment part 23 (?cstart)
+           main                    31C8            Segment part 23 (?cstart)
                CSTACK = 00000000 ( 00000004 )
     -------------------------------------------------------------------------
 ISR_CODE
-  Relative segment, address: 312A - 3181 (0x58 bytes), align: 1
+  Relative segment, address: 312A - 31AF (0x86 bytes), align: 1
   Segment part 22.            Intra module refs:   Port1_ISR::??INTVEC 40
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
            Port1_ISR               312A 
                interrupt function
-               CSTACK = 00000000 ( 00000006 )
+               CSTACK = 00000000 ( 0000000C )
     -------------------------------------------------------------------------
 ISR_CODE
-  Relative segment, address: 3182 - 3199 (0x18 bytes), align: 1
+  Relative segment, address: 31B0 - 31C7 (0x18 bytes), align: 1
   Segment part 21.            Intra module refs:   Timer0_A0::??INTVEC 44
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
-           Timer0_A0               3182 
+           Timer0_A0               31B0 
                interrupt function
                CSTACK = 00000000 ( 00000004 )
     -------------------------------------------------------------------------
@@ -303,11 +303,11 @@ DATA16_ID
   SEGMENTS IN THE MODULE
   ======================
 <CODE> 1 (was CODE)
-  Relative segment, address: 3242 - 3243 (0x2 bytes), align: 1
+  Relative segment, address: 328C - 328D (0x2 bytes), align: 1
   Segment part 2.
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
-           __DebugBreak            3242            __exit (?__exit)
+           __DebugBreak            328C            __exit (?__exit)
 
     -------------------------------------------------------------------------
   LIBRARY MODULE, NAME : ?__exit
@@ -315,11 +315,11 @@ DATA16_ID
   SEGMENTS IN THE MODULE
   ======================
 <CODE> 1 (was CODE)
-  Relative segment, address: 31FA - 3211 (0x18 bytes), align: 1
+  Relative segment, address: 3244 - 325B (0x18 bytes), align: 1
   Segment part 2.
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
-           __exit                  31FA            Segment part 6 (?_exit)
+           __exit                  3244            Segment part 6 (?_exit)
                                                    _exit (?_exit)
                calls direct
 
@@ -329,14 +329,14 @@ DATA16_ID
   SEGMENTS IN THE MODULE
   ======================
 <CODE> 1 (was CODE)
-  Relative segment, address: 323A, align: 1
+  Relative segment, address: 3284, align: 1
   Segment part 0.
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
-           _exit                   323A            exit (?exit)
+           _exit                   3284            exit (?exit)
     -------------------------------------------------------------------------
 <CODE> 1 (was CODE)
-  Relative segment, address: 323A - 323D (0x4 bytes), align: 1
+  Relative segment, address: 3284 - 3287 (0x4 bytes), align: 1
   Segment part 6.             Intra module refs:   _exit
 
     -------------------------------------------------------------------------
@@ -374,7 +374,7 @@ CSTART
   Segment part 16.
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
-           ?cstart_init_zero       3106            sw2interrupt (lab6_bero)
+           ?cstart_init_zero       3106            sw2Interrupt (lab6_bero)
                                                    timerCount (lab6_bero)
     -------------------------------------------------------------------------
 CSTART
@@ -410,13 +410,26 @@ RESET
   SEGMENTS IN THE MODULE
   ======================
 <CODE> 1 (was CODE)
-  Relative segment, address: 3236 - 3239 (0x4 bytes), align: 1
+  Relative segment, address: 3280 - 3283 (0x4 bytes), align: 1
   Segment part 2.
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
-           exit                    3236            Segment part 23 (?cstart)
+           exit                    3280            Segment part 23 (?cstart)
                calls direct
                CSTACK = 00000000 ( 00000004 )
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : ?DivMod816u
+
+  SEGMENTS IN THE MODULE
+  ======================
+<CODE> 1 (was CODE)
+  Relative segment, address: 3228 - 3243 (0x1c bytes), align: 1
+  Segment part 0.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?DivMod8u               3228            Port1_ISR (lab6_bero)
+           ?DivMod16u              322C 
 
     -------------------------------------------------------------------------
   LIBRARY MODULE, NAME : ?memcpy
@@ -424,11 +437,11 @@ RESET
   SEGMENTS IN THE MODULE
   ======================
 <CODE> 1 (was CODE)
-  Relative segment, address: 3212 - 3223 (0x12 bytes), align: 1
+  Relative segment, address: 325C - 326D (0x12 bytes), align: 1
   Segment part 2.
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
-           memcpy                  3212            __data16_memcpy (?memzero)
+           memcpy                  325C            __data16_memcpy (?memzero)
                CSTACK = 00000000 ( 00000004 )
 
     -------------------------------------------------------------------------
@@ -437,19 +450,19 @@ RESET
   SEGMENTS IN THE MODULE
   ======================
 <CODE> 1 (was CODE)
-  Relative segment, address: 3224 - 3235 (0x12 bytes), align: 1
+  Relative segment, address: 326E - 327F (0x12 bytes), align: 1
   Segment part 4.
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
-           __data16_memzero        3224            ?cstart_init_zero (?cstart)
+           __data16_memzero        326E            ?cstart_init_zero (?cstart)
                CSTACK = 00000000 ( 00000004 )
     -------------------------------------------------------------------------
 <CODE> 1 (was CODE)
-  Relative segment, address: 323E - 3241 (0x4 bytes), align: 1
+  Relative segment, address: 3288 - 328B (0x4 bytes), align: 1
   Segment part 3.
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
-           __data16_memcpy         323E            ?cstart_init_copy (?cstart)
+           __data16_memcpy         3288            ?cstart_init_copy (?cstart)
                calls direct
                CSTACK = 00000000 ( 00000004 )
 
@@ -479,8 +492,8 @@ CSTACK                                 30B0 - 30FF              50   rel    1
 DATA16_C                                  3100                       dse    0
 DATA16_ID                              3100 - 3101               2   rel    1
 CSTART                                 3102 - 3129              28   rel    1
-ISR_CODE                               312A - 3199              70   rel    1
-<CODE> 1                               319A - 3243              AA   rel    1
+ISR_CODE                               312A - 31C7              9E   rel    1
+<CODE> 1                               31C8 - 328D              C6   rel    1
 INTVEC                                 FFC0 - FFED              2E   com    1
 RESET                                  FFFE - FFFF               2   rel    1
 
@@ -490,7 +503,7 @@ RESET                                  FFFE - FFFF               2   rel    1
                 *                                      *
                 ****************************************
 
- 370 bytes of CODE  memory
+ 444 bytes of CODE  memory
   86 bytes of DATA  memory (+ 17 absolute )
    2 bytes of CONST memory
 

@@ -63,7 +63,7 @@ void main ( void )
 	while (1) 
 	{
 		// Comming out of a SW2 interrupt once button is released
-		if ((SW2) != 0 && (sw2Interrupt == 1))
+		if (((SW2) != 0) && (sw2Interrupt == 1))
 		{
 			SCFQCTL = previousClock;
 			sw2Interrupt = 0;
@@ -78,7 +78,16 @@ void main ( void )
 #pragma vector = PORT1_VECTOR
 __interrupt void Port1_ISR (void)
 {
-	if ((SW1) == 0 && (SW2) != 0)
+  // Constant delay debounce, arbitrary looper value, revise later
+  int factor = (SCFQCTL / 30);
+  int looper = (20 * factor);
+  
+  for (int c = 0; c < looper; c++)
+  {
+    asm("NOP");
+  }
+  
+	if (((SW1) == 0) && ((SW2) != 0))
 	{
 		if (SCFQCTL == 60)
 		{
@@ -90,7 +99,7 @@ __interrupt void Port1_ISR (void)
 		}
 	}
 	
-	if ((SW2) == 0 && (SW1) != 0)
+	else if (((SW2) == 0) && ((SW1) != 0) && (sw2Interrupt == 0))
 	{
 		previousClock = SCFQCTL;
 		sw2Interrupt = 1;
@@ -119,10 +128,10 @@ __interrupt void Timer0_A0 (void)
 /*****************
  * General Notes
  *****************
- * 
+ * Idea:
  * Create project which expoits the 90 ms brain delay
  * 
- * 
+ * Make sure to encapsulate comparisons with () when using && + ||
  * 
  */
 
