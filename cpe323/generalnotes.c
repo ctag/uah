@@ -1,8 +1,19 @@
-/***********************************************
- * General Notes for C programming on MSP430
- ***********************************************
+/***********************************************************************
+ * 	            General Notes for programming on MSP430
+ ***********************************************************************
  * 
- *	TI Experimentor Board
+ * This C file is a list of notes taken by myself while
+ * 	trying to figure out what the heck is going on
+ * 	with this atrocity of msp programming.
+ * 
+ * This file is distributed as a free entity, 
+ * 	licensed under the GPL 2.0,
+ * 	and available for you (yes, you!) to use.
+ * 
+ * To use this file, place it in with your project,
+ * 	and reference as needed.
+ * 
+ *	TI Experimenter Board (the POS used in lab)
  *	.----._.-----.
  *	|MSP430xG461x|
  *	|            |
@@ -13,9 +24,11 @@
  *	|            |
  *	|       P2.2 |-->LED1 (GREEN)
  *	|       P2.1 |-->LED2 (YELLOW)
+ *	|            |
+ *	|       P3.5 |-->Buzzer
  *	.____.-._____.
  * 
- *	TI Launchpad
+ *	TI Launchpad (the $10 one)
  *	.---._.-----.
  *	|MSP430G2231|
  *	|           |
@@ -27,20 +40,37 @@
  *	.___.-._____.
  * 
  * Ideas:
- *	- Create project which expoits the ~90ms brain delay
+ *	- Create project which works with the ~90ms brain delay
  *	- Control a servo with a potentiometer
  * 
  * 
- * C Programming Points:
- * - Make sure to encapsulate comparisons with () when using && + ||
+ * General C Programming Points:
+ * - Make sure to encapsulate bitmask comparisons with () esp when using && and ||
+ * 		This is done incorrectly on the sample programs, and you should fix it.
+ * 		See page 48 in the Davies textbook. Seriously, read it.
+ * - #include <msp430.h>
+ * 		This is the correct way to include header files. Specify the model elsewhere.
+ * 		Also done improperly in sample programs.
  * - 'volatile' variables are ones which are changed outside the scope of the program.
  * 		These vars are kept in registers, and defeat a lot of optimizations.
+ * 		They do not have to be used for interrupt service routines :D
  * - && and || are boolean operators, meaning they operate on a value (A = 1001) as a whole.
- * 	- &(AND), |(OR), ^(XOR), ~(NOT) are bitwise operators, meaning they operate on each bit of a value. (B = 1010) A & B = 1000.
+ * 		&(AND), |(OR), ^(XOR), ~(NOT) are bitwise operators, 
+ * 		meaning they operate on each bit of a value. (B = 1010) A & B = 1000.
  * - BIT0 - BIT7 are bit masks, with zeros everywhere except the specified location. BIT3 = 00001000.
  * - 
  * 
- * MSP Specific Things:
+ * Bit Masks:
+ * A Byte: [0] [0] [0] [0] [0] [0] [0] [0] = 0x00
+ *          7   6   5   4   3   2   1   0
+ *         MSB                         LSB
+ * Got that? Good.
+ * 
+ * Common Bit Masks:
+ * - BIT0 through BIT7
+ * 		The digit corresponds to the '1' in a byte.
+ * 		For instance, BIT5 = [0] [0] [1] [0] [0] [0] [0] [0] = 0x20
+ * 		Read page 48 in the Davies textbook.
  * 
  * Timer_A:
  * 	- TACLK: clock input to the timer
@@ -66,8 +96,9 @@
  * 	- LIST tab: GENERATE LINKER LISTING and SEGMENT MAP and MODULE MAP
  * - debugger:
  * 	- SETUP tab: DRIVER set to SIMULATION
+ * 	- For FET debugging, set speed to max and turn on validation.
  * 
- * Naming Conventions:
+ * MSP Naming Convention:
  * - MSP: Mixed Signal Processor
  * - The letter after msp430 indicates type of memory.
  * 	- F: Flash memory
@@ -87,14 +118,14 @@
  * - MSP430FG4618: Flash memory, signal processing, can drive LCDs and has many pins.
  * - MSP430G2231: Unknown memory? Signal processing.
  * 
- * Registers (in all msp devices):
+ * Registers (consistent across msp devices):
  * - R0 / Program Counter / PC: Holds address of the next instruction.
  * - R1 / Stack Pointer / SP: Holds address of top of stack.
  * - R2 / Status Register / SR: Contains status flags.
  * - R3 / Constant Generator: Provides the six most frequently used values from RAM?
  * - R4 - R15: General Purpose Registers
  * 
- * Clocks (in all msp devices):
+ * Clocks (somewhat consistent across msp devices):
  * - Master Clock [MCLK]
  * - Subsystem Master Clock [SMCLK}
  * - Auxiliary Clock [ACLK]
