@@ -1,10 +1,29 @@
+The files in this project which were created by Christopher Bero are 
+free documents: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-Because academic honesty is such a disgusting bastard, and so poorly documented on my campus's 
-shiny new wordpress template, you are hereby forbade from even reading my homework, 
-which include all files in this cms. Seriously, why are you even here?
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-Unless of course it's one of the example programs by an instructor (we don't have much in the way of professors here) 
-or otherwise /not/ my work, in which case ask the cooresponding author for their license information 
-without opening the file first.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+-- extra licensing --
+
+Because academic honesty is such a disgusting bastard, 
+and so poorly documented on my campus's shiny new 
+wordpress template, you are hereby forbade from even reading 
+files with the intention of copying or stealing information 
+to change your grade.
+
+Files on this project which were /not/ created by 
+Christopher Bero fall under their prospective author's 
+licenses, which /should/ have been included in the file. 
+If it isn't, look up the author 
+(you know, without opening the file) and ask for a license.
 
 Good luck, and happy hacking!
