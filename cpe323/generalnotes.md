@@ -1,4 +1,6 @@
-## General Notes for programming MSP430
+## General Notes
+##### *for programming the stupendous MSP430*
+##### Last updated: 5/10/2014
 
 This markdown sheet is a list of notes taken by myself while
 trying to figure out what the heck is going on
@@ -42,16 +44,27 @@ with this atrocity of msp programming.
 * Make sure to encapsulate bitmask comparisons with () esp when using `&&` and `||`
 	* This is done incorrectly on the sample programs, and you should fix it.
 	* See page 48 in the Davies textbook. Seriously, read it.
-* `#include <msp430.h>` 
+* `#include <msp430.h>`
 	* This is the correct way to include header files. Specify the model elsewhere.
 	* Also done improperly in sample programs.
 * `volatile` variables are ones which are changed outside the scope of the program.
 	* These vars are kept in registers, and defeat a lot of optimizations.
 	* They do not have to be used for interrupt service routines :D
-* `&&` and `||` are boolean operators, meaning they operate on a value (A = 1001) as a whole.
+* `&&` and `||` are boolean operators, meaning they operate on a value as a whole.
 	* `&`(AND), `|`(OR), `^`(XOR), `~`(NOT) are bitwise operators, 
-	* meaning they operate on each bit of a value. (B = 1010) `A & B = 1000`.
-* BIT0 - BIT7 are bit masks, with zeros everywhere except the specified location. BIT3 = 00001000.
+		* meaning they operate on each bit of a value.
+* BIT0 - BIT7 are bit masks, with zeros everywhere except the specified location.
+	* i.e. BIT3 = 00001000.
+
+#### Bit Examples
+
+	B = 1010
+	A = 1001
+	
+	A & B = 1000
+	A | B = 1011
+	A ^ B = ????
+	A ~ B = ????
 
 ### Bit Masks
 
