@@ -38,18 +38,19 @@ with this atrocity of msp programming.
  
 * Create project which works with the ~90ms brain delay
 * Control a servo with a potentiometer
+* Create Neopixel lights for ACE's server room
 
 ### General C Programming Points
 
 * Make sure to encapsulate bitmask comparisons with () esp when using `&&` and `||`
-	* This is done incorrectly on the sample programs, and you should fix it.
+	* This is done **incorrectly** on the sample programs, and you should fix it.
 	* See page 48 in the Davies textbook. Seriously, read it.
 * `#include <msp430.h>`
 	* This is the correct way to include header files. Specify the model elsewhere.
 	* Also done improperly in sample programs.
 * `volatile` variables are ones which are changed outside the scope of the program.
 	* These vars are kept in registers, and defeat a lot of optimizations.
-	* They do not have to be used for interrupt service routines :D
+	* They do not have to be used for interrupt service routines (usually?)
 * `&&` and `||` are boolean operators, meaning they operate on a value as a whole.
 	* `&`(AND), `|`(OR), `^`(XOR), `~`(NOT) are bitwise operators, 
 		* meaning they operate on each bit of a value.
@@ -75,7 +76,9 @@ with this atrocity of msp programming.
 
 ### Common Bit Masks
 
-* BIT0 through BITF
+* BIT0 through BIT7
+	* Ostensibly, from the Davies text, these bitmasks exist up to BITF, 
+		but I haven't played with that yet.
 	* The digit corresponds to the '1' in a byte.
 	* For instance, `BIT5 = [0] [0] [1] [0] [0] [0] [0] [0] = 0x20`
 	* Read page 48 in the Davies textbook.
