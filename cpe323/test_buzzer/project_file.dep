@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<project>
+  <fileVersion>2</fileVersion>
+  <fileChecksum>3718202193</fileChecksum>
+  <configuration>
+    <name>Debug</name>
+    <outputs>
+      <file>$PROJ_DIR$\Debug\Obj\buzzerTest.r43</file>
+      <file>$PROJ_DIR$\Debug\Exe\project_file.ulp</file>
+      <file>$PROJ_DIR$\Debug\Exe\project_file.d43</file>
+      <file>$PROJ_DIR$\Debug\Obj\project_file.pbd</file>
+      <file>$PROJ_DIR$\Debug\Obj\buzzerTest.pbi</file>
+      <file>$PROJ_DIR$\buzzerTest.c</file>
+    </outputs>
+    <file>
+      <name>$PROJ_DIR$\buzzerTest.c</name>
+      <outputs>
+        <tool>
+          <name>ICC430</name>
+          <file> 0</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 4</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>[ROOT_NODE]</name>
+      <outputs>
+        <tool>
+          <name>XLINK</name>
+          <file> 2</file>
+        </tool>
+        <tool>
+          <name>ULP430</name>
+          <file> 1</file>
+        </tool>
+      </outputs>
+    </file>
+    <forcedrebuild>
+      <name>[MULTI_TOOL]</name>
+      <tool>XLINK</tool>
+    </forcedrebuild>
+  </configuration>
+  <configuration>
+    <name>Release</name>
+    <outputs/>
+    <forcedrebuild>
+      <name>[MULTI_TOOL]</name>
+      <tool>XLINK</tool>
+    </forcedrebuild>
+  </configuration>
+</project>
+
+
