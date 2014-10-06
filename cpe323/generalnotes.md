@@ -38,6 +38,8 @@ with this atrocity of msp programming.
 * Create project which works with the ~90ms brain delay
 * Control a servo with a potentiometer
 * Create Neopixel lights for ACE's server room
+* Take over the world
+* Build an autonomous car
 
 ### General C Programming Points
 
