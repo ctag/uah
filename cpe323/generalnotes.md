@@ -1,6 +1,5 @@
 ## General Notes
 ##### *for programming the stupendous MSP430*
-##### Last updated: 5/10/2014
 
 This markdown sheet is a list of notes taken by myself while
 trying to figure out what the heck is going on
@@ -89,6 +88,7 @@ with this atrocity of msp programming.
 	* TACTL: Timer_A Control 
 
 ### Registers (consistent across msp devices)
+
 * R0 / Program Counter / PC
 	* Holds address of the next instruction.
 * R1 / Stack Pointer / SP
@@ -101,11 +101,13 @@ with this atrocity of msp programming.
 	* General Purpose Registers
 
 ### Clocks (somewhat consistent across msp devices)
+
 * Master Clock [MCLK]
 * Subsystem Master Clock [SMCLK}
 * Auxiliary Clock [ACLK]
 
 ### IAR Bullshit (aka setup configs)
+
 * Create a project, open the options window
 * GENERAL
 	* TARGET: Set device to MSP430FG4618
@@ -125,6 +127,7 @@ with this atrocity of msp programming.
 	* FET debugging: set speed to max and turn on validation.
 
 ### MSP Naming Convention
+
 - MSP: Mixed Signal Processor
 - The letter after msp430 indicates type of memory.
 	- F: Flash memory
@@ -141,6 +144,7 @@ with this atrocity of msp programming.
 	- MSP430X: Original architecture. A part of the F2xx and F4xx lines.
 
 #### Lab devices
+
 - MSP430FG4618: Flash memory, signal processing, can drive LCDs and has many pins.
 - MSP430G2231: Unknown memory? Signal processing.
 
