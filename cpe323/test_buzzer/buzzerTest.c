@@ -2,11 +2,8 @@
  * A buzzer test. Nothing more.
  **********************************************************************/
 
-#include <msp430.h> // The correct include statement
-
-#define SW1 (0x01&P1IN)	// B1 - P1.0 switch SW1 
-#define SW2 (0x02&P1IN)	// B2 - P1.1 switch SW2
-
+#include <msp430.h> // The *correct* include statement
+ 
 const int freq_aclk = 32767;
 volatile int fractionOfSecond = 1000; // 1000 clicks from aclk
 volatile int adjustFactor = 1000; // Amount to change timerPeriod by
