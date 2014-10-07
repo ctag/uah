@@ -102,6 +102,12 @@ with this atrocity of msp programming.
 * R4 - R15
 	* General Purpose Registers
 
+### Interrupts
+
+Interrupts are maskable, meaning they only work when the General Interrupt Enable (GIE) bit is set in the Status Register (SR). This means that the enable bit in the local module, as well as the GIE must be set for interrupts to be handled.
+
+
+	
 ### Clocks (somewhat consistent across msp devices)
 
 * Basic Timer 1
@@ -210,6 +216,7 @@ If the watchdog is left running, the counter (WDTCNT) must be cleared before it 
 If the timer overflows and resets the system, it does so through a PUC, which leaves some register values intact. The timer sets WDTIFG flag on the register IFG1. This is cleared by a POR, but not PUC.
 
 WDT Interrupt Flag - WDTIFG - IFG1.0
+
 WDT Interrupt Enable - WDTIE - IE1.0
 
 ##### Assembly Software Examples

@@ -1,8 +1,8 @@
 /***********************************************************************
- * Title: TEST - Watchdog Reset (without interrupts)
+ * Title: TEST - Watchdog as Reset AND Interval Timer
  * Date Due: NEVAR!
  * 
- * Description:
+ * Description: (same as test_watchdog_reset)
  * This program will blink LED1 for a short period,
  * then settle down and keep the watchdog happy.
  * When SW1 is held, the watchdog is not taken care of,
@@ -26,7 +26,10 @@
 
 // Usage: WDTCTL = WDT_CONFIG;
 #define WDT_CONFIG (WDTPW|WDTCNTCL|WDTSSEL) // Set bits to give us 1s watchdog
+#define WDT_INTERVAL (WDTPW|WDTCNTCL|WDTTMSEL|WDTSSEL|WDTIS0) // Set bits to have a 1s timer
 #define WDT_HALT (WDTPW|WDTHOLD) // Set bits to halt the timer
+
+short unsigned int blink_count = 0;
 
 void blinky (); // function prototype, defined below main()
 
@@ -66,25 +69,40 @@ void main(void)
 
 void blinky (void)
 {
+	// Enable interrupts while we're blinking a light
+	__enable_interrupt();
+
+	// Halt the reset-ing watchdog
+	WDTCTL = WDT_HALT;
+	
+	P2OUT &= ~LED1; // LEDx is defined at top of program
+	
+	// Set up watchdog to be our timer!
+	WDTCTL = WDT_INTERVAL;
+	IE1 |= BIT0; // BIT0 is WDTIE
+	
 	// SCFQCTL defaults to 31.
 	// MCLK = (SCFQCTL + 1) * ACLK
 	int counter = (1000 * SCFQCTL); // Make our delays scale with MCLK
 	int blinks = 8; // Number of times to blink the LED1 * 2
 	
+	while (blink_count < blinks)
+	{
+		asm("NOP");
+	}
+	
 	P2OUT &= ~LED1; // LEDx is defined at top of program
 	
-	for (int c = 0; c < blinks; c++)
-	{
-		P2OUT ^= LED1;
-		for (unsigned int i = 0; i < counter; i++)
-		{
-			//asm("NOP");
-			WDTCTL = WDT_CONFIG; // Defined at top of program
-		}
-	}
+	WDTCTL = WDT_CONFIG;
+	__disable_interrupt();
 }
 
-
+#pragma vector = WDT_VECTOR
+__interrupt void blink_watchdog(void)
+{
+	P2OUT ^= LED1;
+	blink_count++;
+}
 
 
 
