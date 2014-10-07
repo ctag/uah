@@ -107,8 +107,13 @@ with this atrocity of msp programming.
 * Basic Timer 1
 * Watchdog Timer
 * Master Clock [MCLK]
-* Subsystem Master Clock [SMCLK}
+* Subsystem Master Clock [SMCLK]
 * Auxiliary Clock [ACLK]
+
+Defaults:
+
+- ACLK: 32,768Hz
+- MCLK, SMCLK: 1.048576 Mhz
 
 #### Watchdog
 

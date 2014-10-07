@@ -1,9 +1,13 @@
 /***********************************************************************
- * Title: TEST - Watchdog Reset
+ * Title: TEST - Watchdog Reset (without interrupts)
  * Date Due: NEVAR!
  * 
  * Description:
- * This program 
+ * This program will blink LED1 for a short period, then settle down
+ * and keep the watchdog happy.
+ * When SW1 is held, the watchdog is not taken care of,
+ * and if the switch is held for > 1s, the timer will overflow
+ * and the system will reset with a POR (I think).
  *
  * By: Christopher 'ctag' Bero <csb0019@uah.edu>
  * Project: https://github.com/ctag/uah
@@ -14,95 +18,71 @@
 
 #include <msp430.h> // The *correct* include statement
 
-#define SW1 (BIT0&P1IN)	// B1 - P1.0 switch SW1 
+#define SW1 (BIT0&P1IN)	// B1 - P1.0 switch SW1
 #define SW2 (BIT1&P1IN)	// B2 - P1.1 switch SW2
 
-#define LED1 BIT2;
-#define LED2 BIT1;
+#define LED1 BIT2; // LED1 - P2.2 - 0x04
+#define LED2 BIT1; // LED2 - P2.1 - 0x02
 
-// Another way of doing what's below
-// Usage: WDTCTL = WDTCONFIG;
-#define WDTCONFIG (WDTPW|WDTCNTCL|WDTSSEL)
+// Usage: WDTCTL = WDT_CONFIG;
+#define WDT_CONFIG (WDTPW|WDTCNTCL|WDTSSEL) // Set bits to give us 1s watchdog
+#define WDT_HALT (WDTPW|WDTHOLD) // Set bits to halt the timer
+
+void blinky ();
 
 void main(void)
 {
-	// We want a 1s watchdog. So,
-	// Clock: ACLK = 32,768 Hz. WDTSSEL = 1.
-	// Interval: 1 Hz = 32,768Hz / 32,768 cycles. WDTISx = 0x00, or 32,768 cycles.
-	WDTCTL = (WDTPW|WDTCNTCL|WDTSSEL);
+	WDTCTL = WDT_HALT; // Stop the watchdog, see #define above
 	
 	P2DIR |= LED1;
 	P2DIR |= LED2;
 	
-	P2OUT = LED1;
+	P2OUT = 0x0;
 	
 	P1IE |= 0x0003;		// P1.0 interrupt enabled
 	P1IES |= 0x0003;	// P1.0 hi -> low edge
 	P1IFG &= ~0x0003;	// Clear P1.0 IFG
 	
-	for (unsigned int i = 0; i < 60000; i++)
-	{
-		asm("NOP");
-	}
+	blinky();
 	
-	P2OUT ^= LED1;
-	
-	_EINT();			// Enable interrupts
-	//__enable_interrupt(); // Same as _EINT()?
-	
-	//IE1 |= WDTIE;                     // Enable WDT interrupt
-	//_BIS_SR(LPM0_bits + GIE);         // Enter LPM0 w/ interrupt
-
-	
+	// We want a 1s watchdog. So,
+	// Clock: ACLK = 32,768 Hz. WDTSSEL = 1.
+	// Interval: 1 Hz = 32,768Hz / 32,768 cycles. WDTISx = 0x00, or 32,768 cycles.
+	WDTCTL = (WDTPW|WDTCNTCL|WDTSSEL);
 	
 	while (1)
 	{
-		asm("NOP");
-		WDTCTL = WDTCONFIG;
-	}
-}
-
-/*
- * Watchdog Timer interrupt service routine
- */
-#pragma vector = WDT_VECTOR
-__interrupt void watchdog_timer(void)
-{
-
-}
-
-/*
- * Port 1 interrupt service routine
- */
-#pragma vector = PORT1_VECTOR
-__interrupt void Port1_ISR (void)
-{
-	// Constant delay debounce
-	//int factor = (SCFQCTL / 30);
-	//int looper = (20 * factor);
-	//for (int c = 0; c < looper; c++)
-	//{ asm("NOP"); }
-        
-      P2OUT = LED2;
-  
-	if (((SW1) == 0) && ((SW2) != 0)) // SW1 is pressed
-	{
-		while (((SW1) == 0) && ((SW2) != 0))
+		if (SW1 == 0)
 		{
-			asm("NOP");
+			while (SW1 == 0)
+			{
+				P2OUT = LED2;
+			}
 		}
-	} else if (((SW2) == 0) && ((SW1) != 0)) // SW2 is pressed
-	{
-	
+		P2OUT &= ~LED2;
+		WDTCTL = WDT_CONFIG;
 	}
-
-        P2OUT ^= LED2;
-        
-	P1IFG &= ~BIT1;		// Clear P1.1 IFG
-	P1IFG &= ~BIT0;		// Clear P1.0 IFG
 }
 
-
+void blinky (void)
+{
+	// SCFQCTL defaults to 31.
+	// MCLK = (SCFQCTL + 1) * ACLK
+	int counter = (1000 * SCFQCTL); // Make our delays scale with MCLK
+	int blinks = 8; // Number of times to blink the LED1 * 2
+	
+	P2OUT &= ~LED1; // LEDx must be defined
+	
+	for (int c = 0; c < blinks; c++)
+	{
+		P2OUT ^= LED1;
+		for (unsigned int i = 0; i < counter; i++)
+		{
+			//asm("NOP");
+			WDTCTL = WDT_CONFIG; // Must be defined
+		}
+	}
+}
 
 
 
