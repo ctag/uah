@@ -28,24 +28,24 @@
 #define WDT_CONFIG (WDTPW|WDTCNTCL|WDTSSEL) // Set bits to give us 1s watchdog
 #define WDT_HALT (WDTPW|WDTHOLD) // Set bits to halt the timer
 
-void blinky ();
+void blinky (); // function prototype, defined below main()
 
 void main(void)
 {
 	WDTCTL = WDT_HALT; // Stop the watchdog, see #define above
 	
-	P2DIR |= LED1;
-	P2DIR |= LED2;
+	P2DIR |= LED1; // Set LED1 to be output
+	P2DIR |= LED2; // Set LED2 to be output
 	
-	P2OUT = 0x0;
+	P2OUT = 0x0; // Turn off both LEDs
 	
 	P1IE |= 0x0003;		// P1.0 interrupt enabled
 	P1IES |= 0x0003;	// P1.0 hi -> low edge
 	P1IFG &= ~0x0003;	// Clear P1.0 IFG
 	
-	blinky();
+	blinky(); // Blink LED1
 	
-	// We want a 1s watchdog. So,
+	// We want a 1 second watchdog. So,
 	// Clock: ACLK = 32,768 Hz. WDTSSEL = 1.
 	// Interval: 1 Hz = 32,768Hz / 32,768 cycles. WDTISx = 0x00, or 32,768 cycles.
 	WDTCTL = (WDTPW|WDTCNTCL|WDTSSEL);
@@ -71,7 +71,7 @@ void blinky (void)
 	int counter = (1000 * SCFQCTL); // Make our delays scale with MCLK
 	int blinks = 8; // Number of times to blink the LED1 * 2
 	
-	P2OUT &= ~LED1; // LEDx must be defined
+	P2OUT &= ~LED1; // LEDx is defined at top of program
 	
 	for (int c = 0; c < blinks; c++)
 	{
@@ -79,7 +79,7 @@ void blinky (void)
 		for (unsigned int i = 0; i < counter; i++)
 		{
 			//asm("NOP");
-			WDTCTL = WDT_CONFIG; // Must be defined
+			WDTCTL = WDT_CONFIG; // Defined at top of program
 		}
 	}
 }
