@@ -1,0 +1,310 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V6.10.2.50871/W32 for MSP430         07/Oct/2014  13:51:36
+# Copyright 1996-2014 IAR Systems AB.
+# Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.10
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  D:\uah\cpe323\test_watchdog_reset\watchdog_reset.c
+#    Command line  =  
+#        D:\uah\cpe323\test_watchdog_reset\watchdog_reset.c -lCN
+#        D:\uah\cpe323\test_watchdog_reset\Debug\List\ -o
+#        D:\uah\cpe323\test_watchdog_reset\Debug\Obj\ --no_cse --no_unroll
+#        --no_inline --no_code_motion --no_tbaa --debug -D__MSP430FG4618__ -e
+#        --double=32 --dlib_config "C:\Program Files (x86)\IAR Systems\Embedded
+#        Workbench 7.0\430\lib\dlib\dl430xlsfn.h" --core=430X
+#        --data_model=small -On --multiplier=16 --segment __data16=DATA16
+#        --segment __data20=DATA20 --code_model=large
+#    List file     =  
+#        D:\uah\cpe323\test_watchdog_reset\Debug\List\watchdog_reset.lst
+#    Object file   =  
+#        D:\uah\cpe323\test_watchdog_reset\Debug\Obj\watchdog_reset.r43
+#
+###############################################################################
+
+D:\uah\cpe323\test_watchdog_reset\watchdog_reset.c
+      1          /***********************************************************************
+      2           * Title: TEST - Watchdog Reset
+      3           * Date Due: NEVAR!
+      4           * 
+      5           * Description:
+      6           * This program 
+      7           *
+      8           * By: Christopher 'ctag' Bero <csb0019@uah.edu>
+      9           * Project: https://github.com/ctag/uah
+     10           *
+     11           * This software is licensed under the GPLv3,
+     12           * consult the LICENSE file for more information.
+     13           **********************************************************************/
+     14          
+     15          #include <msp430.h> // The *correct* include statement
+
+   \                                 In  segment DATA16_AN, at 0x20
+   \   unsigned char const volatile P1IN
+   \                     P1IN:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x23
+   \   unsigned char volatile P1IFG
+   \                     P1IFG:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x24
+   \   unsigned char volatile P1IES
+   \                     P1IES:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x25
+   \   unsigned char volatile P1IE
+   \                     P1IE:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x29
+   \   unsigned char volatile P2OUT
+   \                     P2OUT:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x2a
+   \   unsigned char volatile P2DIR
+   \                     P2DIR:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x120
+   \   unsigned short volatile WDTCTL
+   \                     WDTCTL:
+   \   000000                DS8 2
+     16          
+     17          #define SW1 (BIT0&P1IN)	// B1 - P1.0 switch SW1 
+     18          #define SW2 (BIT1&P1IN)	// B2 - P1.1 switch SW2
+     19          
+     20          #define LED1 BIT2;
+     21          #define LED2 BIT1;
+     22          
+     23          // Another way of doing what's below
+     24          // Usage: WDTCTL = WDTCONFIG;
+     25          #define WDTCONFIG (WDTPW|WDTCNTCL|WDTSSEL)
+     26          
+
+   \                                 In  segment CODE, align 2
+     27          void main(void)
+   \                     main:
+     28          {
+     29          	// We want a 1s watchdog. So,
+     30          	// Clock: ACLK = 32,768 Hz. WDTSSEL = 1.
+     31          	// Interval: 1 Hz = 32,768Hz / 32,768 cycles. WDTISx = 0x00, or 32,768 cycles.
+     32          	WDTCTL = (WDTPW|WDTCNTCL|WDTSSEL);
+   \   000000   B2400C5A2001 MOV.W   #0x5a0c, &0x120
+     33          	
+     34          	P2DIR |= LED1;
+   \   000006   E2D22A00     BIS.B   #0x4, &0x2a
+     35                  P2DIR |= LED2;
+   \   00000A   E2D32A00     BIS.B   #0x2, &0x2a
+     36          	
+     37          	P2OUT = LED1;
+   \   00000E   E2422900     MOV.B   #0x4, &0x29
+     38          	
+     39          	P1IE |= 0x0003;		// P1.0 interrupt enabled
+   \   000012   F2D003002500 BIS.B   #0x3, &0x25
+     40          	P1IES |= 0x0003;	// P1.0 hi -> low edge
+   \   000018   F2D003002400 BIS.B   #0x3, &0x24
+     41          	P1IFG &= ~0x0003;	// Clear P1.0 IFG
+   \   00001E   F2F0FC002300 AND.B   #0xfc, &0x23
+     42          	
+     43          	for (unsigned int i = 0; i < 60000; i++)
+   \   000024   0F43         MOV.W   #0x0, R15
+   \                     ??main_0:
+   \   000026   3F9060EA     CMP.W   #0xea60, R15
+   \   00002A   032C         JC      ??main_2
+     44          	{
+     45          		asm("NOP");
+   \   00002C   0343         NOP
+     46          	}
+   \   00002E   1F53         ADD.W   #0x1, R15
+   \   000030   FA3F         JMP     ??main_0
+     47          	
+     48          	P2OUT ^= LED1;
+   \                     ??main_2:
+   \   000032   E2E22900     XOR.B   #0x4, &0x29
+     49          	
+     50          	_EINT();			// Enable interrupts
+   \   000036   32D2         EINT
+   \   000038   0343         NOP
+     51          	//__enable_interrupt(); // Same as _EINT()?
+     52          	
+     53          	//IE1 |= WDTIE;                     // Enable WDT interrupt
+     54          	//_BIS_SR(LPM0_bits + GIE);         // Enter LPM0 w/ interrupt
+     55          
+     56          	
+     57          	
+     58          	while (1)
+     59          	{
+     60          		asm("NOP");
+   \                     ??main_1:
+   \   00003A   0343         NOP
+     61          		WDTCTL = WDTCONFIG;
+   \   00003C   B2400C5A2001 MOV.W   #0x5a0c, &0x120
+   \   000042   FB3F         JMP     ??main_1
+   \   000044                REQUIRE WDTCTL
+   \   000044                REQUIRE P2DIR
+   \   000044                REQUIRE P2OUT
+   \   000044                REQUIRE P1IE
+   \   000044                REQUIRE P1IES
+   \   000044                REQUIRE P1IFG
+     62          	}
+     63          }
+     64          
+     65          /*
+     66           * Watchdog Timer interrupt service routine
+     67           */
+     68          #pragma vector = WDT_VECTOR
+
+   \                                 In  segment ISR_CODE, align 2
+     69          __interrupt void watchdog_timer(void)
+   \                     watchdog_timer:
+     70          {
+     71          
+     72          }
+   \   000000   0013         RETI
+     73          
+     74          /*
+     75           * Port 1 interrupt service routine
+     76           */
+     77          #pragma vector = PORT1_VECTOR
+
+   \                                 In  segment ISR_CODE, align 2
+     78          __interrupt void Port1_ISR (void)
+   \                     Port1_ISR:
+     79          {
+   \   000000   0E12         PUSH.W  R14
+     80          	// Constant delay debounce
+     81          	//int factor = (SCFQCTL / 30);
+     82          	//int looper = (20 * factor);
+     83          	//for (int c = 0; c < looper; c++)
+     84          	//{ asm("NOP"); }
+     85                  
+     86                P2OUT = LED2;
+   \   000002   E2432900     MOV.B   #0x2, &0x29
+     87            
+     88          	if (((SW1) == 0) && ((SW2) != 0)) // SW1 is pressed
+   \   000006   D2B32000     BIT.B   #0x1, &0x20
+   \   00000A   0B2C         JC      ??Port1_ISR_1
+   \   00000C   E2B32000     BIT.B   #0x2, &0x20
+   \   000010   0828         JNC     ??Port1_ISR_1
+     89          	{
+     90          		while (((SW1) == 0) && ((SW2) != 0))
+   \                     ??Port1_ISR_0:
+   \   000012   D2B32000     BIT.B   #0x1, &0x20
+   \   000016   0A2C         JC      ??Port1_ISR_2
+   \   000018   E2B32000     BIT.B   #0x2, &0x20
+   \   00001C   0728         JNC     ??Port1_ISR_2
+     91          		{
+     92          			asm("NOP");
+   \   00001E   0343         NOP
+   \   000020   F83F         JMP     ??Port1_ISR_0
+     93          		}
+     94          	} else if (((SW2) == 0) && ((SW1) != 0)) // SW2 is pressed
+   \                     ??Port1_ISR_1:
+   \   000022   E2B32000     BIT.B   #0x2, &0x20
+   \   000026   022C         JC      ??Port1_ISR_2
+   \   000028   5E422000     MOV.B   &0x20, R14
+     95          	{
+     96          	
+     97          	}
+     98          
+     99                  P2OUT ^= LED2;
+   \                     ??Port1_ISR_2:
+   \   00002C   E2E32900     XOR.B   #0x2, &0x29
+    100                  
+    101          	P1IFG &= ~BIT1;		// Clear P1.1 IFG
+   \   000030   E2C32300     BIC.B   #0x2, &0x23
+    102          	P1IFG &= ~BIT0;		// Clear P1.0 IFG
+   \   000034   D2C32300     BIC.B   #0x1, &0x23
+    103          }
+   \   000038   3E41         POP.W   R14
+   \   00003A   0013         RETI
+   \   00003C                REQUIRE P2OUT
+   \   00003C                REQUIRE P1IN
+   \   00003C                REQUIRE P1IFG
+
+   \                                 In  segment INTVEC, offset 0x28, root
+   \                     `??Port1_ISR??INTVEC 40`:
+   \   000028   ....         DC16    Port1_ISR
+
+   \                                 In  segment INTVEC, offset 0x34, root
+   \                     `??watchdog_timer??INTVEC 52`:
+   \   000034   ....         DC16    watchdog_timer
+    104          
+    105          
+    106          
+    107          
+    108          
+    109          
+    110          
+    111          
+    112          
+    113          
+    114          
+    115          
+    116          
+    117          
+    118          
+    119          
+    120          
+    121          
+    122          
+    123          
+    124          
+    125          
+    126          
+    127          
+    128          
+    129          
+    130          
+    131          
+    132          
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+      6   Port1_ISR
+      4   main
+      4   watchdog_timer
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       2  ??Port1_ISR??INTVEC 40
+       2  ??watchdog_timer??INTVEC 52
+       1  P1IE
+       1  P1IES
+       1  P1IFG
+       1  P1IN
+       1  P2DIR
+       1  P2OUT
+      60  Port1_ISR
+       2  WDTCTL
+      68  main
+       2  watchdog_timer
+
+ 
+ 68 bytes in segment CODE
+  8 bytes in segment DATA16_AN
+  4 bytes in segment INTVEC
+ 62 bytes in segment ISR_CODE
+ 
+ 130 bytes of CODE  memory
+   0 bytes of CONST memory (+ 4 bytes shared)
+   0 bytes of DATA  memory (+ 8 bytes shared)
+
+Errors: none
+Warnings: none

@@ -132,10 +132,10 @@ with this atrocity of msp programming.
 
 ##### Overview?
 
-	WDTCTL:
-	[15]-[8]		[7]			[6]			[5]			[4]			[3]			[2]			[1]-		-[0]
-	[WDTPW]			[WDTHOLD]	[WDTNMIES]	[WDTNMIES]	[WDTTMSEL]	[WDTCNTCL]	[WDTSSEL]	[WDTIS1]-	-[WDTIS0]
-					rw-(0)		rw-(0)		rw-(0)		rw-(0)		r0-(w)		rw-(0)		rw-(0)		 rw-(0)
+	WDTCTL Bits:
+	[15]-[8]	[7]			[6]			[5]			[4]			[3]			[2]			[1]-		-[0]
+	[WDTPW]		[WDTHOLD]	[WDTNMIES]	[WDTNMI]	[WDTTMSEL]	[WDTCNTCL]	[WDTSSEL]	[WDTIS1]-	-[WDTIS0]
+				rw-(0)		rw-(0)		rw-(0)		rw-(0)		r0-(w)		rw-(0)		rw-(0)		 rw-(0)
 
 - WDTPW 
 	- Watchdog timer password. Always read as 069h. Must be written as 05Ah, or a PUC is generated.
@@ -162,8 +162,8 @@ with this atrocity of msp programming.
 	- 1 WDTCNT = 0000h
 - WDTSSEL
 	- Watchdog timer clock source select
-	- 0 SMCLK
-	- 1 ACLK
+	- 0 SMCLK (~1 MHz)
+	- 1 ACLK (32,768 Hz)
 - WDTISx
 	- Watchdog timer interval select. These bits select the watchdog timer interval to set the WDTIFG flag and/or generate a PUC.
 	- 00 Watchdog clock source / 32768
@@ -195,6 +195,8 @@ The reset output can be selected from bits 6, 9, 13, 15 of the counter (WDTCNT),
 ##### Stopping the dog
 
 After every reset, the watchdog is running from the default clock (SMCLK, derived from DCO, ~1MHz) and with the default count value (32,768). So the period is the count value (32,768) times the period of the clock (1x10^-6), which is about 32.8 ms. So the timer must be stopped in under 30ms by setting the WDTHOLD bit.
+
+	WDTCTL = (WDTPW|WDTHOLD);
 
 ##### Using the watchdog interrupt
 
