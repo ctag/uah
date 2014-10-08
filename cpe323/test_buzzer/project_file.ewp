@@ -2147,7 +2147,7 @@
     </settings>
   </configuration>
   <file>
-    <name>$PROJ_DIR$\buzzerTest.c</name>
+    <name>$PROJ_DIR$\test_buzzer.c</name>
   </file>
 </project>
 
