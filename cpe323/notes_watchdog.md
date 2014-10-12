@@ -5,20 +5,20 @@
 - Four software-selectable time intervals (see WDTISx)
 - Watchdog Mode \**gasp*\*
 - Interval Mode
-- Access to WDT control register is password protected (the fuck?)
+- Access to WDT control register is password protected (what the hell?)
 - Control of RST/NMI pin function
 - Selectable clock source
 - Can be stopped to conserve power
 - Clock fail-safe feature in WDT+ (plz no)
 
-##### Registers
+##### Register Definitions
 
 	Register							Short Form		Address		Initial State
 	Watchdog timer control register		WDTCTL			0x0120		0x06900 w/ PUC
 	SFR Interrupt Enable Register 1		IE1				0x0000		Reset w/ PUC
 	SFR Interrupt Flag Register 1		IFG1			0x0002		Reset w/ PUC
 
-##### Overview?
+##### Register Overview
 
 	WDTCTL Bits:
 	[15]-[8]	[7]			[6]			[5]			[4]			[3]			[2]			[1]-		-[0]
