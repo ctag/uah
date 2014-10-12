@@ -1,10 +1,6 @@
 ## General Notes
 ##### *Remember: it's not magic*
 
-This markdown sheet is a list of notes taken by myself while
-trying to figure out what the heck is going on
-with this atrocity of msp programming.
-
 The most important thing to remember is that this *isn't magic*. 
 I feel that the class is doing a poor job of enabling a constructive 
 view and approach of programming this microcontroller. There are a few 

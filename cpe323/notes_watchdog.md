@@ -3,7 +3,7 @@
 ##### Features of the watchdog timer:
 
 - Four software-selectable time intervals (see WDTISx)
-- Watchdog Mode (*gasp*)
+- Watchdog Mode \**gasp*\*
 - Interval Mode
 - Access to WDT control register is password protected (the fuck?)
 - Control of RST/NMI pin function
