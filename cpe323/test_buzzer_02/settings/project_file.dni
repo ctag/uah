@@ -8,6 +8,46 @@ UseTrigger=1
 TriggerName=main
 LimitSize=0
 ByteLimit=50
+[DebugChecksum]
+Checksum=-925410374
+[CallStackLog]
+Enabled=0
+[CallStack]
+ShowArgs=0
+[Disassembly]
+MixedMode=1
+[DriverProfiling]
+Enabled=0
+Mode=1
+Graph=0
+Symbiont=0
+Exclusions=
+[InterruptLog]
+LogEnabled=0
+SumEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+ShowTimeSum=1
+SumSortOrder=0
+[DataLog]
+LogEnabled=0
+SumEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+ShowTimeSum=1
+[Breakpoints2]
+Count=0
+[Interrupts]
+Enabled=1
+[MemoryMap]
+Enabled=0
+Base=0
+UseAuto=0
+TypeViolation=1
+UnspecRange=1
+ActionState=1
+[Simulator]
+Freq=1000000
 [State Storage]
 Control Register=-1
 [EEM State Storage]
@@ -21,14 +61,8 @@ Break=0
 State Storage=0
 [NumberOfSequencerBp]
 Number=4
-[DebugChecksum]
-Checksum=-482832899
 [EEM Sequencer]
 Buffer=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-[CallStack]
-ShowArgs=0
-[Disassembly]
-MixedMode=1
 [watch_formats]
 Fmt0={W}0:TBCCR4	4	0
 Fmt1={W}0:TBCCTL4	4	0

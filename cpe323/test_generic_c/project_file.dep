@@ -5,7 +5,9 @@
   <fileChecksum>76410098</fileChecksum>
   <configuration>
     <name>Debug</name>
-    <outputs/>
+    <outputs>
+      <file>$PROJ_DIR$\main_code.c</file>
+    </outputs>
   </configuration>
   <configuration>
     <name>Release</name>
