@@ -21,14 +21,14 @@
 ##### Register Overview
 
 	WDTCTL Bits:
-	[15]-[8]	[7]			[6]			[5]			[4]			[3]			[2]			[1]-		-[0]
-	[WDTPW]		[WDTHOLD]	[WDTNMIES]	[WDTNMI]	[WDTTMSEL]	[WDTCNTCL]	[WDTSSEL]	[WDTIS1]-	-[WDTIS0]
+	[15]-[8]	[7]			[6]			[5]			[4]			[3]			[2]			[1]			[0]
+	[WDTPW]		[WDTHOLD]	[WDTNMIES]	[WDTNMI]	[WDTTMSEL]	[WDTCNTCL]	[WDTSSEL]	[WDTIS1]	[WDTIS0]
 				rw-(0)		rw-(0)		rw-(0)		rw-(0)		r0-(w)		rw-(0)		rw-(0)		 rw-(0)
 
 - WDTPW 
 	- Watchdog timer password. Always read as 069h. Must be written as 05Ah, or a PUC is generated.
 - WDTHOLD 
-	- Watchdog timer hold. This bit stops the watchdog timer. Setting
+	- Watchdog timer hold. This bit stops the watchdog timer.
 	- WDTHOLD = 1 when the WDT is not in use conserves power.
 	- 0 Watchdog timer is not stopped
 	- 1 Watchdog timer is stopped
@@ -99,7 +99,7 @@ WDT Interrupt Enable - WDTIE - IE1.0
 ##### Assembly Software Examples
 
 	; Periodically clear an active watchdog
-	MOV #WDTPW+WDTCNTCL,&WDTCTL ; THIS IS WRONG D: and given by Ti as an example...
+	;MOV #WDTPW+WDTCNTCL,&WDTCTL ; THIS IS WRONG. And given by Ti as an example...
 	
 	; Change watchdog timer interval
 	MOV #WDTPW+WDTCNTL+WDTSSEL,&WDTCTL
