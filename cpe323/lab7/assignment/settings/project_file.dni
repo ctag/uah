@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=893988457
+Checksum=-1059416682
 [CallStackLog]
 Enabled=0
 [CallStack]
@@ -68,7 +68,8 @@ Fmt0={W}0:TBCCR4	4	0
 Fmt1={W}0:TBCCTL4	4	0
 Fmt2={W}0:TBCTL	4	0
 [Breakpoints]
-Count=0
+Bp0=_ "STD_CODE" "{$PROJ_DIR$\lab7_assignment.c}.137.2" 1 0 0 0 "" 0 ""
+Count=1
 [FET]
 Clock mode=46
 Extended Clock mode=24791

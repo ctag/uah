@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR C/C++ Compiler V6.10.2.50871/W32 for MSP430         13/Oct/2014  17:38:20
+# IAR C/C++ Compiler V6.10.2.50871/W32 for MSP430         13/Oct/2014  18:00:08
 # Copyright 1996-2014 IAR Systems AB.
 # Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.10
 #
@@ -53,6 +53,11 @@ D:\uah\cpe323\lab7\assignment\lab7_assignment.c
      21           **********************************************************************/
      22          
      23          #include <msp430.h> // The *correct* include statement
+
+   \                                 In  segment DATA16_AN, at 0x0
+   \   unsigned char volatile IE1
+   \                     IE1:
+   \   000000                DS8 1
 
    \                                 In  segment DATA16_AN, at 0x1a
    \   unsigned char volatile P3DIR
@@ -164,148 +169,153 @@ D:\uah\cpe323\lab7\assignment\lab7_assignment.c
      50          void main(void)
    \                     main:
      51          {
-     52          	WDTCTL = WDT_CONFIG;
-   \   000000   B2400C5A2001 MOV.W   #0x5a0c, &0x120
-     53          	
-     54          	P3DIR |= BIT5; // Set P3.5 to OUT
-   \   000006   F2D020001A00 BIS.B   #0x20, &0x1a
-     55          	P3SEL |= BIT5; // Setup the special TB4 function of P3.5
-   \   00000C   F2D020001B00 BIS.B   #0x20, &0x1b
-     56          	
-     57          	/* // Setup Timer_B's TBCTL
-     58          	// BITs Mapping for TxCTLx:
-     59          	//	[15]	[14]	[13]	[12]	[11]	[10]	[9]		[8]
-     60          	//	NA		NA		NA		NA		NA		NA		TASSEL	TASSEL
-     61          	//	0		0		0		0		0		0		0		1
-     62          	//
-     63          	//	[7]		[6]		[5]		[4]		[3]		[2]		[1]		[0]
-     64          	//	ID		ID		MC		MC		NA		TACLR	TAIE	TAIFG
-     65          	//	0		1		0		1		0		0		0		0
-     66          	//
-     67          	// Condensed: [0000][0001] [0101][0000]
+     52          	WDTCTL = WDT_INTERVAL;
+   \   000000   B2401D5A2001 MOV.W   #0x5a1d, &0x120
+     53          	IE1 |= BIT0; // BIT0 is WDTIE
+   \   000006   D2D30000     BIS.B   #0x1, &0x0
+     54          	__enable_interrupt();
+   \   00000A   32D2         EINT
+     55          	
+     56          	P3DIR |= BIT5; // Set P3.5 to OUT
+   \   00000C   F2D020001A00 BIS.B   #0x20, &0x1a
+     57          	P3SEL |= BIT5; // Setup the special TB4 function of P3.5
+   \   000012   F2D020001B00 BIS.B   #0x20, &0x1b
+     58          	
+     59          	/* // Setup Timer_B's TBCTL
+     60          	// BITs Mapping for TxCTLx:
+     61          	//	[15]	[14]	[13]	[12]	[11]	[10]	[9]		[8]
+     62          	//	NA		NA		NA		NA		NA		NA		TASSEL	TASSEL
+     63          	//	0		0		0		0		0		0		0		1
+     64          	//
+     65          	//	[7]		[6]		[5]		[4]		[3]		[2]		[1]		[0]
+     66          	//	ID		ID		MC		MC		NA		TACLR	TAIE	TAIFG
+     67          	//	0		1		0		1		0		0		0		0
      68          	//
-     69          	// Specifics:
-     70          	// TASSELx = 01, ACLK
-     71          	// IDx = 01, divide ACLK by 2, ACLK/2 = 16,384
-     72          	// MCx = 01, UP mode
-     73          	*/
-     74          	TBCTL = 0x0150;
-   \   000012   B24050018001 MOV.W   #0x150, &0x180
-     75          	
-     76          	/* // Choosing a value for TBCCR0:
-     77          	// This is a little tricky, because you can tackle this problem
-     78          	// from a multitude of angles, and the one I chose is likely non-standard,
-     79          	// but makes much more sense to me.
-     80          	// So, TBCCR0 represents the period out of 16,384 which we wish
-     81          	// for the speaker to be pulsed each second. A value of 16,384 means
-     82          	// the speaker will click once per second. A value of 16 means the
-     83          	// speaker will click about 1000 times per second, which is an audible tone!
-     84          	//
-     85          	// The formula:
-     86          	// TBCCR0 = [ACLK = 16384] / [desired freq in Hz]
-     87          	//
-     88          	// So, for 900Hz, TBCCR0 = [16384] / [900] = 18.2 = 18.
-     89          	*/
-     90          	TBCCR0 = 19;
-   \   000018   B24013009201 MOV.W   #0x13, &0x192
-     91          	
-     92          	/* // Setup Timer_B's TBCCTL4
-     93          	// BITs Mapping for TxCTLx:
-     94          	//	[15]	[14]	[13]	[12]	[11]	[10]	[9]		[8]
-     95          	//	CM		CM		CCIS	CCIS	SCS		CCLD	CCLD	CAP
-     96          	//	0		0		0		0		0		0		0		0
-     97          	//
-     98          	//	[7]		[6]		[5]		[4]		[3]		[2]		[1]		[0]
-     99          	//	OUTMOD	OUTMOD	OUTMOD	CCIE	CCI		OUT		COV		CCIFG
-    100          	//	1		0		0		0		0		0		0		0
-    101          	//
-    102          	// Condensed: [0000][0000] [1000][0000]
+     69          	// Condensed: [0000][0001] [0101][0000]
+     70          	//
+     71          	// Specifics:
+     72          	// TASSELx = 01, ACLK
+     73          	// IDx = 01, divide ACLK by 2, ACLK/2 = 16,384
+     74          	// MCx = 01, UP mode
+     75          	*/
+     76          	TBCTL = 0x0150;
+   \   000018   B24050018001 MOV.W   #0x150, &0x180
+     77          	
+     78          	/* // Choosing a value for TBCCR0:
+     79          	// This is a little tricky, because you can tackle this problem
+     80          	// from a multitude of angles, and the one I chose is likely non-standard,
+     81          	// but makes much more sense to me.
+     82          	// So, TBCCR0 represents the period out of 16,384 which we wish
+     83          	// for the speaker to be pulsed each second. A value of 16,384 means
+     84          	// the speaker will click once per second. A value of 16 means the
+     85          	// speaker will click about 1000 times per second, which is an audible tone!
+     86          	//
+     87          	// The formula:
+     88          	// TBCCR0 = [ACLK = 16384] / [desired freq in Hz]
+     89          	//
+     90          	// So, for 900Hz, TBCCR0 = [16384] / [900] = 18.2 = 18.
+     91          	*/
+     92          	TBCCR0 = 19;
+   \   00001E   B24013009201 MOV.W   #0x13, &0x192
+     93          	
+     94          	/* // Setup Timer_B's TBCCTL4
+     95          	// BITs Mapping for TxCTLx:
+     96          	//	[15]	[14]	[13]	[12]	[11]	[10]	[9]		[8]
+     97          	//	CM		CM		CCIS	CCIS	SCS		CCLD	CCLD	CAP
+     98          	//	0		0		0		0		0		0		0		0
+     99          	//
+    100          	//	[7]		[6]		[5]		[4]		[3]		[2]		[1]		[0]
+    101          	//	OUTMOD	OUTMOD	OUTMOD	CCIE	CCI		OUT		COV		CCIFG
+    102          	//	1		0		0		0		0		0		0		0
     103          	//
-    104          	// Specifics:
-    105          	// OUTx = 100, Toggle mode (on TB4 of course) 
-    106          	*/
-    107          	TBCCTL4 = 0x0080;
-   \   00001E   B24080008A01 MOV.W   #0x80, &0x18a
-    108          	
-    109          	TBCCR4 = 1; // doesn't matter, can be any valid value
-   \   000024   92439A01     MOV.W   #0x1, &0x19a
+    104          	// Condensed: [0000][0000] [1000][0000]
+    105          	//
+    106          	// Specifics:
+    107          	// OUTx = 100, Toggle mode (on TB4 of course) 
+    108          	*/
+    109          	TBCCTL4 = 0x0080;
+   \   000024   B24080008A01 MOV.W   #0x80, &0x18a
     110          	
-    111          	while (1)
-    112          	{
-    113          		while (new_note_flag == 0)
+    111          	TBCCR4 = 1; // doesn't matter, can be any valid value
+   \   00002A   92439A01     MOV.W   #0x1, &0x19a
+    112          	
+    113          	while (1)
+    114          	{
+    115          		while (new_note_flag == 0)
    \                     ??main_1:
-   \   000028   8293....     CMP.W   #0x0, &new_note_flag
-   \   00002C   0220         JNE     ??main_3
-    114          		{
-    115          			asm("NOP");
-   \   00002E   0343         NOP
-   \   000030   FB3F         JMP     ??main_1
-    116          		}
-    117          		new_note_flag = 0;
+   \   00002E   8293....     CMP.W   #0x0, &new_note_flag
+   \   000032   0220         JNE     ??main_3
+    116          		{
+    117          			asm("NOP");
+   \   000034   0343         NOP
+   \   000036   FB3F         JMP     ??main_1
+    118          		}
+    119          		new_note_flag = 0;
    \                     ??main_3:
-   \   000032   8243....     MOV.W   #0x0, &new_note_flag
-    118          		
-    119          		for (int i = 0; i < notes_len; i++)
-   \   000036   0F43         MOV.W   #0x0, R15
+   \   000038   8243....     MOV.W   #0x0, &new_note_flag
+    120          		
+    121          		for (int i = 0; i < notes_len; i++)
+   \   00003C   0F43         MOV.W   #0x0, R15
    \                     ??main_2:
-   \   000038   1F92....     CMP.W   &notes_len, R15
-   \   00003C   F537         JGE     ??main_1
-    120          		{
-    121          			if (notes[i] == note)
-   \   00003E   DF92........ CMP.B   &note, notes(R15)
-   \   000044   0F20         JNE     ??main_4
-    122          			{
-    123          				TBCCR0 = (16384 / freq[i]);
-   \   000046   5F06         RLAM.W  #0x2, R15
-   \   000048   1E4F....     MOV.W   freq(R15), R14
-   \   00004C   1F4F....     MOV.W   freq + 2(R15), R15
-   \   000050   0C43         MOV.W   #0x0, R12
-   \   000052   3D408046     MOV.W   #0x4680, R13
-   \   000056   ........     CALLA   #_Div32f
-   \   00005A   ........     CALLA   #_Cast32fto32u
-   \   00005E   824C9201     MOV.W   R12, &0x192
-    124          				break;
-   \   000062   E23F         JMP     ??main_1
-    125          			}
-    126          		}
+   \   00003E   1F92....     CMP.W   &notes_len, R15
+   \   000042   F537         JGE     ??main_1
+    122          		{
+    123          			if (notes[i] == note)
+   \   000044   DF92........ CMP.B   &note, notes(R15)
+   \   00004A   0F20         JNE     ??main_4
+    124          			{
+    125          				TBCCR0 = (16384 / freq[i]);
+   \   00004C   5F06         RLAM.W  #0x2, R15
+   \   00004E   1E4F....     MOV.W   freq(R15), R14
+   \   000052   1F4F....     MOV.W   freq + 2(R15), R15
+   \   000056   0C43         MOV.W   #0x0, R12
+   \   000058   3D408046     MOV.W   #0x4680, R13
+   \   00005C   ........     CALLA   #_Div32f
+   \   000060   ........     CALLA   #_Cast32fto32u
+   \   000064   824C9201     MOV.W   R12, &0x192
+    126          				break;
+   \   000068   E23F         JMP     ??main_1
+    127          			}
+    128          		}
    \                     ??main_4:
-   \   000064   1F53         ADD.W   #0x1, R15
-   \   000066   E83F         JMP     ??main_2
-   \   000068                REQUIRE WDTCTL
-   \   000068                REQUIRE P3DIR
-   \   000068                REQUIRE P3SEL
-   \   000068                REQUIRE TBCTL
-   \   000068                REQUIRE TBCCR0
-   \   000068                REQUIRE TBCCTL4
-   \   000068                REQUIRE TBCCR4
-    127          		
-    128          		
-    129          	}
-    130          }
-    131          
-    132          #pragma vector = WDT_VECTOR
+   \   00006A   1F53         ADD.W   #0x1, R15
+   \   00006C   E83F         JMP     ??main_2
+   \   00006E                REQUIRE WDTCTL
+   \   00006E                REQUIRE IE1
+   \   00006E                REQUIRE P3DIR
+   \   00006E                REQUIRE P3SEL
+   \   00006E                REQUIRE TBCTL
+   \   00006E                REQUIRE TBCCR0
+   \   00006E                REQUIRE TBCCTL4
+   \   00006E                REQUIRE TBCCR4
+    129          		
+    130          		
+    131          	}
+    132          }
+    133          
+    134          #pragma vector = WDT_VECTOR
 
    \                                 In  segment ISR_CODE, align 2
-    133          __interrupt void blink_watchdog(void)
+    135          __interrupt void blink_watchdog(void)
    \                     blink_watchdog:
-    134          {
+    136          {
    \   000000   0F12         PUSH.W  R15
-    135          	new_note_flag = 1;
+    137          	new_note_flag = 1;
    \   000002   9243....     MOV.W   #0x1, &new_note_flag
-    136          	index ++;
+    138          	index ++;
    \   000006   9253....     ADD.W   #0x1, &index
-    137          	if (index == mysong_len)
+    139          	if (index == mysong_len)
    \   00000A   9292........ CMP.W   &mysong_len, &index
    \   000010   0220         JNE     ??blink_watchdog_0
-    138          	{
-    139          		index = 0;
+    140          	{
+    141          		index = 0;
    \   000012   8243....     MOV.W   #0x0, &index
-    140          	}
-    141          	note = mysong[index];
+    142          	}
+    143          	note = mysong[index];
    \                     ??blink_watchdog_0:
    \   000016   1F42....     MOV.W   &index, R15
    \   00001A   D24F........ MOV.B   mysong(R15), &note
-    142          }
+    144          }
    \   000020   3F41         POP.W   R15
    \   000022   0013         RETI
 
@@ -338,8 +348,6 @@ D:\uah\cpe323\lab7\assignment\lab7_assignment.c
    \                                 In  segment DATA16_ID, align 2, align-sorted
    \                     `?<Initializer for mysong_len>`:
    \   000000   0700         DC16 7
-    143          
-    144          
     145          
     146          
     147          
@@ -365,6 +373,8 @@ D:\uah\cpe323\lab7\assignment\lab7_assignment.c
     167          
     168          
     169          
+    170          
+    171          
 
    Maximum stack usage in bytes:
 
@@ -386,6 +396,7 @@ D:\uah\cpe323\lab7\assignment\lab7_assignment.c
        7  ?<Initializer for notes>
        2  ?<Initializer for notes_len>
        2  ??blink_watchdog??INTVEC 52
+       1  IE1
        1  P3DIR
        1  P3SEL
        2  TBCCR0
@@ -396,7 +407,7 @@ D:\uah\cpe323\lab7\assignment\lab7_assignment.c
       36  blink_watchdog
       28  freq
        2  index
-     104  main
+     110  main
        7  mysong
        2  mysong_len
        2  new_note_flag
@@ -405,17 +416,17 @@ D:\uah\cpe323\lab7\assignment\lab7_assignment.c
        2  notes_len
 
  
- 104 bytes in segment CODE
-  12 bytes in segment DATA16_AN
+ 110 bytes in segment CODE
+  13 bytes in segment DATA16_AN
   46 bytes in segment DATA16_I
   46 bytes in segment DATA16_ID
    5 bytes in segment DATA16_Z
    2 bytes in segment INTVEC
   36 bytes in segment ISR_CODE
  
- 140 bytes of CODE  memory
+ 146 bytes of CODE  memory
   46 bytes of CONST memory (+  2 bytes shared)
-  51 bytes of DATA  memory (+ 12 bytes shared)
+  51 bytes of DATA  memory (+ 13 bytes shared)
 
 Errors: none
 Warnings: 1

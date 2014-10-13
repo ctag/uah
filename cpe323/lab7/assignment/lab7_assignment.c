@@ -50,6 +50,8 @@ char note;
 void main(void)
 {
 	WDTCTL = WDT_INTERVAL;
+	IE1 |= BIT0; // BIT0 is WDTIE
+	__enable_interrupt();
 	
 	P3DIR |= BIT5; // Set P3.5 to OUT
 	P3SEL |= BIT5; // Setup the special TB4 function of P3.5
@@ -124,7 +126,6 @@ void main(void)
 				break;
 			}
 		}
-		
 		
 	}
 }
