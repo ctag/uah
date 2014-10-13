@@ -1,7 +1,7 @@
 ## General Notes
 ##### *Remember: it's not magic*
 
-The most important thing to remember is that this *isn't magic*. 
+The most important thing to keep in mind is that this *isn't magic*. 
 I feel that the class is doing a poor job of enabling a constructive 
 view and approach of programming this microcontroller. There are a few 
 constructs which I wish to make pertinent across this git project to 

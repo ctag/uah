@@ -25,10 +25,10 @@ The demo lab code tends to use 'TA0CTL' when it really means 'TACTL'.
 This is most likely because it's possible to have multiple Timer_A's, 
 which would make specifying *which* necessary. As it stands, we're only 
 using the first Timer_A, and in the background libraries, TA0CTL is simply 
-redifined as TACTL, rendering it useless. Please be aware of this while 
+redefined as TACTL, rendering it useless. Please be aware of this while 
 going through any MSP code, the registers are one and the same. To help 
 alleviate the headache this causes, I will attempt to document with both names 
-and then only use my preffered one while coding.
+and then only use my preferred one while coding.
 
 ##### Register Definitions
 
@@ -121,9 +121,9 @@ TACCRx, Capture/Compare Register x
 - TACCRx
 	- Timer_A capture/compare register.
 	- Compare mode: TACCRx holds the data for the comparison to the timer value in the Timer_A register, TAR
-	- Capture mode: The Timer_A register, TAR, is copeid into the TACCRx register when a capture is performed.
+	- Capture mode: The Timer_A register, TAR, is copied into the TACCRx register when a capture is performed.
 
-TACCTLx, Capture/Compare Control Register x
+	TACCTLx, Capture/Compare Control Register x
 	[15]	[14]	[13]		[12]		[11]	[10]	[9]			[8]
 	[CM15]	[CM14]	[CCIS13]	[CCIS12]	[SCS]	[SCCI]	[Unused]	[CAP]
 	rw-(0)	rw-(0)	rw-(0)		rw-(0)		r0-(w)	r		r0			rw-(0)

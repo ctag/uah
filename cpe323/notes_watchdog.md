@@ -3,7 +3,7 @@
 ##### Features of the watchdog timer:
 
 - Four software-selectable time intervals (see WDTISx)
-- Watchdog Mode \**gasp*\*
+- Watchdog Mode * \*gasp*\ *
 - Interval Mode
 - Access to WDT control register is password protected (what the hell?)
 - Control of RST/NMI pin function
@@ -109,3 +109,34 @@ WDT Interrupt Enable - WDTIE - IE1.0
 	
 	; Change WDT to interval timer mode, clock/8192 interval
 	MOV #WDTPW+WDTCNTCL+WDTTMSEL+WDTIS0,&WDTCTL
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
