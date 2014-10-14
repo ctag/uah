@@ -1,0 +1,734 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V6.10.2.50871/W32 for MSP430         14/Oct/2014  15:05:12
+# Copyright 1996-2014 IAR Systems AB.
+# Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.10
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  D:\uah\cpe323\lab7\assignment\lab7_assignment.c
+#    Command line  =  
+#        D:\uah\cpe323\lab7\assignment\lab7_assignment.c -lCN
+#        D:\uah\cpe323\lab7\assignment\Debug\List\ -o
+#        D:\uah\cpe323\lab7\assignment\Debug\Obj\ --no_cse --no_unroll
+#        --no_inline --no_code_motion --no_tbaa --debug -D__MSP430FG4618__ -e
+#        --double=32 --dlib_config "C:\Program Files (x86)\IAR Systems\Embedded
+#        Workbench 7.0\430\lib\dlib\dl430xlsfn.h" --core=430X
+#        --data_model=small -On --multiplier=16 --segment __data16=DATA16
+#        --segment __data20=DATA20 --code_model=large
+#    List file     =  
+#        D:\uah\cpe323\lab7\assignment\Debug\List\lab7_assignment.lst
+#    Object file   =  
+#        D:\uah\cpe323\lab7\assignment\Debug\Obj\lab7_assignment.r43
+#
+###############################################################################
+
+D:\uah\cpe323\lab7\assignment\lab7_assignment.c
+      1          /***********************************************************************
+      2           * Title: Lab 7 Assignment
+      3           * Date Due: Oct sometime
+      4           * 
+      5           * Description:
+      6           * Here we will use Timer_B to modulate the output of Port 3.5 (TB4)
+      7           * in order to drive an annoying-as-fuck speaker on the Exp Board!
+      8           * The main idea is that you /must/ run both cap/comp 0 and 4. Cap/comp
+      9           * 0 is used to drive the clock and TBCCR0 sets the max value for most
+     10           * of the MCx settings, such as "UP" mode.
+     11           * In order to make the calculations easier, I'm going to use 'toggle'
+     12           * mode in this program, which means that TBCCR4 *doesn't matter* and
+     13           * we can module the speaker directly with TBCCR0 :D
+     14           * Also, we use watchdog for something, I think...
+     15           *
+     16           * By: Christopher 'ctag' Bero <csb0019@uah.edu>
+     17           * Project: https://github.com/ctag/uah
+     18           *
+     19           * This software is licensed under the GPLv3,
+     20           * consult the LICENSE file for more information.
+     21           **********************************************************************/
+     22          
+     23          #include <msp430.h> // The *correct* include statement
+
+   \                                 In  segment DATA16_AN, at 0x0
+   \   unsigned char volatile IE1
+   \                     IE1:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x1a
+   \   unsigned char volatile P3DIR
+   \                     P3DIR:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x1b
+   \   unsigned char volatile P3SEL
+   \                     P3SEL:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x180
+   \   unsigned short volatile TBCTL
+   \                     TBCTL:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x18a
+   \   unsigned short volatile TBCCTL4
+   \                     TBCCTL4:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x192
+   \   unsigned short volatile TBCCR0
+   \                     TBCCR0:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x19a
+   \   unsigned short volatile TBCCR4
+   \                     TBCCR4:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x120
+   \   unsigned short volatile WDTCTL
+   \                     WDTCTL:
+   \   000000                DS8 2
+     24          #include <math.h> // for pow()
+     25          
+     26          #define SW1 0x01&P1IN	// B1 - P1.0 switch SW1 
+     27          #define SW2 0x02&P1IN	// B2 - P1.1 switch SW2
+     28          
+     29          #define LED1 BIT2; // LED1 - P2.2 - 0x04
+     30          #define LED2 BIT1; // LED2 - P2.1 - 0x02
+     31          
+     32          // Usage: WDTCTL = WDT_CONFIG;
+     33          #define WDT_CONFIG_250 (WDTPW|WDTCNTCL|WDTSSEL|WDTIS0) // Set bits to give us 0.250s watchdog
+     34          #define WDT_CONFIG_1000 (WDTPW|WDTCNTCL|WDTSSEL) // Set bits to give us 1s watchdog
+     35          #define WDT_INTERVAL_250 (WDTPW|WDTCNTCL|WDTTMSEL|WDTSSEL|WDTIS0) // Set bits to have 0.250s timer
+     36          #define WDT_INTERVAL_1000 (WDTPW|WDTCNTCL|WDTTMSEL|WDTSSEL) // Set bits to have 1s timer
+     37          #define WDT_HALT (WDTPW|WDTHOLD) // Set bits to halt the timer
+     38          
+
+   \                                 In  segment DATA16_Z, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_zero
+     39          short unsigned int new_note_flag = 0;
+   \                     new_note_flag:
+   \   000000                DS8 2
+     40          
+
+   \                                 In  segment DATA16_I, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_copy
+     41          double freq[] = {16.35, 17.32, 18.35, 19.45, 20.60, 21.83, 23.12, 24.50, 25.96, 27.50, 29.14, 30.87, 1.00};
+   \                     freq:
+   \   000000                DS8 52
+   \   000034                REQUIRE `?<Initializer for freq>`
+
+   \                                 In  segment DATA16_I, align 1, align-sorted
+   \   000000                REQUIRE ?cstart_init_copy
+     42          char notes[] = {'C', 'd', 'D', 'e', 'E', 'F', 'g', 'G', 'a', 'A', 'b', 'B', ' '};
+   \                     notes:
+   \   000000                DS8 13
+   \   00000D                REQUIRE `?<Initializer for notes>`
+     43          
+     44          // P = Pulse
+     45          // N = No Pulse
+     46          
+
+   \                                 In  segment DATA16_I, align 1, align-sorted
+   \   000000                REQUIRE ?cstart_init_copy
+     47          char songs[3][66] = 
+   \                     songs:
+   \   000000                DS8 198
+   \   0000C6                REQUIRE `?<Initializer for songs>`
+     48          {
+     49          	/*Twinkle Twinkle, Little Star*/
+     50          	'P',
+     51          	'C','C','G','G','A','A','G','G','G','G',' ',' ','F','F','E','E',
+     52          	'D','D','C','C','C','C',' ',' ',
+     53          	'C','C','G','G','A','A','G','G','G','G',' ',' ','F','F','E','E',
+     54          	'D','D','C','C','C','C',' ',' ',
+     55          	' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+     56          	'Z', /*EOF*/
+     57          	/*Jolly Old St. Nicholas*/
+     58          	'N',
+     59          	'B','B','B','B','A','A','A',' ','G','G','G','G','B',' ',' ',' ',
+     60          	'E','E','E','E','D','D','G',' ','A','G','A','B','A',' ',' ',' ',
+     61          	'B','B','B','B','A','A','A',' ','G','G','G','G','B',' ',' ',' ',
+     62          	'E','E','E','E','D','D','G',' ','A','G','A','B','G',' ',' ',' ',
+     63          	'Z', /*EOF*/
+     64          	/*We Three Kings*/
+     65          	'N',
+     66          	'B',' ','A','G',' ','E','g','G','g','E',' ',' ',
+     67          	'B',' ','A','G',' ','E','g','G','g','E',' ',' ',
+     68          	'G',' ','G','A',' ','A','B',' ','B','D','C','B',
+     69          	'A','B','A','G',' ','g','E',' ',' ',' ',' ',' ',
+     70          	' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+     71          	' ',' ',' ',' ',
+     72          	'Z' /*EOF*/
+     73          };
+     74          
+
+   \                                 In  segment DATA16_I, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_copy
+     75          short unsigned int songs_octive[3][66] = 
+   \                     songs_octive:
+   \   000000                DS8 396
+   \   00018C                REQUIRE `?<Initializer for songs_octive>`
+     76          {
+     77          	/*Twinkle Twinkle, Little Star*/
+     78          	0,
+     79          	5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
+     80          	5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
+     81          	5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
+     82          	5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
+     83          	-1, /*EOF*/
+     84          	/*Jolly Old St. Nicholas*/
+     85          	0,
+     86          	5,5,5,5,5,5,5,0,5,5,5,5,5,0,0,0,
+     87          	4,4,4,4,4,4,5,0,5,5,5,5,5,0,0,0,
+     88          	5,5,5,5,5,5,5,0,5,5,5,5,5,0,0,0,
+     89          	4,4,4,4,4,4,5,0,5,5,5,5,5,0,0,0,
+     90          	-1, /*EOF*/
+     91          	/*We Three Kings*/
+     92          	0,
+     93          	5,0,5,5,0,4,5,5,5,4,0,0,
+     94          	5,0,5,5,0,4,5,5,5,4,0,0,
+     95          	5,0,5,5,0,5,5,0,5,6,6,5,
+     96          	5,5,5,5,0,5,4,0,0,0,0,0,
+     97          	0,0,0,0,0,0,0,0,0,0,0,0,
+     98          	0,0,0,0,
+     99          	-1 /*EOF*/
+    100          };
+    101          
+
+   \                                 In  segment DATA16_I, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_copy
+    102          int index = 1;
+   \                     index:
+   \   000000                DS8 2
+   \   000002                REQUIRE `?<Initializer for index>`
+    103          
+
+   \                                 In  segment DATA16_I, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_copy
+    104          int songs_num = 2;
+   \                     songs_num:
+   \   000000                DS8 2
+   \   000002                REQUIRE `?<Initializer for songs_num>`
+
+   \                                 In  segment DATA16_I, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_copy
+    105          int current_song = 2;
+   \                     current_song:
+   \   000000                DS8 2
+   \   000002                REQUIRE `?<Initializer for current_song>`
+    106          
+
+   \                                 In  segment DATA16_Z, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_zero
+    107          int rest = 0;
+   \                     rest:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_Z, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_zero
+    108          int pulse = 0;
+   \                     pulse:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_I, align 1, align-sorted
+   \   000000                REQUIRE ?cstart_init_copy
+    109          char note = ' ';
+   \                     note:
+   \   000000                DS8 1
+   \   000001                REQUIRE `?<Initializer for note>`
+
+   \                                 In  segment DATA16_Z, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_zero
+    110          short unsigned int octive = 0;
+   \                     octive:
+   \   000000                DS8 2
+    111          
+
+   \                                 In  segment CODE, align 2
+    112          void main(void)
+   \                     main:
+    113          {
+   \   000000   0A12         PUSH.W  R10
+    114          	WDTCTL = WDT_INTERVAL_250;
+   \   000002   B2401D5A2001 MOV.W   #0x5a1d, &0x120
+    115          	IE1 |= BIT0; // BIT0 is WDTIE
+   \   000008   D2D30000     BIS.B   #0x1, &0x0
+    116          	__enable_interrupt();
+   \   00000C   32D2         EINT
+    117          	
+    118          	P3DIR |= BIT5; // Set P3.5 to OUT
+   \   00000E   F2D020001A00 BIS.B   #0x20, &0x1a
+    119          	P3SEL |= BIT5; // Setup the special TB4 function of P3.5
+   \   000014   F2D020001B00 BIS.B   #0x20, &0x1b
+    120          	
+    121          	/* 
+    122          	 * Setup Timer_B's TBCTL
+    123          	 * BITs Mapping for TxCTLx:
+    124          	 *	[15]	[14]	[13]	[12]	[11]	[10]	[9]		[8]
+    125          	 *	NA		NA		NA		NA		NA		NA		TASSEL	TASSEL
+    126          	 *	0		0		0		0		0		0		0		1
+    127          	 *
+    128          	 *	[7]		[6]		[5]		[4]		[3]		[2]		[1]		[0]
+    129          	 *	ID		ID		MC		MC		NA		TACLR	TAIE	TAIFG
+    130          	 *	0		1		0		1		0		0		0		0
+    131          	 *
+    132          	 * Condensed: [0000][0001] [0101][0000]
+    133          	 *
+    134          	 * Specifics:
+    135          	 * TASSELx = 01, ACLK
+    136          	 * IDx = 01, divide ACLK by 2, ACLK/2 = 16,384
+    137          	 * MCx = 01, UP mode
+    138          	 */
+    139          	TBCTL = 0x0150;
+   \   00001A   B24050018001 MOV.W   #0x150, &0x180
+    140          	
+    141          	/* 
+    142          	 * Choosing a value for TBCCR0:
+    143          	 * This is a little tricky, because you can tackle this problem
+    144          	 * from a multitude of angles, and the one I chose is likely non-standard,
+    145          	 * but makes much more sense to me.
+    146          	 * So, TBCCR0 represents the period out of 16,384 which we wish
+    147          	 * for the speaker to be pulsed each second. A value of 16,384 means
+    148          	 * the speaker will click once per second. A value of 16 means the
+    149          	 * speaker will click about 1000 times per second, which is an audible tone!
+    150          	 *
+    151          	 * The formula:
+    152          	 * TBCCR0 = [ACLK = 16384] / [desired freq in Hz]
+    153          	 *
+    154          	 * So, for 900Hz, TBCCR0 = [16384] / [900] = 18.2 = 18.
+    155          	 */
+    156          	//TBCCR0 = 19;
+    157          	
+    158          	/*
+    159          	 * Setup Timer_B's TBCCTL4
+    160          	 * BITs Mapping for TxCTLx:
+    161          	 *	[15]	[14]	[13]	[12]	[11]	[10]	[9]		[8]
+    162          	 *	CM		CM		CCIS	CCIS	SCS		CCLD	CCLD	CAP
+    163          	 *	0		0		0		0		0		0		0		0
+    164          	 *
+    165          	 *	[7]		[6]		[5]		[4]		[3]		[2]		[1]		[0]
+    166          	 *	OUTMOD	OUTMOD	OUTMOD	CCIE	CCI		OUT		COV		CCIFG
+    167          	 *	1		0		0		0		0		0		0		0
+    168          	 *
+    169          	 * Condensed: [0000][0000] [1000][0000]
+    170          	 *
+    171          	 * Specifics:
+    172          	 * OUTx = 100, Toggle mode (on TB4 of course) 
+    173          	 */
+    174          	TBCCTL4 = 0x0080;
+   \   000020   B24080008A01 MOV.W   #0x80, &0x18a
+    175          	
+    176          	TBCCR4 = 1; // doesn't matter, can be any valid value
+   \   000026   92439A01     MOV.W   #0x1, &0x19a
+    177          	
+    178          	if (songs[current_song][0] == 'P')
+   \   00002A   1F42....     MOV.W   &current_song, R15
+   \   00002E   0F5F         RLA.W   R15
+   \   000030   0E4F         MOV.W   R15, R14
+   \   000032                RPT     #0x5
+   \   000032   44180F5F     RLAX.W  R15
+   \   000036   0F5E         ADD.W   R14, R15
+   \   000038   FF905000.... CMP.B   #0x50, songs(R15)
+   \   00003E   0220         JNE     ??main_1
+    179          	{
+    180          		pulse = 1;
+   \   000040   9243....     MOV.W   #0x1, &pulse
+    181          	}
+    182          	
+    183          	while (1)
+    184          	{
+    185          		while (new_note_flag == 0)
+   \                     ??main_1:
+   \   000044   8293....     CMP.W   #0x0, &new_note_flag
+   \   000048   0220         JNE     ??main_3
+    186          		{
+    187          			asm("NOP");
+   \   00004A   0343         NOP
+   \   00004C   FB3F         JMP     ??main_1
+    188          		}
+    189          		new_note_flag = 0;
+   \                     ??main_3:
+   \   00004E   8243....     MOV.W   #0x0, &new_note_flag
+    190          		
+    191          		for (int i = 0; i < 65; i++)
+   \   000052   0A43         MOV.W   #0x0, R10
+   \                     ??main_2:
+   \   000054   3A904100     CMP.W   #0x41, R10
+   \   000058   F537         JGE     ??main_1
+    192          		{
+    193          			if (notes[i] == note)
+   \   00005A   DA92........ CMP.B   &note, notes(R10)
+   \   000060   2C20         JNE     ??main_4
+    194          			{
+    195                                    if (notes[i] == ' ')
+   \   000062   FA902000.... CMP.B   #0x20, notes(R10)
+   \   000068   0320         JNE     ??main_5
+    196                                    {
+    197                                       TBCCR0 = 0;
+   \   00006A   82439201     MOV.W   #0x0, &0x192
+   \   00006E   253C         JMP     ??main_4
+    198                                    }
+    199                                    else 
+    200                                    {
+    201          				TBCCR0 = (16384 / (int)(freq[i] * pow(2,octive) ) );
+   \                     ??main_5:
+   \   000070   1C42....     MOV.W   &octive, R12
+   \   000074   0D43         MOV.W   #0x0, R13
+   \   000076   ........     CALLA   #_Cast32uto32f
+   \   00007A   0E4C         MOV.W   R12, R14
+   \   00007C   0F4D         MOV.W   R13, R15
+   \   00007E   0C43         MOV.W   #0x0, R12
+   \   000080   3D400040     MOV.W   #0x4000, R13
+   \   000084   ........     CALLA   #pow
+   \   000088   0E4C         MOV.W   R12, R14
+   \   00008A   0F4D         MOV.W   R13, R15
+   \   00008C   5A06         RLAM.W  #0x2, R10
+   \   00008E   1C4A....     MOV.W   freq(R10), R12
+   \   000092   1D4A....     MOV.W   freq + 2(R10), R13
+   \   000096   ........     CALLA   #_Mul32f
+   \   00009A   0E4C         MOV.W   R12, R14
+   \   00009C   0F4D         MOV.W   R13, R15
+   \   00009E   3C400040     MOV.W   #0x4000, R12
+   \   0000A2   0A4C         MOV.W   R12, R10
+   \   0000A4   0C4E         MOV.W   R14, R12
+   \   0000A6   0D4F         MOV.W   R15, R13
+   \   0000A8   ........     CALLA   #_Cast32fto32s
+   \   0000AC   0E4C         MOV.W   R12, R14
+   \   0000AE   0C4A         MOV.W   R10, R12
+   \   0000B0   ........     CALLA   #?DivMod16s
+   \   0000B4   824C9201     MOV.W   R12, &0x192
+    202          				break;
+   \   0000B8   C53F         JMP     ??main_1
+    203                                    }
+    204          			}
+    205          		}
+   \                     ??main_4:
+   \   0000BA   1A53         ADD.W   #0x1, R10
+   \   0000BC   CB3F         JMP     ??main_2
+   \   0000BE                REQUIRE WDTCTL
+   \   0000BE                REQUIRE IE1
+   \   0000BE                REQUIRE P3DIR
+   \   0000BE                REQUIRE P3SEL
+   \   0000BE                REQUIRE TBCTL
+   \   0000BE                REQUIRE TBCCTL4
+   \   0000BE                REQUIRE TBCCR4
+   \   0000BE                REQUIRE TBCCR0
+    206          		
+    207          	}
+    208          }
+    209          
+    210          #pragma vector = WDT_VECTOR
+
+   \                                 In  segment ISR_CODE, align 2
+    211          __interrupt void blink_watchdog(void)
+   \                     blink_watchdog:
+    212          {
+   \   000000   2F15         PUSHM.W #0x3, R15
+    213            new_note_flag = 1;
+   \   000002   9243....     MOV.W   #0x1, &new_note_flag
+    214          if (rest == 0)
+   \   000006   8293....     CMP.W   #0x0, &rest
+   \   00000A   3120         JNE     ??blink_watchdog_0
+    215          {
+    216          	index ++;
+   \   00000C   9253....     ADD.W   #0x1, &index
+    217          	if (songs[current_song][index] == 'Z')
+   \   000010   1F42....     MOV.W   &current_song, R15
+   \   000014   0F5F         RLA.W   R15
+   \   000016   0E4F         MOV.W   R15, R14
+   \   000018                RPT     #0x5
+   \   000018   44180F5F     RLAX.W  R15
+   \   00001C   0F5E         ADD.W   R14, R15
+   \   00001E   1F52....     ADD.W   &index, R15
+   \   000022   FF905A00.... CMP.B   #0x5a, songs(R15)
+   \   000028   0220         JNE     ??blink_watchdog_1
+    218          	{
+    219          		index = 1;
+   \   00002A   9243....     MOV.W   #0x1, &index
+    220          	}
+    221          	note = songs[current_song][index];
+   \                     ??blink_watchdog_1:
+   \   00002E   1F42....     MOV.W   &current_song, R15
+   \   000032   0F5F         RLA.W   R15
+   \   000034   0E4F         MOV.W   R15, R14
+   \   000036                RPT     #0x5
+   \   000036   44180F5F     RLAX.W  R15
+   \   00003A   0F5E         ADD.W   R14, R15
+   \   00003C   1F52....     ADD.W   &index, R15
+   \   000040   D24F........ MOV.B   songs(R15), &note
+    222          	octive = songs_octive[current_song][index];
+   \   000046   1F42....     MOV.W   &current_song, R15
+   \   00004A   5F06         RLAM.W  #0x2, R15
+   \   00004C   0E4F         MOV.W   R15, R14
+   \   00004E                RPT     #0x5
+   \   00004E   44180F5F     RLAX.W  R15
+   \   000052   0F5E         ADD.W   R14, R15
+   \   000054   1E42....     MOV.W   &index, R14
+   \   000058   0E5E         RLA.W   R14
+   \   00005A   0F5E         ADD.W   R14, R15
+   \   00005C   924F........ MOV.W   songs_octive(R15), &octive
+    223          	if (pulse == 1)
+   \   000062   9293....     CMP.W   #0x1, &pulse
+   \   000066   0A20         JNE     ??blink_watchdog_2
+    224          	{
+    225          		rest++;
+   \   000068   9253....     ADD.W   #0x1, &rest
+   \   00006C   073C         JMP     ??blink_watchdog_2
+    226          	}
+    227          }
+    228          else
+    229          {
+    230          	note = ' ';
+   \                     ??blink_watchdog_0:
+   \   00006E   F2402000.... MOV.B   #0x20, &note
+    231          	octive = 0;
+   \   000074   8243....     MOV.W   #0x0, &octive
+    232          	rest = 0;
+   \   000078   8243....     MOV.W   #0x0, &rest
+    233          }
+    234          }
+   \                     ??blink_watchdog_2:
+   \   00007C   2D17         POPM.W  #0x3, R15
+   \   00007E   0013         RETI
+
+   \                                 In  segment INTVEC, offset 0x34, root
+   \                     `??blink_watchdog??INTVEC 52`:
+   \   000034   ....         DC16    blink_watchdog
+
+   \                                 In  segment DATA16_ID, align 2, align-sorted
+   \                     `?<Initializer for freq>`:
+   \   000000   CDCC82415C8F DC32 4182CCCDH, 418A8F5CH, 4192CCCDH, 419B999AH, 41A4CCCDH, 41AEA3D7H
+   \            8A41CDCC9241
+   \            9A999B41CDCC
+   \            A441D7A3AE41
+   \   000018   C3F5B8410000 DC32 41B8F5C3H, 41C40000H, 41CFAE14H, 41DC0000H, 41E91EB8H, 41F6F5C3H
+   \            C44114AECF41
+   \            0000DC41B81E
+   \            E941C3F5F641
+   \   000030   0000803F     DC32 3F800000H
+
+   \                                 In  segment DATA16_ID, align 1, align-sorted
+   \                     `?<Initializer for notes>`:
+   \   000000   436444654546 DC8 67, 100, 68, 101, 69, 70, 103, 71, 97, 65, 98, 66, 32
+   \            674761416242
+   \            20          
+
+   \                                 In  segment DATA16_ID, align 1, align-sorted
+   \                     `?<Initializer for songs>`:
+   \   000000   504343474741 DC8 80, 67, 67, 71, 71, 65, 65, 71, 71, 71, 71, 32, 32, 70, 70, 69, 69
+   \            414747474720
+   \            2046464545  
+   \   000011   444443434343 DC8 68, 68, 67, 67, 67, 67, 32, 32, 67, 67, 71, 71, 65, 65, 71, 71, 71
+   \            202043434747
+   \            4141474747  
+   \   000022   472020464645 DC8 71, 32, 32, 70, 70, 69, 69, 68, 68, 67, 67, 67, 67, 32, 32, 32, 32
+   \            454444434343
+   \            4320202020  
+   \   000033   202020202020 DC8 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 90, 78, 66
+   \            202020202020
+   \            20205A4E42  
+   \   000044   424242414141 DC8 66, 66, 66, 65, 65, 65, 32, 71, 71, 71, 71, 66, 32, 32, 32, 69, 69
+   \            204747474742
+   \            2020204545  
+   \   000055   454544444720 DC8 69, 69, 68, 68, 71, 32, 65, 71, 65, 66, 65, 32, 32, 32, 66, 66, 66
+   \            414741424120
+   \            2020424242  
+   \   000066   424141412047 DC8 66, 65, 65, 65, 32, 71, 71, 71, 71, 66, 32, 32, 32, 69, 69, 69, 69
+   \            474747422020
+   \            2045454545  
+   \   000077   444447204147 DC8 68, 68, 71, 32, 65, 71, 65, 66, 71, 32, 32, 32, 90, 78, 66, 32, 65
+   \            414247202020
+   \            5A4E422041  
+   \   000088   472045674767 DC8 71, 32, 69, 103, 71, 103, 69, 32, 32, 66, 32, 65, 71, 32, 69, 103
+   \            452020422041
+   \            47204567    
+   \   000098   476745202047 DC8 71, 103, 69, 32, 32, 71, 32, 71, 65, 32, 65, 66, 32, 66, 68, 67, 66
+   \            204741204142
+   \            2042444342  
+   \   0000A9   414241472067 DC8 65, 66, 65, 71, 32, 103, 69, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32
+   \            452020202020
+   \            2020202020  
+   \   0000BA   202020202020 DC8 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 90
+   \            20202020205A
+
+   \                                 In  segment DATA16_ID, align 2, align-sorted
+   \                     `?<Initializer for songs_octive>`:
+   \   000000   000005000500 DC16 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5
+   \            050005000500
+   \            050005000500
+   \            050005000500
+   \            050005000500
+   \            050005000500
+   \            050005000500
+   \            0500        
+   \   00002C   050005000500 DC16 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5
+   \            050005000500
+   \            050005000500
+   \            050005000500
+   \            050005000500
+   \            050005000500
+   \            050005000500
+   \            0500        
+   \   000058   050005000500 DC16 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5
+   \            050005000500
+   \            050005000500
+   \            050005000500
+   \            050005000500
+   \            050005000500
+   \            050005000500
+   \   000082   FFFF00000500 DC16 65535, 0, 5, 5, 5, 5, 5, 5, 5, 0, 5, 5, 5, 5, 5, 0, 0, 0, 4, 4, 4
+   \            050005000500
+   \            050005000500
+   \            000005000500
+   \            050005000500
+   \            000000000000
+   \            040004000400
+   \   0000AC   040004000400 DC16 4, 4, 4, 5, 0, 5, 5, 5, 5, 5, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 0, 5
+   \            050000000500
+   \            050005000500
+   \            050000000000
+   \            000005000500
+   \            050005000500
+   \            050005000000
+   \            0500        
+   \   0000D8   050005000500 DC16 5, 5, 5, 5, 0, 0, 0, 4, 4, 4, 4, 4, 4, 5, 0, 5, 5, 5, 5, 5, 0, 0
+   \            050000000000
+   \            000004000400
+   \            040004000400
+   \            040005000000
+   \            050005000500
+   \            050005000000
+   \            0000        
+   \   000104   0000FFFF0000 DC16 0, 65535, 0, 5, 0, 5, 5, 0, 4, 5, 5, 5, 4, 0, 0, 5, 0, 5, 5, 0, 4
+   \            050000000500
+   \            050000000400
+   \            050005000500
+   \            040000000000
+   \            050000000500
+   \            050000000400
+   \   00012E   050005000500 DC16 5, 5, 5, 4, 0, 0, 5, 0, 5, 5, 0, 5, 5, 0, 5, 6, 6, 5, 5, 5, 5, 5
+   \            040000000000
+   \            050000000500
+   \            050000000500
+   \            050000000500
+   \            060006000500
+   \            050005000500
+   \            0500        
+   \   00015A   000005000400 DC16 0, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+   \            000000000000
+   \            000000000000
+   \            000000000000
+   \            000000000000
+   \            000000000000
+   \            000000000000
+   \            0000        
+   \   000186   00000000FFFF DC16 0, 0, 65535
+
+   \                                 In  segment DATA16_ID, align 2, align-sorted
+   \                     `?<Initializer for index>`:
+   \   000000   0100         DC16 1
+
+   \                                 In  segment DATA16_ID, align 2, align-sorted
+   \                     `?<Initializer for songs_num>`:
+   \   000000   0200         DC16 2
+
+   \                                 In  segment DATA16_ID, align 2, align-sorted
+   \                     `?<Initializer for current_song>`:
+   \   000000   0200         DC16 2
+
+   \                                 In  segment DATA16_ID, align 1, align-sorted
+   \                     `?<Initializer for note>`:
+   \   000000   20           DC8 32
+    235          
+    236          
+    237          
+    238          
+    239          
+    240          
+    241          
+    242          
+    243          
+    244          
+    245          
+    246          
+    247          
+    248          
+    249          
+    250          
+    251          
+    252          
+    253          
+    254          
+    255          
+    256          
+    257          
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+     10   blink_watchdog
+      6   main
+        6   -> _Cast32fto32s
+        6   -> _Cast32uto32f
+        6   -> _Mul32f
+        6   -> pow
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       2  ?<Initializer for current_song>
+      52  ?<Initializer for freq>
+       2  ?<Initializer for index>
+       1  ?<Initializer for note>
+      13  ?<Initializer for notes>
+     198  ?<Initializer for songs>
+       2  ?<Initializer for songs_num>
+     396  ?<Initializer for songs_octive>
+       2  ??blink_watchdog??INTVEC 52
+       1  IE1
+       1  P3DIR
+       1  P3SEL
+       2  TBCCR0
+       2  TBCCR4
+       2  TBCCTL4
+       2  TBCTL
+       2  WDTCTL
+     128  blink_watchdog
+       2  current_song
+      52  freq
+       2  index
+     190  main
+       2  new_note_flag
+       1  note
+      13  notes
+       2  octive
+       2  pulse
+       2  rest
+     198  songs
+       2  songs_num
+     396  songs_octive
+
+ 
+ 190 bytes in segment CODE
+  13 bytes in segment DATA16_AN
+ 666 bytes in segment DATA16_I
+ 666 bytes in segment DATA16_ID
+   8 bytes in segment DATA16_Z
+   2 bytes in segment INTVEC
+ 128 bytes in segment ISR_CODE
+ 
+ 318 bytes of CODE  memory
+ 666 bytes of CONST memory (+  2 bytes shared)
+ 674 bytes of DATA  memory (+ 13 bytes shared)
+
+Errors: none
+Warnings: none

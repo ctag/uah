@@ -21,35 +21,97 @@
  **********************************************************************/
 
 #include <msp430.h> // The *correct* include statement
+#include <math.h> // for pow()
 
-#define SW1 0x01&P1IN	// B1 - P1.0 switch SW1 
-#define SW2 0x02&P1IN	// B2 - P1.1 switch SW2
+#define SW1 (0x01&P1IN)	// B1 - P1.0 switch SW1 
+#define SW2 (0x02&P1IN)	// B2 - P1.1 switch SW2
 
 #define LED1 BIT2; // LED1 - P2.2 - 0x04
 #define LED2 BIT1; // LED2 - P2.1 - 0x02
 
 // Usage: WDTCTL = WDT_CONFIG;
-#define WDT_CONFIG (WDTPW|WDTCNTCL|WDTSSEL|WDTIS0) // Set bits to give us 0.250s watchdog
-#define WDT_INTERVAL (WDTPW|WDTCNTCL|WDTTMSEL|WDTSSEL|WDTIS0) // Set bits to have 0.250s timer
+#define WDT_CONFIG_250 (WDTPW|WDTCNTCL|WDTSSEL|WDTIS0) // Set bits to give us 0.250s watchdog
+#define WDT_CONFIG_1000 (WDTPW|WDTCNTCL|WDTSSEL) // Set bits to give us 1s watchdog
+#define WDT_INTERVAL_250 (WDTPW|WDTCNTCL|WDTTMSEL|WDTSSEL|WDTIS0) // Set bits to have 0.250s timer
+#define WDT_INTERVAL_1000 (WDTPW|WDTCNTCL|WDTTMSEL|WDTSSEL) // Set bits to have 1s timer
 #define WDT_HALT (WDTPW|WDTHOLD) // Set bits to halt the timer
 
 short unsigned int new_note_flag = 0;
 
-double freq[] = {440.00, 493.88, 523.25, 587.33, 659.25, 698.46, 783.99, 1};
-char notes[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', ' '};
+double freq[] = {16.35, 17.32, 18.35, 19.45, 20.60, 21.83, 23.12, 24.50, 25.96, 27.50, 29.14, 30.87, 1.00};
+char notes[] = {'C', 'd', 'D', 'e', 'E', 'F', 'g', 'G', 'a', 'A', 'b', 'B', ' '};
 
-char mysong[] = {'C', 'C', ' ', 'C', 'C', ' ', 'G', 'G', ' ', 'G', 'G', ' ', 'A', 'A', ' ', 'A', 'A', ' ', 'G', 'G', ' ', 'F', 'F', ' ', 'F', 'F', ' ', 'E', 'E', ' ', 'E', 'E', ' ', 'D', 'D', ' ', 'D', 'D', ' ', 'C', 'C', ' ', ' ', ' ', ' '};
+// P = Pulse
+// N = No Pulse
 
-int index = 0;
+char songs[3][66] = 
+{
+	/*Twinkle Twinkle, Little Star*/
+	'P',
+	'C','C','G','G','A','A','G','G','G','G',' ',' ','F','F','E','E',
+	'D','D','C','C','C','C',' ',' ',
+	'C','C','G','G','A','A','G','G','G','G',' ',' ','F','F','E','E',
+	'D','D','C','C','C','C',' ',' ',
+	' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+	'Z', /*EOF*/
+	/*Jolly Old St. Nicholas*/
+	'N',
+	'B','B','B','B','A','A','A',' ','G','G','G','G','B',' ',' ',' ',
+	'E','E','E','E','D','D','G',' ','A','G','A','B','A',' ',' ',' ',
+	'B','B','B','B','A','A','A',' ','G','G','G','G','B',' ',' ',' ',
+	'E','E','E','E','D','D','G',' ','A','G','A','B','G',' ',' ',' ',
+	'Z', /*EOF*/
+	/*We Three Kings*/
+	'N',
+	'B',' ','A','G',' ','E','g','G','g','E',' ',' ',
+	'B',' ','A','G',' ','E','g','G','g','E',' ',' ',
+	'G',' ','G','A',' ','A','B',' ','B','D','C','B',
+	'A','B','A','G',' ','g','E',' ',' ',' ',' ',' ',
+	' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+	' ',' ',' ',' ',
+	'Z' /*EOF*/
+};
 
-int notes_len = 8;
-int mysong_len = 45;
+short unsigned int songs_octive[3][66] = 
+{
+	/*Twinkle Twinkle, Little Star*/
+	0,
+	5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
+	5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
+	5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
+	5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
+	-1, /*EOF*/
+	/*Jolly Old St. Nicholas*/
+	0,
+	5,5,5,5,5,5,5,0,5,5,5,5,5,0,0,0,
+	4,4,4,4,4,4,5,0,5,5,5,5,5,0,0,0,
+	5,5,5,5,5,5,5,0,5,5,5,5,5,0,0,0,
+	4,4,4,4,4,4,5,0,5,5,5,5,5,0,0,0,
+	-1, /*EOF*/
+	/*We Three Kings*/
+	0,
+	5,0,5,5,0,4,5,5,5,4,0,0,
+	5,0,5,5,0,4,5,5,5,4,0,0,
+	5,0,5,5,0,5,5,0,5,6,6,5,
+	5,5,5,5,0,5,4,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,0,0,0,
+	0,0,0,0,
+	-1 /*EOF*/
+};
 
-char note;
+int index = 1;
+
+int songs_num = 2;
+int current_song = 2;
+
+int rest = 0;
+int pulse = 0;
+char note = ' ';
+short unsigned int octive = 0;
 
 void main(void)
 {
-	WDTCTL = WDT_INTERVAL;
+	WDTCTL = WDT_INTERVAL_250;
 	IE1 |= BIT0; // BIT0 is WDTIE
 	__enable_interrupt();
 	
@@ -91,7 +153,7 @@ void main(void)
 	 *
 	 * So, for 900Hz, TBCCR0 = [16384] / [900] = 18.2 = 18.
 	 */
-	TBCCR0 = 19;
+	//TBCCR0 = 19;
 	
 	/*
 	 * Setup Timer_B's TBCCTL4
@@ -113,6 +175,11 @@ void main(void)
 	
 	TBCCR4 = 1; // doesn't matter, can be any valid value
 	
+	if (songs[current_song][0] == 'P')
+	{
+		pulse = 1;
+	}
+	
 	while (1)
 	{
 		while (new_note_flag == 0)
@@ -121,12 +188,19 @@ void main(void)
 		}
 		new_note_flag = 0;
 		
-		for (int i = 0; i < notes_len; i++)
+		for (int i = 0; i < 65; i++)
 		{
 			if (notes[i] == note)
 			{
-				TBCCR0 = (16384 / (int)freq[i]);
+                          if (notes[i] == ' ')
+                          {
+                             TBCCR0 = 0;
+                          }
+                          else 
+                          {
+				TBCCR0 = (16384 / (int)(freq[i] * pow(2,octive) ) );
 				break;
+                          }
 			}
 		}
 		
@@ -136,18 +210,28 @@ void main(void)
 #pragma vector = WDT_VECTOR
 __interrupt void blink_watchdog(void)
 {
-	new_note_flag = 1;
+  new_note_flag = 1;
+if (rest == 0)
+{
 	index ++;
-	if (index == mysong_len)
+	if (songs[current_song][index] == 'Z')
 	{
-		index = 0;
+		index = 1;
 	}
-	note = mysong[index];
+	note = songs[current_song][index];
+	octive = songs_octive[current_song][index];
+	if (pulse == 1)
+	{
+		rest++;
+	}
 }
-
-
-
-
+else
+{
+	note = ' ';
+	octive = 0;
+	rest = 0;
+}
+}
 
 
 

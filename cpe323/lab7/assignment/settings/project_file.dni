@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=666591039
+Checksum=-951822165
 [CallStackLog]
 Enabled=0
 [CallStack]
@@ -75,7 +75,8 @@ Category=_ 0
 LoggingEnabled=_ 0
 LogFile=_ ""
 [Breakpoints]
-Count=0
+Bp0=_ "STD_CODE" "Memory:0x3C12" 0 0 0 0 "" 0 ""
+Count=1
 [FET]
 Clock mode=46
 Extended Clock mode=24791
