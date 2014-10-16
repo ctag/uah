@@ -21,7 +21,7 @@
  **********************************************************************/
 
 #include <msp430.h> // The *correct* include statement
-#include <math.h> // for pow()
+#include <math.h> // for pow(), puh power!
 
 #define SW1 (0x01&P1IN)	// B1 - P1.0 switch SW1 
 #define SW2 (0x02&P1IN)	// B2 - P1.1 switch SW2
@@ -38,6 +38,7 @@
 
 short unsigned int new_note_flag = 0;
 
+// Teach the little guy to sing
 double freq[] = {16.35, 17.32, 18.35, 19.45, 20.60, 21.83, 23.12, 24.50, 25.96, 27.50, 29.14, 30.87, 1.00};
 char notes[] = {'C', 'd', 'D', 'e', 'E', 'F', 'g', 'G', 'a', 'A', 'b', 'B', ' '};
 
@@ -46,49 +47,53 @@ char notes[] = {'C', 'd', 'D', 'e', 'E', 'F', 'g', 'G', 'a', 'A', 'b', 'B', ' '}
 
 char songs[3][66] = 
 {
-	/*Twinkle Twinkle, Little Star*/
-	'P',
+/*Twinkle Twinkle, Little Star*/
+	'P', /*Pulse*/
 	'C','C','G','G','A','A','G','G','G','G',' ',' ','F','F','E','E',
 	'D','D','C','C','C','C',' ',' ',
 	'C','C','G','G','A','A','G','G','G','G',' ',' ','F','F','E','E',
 	'D','D','C','C','C','C',' ',' ',
 	' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-	'Z', /*EOF*/
-	/*Jolly Old St. Nicholas*/
-	'N',
+	'Z', /*FIN*/
+	
+/*Jolly Old St. Nicholas*/
+	'N', /*No Pulse*/
 	'B','B','B','B','A','A','A',' ','G','G','G','G','B',' ',' ',' ',
 	'E','E','E','E','D','D','G',' ','A','G','A','B','A',' ',' ',' ',
 	'B','B','B','B','A','A','A',' ','G','G','G','G','B',' ',' ',' ',
 	'E','E','E','E','D','D','G',' ','A','G','A','B','G',' ',' ',' ',
-	'Z', /*EOF*/
-	/*We Three Kings*/
-	'N',
+	'Z', /*FIN*/
+	
+/*We Three Kings*/
+	'N', /*Pulse*/
 	'B',' ','A','G',' ','E','g','G','g','E',' ',' ',
 	'B',' ','A','G',' ','E','g','G','g','E',' ',' ',
 	'G',' ','G','A',' ','A','B',' ','B','D','C','B',
 	'A','B','A','G',' ','g','E',' ',' ',' ',' ',' ',
 	' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
 	' ',' ',' ',' ',
-	'Z' /*EOF*/
+	'Z' /*FIN*/
 };
 
 short unsigned int songs_octive[3][66] = 
 {
-	/*Twinkle Twinkle, Little Star*/
+/*Twinkle Twinkle, Little Star*/
 	0,
 	5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
 	5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
 	5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
 	5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
-	-1, /*EOF*/
-	/*Jolly Old St. Nicholas*/
+	-1, /*FIN*/
+
+/*Jolly Old St. Nicholas*/
 	0,
 	5,5,5,5,5,5,5,0,5,5,5,5,5,0,0,0,
 	4,4,4,4,4,4,5,0,5,5,5,5,5,0,0,0,
 	5,5,5,5,5,5,5,0,5,5,5,5,5,0,0,0,
 	4,4,4,4,4,4,5,0,5,5,5,5,5,0,0,0,
-	-1, /*EOF*/
-	/*We Three Kings*/
+	-1, /*FIN*/
+
+/*We Three Kings*/
 	0,
 	5,0,5,5,0,4,5,5,5,4,0,0,
 	5,0,5,5,0,4,5,5,5,4,0,0,
@@ -96,13 +101,13 @@ short unsigned int songs_octive[3][66] =
 	5,5,5,5,0,5,4,0,0,0,0,0,
 	0,0,0,0,0,0,0,0,0,0,0,0,
 	0,0,0,0,
-	-1 /*EOF*/
+	-1 /*FIN*/
 };
 
 int index = 1;
 
 int songs_num = 2;
-int current_song = 2;
+int current_song = 0;
 
 int rest = 0;
 int pulse = 0;
@@ -111,15 +116,19 @@ short unsigned int octive = 0;
 
 void main(void)
 {
-	WDTCTL = WDT_INTERVAL_250;
+	WDTCTL = WDT_HALT;
+	
+	P1IE |= 0x0003;		// P1.0 interrupt enabled
+	P1IES |= 0x0003;	// P1.0 hi -> low edge
+	P1IFG &= ~0x0003;	// Clear P1.0 IFG
+	
 	IE1 |= BIT0; // BIT0 is WDTIE
-	__enable_interrupt();
+	__enable_interrupt(); // Enable global interrupts
 	
 	P3DIR |= BIT5; // Set P3.5 to OUT
 	P3SEL |= BIT5; // Setup the special TB4 function of P3.5
 	
-	/* 
-	 * Setup Timer_B's TBCTL
+	/* Setup Timer_B's TBCTL
 	 * BITs Mapping for TxCTLx:
 	 *	[15]	[14]	[13]	[12]	[11]	[10]	[9]		[8]
 	 *	NA		NA		NA		NA		NA		NA		TASSEL	TASSEL
@@ -138,8 +147,7 @@ void main(void)
 	 */
 	TBCTL = 0x0150;
 	
-	/* 
-	 * Choosing a value for TBCCR0:
+	/* Choosing a value for TBCCR0:
 	 * This is a little tricky, because you can tackle this problem
 	 * from a multitude of angles, and the one I chose is likely non-standard,
 	 * but makes much more sense to me.
@@ -153,10 +161,9 @@ void main(void)
 	 *
 	 * So, for 900Hz, TBCCR0 = [16384] / [900] = 18.2 = 18.
 	 */
-	//TBCCR0 = 19;
+	 //TBCCR0 = 18;
 	
-	/*
-	 * Setup Timer_B's TBCCTL4
+	/* Setup Timer_B's TBCCTL4
 	 * BITs Mapping for TxCTLx:
 	 *	[15]	[14]	[13]	[12]	[11]	[10]	[9]		[8]
 	 *	CM		CM		CCIS	CCIS	SCS		CCLD	CCLD	CAP
@@ -182,58 +189,71 @@ void main(void)
 	
 	while (1)
 	{
-		while (new_note_flag == 0)
+		if (new_note_flag == 0)
 		{
-			asm("NOP");
+			GIE |= (SCG1+CPUOFF); // Turn off mclk and smclk
 		}
+		
 		new_note_flag = 0;
 		
-		for (int i = 0; i < 65; i++)
+		for (short unsigned int i = 0; i < 13; i++)
 		{
 			if (notes[i] == note)
 			{
-                          if (notes[i] == ' ')
-                          {
-                             TBCCR0 = 0;
-                          }
-                          else 
-                          {
-				TBCCR0 = (16384 / (int)(freq[i] * pow(2,octive) ) );
-				break;
-                          }
+				if (notes[i] == ' ')
+				{
+					TBCCR0 = 0; // halt the buzzer for a rest
+				} else {
+					TBCCR0 = (16384 / (int)(freq[i] * pow(2,octive) ) ); // Set the correct period to achieve a note
+					break; // break from for loop
+				}
 			}
 		}
-		
 	}
 }
 
+/*
+ * Watchdog interrupt service
+ */
 #pragma vector = WDT_VECTOR
 __interrupt void blink_watchdog(void)
 {
-  new_note_flag = 1;
-if (rest == 0)
-{
-	index ++;
-	if (songs[current_song][index] == 'Z')
+	new_note_flag = 1;
+	if (rest == 0)
 	{
-		index = 1;
+		index ++;
+		note = songs[current_song][index];
+		octive = songs_octive[current_song][index];
+		
+		if (songs[current_song][index] == 'Z')
+		{
+			index = 1;
+			WDTCTL = WDT_HALT;
+		} else if (pulse == 1) {
+			rest++;
+		}
+	} else {
+		note = ' ';
+		octive = 0;
+		rest = 0;
 	}
-	note = songs[current_song][index];
-	octive = songs_octive[current_song][index];
-	if (pulse == 1)
-	{
-		rest++;
-	}
-}
-else
-{
-	note = ' ';
-	octive = 0;
-	rest = 0;
-}
 }
 
-
+/*
+ * Port 1 interrupt service
+ */
+#pragma vector = PORT1_VECTOR
+__interrupt void Port1_ISR (void)
+{
+	current_song++;
+	
+	if (current_song == 3)
+	{
+		current_song = 0;
+	}
+	
+	WDTCTL = WDT_INTERVAL_250;
+}
 
 
 
