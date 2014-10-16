@@ -22,6 +22,7 @@
 
 #include <msp430.h> // The *correct* include statement
 #include <math.h> // for pow(), puh power!
+//#include <stdio.h> // for enum?
 
 #define SW1 (0x01&P1IN)	// B1 - P1.0 switch SW1 
 #define SW2 (0x02&P1IN)	// B2 - P1.1 switch SW2
@@ -36,9 +37,14 @@
 #define WDT_INTERVAL_1000 (WDTPW|WDTCNTCL|WDTTMSEL|WDTSSEL) // Set bits to have 1s timer
 #define WDT_HALT (WDTPW|WDTHOLD) // Set bits to halt the timer
 
-short unsigned int new_note_flag = 0;
+// Use instead of int flags
+typedef enum {
+	false = 0,
+	true = 1
+} bool;
 
-// Teach the little guy to sing
+bool new_note_flag = false;
+
 double freq[] = {16.35, 17.32, 18.35, 19.45, 20.60, 21.83, 23.12, 24.50, 25.96, 27.50, 29.14, 30.87, 1.00};
 char notes[] = {'C', 'd', 'D', 'e', 'E', 'F', 'g', 'G', 'a', 'A', 'b', 'B', ' '};
 
@@ -57,7 +63,7 @@ char songs[3][66] =
 	'Z', /*FIN*/
 	
 /*Jolly Old St. Nicholas*/
-	'N', /*No Pulse*/
+	'P', /*No Pulse*/
 	'B','B','B','B','A','A','A',' ','G','G','G','G','B',' ',' ',' ',
 	'E','E','E','E','D','D','G',' ','A','G','A','B','A',' ',' ',' ',
 	'B','B','B','B','A','A','A',' ','G','G','G','G','B',' ',' ',' ',
@@ -65,7 +71,7 @@ char songs[3][66] =
 	'Z', /*FIN*/
 	
 /*We Three Kings*/
-	'N', /*Pulse*/
+	'N', /*No Pulse*/
 	'B',' ','A','G',' ','E','g','G','g','E',' ',' ',
 	'B',' ','A','G',' ','E','g','G','g','E',' ',' ',
 	'G',' ','G','A',' ','A','B',' ','B','D','C','B',
@@ -182,32 +188,24 @@ void main(void)
 	
 	TBCCR4 = 1; // doesn't matter, can be any valid value
 	
-	if (songs[current_song][0] == 'P')
-	{
-		pulse = 1;
-	}
-	
 	while (1)
 	{
-		if (new_note_flag == 0)
+		if (new_note_flag) // There's a new note waiting
 		{
-			GIE |= (SCG1+CPUOFF); // Turn off mclk and smclk
-		}
-		
-		new_note_flag = 0;
-		
-		for (short unsigned int i = 0; i < 13; i++)
-		{
-			if (notes[i] == note)
+			for (int i = 0; i < 13; i++)
 			{
-				if (notes[i] == ' ')
+				if (notes[i] == note)
 				{
-					TBCCR0 = 0; // halt the buzzer for a rest
-				} else {
-					TBCCR0 = (16384 / (int)(freq[i] * pow(2,octive) ) ); // Set the correct period to achieve a note
-					break; // break from for loop
+					if (notes[i] == ' ')
+					{
+						TBCCR0 = 0; // halt the buzzer for a rest
+					} else {
+						TBCCR0 = (16384 / (int)(freq[i] * pow(2,octive) ) ); // Set the correct period to achieve a note
+						break; // break from for loop
+					}
 				}
 			}
+			new_note_flag = false;
 		}
 	}
 }
@@ -218,10 +216,10 @@ void main(void)
 #pragma vector = WDT_VECTOR
 __interrupt void blink_watchdog(void)
 {
-	new_note_flag = 1;
+	new_note_flag = true;
 	if (rest == 0)
 	{
-		index ++;
+		index++;
 		note = songs[current_song][index];
 		octive = songs_octive[current_song][index];
 		
@@ -252,8 +250,26 @@ __interrupt void Port1_ISR (void)
 		current_song = 0;
 	}
 	
+	if (songs[current_song][0] == 'P')
+	{
+		pulse = 1;
+	} else {
+		pulse = 0;
+	}
+	
+	rest = 0;
+	index = 1;
+        
 	WDTCTL = WDT_INTERVAL_250;
+        
+	P1IFG &= ~0x0003;	// Clear P1.0 IFG
 }
+
+
+
+
+
+
 
 
 
