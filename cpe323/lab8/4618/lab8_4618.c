@@ -38,9 +38,9 @@ char Time[8]; // string to keep current time
 //Function Declarations 
 void SetTime(void); 
 void SendTime(void); 
-////////////////////////////////////////////////////////////////// 
+
+
 //UART0 Initialization 						  
-////////////////////////////////////////////////////////////////// 
 void UART_Initialize(void) // USART in UART Mode 
 {   
 	P2SEL |= BIT4+BIT5; // Set UC0TXD and UC0RXD to transmit and receive data   
@@ -70,10 +70,10 @@ void SetTime(void) {
 
 // Sends the time to the HyperTerminal 
 void SendTime(void) {   
-	sprintf(Time, "%02d:%02d:%02d", min, sec, tsec); // prints time to a string   
+	sprintf(Time, "%02d:%02d:%02d", min, sec, (tsec*10)); // prints time to a string   
 	for(int i=0;i<8;i++) // Send character by character   
 	{     
-		while (!(IFG2 & UCA0TXIFG));     
+		while (!(IFG2 & UCA0TXIFG));
 		UCA0TXBUF = Time[i];   
 	}   
 	while (!(IFG2 & UCA0TXIFG));   
@@ -85,13 +85,17 @@ void main(void)
 	//WDTCTL = WDT_ADLY_250;
 	WDTCTL = (WDTPW|WDTHOLD);
 	
+	P2DIR |= 0x06;		// Set P2.1 and P2.2 to output direction (0000_0110) 
+	P2OUT = 0x02; 		// Set P2OUT to 0000_0010b (LED2 is ON, LED1 is OFF)
+	
 	P1IE |= 0x0003;		// P1.0 interrupt enabled
 	P1IES |= 0x0003;	// P1.0 hi -> low edge
 	P1IFG &= ~0x0003;	// Clear P1.0 IFG
 	
-	P3DIR |= BIT0; // Set P3.1 output
-	P3DIR &= ~BIT0; // Set low
-	
+	P3DIR |= BIT1; // Set P3.1 output
+	//P3OUT &= ~BIT1; // Set low
+	P3OUT |= BIT1; // Set high
+        
 	UART_Initialize(); //Initialize UART   /* Initialize Timer A to measure 1/10 sec */   
 	TACTL = TASSEL_2 + MC_1+ ID_3; // Select smclk/8 and up mode   
 	TACCR0 = 13107; // 100ms interval   
@@ -106,14 +110,15 @@ void main(void)
 	while (1)
 	{
 		asm("NOP");
-		if ((SW1) != 0)
+		while ((SW1) == 0)
+                {
+                  P3OUT |= BIT1; // set high
+		P2OUT = BIT2;
+                }
+                if ((SW1) != 0)
 		{
-			P3OUT &= ~BIT0;
-		}
-		if (send_time_flag == true)
-		{
-			send_time_flag = false;
-			SendTime();
+			P3OUT &= ~BIT1;
+			P2OUT = BIT1;
 		}
 	}
 }
@@ -135,7 +140,7 @@ __interrupt void Port1_ISR (void)
 {
 	// Constant delay debounce
 	int factor = (SCFQCTL / 30);
-	int looper = (20 * factor);
+	int looper = (30 * factor);
 	for (int c = 0; c < looper; c++)
 	{ asm("NOP"); }
 
@@ -143,7 +148,8 @@ __interrupt void Port1_ISR (void)
 	{
 		// Light up LED3
 		// Use P3.1 high
-		P3OUT |= BIT0; // set high
+		P3OUT |= BIT1; // set high
+		P2OUT = BIT2;
 	} else if (((SW2) == 0) && ((SW1) != 0)) // SW2 is pressed
 	{
 		// Do nothing.
@@ -158,7 +164,7 @@ __interrupt void Port1_ISR (void)
 __interrupt void TIMERA_ISA(void) 
 {   
 	SetTime(); // Set Clock   
-	send_time_flag = true;
+	SendTime();
 }
 
 
