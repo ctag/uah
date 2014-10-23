@@ -26,7 +26,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->rightDial, SIGNAL(valueChanged(int)), ui->leftLabel, SLOT(setNum(int)));
 
     // Problem 2
-
     timer = new QTimer(this);
     timer->setInterval(1000);
     timer->start();
@@ -69,6 +68,11 @@ void MainWindow::setTimerFast()
 void MainWindow::setTimerSlow()
 {
     timer->setInterval(1000);
+}
+
+void MainWindow::setTimerInt(int val)
+{
+    timer->setInterval(val);
 }
 
 bool MainWindow::eventFilter(QObject *watched, QEvent *e)
