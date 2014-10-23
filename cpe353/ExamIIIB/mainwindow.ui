@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>632</width>
+    <height>558</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>3</number>
+      </property>
+      <widget class="QWidget" name="tab_6">
+       <attribute name="title">
+        <string>Directions</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QTextBrowser" name="textBrowser_2">
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;Directions:    No collaboration!!&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;You may use Qt Creator (including Qt Assistant) and the CPE 353 course pdf lecture notes on Angel.  &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#ff0000;&quot;&gt;Use of any other resources will be considered cheating and will result in &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;zero credit (0 points) &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#ff0000;&quot;&gt;and additional penalties.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;When completing the tasks associated with each problem, you may only modify the files &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;mainwindow.h&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; and &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;mainwindow.cpp   &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#ff0000;&quot;&gt;Do NOT modify &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;main.cpp &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#ff0000;&quot;&gt;and &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;mainwindow.ui &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#ff0000;&quot;&gt;(the form) or you will receive&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; zero credit (0 points).&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;The text browser object at the top of each tab descibes the desired task associated with that tab -- you may need to scroll down to read the complete description.  &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;Your goal is to make your program's behavior match that of the sample solution!!!&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;See Angel for directions on how to execute a copy of the sample solution.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0617f3;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0617f3;&quot;&gt;When you are finished, upload both &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#ff0000;&quot;&gt;mainwindow.h&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0617f3;&quot;&gt; and &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#ff0000;&quot;&gt;mainwindow.cpp&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0617f3;&quot;&gt; as attachments to your Angel dropbox submission.  &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#000000;&quot;&gt;Be sure both files are attached to each submission you make.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0617f3;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>P01</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QTextBrowser" name="textBrowser_3">
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;(20%) Topic:  Interact with form widgets&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;Complete all the following tasks.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;* Use a Qt/C++ statement(s) such that changes in the &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;leftDial&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; object's value updates the value of the &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;rightDial&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; object&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;* Use a Qt/C++ statement(s) such that changes in the &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;rightDial&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; object's value updates the value of the &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;leftDial&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; object&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;* Use a Qt/C++ statement(s) to ensure that the &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;leftLabel&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; and &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;rightLabel&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; values are updated correctly&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#ff0000;&quot;&gt;Do NOT use the Designer tool to modify the form itself or you will receive&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#000000;&quot;&gt; zero credit (0 points).&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <spacer name="horizontalSpacer_12">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="leftLabel">
+            <property name="text">
+             <string>0</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDial" name="leftDial">
+            <property name="maximum">
+             <number>9</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QDial" name="rightDial">
+            <property name="maximum">
+             <number>9</number>
+            </property>
+            <property name="value">
+             <number>9</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="rightLabel">
+            <property name="text">
+             <string>9</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_13">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string>P02</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <item>
+         <widget class="QTextBrowser" name="textBrowser_5">
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;(20%) Topic:  Using QTimer objects and event filters&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;Complete all the following tasks.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;* Add Qt/C++ statement(s) to check/uncheck timer output at slow rate&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;* Add Qt/C++ statement(s) to check/uncheck timer output at fast rate&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;* Add an &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#ff0000;&quot;&gt;event filter&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; to block direct checking of timer output (must use an event filter to receive credit)&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#ff0000;&quot;&gt;Do NOT use the Designer tool to modify the form itself or you will receive&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#000000;&quot;&gt; zero credit (0 points).&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <spacer name="horizontalSpacer_8">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox">
+            <property name="title">
+             <string>Rate</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_6">
+             <item>
+              <widget class="QRadioButton" name="slowButton">
+               <property name="text">
+                <string>1 sec on, 1 sec off</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="fastButton">
+               <property name="text">
+                <string>0.1 sec on, 0.1 sec 0ff</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="outputButton">
+            <property name="text">
+             <string>Timer Output</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_11">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>P03</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QTextBrowser" name="textBrowser_8">
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;(20%)  Topic:  Using &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;connect&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; statements as specified below &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;Complete all the following tasks.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;* Use a &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;Qt4-style connect&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; statement to link the changing of the &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;lineEditQt4&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; object's value to changing the &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;labelQt4&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; object's value&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;* Use a &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#ff0000;&quot;&gt;Qt5-style connect&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; statement to link the changing of the &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#ff0000;&quot;&gt;spinBoxQt5&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; object's value to changing the &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#ff0000;&quot;&gt;labelQt5&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; object's value&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;* Add Qt/C++ statements to restrict range of &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;spinBoxQt5&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; to 0-9 inclusive [0,9]&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;* Add Qt/C++ statements to allow from zero to six letters A-Z and/or a-z as inputs for &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;lineEditQt4   &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#000000;&quot;&gt;(allow uppercase and lowercase letters only)&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#ff0000;&quot;&gt;Do NOT use the Designer tool to modify the form itself or you will receive&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#000000;&quot;&gt; zero credit (0 points).&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>A</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineEditQt4"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>B</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="labelQt4">
+              <property name="frameShape">
+               <enum>QFrame::Box</enum>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="line_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <item>
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>C</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinBoxQt5"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <item>
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>D</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="labelQt5">
+              <property name="frameShape">
+               <enum>QFrame::Box</enum>
+              </property>
+              <property name="text">
+               <string>0</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>P04</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="QTextBrowser" name="textBrowser_4">
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;(20%) Topic:  Using files in Qt &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;Complete the following tasks.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;* Use Qt/C++ statement(s) to add a &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;Save File&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; option to a pulldown menu called &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;Exam&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;* Add Qt/C++ statement(s) such that triggering of the &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;Save File&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; option will result in the display of a dialog for selecting name of text file (.txt) to save&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;* Use Qt/C++ statement(s) to save all text from the &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;textEdit&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; object below as &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#ff0000;&quot;&gt;plain text&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; to the selected file.  The text saved must exactly match in the &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;textEdit&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; object for credit.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#ff0000;&quot;&gt;Do NOT use the Designer tool to modify the form itself or you will receive&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#000000;&quot;&gt; zero credit (0 points).&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Name of Object Below = textEdit</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTextEdit" name="textEdit"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_5">
+       <attribute name="title">
+        <string>P05</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <item>
+         <widget class="QTextBrowser" name="textBrowser_6">
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;(20%) Topic:  TCP Sockets&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;Complete all the following tasks.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;* Add Qt/C++ statement(s) such that clicking the &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;sendButton&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; object will trigger sending the text from the &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;sendEdit&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; as a message via TCP port &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;5151&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; of &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;LocalHost     &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;* Add Qt/C++ statement(s) such that the &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;sendEdit &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;object is cleared after the text has been sent&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt;* For full credit, this send function must work each time &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;sendButton&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600;&quot;&gt; is clicked&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#000000;&quot;&gt;Hints:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#000000;&quot;&gt;Type &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#ff0000;&quot;&gt;nc -l 5151&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#000000;&quot;&gt; in a terminal window &lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#0000ff;&quot;&gt;before&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#000000;&quot;&gt; trying to send a message in order to verify the message has been sent (lowercase L, not digit one)&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#000000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#ff0000;&quot;&gt;Do NOT use the Designer tool to modify the main form itself or to create the pop-up dialog or you will receive&lt;/span&gt;&lt;span style=&quot; font-family:'.Lucida Grande UI'; font-size:13pt; font-weight:600; color:#000000;&quot;&gt; zero credit (0 points).&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_10">
+          <item>
+           <spacer name="horizontalSpacer_10">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="sendEdit"/>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="sendButton">
+            <property name="text">
+             <string>Send</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_9">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>632</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
