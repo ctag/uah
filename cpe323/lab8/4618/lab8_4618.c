@@ -70,8 +70,8 @@ void SetTime(void) {
 
 // Sends the time to the HyperTerminal 
 void SendTime(void) {   
-	sprintf(Time, "%02d:%02d:%02d", min, sec, (tsec*10)); // prints time to a string   
-	for(int i=0;i<8;i++) // Send character by character   
+	sprintf(Time, "%02d:%02d:%02d has elapsed since SW1 was pressed.", min, sec, (tsec*10)); // prints time to a string   
+	for(int i=0;i<43;i++) // Send character by character   
 	{     
 		while (!(IFG2 & UCA0TXIFG));
 		UCA0TXBUF = Time[i];   
@@ -150,6 +150,10 @@ __interrupt void Port1_ISR (void)
 		// Use P3.1 high
 		P3OUT |= BIT1; // set high
 		P2OUT = BIT2;
+		
+		min = 0;
+		sec = 0;
+		tsec = 0;
 	} else if (((SW2) == 0) && ((SW1) != 0)) // SW2 is pressed
 	{
 		// Do nothing.

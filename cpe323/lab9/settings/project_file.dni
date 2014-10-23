@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=-193377411
+Checksum=1000751505
 [CallStackLog]
 Enabled=0
 [CallStack]
@@ -63,8 +63,6 @@ State Storage=0
 Number=4
 [EEM Sequencer]
 Buffer=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-[watch_formats]
-Fmt0={W}0:P3OUT	1	0
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
@@ -76,7 +74,7 @@ LogFile=_ ""
 Count=0
 [FET]
 Clock mode=46
-Extended Clock mode=1
+Extended Clock mode=24791
 Secure Password=
 Extended Clock Control Enable=1
 Advanced Extended Clock Control=0
