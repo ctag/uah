@@ -4,7 +4,7 @@
  * 
  * Description: Ripped from demo code, because fuck the amount of time
  * we have to actually learn something that's otherwise interesting.
- * I'm sorry, that was passive agressive wasn't it.
+ * I'm sorry, that was passive aggressive wasn't it.
  * 
  * 19200 - 8N1
  *
@@ -98,7 +98,7 @@ void main(void)
         
 	UART_Initialize(); //Initialize UART   /* Initialize Timer A to measure 1/10 sec */   
 	TACTL = TASSEL_2 + MC_1+ ID_3; // Select smclk/8 and up mode   
-	TACCR0 = 13107; // 100ms interval   
+	TACCR0 = 13107; // 100ms interval
 	TACCTL0 = CCIE; // Capture/compare interrupt enable 
 	
 	//_EINT();			// Enable interrupts

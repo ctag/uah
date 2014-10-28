@@ -166,7 +166,7 @@ void main(void)
                 UART0_putchar('\n');    // newline
                 UART0_putchar('\r');    // carriage return
           break;
-    } 
+    }
   }
 }
 

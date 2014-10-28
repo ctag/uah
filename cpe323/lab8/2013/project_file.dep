@@ -6,32 +6,32 @@
   <configuration>
     <name>Debug</name>
     <outputs>
-      <file>$TOOLKIT_DIR$\inc\in430.h</file>
-      <file>$PROJ_DIR$\Debug\List\project_file.map</file>
-      <file>$TOOLKIT_DIR$\inc\intrinsics.h</file>
-      <file>$PROJ_DIR$\Debug\List\lab8_2013.lst</file>
-      <file>$PROJ_DIR$\Debug\Obj\lab8_2013.r43</file>
-      <file>$PROJ_DIR$\Debug\Obj\project_file.pbd</file>
-      <file>$PROJ_DIR$\Debug\Obj\lab8_2013.pbi</file>
       <file>$TOOLKIT_DIR$\lib\dlib\dl430fn.r43</file>
+      <file>$PROJ_DIR$\Debug\Obj\lab8_2013.r43</file>
+      <file>$PROJ_DIR$\Debug\Obj\lab8_2013.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\msp430.h</file>
+      <file>$PROJ_DIR$\Debug\List\project_file.map</file>
+      <file>$PROJ_DIR$\Debug\List\lab8_2013.lst</file>
       <file>$PROJ_DIR$\Debug\Exe\project_file.d43</file>
       <file>$TOOLKIT_DIR$\inc\msp430f2013.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\project_file.pbd</file>
       <file>$TOOLKIT_DIR$\config\linker\lnk430f2013.xcl</file>
-      <file>$TOOLKIT_DIR$\inc\msp430.h</file>
       <file>$PROJ_DIR$\lab8_2013.c</file>
+      <file>$TOOLKIT_DIR$\inc\in430.h</file>
+      <file>$TOOLKIT_DIR$\inc\intrinsics.h</file>
     </outputs>
     <file>
       <name>$PROJ_DIR$\Debug\Exe\project_file.d43</name>
       <outputs>
         <tool>
           <name>XLINK</name>
-          <file> 1</file>
+          <file> 4</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>XLINK</name>
-          <file> 10 4 7</file>
+          <file> 9 1 0</file>
         </tool>
       </inputs>
     </file>
@@ -39,22 +39,22 @@
       <name>$PROJ_DIR$\lab8_2013.c</name>
       <outputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 6</file>
+          <name>ICC430</name>
+          <file> 5 1</file>
         </tool>
         <tool>
-          <name>ICC430</name>
-          <file> 3 4</file>
+          <name>BICOMP</name>
+          <file> 2</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 11 9 0 2</file>
+          <name>ICC430</name>
+          <file> 3 7 11 12</file>
         </tool>
         <tool>
-          <name>ICC430</name>
-          <file> 11 9 0 2</file>
+          <name>BICOMP</name>
+          <file> 3 7 11 12</file>
         </tool>
       </inputs>
     </file>
@@ -63,7 +63,7 @@
       <outputs>
         <tool>
           <name>XLINK</name>
-          <file> 8 1</file>
+          <file> 4 6</file>
         </tool>
       </outputs>
     </file>
