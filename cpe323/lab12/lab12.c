@@ -39,7 +39,8 @@ char timePacket[9];
 char rxBuffer[256];
 char len;
 
-volatile float millisec = 0;
+unsigned long millisec = 0;
+short unsigned int timer_on = 0;
 
 /*
  * Function Definitions
@@ -131,10 +132,10 @@ void main(void)
 	WDTCTL = (WDTPW|WDTHOLD); // halt watchdog
 	
 	// Setup Timer_A, leave halted
-	TACTL = TASSEL_2 + ID_3; // Select smclk/8 and up mode
+	//TACTL = TASSEL_2 + ID_3 + MC_1; // Select smclk/8 and up mode
 	// To start: TACTL |= MC_1;
-	TACCR0 = 131; // 1ms interval   
-	TACCTL0 = CCIE; // Capture/compare interrupt enable 
+	//TACCR0 = 131; // 1ms interval   
+	//TACCTL0 = CCIE; // Capture/compare interrupt enable 
 	
 	_EINT();	// Enable interrupts
 
@@ -143,7 +144,7 @@ void main(void)
 	P1IE |= 0x03;		// Enable P1 interrupt for bit 0 and 1
 	P1IES |= 0x03;		// Set interrupt call to falling edge
 	P1IFG &= ~(0x03);	// Clear interrupt flags
-	P2DIR |= 0x02;		// Set P2.1 and P2.2 to output (0000_0110) 
+	P2DIR |= 0x06;		// Set P2.1 and P2.2 to output (0000_0110) 
 	P2OUT = 0x02;		// Set P2OUT to 0000_0010b
 	Transmitter_Initialize();      
 
@@ -160,7 +161,31 @@ void main(void)
 	while (1)
 	{
 		//_BIS_SR(LPM3_bits + GIE);	// Enter LPM0, enable interrupts
+	  
+	  	if (SW1 != 0 && timer_on == 1) {
+		TACTL &= ~MC_1;
+		char * timePointer = (char *)&millisec;
 		
+		int i = 0;
+		while (i < 9) {
+			UART_Write(timePointer[i] * 4);
+			UART_Write('_');
+			i++;
+		}
+		UART_Write('\n');
+		UART_Write('\r');
+		
+		for (int c = 0; c < 7; c++) {
+			timePacket[c+2] = timePointer[c];
+		}
+		
+		RFSendPacket(timePacket, 9);
+		timer_on = 0;
+		}
+		else if (timer_on == 0) {
+		  TACTL = 0x00;
+		  P2OUT &= ~0x04;
+		}
 	}
 }
 
@@ -171,8 +196,7 @@ void main(void)
 __interrupt void TIMERA_ISA(void)
 {
 	millisec++;
-	UART_Toggle_SW2();
-	P2OUT ^= 0x02;
+	P2OUT ^= 0x04;
 	//_BIC_SR_IRQ(LPM0_bits); // Clear LPM0 bits from 0(SR)
 }
 
@@ -187,29 +211,12 @@ __interrupt void Port1_ISR (void)
 	if (((SW1) == 0) && ((SW2) != 0)) // SW1 is pressed
 	{
 		millisec = 0;
+		timer_on = 1;
 		
-		TACTL |= MC_1;
-		
-		while (SW1 == 0) {
-			
-		}
-		
-		TACTL &= ~MC_1;
-		
-		char * timePointer = (char *)&millisec;
-		
-		int i = 0;
-		while (i < 9) {
-			UART_Write(timePointer[i]);
-			UART_Write('_');
-			i++;
-		}
-		
-		for (int c = 0; c < 7; c++) {
-			timePacket[c+2] = timePointer[c];
-		}
-		
-		RFSendPacket(timePacket, 9);
+		// Setup Timer_A, leave halted
+		TACTL = TASSEL_2 + ID_3 + MC_1; // Select smclk/8 and up mode
+		TACCR0 = 131; // 1ms interval   
+		TACCTL0 = CCIE; // Capture/compare interrupt enable 
 		
 	} else if (((SW2) == 0) && ((SW1) != 0)) // SW2 is pressed
 	{
