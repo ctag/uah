@@ -110,7 +110,7 @@ void UART_Initialize(void)
 void UART_Write(char c) {
 	while (!(IFG2 & UCA0TXIFG));
 	UCA0TXBUF = c;
-} 
+}
 
 /*
  * Write a static debugging message to serial buffer
