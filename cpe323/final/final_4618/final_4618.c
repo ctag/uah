@@ -27,11 +27,33 @@
 #define SW1 0x01&P1IN	// B1 - P1.0 switch SW1 
 #define SW2 0x02&P1IN	// B2 - P1.1 switch SW2
 
-volatile long int lsx = 0;
-volatile long int lsy = 0;
-volatile long int rsx = 0;
-volatile long int rsy = 0;
+volatile long unsigned int lsx = 0;
+volatile long unsigned int lsy = 0;
+volatile long unsigned int rsx = 0;
+volatile long unsigned int rsy = 0;
+
+short unsigned int lsx_percent = 0;
+short unsigned int lsy_percent = 0;
+short unsigned int rsx_percent = 0;
+short unsigned int rsy_percent = 0;
+
 char current_char = '\0';
+
+int alpha_index [3][4] = {
+	-1, 0, -1,
+	1, -1, 2,
+	3, -1, 4,
+	-1, 5, -1
+};
+
+char alphabet[6][6] = {
+	'A', 'B', 'C', 'D', 'E', 'F',
+	'G', 'H', 'I', 'J', 'K', 'L',
+	'M', 'N', 'O', 'P', 'Q', 'R',
+	'S', 'T', 'U', 'V', 'W', 'X',
+	'Y', 'Z', '0', '1', '2', '3',
+	'4', '5', '6', '7', '8', '9',
+	};
 
 /*
  * (Somewhat) Constant Delay and Debounce
@@ -69,9 +91,52 @@ void UART_Write(char c)
 	UCA0TXBUF = c;
 } 
 
-void Send_Char(void)
+void Generate_Section(short unsigned int input, char axis)
 {
+	if (axis = 'x') {
+		if (input < 33) {
+			return (0);
+		} else if (input >= 33 && input <= 66) {
+			return (1);
+		} else if (input > 66) {
+			return (2);
+		}
+	} else {
+		if (input < 25) {
+			return (0);
+		} else if (input >= 25 && input < 50) {
+			return (1);
+		} else if (input >= 50 && input < 75) {
+			return (2);
+		} else if (input >= 75) {
+			return (3);
+		}
+	}
+}
+
+void UART_Send_Char(void)
+{
+	lsx_percent = (lsx*3/4095*100/3);
+	lsy_percent = (lsy*3/4095*100/3);
+	rsx_percent = (rsx*3/4095*100/3);
+	rsy_percent = (rsy*3/4095*100/3);
 	
+	int lsx_loc = Generate_Section(lsx_percent, 'x');
+	int lsy_loc = Generate_Section(lsy_percent, 'y');
+	int rsx_loc = Generate_Section(rsx_percent, 'x');
+	int rsy_loc = Generate_Section(rsy_percent, 'y');
+	
+	if ((alpha_index[lsx_loc][lsy_loc] == -1) || (alpha_index[rsx_loc][rsy_loc] == -1)) {
+		return;
+	}
+	
+	int l_index = alpha_index[lsx_loc][lsy_loc];
+	int r_index = alpha_index[rsx_loc][rsy_loc];
+	
+	if (lsx > 50 && rsx > 50)
+	{
+		UART_Write(alphabet[l_index][r_index]);
+	}
 }
 
 void main(void)
@@ -98,7 +163,7 @@ void main(void)
 	ADC12MCTL3 = INCH_7 + EOS;		// ADC channel 3 is A7 pin - Right-Stick Y-axis
 	// EOS - End of Sequence for Conversions
 	
-	ADC12IE |= 0x0F;	// Enable ADC12IFG.x
+	ADC12IE |= 0x0008;	// Enable ADC12 Interrupts
 	Delay_Debounce();	// Delay for reference start-up
 	ADC12CTL0 |= ENC;	// Enable conversions
 	
@@ -108,7 +173,8 @@ void main(void)
 
 	while (1)
 	{
-		asm("NOP");
+		
+		
 	}
 }
 
@@ -118,10 +184,11 @@ void main(void)
 #pragma vector = ADC12_VECTOR
 __interrupt void ADC12_ISR(void)
 {
-  lsx = ADC12MEM0;	// Move results, IFG is cleared
+  lsx = ADC12MEM0;	// Move results
   lsy = ADC12MEM1;
   rsx = ADC12MEM2;
-  rsy = ADC12MEM3;
+  rsy = ADC12MEM3; // IFG cleared
+  
   //__bic_SR_register_on_exit(LPM0_bits);	// Exit LPM0
 }
 
@@ -131,8 +198,18 @@ __interrupt void ADC12_ISR(void)
 #pragma vector = TIMERA0_VECTOR
 __interrupt void TIMERA_ISR(void)
 {
-  //Send_Char();
-  //__bic_SR_register_on_exit(LPM0_bits);     // Exit LPM0
+	if (lsx != 0) {
+		UART_Send_Char();
+	}
+	
+	lsx = 0;
+	lsy = 0;
+	rsx = 0;
+	rsy = 0;
+	
+	ADC12CTL0 |= ADC12SC;
+	
+	//__bic_SR_register_on_exit(LPM0_bits);     // Exit LPM0
 }
 
 
