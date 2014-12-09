@@ -5,6 +5,7 @@
 #include <QSqlDatabase>
 #include <QLabel>
 #include <QSql>
+#include <QtSql>
 #include <QSqlDatabase>
 #include <QIntValidator>
 #include <QtDebug>
@@ -19,6 +20,16 @@
 #include <QPen>
 #include <QBrush>
 #include <QRect>
+#include <QIntValidator>
+#include <QRegularExpressionValidator>
+#include <QDoubleValidator>
+#include <QTextBrowser>
+#include <QTextEdit>
+#include <QInputEvent>
+#include <QKeyEvent>
+#include <stdio.h>
+#include <stdlib.h>
+#include <QTimer>
 //#include <QTgui>
 //#include <QUdpSocket>
 //#include <QtNetwork>
@@ -44,21 +55,31 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    //bool EventFilter1 *eventFilter1;
     QSqlDatabase db;
     QSqlQuery * dbQuery;
     QAction * dbOpened;
     QTableView * tview;
     QSqlTableModel * tmodel;
+    QRegularExpressionValidator *regExpValid;
+    QTimer *timer;
 
 protected slots:
-    //void openDB();
+    void openDB();
+    void toggleYesNo();
+    void timerRadio();
+    void timerStart();
+    void timerStop();
     
 signals:
-    //void valueReached();
+    //void valueIncrement();
+    
+protected:
+    bool eventFilter(QObject *obj, QEvent *event);
+    int *filter_count;
     
 private:
     Ui::MainWindow *ui;
+    
 };
 
 #endif // MAINWINDOW_H
