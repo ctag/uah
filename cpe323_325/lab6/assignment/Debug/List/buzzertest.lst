@@ -1,0 +1,274 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V6.10.2.50871/W32 for MSP430         02/Oct/2014  14:59:53
+# Copyright 1996-2014 IAR Systems AB.
+# Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.10
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  D:\lab6\assignment\buzzertest.c
+#    Command line  =  
+#        D:\lab6\assignment\buzzertest.c -lCN D:\lab6\assignment\Debug\List\ -o
+#        D:\lab6\assignment\Debug\Obj\ --no_cse --no_unroll --no_inline
+#        --no_code_motion --no_tbaa --debug -D__MSP430FG4618__ -e --double=32
+#        --dlib_config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.0\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On
+#        --multiplier=16 --segment __data16=DATA16 --segment __data20=DATA20
+#        --code_model=large
+#    List file     =  D:\lab6\assignment\Debug\List\buzzertest.lst
+#    Object file   =  D:\lab6\assignment\Debug\Obj\buzzertest.r43
+#
+###############################################################################
+
+D:\lab6\assignment\buzzertest.c
+      1          /***********************************************************************
+      2           *   lab6, TI experimenter board project
+      3           *
+      4           *   Desc:	bullshit
+      5           *
+      6           *   .----._.-----.
+      7           *   |MSP430xG461x|
+      8           *   |            |
+      9           *   |        RST |-->
+     10           *   |            |
+     11           *   |       P1.0 |-->SW1 (labeled)
+     12           *   |       P1.1 |-->SW2 (labeled)
+     13           *   |            |
+     14           *   |       P2.2 |-->LED1 (GREEN)
+     15           *   |       P2.1 |-->LED2 (YELLOW)
+     16           *   |            |
+     17           *   |       P3.5 |-->Buzzer
+     18           *   |            |
+     19           *   \____________/ 
+     20           * 
+     21           *   Christopher Bero <csb0019@uah.edu>
+     22           **********************************************************************/
+     23          
+     24          // Here's to the day that IAR is able to format .c files correctly.
+     25          // Don't hold your breath.
+     26          
+     27          #include  <msp430.h> 	// The /correct/ way to include standard library
+
+   \                                 In  segment DATA16_AN, at 0x29
+   \   unsigned char volatile P2OUT
+   \                     P2OUT:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x2a
+   \   unsigned char volatile P2DIR
+   \                     P2DIR:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x19
+   \   unsigned char volatile P3OUT
+   \                     P3OUT:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x1a
+   \   unsigned char volatile P3DIR
+   \                     P3DIR:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x31
+   \   unsigned char volatile P5OUT
+   \                     P5OUT:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x32
+   \   unsigned char volatile P5DIR
+   \                     P5DIR:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x120
+   \   unsigned short volatile WDTCTL
+   \                     WDTCTL:
+   \   000000                DS8 2
+     28          
+     29          #define SW1 0x01&P1IN	// B1 - P1.0 switch SW1 
+     30          #define SW2 0x02&P1IN	// B2 - P1.1 switch SW2
+     31          
+     32          // Volatile variables may be changed at any time by a subroutine (interrupt)
+     33          // volatile short int timerCount = 0;			// Number of times TimerA has been triggered
+     34          // volatile short int previousClock = 60;		// The clock factor to return to after SW2 interrupt
+     35          // volatile short int sw2Interrupt = 0;	// Status boolean, are we in a modified clock state?
+     36          										// 0 = no; 1 = yes;
+     37          /*
+     38           * Main function (infinite loop, no exit)
+     39           */
+
+   \                                 In  segment CODE, align 2
+     40          void main ( void ) 
+   \                     main:
+     41          {
+     42          	WDTCTL = WDTPW + WDTHOLD;	// Stop watchdog timer 
+   \   000000   B240805A2001 MOV.W   #0x5a80, &0x120
+     43          
+     44          	// FLL_CTL0 |= XCAP18PF;	// Set load capacitance for xtal
+     45          	// SCFI0 |= FN_2;			// x2 DCO, 4MHz nominal DCO
+     46          	// SCFQCTL = 60;			// (60+1) x 32768 ~= 2 MHz
+     47          	
+     48          	P2DIR |= 0x06;		// Set P2.1 and P2.2 to output direction (0000_0110) 
+   \   000006   F2D006002A00 BIS.B   #0x6, &0x2a
+     49          	P2OUT = 0x02; 		// Set P2OUT to 0000_0010b (LED2 is ON, LED1 is OFF)
+   \   00000C   E2432900     MOV.B   #0x2, &0x29
+     50          	
+     51          	P5DIR |= 0x02;          // Pin 5, on P5.1, a red LED, cool.
+   \   000010   E2D33200     BIS.B   #0x2, &0x32
+     52          	P5OUT = 0x00;           // Let's use it! (needs jumper JP3 bridged)
+   \   000014   C2433100     MOV.B   #0x0, &0x31
+     53          	
+     54          	P3DIR |= 0x10;
+   \   000018   F2D010001A00 BIS.B   #0x10, &0x1a
+     55          	P3OUT = 0x00;
+   \   00001E   C2431900     MOV.B   #0x0, &0x19
+     56          	
+     57          	// Screw looping, use TimerA and SMCLK to control LEDs
+     58          	// TA0CCR0 |= 40000-1;	// See below
+     59          		// ACLK ~ 33KHz & SMCLK ~ 2MHz
+     60          		// So we trigger every 32,768 clicks to achieve 1Hz blink (1 second on, 1 second off) with ACLK
+     61          		// Or every 2,000,000 clicks for SMCLK (the one we have to use)
+     62          		// The register value cannot exceed ~60,000, so we must use 40,000 and count to 50
+     63          		// But we really want a 2Hz blink (0.5 sec on, 0.5 sec off), so we only count to 25
+     64          	// TA0CCTL0 |= CCIE;			// Enable the clock interrupt
+     65          	// TA0CTL |= TASSEL_2 + MC_1;	// Choose SMCLK as the clock, change to TASSEL_1 for ACLK
+     66          
+     67          	// _EINT();			// Enable interrupts
+     68          	// P1IE |= 0x0003;		// P1.0 interrupt enabled
+     69          	// P1IES |= 0x0003;	// P1.0 hi -> low edge
+     70          	// P1IFG &= ~0x0003;	// Clear P1.0 IFG
+     71          	
+     72          	//int buzTimer = 0;
+     73          	
+     74          	while (1) 
+     75          	{
+     76                              P5OUT ^= 0x02;
+   \                     ??main_0:
+   \   000022   E2E33100     XOR.B   #0x2, &0x31
+     77                              P3OUT ^= 0x10;
+   \   000026   F2E010001900 XOR.B   #0x10, &0x19
+     78                              for (int m = 0; m < 5000; m++)
+   \   00002C   0F43         MOV.W   #0x0, R15
+   \                     ??main_1:
+   \   00002E   3F908813     CMP.W   #0x1388, R15
+   \   000032   F737         JGE     ??main_0
+     79                              {
+     80                                 asm("NOP");
+   \   000034   0343         NOP
+     81                              }
+   \   000036   1F53         ADD.W   #0x1, R15
+   \   000038   FA3F         JMP     ??main_1
+   \   00003A                REQUIRE WDTCTL
+   \   00003A                REQUIRE P2DIR
+   \   00003A                REQUIRE P2OUT
+   \   00003A                REQUIRE P5DIR
+   \   00003A                REQUIRE P5OUT
+   \   00003A                REQUIRE P3DIR
+   \   00003A                REQUIRE P3OUT
+     82          	}
+     83          }
+     84          
+     85          /*
+     86           * Port 1 interrupt service
+     87           */
+     88          // #pragma vector = PORT1_VECTOR // The fuck does pragma mean? or vector for that matter.
+     89          // __interrupt void Port1_ISR (void)
+     90          // {
+     91          	// Constant delay debounce, arbitrary looper value
+     92            // At SCFQCTL=30, we delay 20 NOP instructions.
+     93            // At SCFQCTL=60, we delay 40 NOP instructions.
+     94            // At SCFQCTL=120, we delay 80 NOP instructions.
+     95            // A linear relationship between clock and delay :)
+     96          	// int factor = (SCFQCTL / 30);
+     97          	// int looper = (20 * factor);
+     98          	
+     99          	// for (int c = 0; c < looper; c++)
+    100          	// {
+    101          		// asm("NOP");
+    102          	// }
+    103            
+    104          	// if (((SW1) == 0) && ((SW2) != 0))
+    105          	// {
+    106          		// if (SCFQCTL == 60)
+    107          		// {
+    108          			// SCFQCTL = 120;	// Set clock to 4Mhz
+    109          		// } 
+    110          		// else if (SCFQCTL == 120)
+    111          		// {
+    112          			// SCFQCTL = 60;	// Set clock to 2Mhz
+    113          		// }
+    114          	// }
+    115          	// else if (((SW2) == 0) && ((SW1) != 0) && (sw2Interrupt == 0))
+    116          	// {
+    117          		// previousClock = SCFQCTL;
+    118          		// sw2Interrupt = 1;
+    119          		// SCFQCTL = 30;	// Set clock to 1Mhz
+    120          	// }
+    121          	
+    122          	// P1IFG &= ~BIT1;		// Clear P1.1 IFG
+    123          	// P1IFG &= ~BIT0;		// Clear P1.0 IFG
+    124          // }
+    125          
+    126          
+    127          
+    128          
+    129          
+    130          
+    131          
+    132          
+    133          
+    134          
+    135          
+    136          
+    137          
+    138          
+    139          
+    140          
+    141          
+    142          
+    143          
+    144          
+    145          
+    146          
+    147          
+    148          
+    149          
+    150          
+    151          
+    152          
+    153          
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+      4   main
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       1  P2DIR
+       1  P2OUT
+       1  P3DIR
+       1  P3OUT
+       1  P5DIR
+       1  P5OUT
+       2  WDTCTL
+      58  main
+
+ 
+ 58 bytes in segment CODE
+  8 bytes in segment DATA16_AN
+ 
+ 58 bytes of CODE memory
+  0 bytes of DATA memory (+ 8 bytes shared)
+
+Errors: none
+Warnings: none

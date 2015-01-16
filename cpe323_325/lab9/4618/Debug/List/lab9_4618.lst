@@ -1,0 +1,593 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V6.10.2.50871/W32 for MSP430         04/Nov/2014  13:51:28
+# Copyright 1996-2014 IAR Systems AB.
+# Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.10
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  D:\uah\cpe323\lab9\4618\lab9_4618.c
+#    Command line  =  
+#        D:\uah\cpe323\lab9\4618\lab9_4618.c -lCN
+#        D:\uah\cpe323\lab9\4618\Debug\List\ -o
+#        D:\uah\cpe323\lab9\4618\Debug\Obj\ --no_cse --no_unroll --no_inline
+#        --no_code_motion --no_tbaa --debug -D__MSP430FG4618__ -e --double=32
+#        --dlib_config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.0\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On
+#        --multiplier=16 --segment __data16=DATA16 --segment __data20=DATA20
+#        --code_model=large
+#    List file     =  D:\uah\cpe323\lab9\4618\Debug\List\lab9_4618.lst
+#    Object file   =  D:\uah\cpe323\lab9\4618\Debug\Obj\lab9_4618.r43
+#
+###############################################################################
+
+D:\uah\cpe323\lab9\4618\lab9_4618.c
+      1          /***********************************************************************
+      2           * Title: LAB 9 - MSP~4618
+      3           * Date Due: 30-10-14
+      4           * 
+      5           * Description:
+      6           * Reads input over serial and instructs MSP2013 over SPI to adjust
+      7           * an LED's blink rate.
+      8           *	
+      9           
+     10           Make sure:
+     11           BAUD - 19200
+     12           8N1
+     13           Flow Control - OFF
+     14           
+     15           * By: Christopher 'ctag' Bero <csb0019@uah.edu>
+     16           * Project: https://github.com/ctag/uah
+     17           *
+     18           * This software is licensed under the GPLv3,
+     19           * consult the LICENSE file for more information.
+     20           **********************************************************************/
+     21          
+     22          #include <msp430.h> // The *correct* include statement
+
+   \                                 In  segment DATA16_AN, at 0x1
+   \   unsigned char volatile IE2
+   \                     IE2:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x3
+   \   unsigned char volatile IFG2
+   \                     IFG2:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x2e
+   \   unsigned char volatile P2SEL
+   \                     P2SEL:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x18
+   \   unsigned char const volatile P3IN
+   \                     P3IN:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x1b
+   \   unsigned char volatile P3SEL
+   \                     P3SEL:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x60
+   \   unsigned char volatile UCA0CTL0
+   \                     UCA0CTL0:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x61
+   \   unsigned char volatile UCA0CTL1
+   \                     UCA0CTL1:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x62
+   \   unsigned char volatile UCA0BR0
+   \                     UCA0BR0:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x63
+   \   unsigned char volatile UCA0BR1
+   \                     UCA0BR1:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x64
+   \   unsigned char volatile UCA0MCTL
+   \                     UCA0MCTL:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x66
+   \   unsigned char const volatile UCA0RXBUF
+   \                     UCA0RXBUF:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x67
+   \   unsigned char volatile UCA0TXBUF
+   \                     UCA0TXBUF:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x68
+   \   unsigned char volatile UCB0CTL0
+   \                     UCB0CTL0:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x69
+   \   unsigned char volatile UCB0CTL1
+   \                     UCB0CTL1:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x6a
+   \   unsigned char volatile UCB0BR0
+   \                     UCB0BR0:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x6b
+   \   unsigned char volatile UCB0BR1
+   \                     UCB0BR1:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x6f
+   \   unsigned char volatile UCB0TXBUF
+   \                     UCB0TXBUF:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x120
+   \   unsigned short volatile WDTCTL
+   \                     WDTCTL:
+   \   000000                DS8 2
+     23          #include <stdio.h> // '(dot) EWW' (see what I did there?)
+     24          
+     25          #define SW1 0x01&P1IN	// B1 - P1.0 switch SW1
+     26          #define SW2 0x02&P1IN	// B2 - P1.1 switch SW2
+     27          
+     28          #define LED_4X_STATE    0x34	// character '4'
+     29          #define LED_3X_STATE    0x33	// character '3'
+     30          #define LED_2X_STATE    0x32	// character '2'
+     31          #define LED_1X_STATE    0x31	// character '1'
+     32          #define LED_OFF_STATE   0x30    // character '0'
+     33          #define LED_NUL_STATE   0x00    // character NULL - dummy write
+     34          
+
+   \                                 In  segment DATA16_I, align 1, align-sorted
+   \   000000                REQUIRE ?cstart_init_copy
+     35          unsigned char ch = '0';  // hold char from UART RX
+   \                     ch:
+   \   000000                DS8 1
+   \   000001                REQUIRE `?<Initializer for ch>`
+
+   \                                 In  segment DATA16_Z, align 1, align-sorted
+   \   000000                REQUIRE ?cstart_init_zero
+     36          unsigned char rx_flag = 0;   // receiver rx status flag
+   \                     rx_flag:
+   \   000000                DS8 1
+     37          
+
+   \                                 In  segment DATA16_I, align 1, align-sorted
+   \   000000                REQUIRE ?cstart_init_copy
+     38          char serialMessage[] = "Enter 1, 2, 3, or 4: ";
+   \                     serialMessage:
+   \   000000                DS8 22
+   \   000016                REQUIRE `?<Initializer for serialMessage>`
+
+   \                                 In  segment DATA16_I, align 1, align-sorted
+   \   000000                REQUIRE ?cstart_init_copy
+     39          char serialChastise[] = "Only 1-4 is allowed as valid input.";
+   \                     serialChastise:
+   \   000000                DS8 36
+   \   000024                REQUIRE `?<Initializer for serialChastise>`
+     40          
+
+   \                                 In  segment CODE, align 2
+     41          void SPISetup(void)
+   \                     SPISetup:
+     42          {
+     43            UCB0CTL0 = UCMSB + UCMST + UCSYNC; 	// sync. mode, 3-pin SPI, Master mode, 8-bit data
+   \   000000   F24029006800 MOV.B   #0x29, &0x68
+     44            UCB0CTL1 = UCSSEL_2 + UCSWRST;   		// SMCLK and Software reset                  
+   \   000006   F24081006900 MOV.B   #0x81, &0x69
+     45            UCB0BR0 = 0x02; 						// Data rate = SMCLK/2 ~= 500kHz                          
+   \   00000C   E2436A00     MOV.B   #0x2, &0x6a
+     46            UCB0BR1 = 0x00;
+   \   000010   C2436B00     MOV.B   #0x0, &0x6b
+     47            P3SEL |= BIT1 + BIT2 + BIT3;			// P3.1,P3.2,P3.3 option select               
+   \   000014   F2D00E001B00 BIS.B   #0xe, &0x1b
+     48            UCB0CTL1 &= ~UCSWRST; 				// **Initialize USCI state machine**
+   \   00001A   D2C36900     BIC.B   #0x1, &0x69
+     49          }
+   \   00001E   1001         RETA
+   \   000020                REQUIRE UCB0CTL0
+   \   000020                REQUIRE UCB0CTL1
+   \   000020                REQUIRE UCB0BR0
+   \   000020                REQUIRE UCB0BR1
+   \   000020                REQUIRE P3SEL
+     50          
+
+   \                                 In  segment CODE, align 2
+     51          void SPISetState(unsigned char State)
+   \                     SPISetState:
+   \                     ??SPISetState_0:
+     52          {
+     53             while(P3IN & 0x01);                // Verifies busy flag
+   \   000000   D2B31800     BIT.B   #0x1, &0x18
+   \   000004   FD2F         JC      ??SPISetState_0
+     54             IFG2 &= ~UCB0RXIFG;  
+   \   000006   E2C20300     BIC.B   #0x4, &0x3
+     55             UCB0TXBUF = State;                 //  write new state
+   \   00000A   C24C6F00     MOV.B   R12, &0x6f
+     56             while (!(IFG2 & UCB0RXIFG));       // USCI_B0 TX buffer ready?
+   \                     ??SPISetState_1:
+   \   00000E   E2B20300     BIT.B   #0x4, &0x3
+   \   000012   FD2B         JNC     ??SPISetState_1
+     57          }
+   \   000014   1001         RETA
+   \   000016                REQUIRE P3IN
+   \   000016                REQUIRE IFG2
+   \   000016                REQUIRE UCB0TXBUF
+     58          
+
+   \                                 In  segment CODE, align 2
+     59          void UART0_putchar(char c) {
+   \                     UART0_putchar:
+   \                     ??UART0_putchar_0:
+     60            while (!(IFG2 & UCA0TXIFG));	// wait for other character to transmit
+   \   000000   E2B30300     BIT.B   #0x2, &0x3
+   \   000004   FD2B         JNC     ??UART0_putchar_0
+     61            UCA0TXBUF = c;	// Set char c
+   \   000006   C24C6700     MOV.B   R12, &0x67
+     62          }
+   \   00000A   1001         RETA
+   \   00000C                REQUIRE IFG2
+   \   00000C                REQUIRE UCA0TXBUF
+     63          
+
+   \                                 In  segment CODE, align 2
+     64          void Serial_Initialize(void)
+   \                     Serial_Initialize:
+     65          {
+     66            P2SEL |= BIT4+BIT5; 		// Set UC0TXD and UC0RXD to transmit and receive data
+   \   000000   F2D030002E00 BIS.B   #0x30, &0x2e
+     67            UCA0CTL1 |= BIT0; 		// Software reset
+   \   000006   D2D36100     BIS.B   #0x1, &0x61
+     68            UCA0CTL0 = 0; 			// USCI_A0 control register
+   \   00000A   C2436000     MOV.B   #0x0, &0x60
+     69            UCA0CTL1 |= UCSSEL_2; 	// Clock source SMCLK - 1048576 Hz
+   \   00000E   F2D080006100 BIS.B   #0x80, &0x61
+     70            UCA0BR0 = 54; 			// baud rate - 1048576 Hz / 19200
+   \   000014   F24036006200 MOV.B   #0x36, &0x62
+     71            UCA0BR1 = 0; 				// Excellent documentation here in the demo code!
+   \   00001A   C2436300     MOV.B   #0x0, &0x63
+     72            UCA0MCTL = 0x0A; 			// Modulation
+   \   00001E   F2400A006400 MOV.B   #0xa, &0x64
+     73            UCA0CTL1 &= ~BIT0; 		// Software reset
+   \   000024   D2C36100     BIC.B   #0x1, &0x61
+     74            IE2 |= UCA0RXIE;			// Enable USCI_A0 RX interrupt
+   \   000028   D2D30100     BIS.B   #0x1, &0x1
+     75          }
+   \   00002C   1001         RETA
+   \   00002E                REQUIRE P2SEL
+   \   00002E                REQUIRE UCA0CTL1
+   \   00002E                REQUIRE UCA0CTL0
+   \   00002E                REQUIRE UCA0BR0
+   \   00002E                REQUIRE UCA0BR1
+   \   00002E                REQUIRE UCA0MCTL
+   \   00002E                REQUIRE IE2
+     76          
+
+   \                                 In  segment CODE, align 2
+     77          void main(void)
+   \                     main:
+     78          {
+   \   000000   0A12         PUSH.W  R10
+     79          	WDTCTL = (WDTPW|WDTHOLD);
+   \   000002   B240805A2001 MOV.W   #0x5a80, &0x120
+     80          	
+     81          	Serial_Initialize();
+   \   000008   ........     CALLA   #Serial_Initialize
+     82          	SPISetup();
+   \   00000C   ........     CALLA   #SPISetup
+     83          	
+     84          	_EINT();	// Enable interrupts
+   \   000010   32D2         EINT
+     85          	
+     86          	for (int z = 5000; z > 0; z--);	// Delay to allow baud rate stabilize
+   \   000012   3F408813     MOV.W   #0x1388, R15
+   \                     ??main_0:
+   \   000016   1F93         CMP.W   #0x1, R15
+   \   000018   0238         JL      ??main_6
+   \   00001A   3F53         ADD.W   #0xffff, R15
+   \   00001C   FC3F         JMP     ??main_0
+     87          	
+     88          	UART0_putchar('\n');    // newline
+   \                     ??main_6:
+   \   00001E   7C400A00     MOV.B   #0xa, R12
+   \   000022   ........     CALLA   #UART0_putchar
+     89          	UART0_putchar('\r');    // carriage return
+   \   000026   7C400D00     MOV.B   #0xd, R12
+   \   00002A   ........     CALLA   #UART0_putchar
+     90          	
+     91          	while (1)
+     92          	{
+     93          	
+     94          		for(int i = 0; i < 21; i++) {
+   \                     ??main_4:
+   \   00002E   0A43         MOV.W   #0x0, R10
+   \                     ??main_1:
+   \   000030   3A901500     CMP.W   #0x15, R10
+   \   000034   0934         JGE     ??main_2
+     95          			ch = serialMessage[i];
+   \   000036   D24A........ MOV.B   serialMessage(R10), &ch
+     96          			UART0_putchar(ch); // print the greeting message
+   \   00003C   5C42....     MOV.B   &ch, R12
+   \   000040   ........     CALLA   #UART0_putchar
+     97          		}
+   \   000044   1A53         ADD.W   #0x1, R10
+   \   000046   F43F         JMP     ??main_1
+     98          		
+     99          		while(rx_flag != 1); // wait until receive the character
+   \                     ??main_2:
+   \   000048   D293....     CMP.B   #0x1, &rx_flag
+   \   00004C   FD23         JNE     ??main_2
+    100          		rx_flag = 0;            // clear rx_flag
+   \   00004E   C243....     MOV.B   #0x0, &rx_flag
+    101          		
+    102          		UART0_putchar(' '); 
+   \   000052   7C402000     MOV.B   #0x20, R12
+   \   000056   ........     CALLA   #UART0_putchar
+    103          		UART0_putchar(ch);	// Echo answer
+   \   00005A   5C42....     MOV.B   &ch, R12
+   \   00005E   ........     CALLA   #UART0_putchar
+    104          		
+    105          		UART0_putchar('\n');    // newline
+   \   000062   7C400A00     MOV.B   #0xa, R12
+   \   000066   ........     CALLA   #UART0_putchar
+    106          		UART0_putchar('\r');    // carriage return
+   \   00006A   7C400D00     MOV.B   #0xd, R12
+   \   00006E   ........     CALLA   #UART0_putchar
+    107          		UART0_putchar('\n');    // newline
+   \   000072   7C400A00     MOV.B   #0xa, R12
+   \   000076   ........     CALLA   #UART0_putchar
+    108          		UART0_putchar('\r');    // carriage return
+   \   00007A   7C400D00     MOV.B   #0xd, R12
+   \   00007E   ........     CALLA   #UART0_putchar
+    109          		
+    110          		switch (ch)
+   \   000082   5E42....     MOV.B   &ch, R14
+   \   000086   7E803100     SUB.B   #0x31, R14
+   \   00008A   0724         JEQ     ??main_7
+   \   00008C   5E83         SUB.B   #0x1, R14
+   \   00008E   0A24         JEQ     ??main_8
+   \   000090   5E83         SUB.B   #0x1, R14
+   \   000092   0D24         JEQ     ??main_9
+   \   000094   5E83         SUB.B   #0x1, R14
+   \   000096   1024         JEQ     ??main_10
+   \   000098   143C         JMP     ??main_11
+    111          		{
+    112          			case '1' :
+    113          				SPISetState(LED_1X_STATE);
+   \                     ??main_7:
+   \   00009A   7C403100     MOV.B   #0x31, R12
+   \   00009E   ........     CALLA   #SPISetState
+    114          			break;
+   \   0000A2   2C3C         JMP     ??main_12
+    115          			
+    116          			case '2' :
+    117          				SPISetState(LED_2X_STATE);
+   \                     ??main_8:
+   \   0000A4   7C403200     MOV.B   #0x32, R12
+   \   0000A8   ........     CALLA   #SPISetState
+    118          			break;
+   \   0000AC   273C         JMP     ??main_12
+    119          			
+    120          			case '3' :
+    121          				SPISetState(LED_3X_STATE);
+   \                     ??main_9:
+   \   0000AE   7C403300     MOV.B   #0x33, R12
+   \   0000B2   ........     CALLA   #SPISetState
+    122          			break;
+   \   0000B6   223C         JMP     ??main_12
+    123          			
+    124          			case '4' :
+    125          				SPISetState(LED_4X_STATE);
+   \                     ??main_10:
+   \   0000B8   7C403400     MOV.B   #0x34, R12
+   \   0000BC   ........     CALLA   #SPISetState
+    126          			break;
+   \   0000C0   1D3C         JMP     ??main_12
+    127          			
+    128          			default:
+    129          				for(int i = 0; i < 35; i++) {
+   \                     ??main_11:
+   \   0000C2   0A43         MOV.W   #0x0, R10
+   \                     ??main_3:
+   \   0000C4   3A902300     CMP.W   #0x23, R10
+   \   0000C8   0934         JGE     ??main_13
+    130          					ch = serialChastise[i];
+   \   0000CA   D24A........ MOV.B   serialChastise(R10), &ch
+    131          					UART0_putchar(ch); // print the greeting message
+   \   0000D0   5C42....     MOV.B   &ch, R12
+   \   0000D4   ........     CALLA   #UART0_putchar
+    132          				}
+   \   0000D8   1A53         ADD.W   #0x1, R10
+   \   0000DA   F43F         JMP     ??main_3
+    133          				UART0_putchar('\n');    // newline
+   \                     ??main_13:
+   \   0000DC   7C400A00     MOV.B   #0xa, R12
+   \   0000E0   ........     CALLA   #UART0_putchar
+    134          				UART0_putchar('\r');    // carriage return
+   \   0000E4   7C400D00     MOV.B   #0xd, R12
+   \   0000E8   ........     CALLA   #UART0_putchar
+    135          				UART0_putchar('\n');    // newline
+   \   0000EC   7C400A00     MOV.B   #0xa, R12
+   \   0000F0   ........     CALLA   #UART0_putchar
+    136          				UART0_putchar('\r');    // carriage return
+   \   0000F4   7C400D00     MOV.B   #0xd, R12
+   \   0000F8   ........     CALLA   #UART0_putchar
+    137          			break;
+    138          		}
+    139          		
+    140          		for(int i = 1000; i > 0;i--); //delay
+   \                     ??main_12:
+   \   0000FC   3F40E803     MOV.W   #0x3e8, R15
+   \                     ??main_5:
+   \   000100   1F93         CMP.W   #0x1, R15
+   \   000102   953B         JL      ??main_4
+   \   000104   3F53         ADD.W   #0xffff, R15
+   \   000106   FC3F         JMP     ??main_5
+   \   000108                REQUIRE WDTCTL
+    141          		
+    142          	}
+    143          }
+    144          
+    145          /*
+    146           * Interrupt SR for USCI Rx 
+    147           */
+    148          #pragma vector = USCIAB0RX_VECTOR
+
+   \                                 In  segment ISR_CODE, align 2
+    149          __interrupt void USCIB0RX_ISR (void)
+   \                     USCIB0RX_ISR:
+    150          {
+    151            ch = UCA0RXBUF;  // character received is moved to a variable
+   \   000000   D2426600.... MOV.B   &0x66, &ch
+    152            rx_flag = 1;          // signal main function receiving a char
+   \   000006   D243....     MOV.B   #0x1, &rx_flag
+    153          }
+   \   00000A   0013         RETI
+   \   00000C                REQUIRE UCA0RXBUF
+
+   \                                 In  segment INTVEC, offset 0x32, root
+   \                     `??USCIB0RX_ISR??INTVEC 50`:
+   \   000032   ....         DC16    USCIB0RX_ISR
+
+   \                                 In  segment DATA16_ID, align 1, align-sorted
+   \                     `?<Initializer for ch>`:
+   \   000000   30           DC8 48
+
+   \                                 In  segment DATA16_ID, align 1, align-sorted
+   \                     `?<Initializer for serialMessage>`:
+   \   000000   456E74657220 DC8 "Enter 1, 2, 3, or 4: "
+   \            312C20322C20
+   \            332C206F7220
+   \            343A2000    
+
+   \                                 In  segment DATA16_ID, align 1, align-sorted
+   \                     `?<Initializer for serialChastise>`:
+   \   000000   4F6E6C792031 DC8 "Only 1-4 is allowed as valid input."
+   \            2D3420697320
+   \            616C6C6F7765
+   \            642061732076
+   \            616C69642069
+   \            6E7075742E00
+    154          
+    155          
+    156          
+    157          
+    158          
+    159          
+    160          
+    161          
+    162          
+    163          
+    164          
+    165          
+    166          
+    167          
+    168          
+    169          
+    170          
+    171          
+    172          
+    173          
+    174          
+    175          
+    176          
+    177          
+    178          
+    179          
+    180          
+    181          
+    182          
+    183          
+    184          
+    185          
+    186          
+    187          
+    188          
+    189          
+    190          
+    191          
+    192          
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+      4   SPISetState
+      4   SPISetup
+      4   Serial_Initialize
+      4   UART0_putchar
+      4   USCIB0RX_ISR
+      6   main
+        6   -> SPISetState
+        6   -> SPISetup
+        6   -> Serial_Initialize
+        6   -> UART0_putchar
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       1  ?<Initializer for ch>
+      36  ?<Initializer for serialChastise>
+      22  ?<Initializer for serialMessage>
+       2  ??USCIB0RX_ISR??INTVEC 50
+       1  IE2
+       1  IFG2
+       1  P2SEL
+       1  P3IN
+       1  P3SEL
+      22  SPISetState
+      32  SPISetup
+      46  Serial_Initialize
+      12  UART0_putchar
+       1  UCA0BR0
+       1  UCA0BR1
+       1  UCA0CTL0
+       1  UCA0CTL1
+       1  UCA0MCTL
+       1  UCA0RXBUF
+       1  UCA0TXBUF
+       1  UCB0BR0
+       1  UCB0BR1
+       1  UCB0CTL0
+       1  UCB0CTL1
+       1  UCB0TXBUF
+      12  USCIB0RX_ISR
+       2  WDTCTL
+       1  ch
+     264  main
+       1  rx_flag
+      36  serialChastise
+      22  serialMessage
+
+ 
+ 376 bytes in segment CODE
+  19 bytes in segment DATA16_AN
+  59 bytes in segment DATA16_I
+  59 bytes in segment DATA16_ID
+   1 byte  in segment DATA16_Z
+   2 bytes in segment INTVEC
+  12 bytes in segment ISR_CODE
+ 
+ 388 bytes of CODE  memory
+  59 bytes of CONST memory (+  2 bytes shared)
+  60 bytes of DATA  memory (+ 19 bytes shared)
+
+Errors: none
+Warnings: none

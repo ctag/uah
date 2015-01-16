@@ -1,0 +1,1108 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V6.10.2.50871/W32 for MSP430         25/Nov/2014  13:06:27
+# Copyright 1996-2014 IAR Systems AB.
+# Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.10
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  D:\uah\cpe323\lab12\gateway.c
+#    Command line  =  
+#        D:\uah\cpe323\lab12\gateway.c -lCN D:\uah\cpe323\lab12\Debug\List\ -o
+#        D:\uah\cpe323\lab12\Debug\Obj\ --no_cse --no_unroll --no_inline
+#        --no_code_motion --no_tbaa --debug -D__MSP430FG4618__ -e --double=32
+#        --dlib_config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.0\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On
+#        --multiplier=16 --segment __data16=DATA16 --segment __data20=DATA20
+#        --code_model=large
+#    List file     =  D:\uah\cpe323\lab12\Debug\List\gateway.lst
+#    Object file   =  D:\uah\cpe323\lab12\Debug\Obj\gateway.r43
+#
+###############################################################################
+
+D:\uah\cpe323\lab12\gateway.c
+      1          //----------------------------------------------------------------------------
+      2          //  Description:  This file contains functions that configure the CC1100/2500
+      3          //  device.
+      4          //
+      5          //  Demo Application for MSP430/CC1100-2500 Interface Code Library v1.0
+      6          //
+      7          //  K. Quiring
+      8          //  Texas Instruments, Inc.
+      9          //  July 2006
+     10          //  IAR Embedded Workbench v3.42A
+     11          // Wireless Gateway Receiver and Transmitter for MSP430 using CC1101
+     12          // Program for Dr. Aleksandar Milenkovic
+     13          // written by Sjohn Chambers, Sunny Patel, & Pam Mazurkivich January 2013
+     14          // This file contains the constants, variables, and functions to be included 
+     15          // with wireless gateway project.
+     16          //----------------------------------------------------------------------------
+     17          
+     18          #include "gateway.h"
+
+   \                                 In  segment DATA16_AN, at 0x1
+   \   unsigned char volatile IE2
+   \                     IE2:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x3
+   \   unsigned char volatile IFG2
+   \                     IFG2:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x5
+   \   unsigned char volatile ME2
+   \                     ME2:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x20
+   \   unsigned char const volatile P1IN
+   \                     P1IN:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x2e
+   \   unsigned char volatile P2SEL
+   \                     P2SEL:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x1c
+   \   unsigned char const volatile P4IN
+   \                     P4IN:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x1d
+   \   unsigned char volatile P4OUT
+   \                     P4OUT:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x1e
+   \   unsigned char volatile P4DIR
+   \                     P4DIR:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x1f
+   \   unsigned char volatile P4SEL
+   \                     P4SEL:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x61
+   \   unsigned char volatile UCA0CTL1
+   \                     UCA0CTL1:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x62
+   \   unsigned char volatile UCA0BR0
+   \                     UCA0BR0:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x63
+   \   unsigned char volatile UCA0BR1
+   \                     UCA0BR1:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x64
+   \   unsigned char volatile UCA0MCTL
+   \                     UCA0MCTL:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x67
+   \   unsigned char volatile UCA0TXBUF
+   \                     UCA0TXBUF:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x78
+   \   unsigned char volatile U1CTL
+   \                     U1CTL:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x79
+   \   unsigned char volatile U1TCTL
+   \                     U1TCTL:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x7b
+   \   unsigned char volatile U1MCTL
+   \                     U1MCTL:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x7c
+   \   unsigned char volatile U1BR0
+   \                     U1BR0:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x7d
+   \   unsigned char volatile U1BR1
+   \                     U1BR1:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x7e
+   \   unsigned char const volatile U1RXBUF
+   \                     U1RXBUF:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x7f
+   \   unsigned char volatile U1TXBUF
+   \                     U1TXBUF:
+   \   000000                DS8 1
+     19          
+     20          //hal_uart function definitions
+     21          //----------------------------------------------------------------------------
+     22          // Functions for sending debug strings to a UART.  Although the same interfaces
+     23          // defined for SPI (USARTn, USCIxn, USI, and bit-bang) could be used for UART,
+     24          // only USART0/1 are defined.
+     25          //----------------------------------------------------------------------------
+     26          
+
+   \                                 In  segment CODE, align 2
+     27          void halUARTSetup(void)
+   \                     halUARTSetup:
+     28          {
+     29            P2SEL |= 0x010;                           // P2.4 = USCI_A0 TXD
+   \   000000   F2D010002E00 BIS.B   #0x10, &0x2e
+     30            UCA0CTL1 |= UCSSEL_2;                     // SMCLK
+   \   000006   F2D080006100 BIS.B   #0x80, &0x61
+     31            UCA0BR0 = 0x6D;                           // 1MHz 9600
+   \   00000C   F2406D006200 MOV.B   #0x6d, &0x62
+     32            UCA0BR1 = 0x00;                           // 1MHz 9600
+   \   000012   C2436300     MOV.B   #0x0, &0x63
+     33            UCA0MCTL = 4;                             // Modulation
+   \   000016   E2426400     MOV.B   #0x4, &0x64
+     34            UCA0CTL1 &= ~UCSWRST;                     // **Initialize USCI state machine**
+   \   00001A   D2C36100     BIC.B   #0x1, &0x61
+     35            IE2 |= UCA0RXIE;                          // Enable USCI_A0 RX interrupt
+   \   00001E   D2D30100     BIS.B   #0x1, &0x1
+     36          }
+   \   000022   1001         RETA
+   \   000024                REQUIRE P2SEL
+   \   000024                REQUIRE UCA0CTL1
+   \   000024                REQUIRE UCA0BR0
+   \   000024                REQUIRE UCA0BR1
+   \   000024                REQUIRE UCA0MCTL
+   \   000024                REQUIRE IE2
+     37          
+
+   \                                 In  segment CODE, align 2
+     38          void blastString(char string[], unsigned int len)
+   \                     blastString:
+     39          {
+   \   000000   2183         SUB.W   #0x2, SP
+     40            volatile unsigned int i;
+     41          
+     42            for(i=0;i<len;i++)
+   \   000002   81430000     MOV.W   #0x0, 0(SP)
+   \                     ??blastString_1:
+   \   000006   819D0000     CMP.W   R13, 0(SP)
+   \   00000A   0C2C         JC      ??blastString_2
+     43            {
+     44              while (!(IFG2 & UCA0TXIFG));            // USART1 TX buffer ready?
+   \                     ??blastString_0:
+   \   00000C   E2B30300     BIT.B   #0x2, &0x3
+   \   000010   FD2B         JNC     ??blastString_0
+     45              UCA0TXBUF  = string[i];                 // Output character
+   \   000012   0F4C         MOV.W   R12, R15
+   \   000014   2F51         ADD.W   @SP, R15
+   \   000016   E24F6700     MOV.B   @R15, &0x67
+     46            }
+   \   00001A   2F41         MOV.W   @SP, R15
+   \   00001C   1F53         ADD.W   #0x1, R15
+   \   00001E   814F0000     MOV.W   R15, 0(SP)
+   \   000022   F13F         JMP     ??blastString_1
+     47          }
+   \                     ??blastString_2:
+   \   000024   2153         ADD.W   #0x2, SP
+   \   000026   1001         RETA
+   \   000028                REQUIRE IFG2
+   \   000028                REQUIRE UCA0TXBUF
+     48          
+     49          //CC1100-CC2500 function definitions
+     50          #define TI_CC_RF_FREQ  915  // 315, 433, 868, 915, 2400
+     51          
+     52          
+     53          #if TI_CC_RF_FREQ == 915                          // 915 MHz
+     54          // Product = CC1100
+     55          // Crystal accuracy = 40 ppm
+     56          // X-tal frequency = 26 MHz
+     57          // RF output power = 0 dBm
+     58          // RX filterbandwidth = 540.000000 kHz
+     59          // Deviation = 0.000000
+     60          // Return state:  Return to RX state upon leaving either TX or RX
+     61          // Datarate = 250.000000 kbps
+     62          // Modulation = (7) MSK
+     63          // Manchester enable = (0) Manchester disabled
+     64          // RF Frequency = 915.000000 MHz
+     65          // Channel spacing = 199.951172 kHz
+     66          // Channel number = 0
+     67          // Optimization = Sensitivity
+     68          // Sync mode = (3) 30/32 sync word bits detected
+     69          // Format of RX/TX data = (0) Normal mode, use FIFOs for RX and TX
+     70          // CRC operation = (1) CRC calculation in TX and CRC check in RX enabled
+     71          // Forward Error Correction = (0) FEC disabled
+     72          // Length configuration = (1) Variable length packets, packet length configured by the first received byte after sync word.
+     73          // Packetlength = 255
+     74          // Preamble count = (2)  4 bytes
+     75          // Append status = 1
+     76          // Address check = (0) No address check
+     77          // FIFO autoflush = 0
+     78          // Device address = 0
+     79          // GDO0 signal selection = ( 6) Asserts when sync word has been sent / received, and de-asserts at the end of the packet
+     80          // GDO2 signal selection = (11) Serial Clock
+
+   \                                 In  segment CODE, align 2
+     81          void writeRFSettings(void)
+   \                     writeRFSettings:
+     82          {
+     83              // Write register settings
+     84              TI_CC_SPIWriteReg(TI_CCxxx0_IOCFG2,   0x0B); // GDO2 output pin config.
+   \   000000   7D400B00     MOV.B   #0xb, R13
+   \   000004   4C43         MOV.B   #0x0, R12
+   \   000006   ........     CALLA   #TI_CC_SPIWriteReg
+     85              TI_CC_SPIWriteReg(TI_CCxxx0_IOCFG0,   0x06); // GDO0 output pin config.
+   \   00000A   7D400600     MOV.B   #0x6, R13
+   \   00000E   6C43         MOV.B   #0x2, R12
+   \   000010   ........     CALLA   #TI_CC_SPIWriteReg
+     86              TI_CC_SPIWriteReg(TI_CCxxx0_PKTLEN,   0xFF); // Packet length.
+   \   000014   7D43         MOV.B   #0xff, R13
+   \   000016   7C400600     MOV.B   #0x6, R12
+   \   00001A   ........     CALLA   #TI_CC_SPIWriteReg
+     87              TI_CC_SPIWriteReg(TI_CCxxx0_PKTCTRL1, 0x05); // Packet automation control.
+   \   00001E   7D400500     MOV.B   #0x5, R13
+   \   000022   7C400700     MOV.B   #0x7, R12
+   \   000026   ........     CALLA   #TI_CC_SPIWriteReg
+     88              TI_CC_SPIWriteReg(TI_CCxxx0_PKTCTRL0, 0x05); // Packet automation control.
+   \   00002A   7D400500     MOV.B   #0x5, R13
+   \   00002E   7C42         MOV.B   #0x8, R12
+   \   000030   ........     CALLA   #TI_CC_SPIWriteReg
+     89              TI_CC_SPIWriteReg(TI_CCxxx0_ADDR,     0x02); // Device address.
+   \   000034   6D43         MOV.B   #0x2, R13
+   \   000036   7C400900     MOV.B   #0x9, R12
+   \   00003A   ........     CALLA   #TI_CC_SPIWriteReg
+     90              TI_CC_SPIWriteReg(TI_CCxxx0_CHANNR,   0x00); // Channel number.
+   \   00003E   4D43         MOV.B   #0x0, R13
+   \   000040   7C400A00     MOV.B   #0xa, R12
+   \   000044   ........     CALLA   #TI_CC_SPIWriteReg
+     91              TI_CC_SPIWriteReg(TI_CCxxx0_FSCTRL1,  0x0B); // Freq synthesizer control.
+   \   000048   7D400B00     MOV.B   #0xb, R13
+   \   00004C   7C400B00     MOV.B   #0xb, R12
+   \   000050   ........     CALLA   #TI_CC_SPIWriteReg
+     92              TI_CC_SPIWriteReg(TI_CCxxx0_FSCTRL0,  0x00); // Freq synthesizer control.
+   \   000054   4D43         MOV.B   #0x0, R13
+   \   000056   7C400C00     MOV.B   #0xc, R12
+   \   00005A   ........     CALLA   #TI_CC_SPIWriteReg
+     93              TI_CC_SPIWriteReg(TI_CCxxx0_FREQ2,    0x23); // Freq control word, high byte
+   \   00005E   7D402300     MOV.B   #0x23, R13
+   \   000062   7C400D00     MOV.B   #0xd, R12
+   \   000066   ........     CALLA   #TI_CC_SPIWriteReg
+     94              TI_CC_SPIWriteReg(TI_CCxxx0_FREQ1,    0x31); // Freq control word, mid byte.
+   \   00006A   7D403100     MOV.B   #0x31, R13
+   \   00006E   7C400E00     MOV.B   #0xe, R12
+   \   000072   ........     CALLA   #TI_CC_SPIWriteReg
+     95              TI_CC_SPIWriteReg(TI_CCxxx0_FREQ0,    0x3B); // Freq control word, low byte.
+   \   000076   7D403B00     MOV.B   #0x3b, R13
+   \   00007A   7C400F00     MOV.B   #0xf, R12
+   \   00007E   ........     CALLA   #TI_CC_SPIWriteReg
+     96              TI_CC_SPIWriteReg(TI_CCxxx0_MDMCFG4,  0x2D); // Modem configuration.
+   \   000082   7D402D00     MOV.B   #0x2d, R13
+   \   000086   7C401000     MOV.B   #0x10, R12
+   \   00008A   ........     CALLA   #TI_CC_SPIWriteReg
+     97              TI_CC_SPIWriteReg(TI_CCxxx0_MDMCFG3,  0x3B); // Modem configuration.
+   \   00008E   7D403B00     MOV.B   #0x3b, R13
+   \   000092   7C401100     MOV.B   #0x11, R12
+   \   000096   ........     CALLA   #TI_CC_SPIWriteReg
+     98              TI_CC_SPIWriteReg(TI_CCxxx0_MDMCFG2,  0x73); // Modem configuration.
+   \   00009A   7D407300     MOV.B   #0x73, R13
+   \   00009E   7C401200     MOV.B   #0x12, R12
+   \   0000A2   ........     CALLA   #TI_CC_SPIWriteReg
+     99              TI_CC_SPIWriteReg(TI_CCxxx0_MDMCFG1,  0x22); // Modem configuration.
+   \   0000A6   7D402200     MOV.B   #0x22, R13
+   \   0000AA   7C401300     MOV.B   #0x13, R12
+   \   0000AE   ........     CALLA   #TI_CC_SPIWriteReg
+    100              TI_CC_SPIWriteReg(TI_CCxxx0_MDMCFG0,  0xF8); // Modem configuration.
+   \   0000B2   7D40F800     MOV.B   #0xf8, R13
+   \   0000B6   7C401400     MOV.B   #0x14, R12
+   \   0000BA   ........     CALLA   #TI_CC_SPIWriteReg
+    101              TI_CC_SPIWriteReg(TI_CCxxx0_DEVIATN,  0x00); // Modem dev (when FSK mod en)
+   \   0000BE   4D43         MOV.B   #0x0, R13
+   \   0000C0   7C401500     MOV.B   #0x15, R12
+   \   0000C4   ........     CALLA   #TI_CC_SPIWriteReg
+    102              TI_CC_SPIWriteReg(TI_CCxxx0_MCSM1 ,   0x3F); //MainRadio Cntrl State Machine
+   \   0000C8   7D403F00     MOV.B   #0x3f, R13
+   \   0000CC   7C401700     MOV.B   #0x17, R12
+   \   0000D0   ........     CALLA   #TI_CC_SPIWriteReg
+    103              TI_CC_SPIWriteReg(TI_CCxxx0_MCSM0 ,   0x18); //MainRadio Cntrl State Machine
+   \   0000D4   7D401800     MOV.B   #0x18, R13
+   \   0000D8   7C401800     MOV.B   #0x18, R12
+   \   0000DC   ........     CALLA   #TI_CC_SPIWriteReg
+    104              TI_CC_SPIWriteReg(TI_CCxxx0_FOCCFG,   0x1D); // Freq Offset Compens. Config
+   \   0000E0   7D401D00     MOV.B   #0x1d, R13
+   \   0000E4   7C401900     MOV.B   #0x19, R12
+   \   0000E8   ........     CALLA   #TI_CC_SPIWriteReg
+    105              TI_CC_SPIWriteReg(TI_CCxxx0_BSCFG,    0x1C); //  Bit synchronization config.
+   \   0000EC   7D401C00     MOV.B   #0x1c, R13
+   \   0000F0   7C401A00     MOV.B   #0x1a, R12
+   \   0000F4   ........     CALLA   #TI_CC_SPIWriteReg
+    106              TI_CC_SPIWriteReg(TI_CCxxx0_AGCCTRL2, 0xC7); // AGC control.
+   \   0000F8   7D40C700     MOV.B   #0xc7, R13
+   \   0000FC   7C401B00     MOV.B   #0x1b, R12
+   \   000100   ........     CALLA   #TI_CC_SPIWriteReg
+    107              TI_CC_SPIWriteReg(TI_CCxxx0_AGCCTRL1, 0x00); // AGC control.
+   \   000104   4D43         MOV.B   #0x0, R13
+   \   000106   7C401C00     MOV.B   #0x1c, R12
+   \   00010A   ........     CALLA   #TI_CC_SPIWriteReg
+    108              TI_CC_SPIWriteReg(TI_CCxxx0_AGCCTRL0, 0xB2); // AGC control.
+   \   00010E   7D40B200     MOV.B   #0xb2, R13
+   \   000112   7C401D00     MOV.B   #0x1d, R12
+   \   000116   ........     CALLA   #TI_CC_SPIWriteReg
+    109              TI_CC_SPIWriteReg(TI_CCxxx0_FREND1,   0xB6); // Front end RX configuration.
+   \   00011A   7D40B600     MOV.B   #0xb6, R13
+   \   00011E   7C402100     MOV.B   #0x21, R12
+   \   000122   ........     CALLA   #TI_CC_SPIWriteReg
+    110              TI_CC_SPIWriteReg(TI_CCxxx0_FREND0,   0x10); // Front end RX configuration.
+   \   000126   7D401000     MOV.B   #0x10, R13
+   \   00012A   7C402200     MOV.B   #0x22, R12
+   \   00012E   ........     CALLA   #TI_CC_SPIWriteReg
+    111              TI_CC_SPIWriteReg(TI_CCxxx0_FSCAL3,   0xEA); // Frequency synthesizer cal.
+   \   000132   7D40EA00     MOV.B   #0xea, R13
+   \   000136   7C402300     MOV.B   #0x23, R12
+   \   00013A   ........     CALLA   #TI_CC_SPIWriteReg
+    112              TI_CC_SPIWriteReg(TI_CCxxx0_FSCAL2,   0x0A); // Frequency synthesizer cal.
+   \   00013E   7D400A00     MOV.B   #0xa, R13
+   \   000142   7C402400     MOV.B   #0x24, R12
+   \   000146   ........     CALLA   #TI_CC_SPIWriteReg
+    113              TI_CC_SPIWriteReg(TI_CCxxx0_FSCAL1,   0x00); // Frequency synthesizer cal.
+   \   00014A   4D43         MOV.B   #0x0, R13
+   \   00014C   7C402500     MOV.B   #0x25, R12
+   \   000150   ........     CALLA   #TI_CC_SPIWriteReg
+    114              TI_CC_SPIWriteReg(TI_CCxxx0_FSCAL0,   0x11); // Frequency synthesizer cal.
+   \   000154   7D401100     MOV.B   #0x11, R13
+   \   000158   7C402600     MOV.B   #0x26, R12
+   \   00015C   ........     CALLA   #TI_CC_SPIWriteReg
+    115              TI_CC_SPIWriteReg(TI_CCxxx0_FSTEST,   0x59); // Frequency synthesizer cal.
+   \   000160   7D405900     MOV.B   #0x59, R13
+   \   000164   7C402900     MOV.B   #0x29, R12
+   \   000168   ........     CALLA   #TI_CC_SPIWriteReg
+    116              TI_CC_SPIWriteReg(TI_CCxxx0_TEST2,    0x88); // Various test settings.
+   \   00016C   7D408800     MOV.B   #0x88, R13
+   \   000170   7C402C00     MOV.B   #0x2c, R12
+   \   000174   ........     CALLA   #TI_CC_SPIWriteReg
+    117              TI_CC_SPIWriteReg(TI_CCxxx0_TEST1,    0x31); // Various test settings.
+   \   000178   7D403100     MOV.B   #0x31, R13
+   \   00017C   7C402D00     MOV.B   #0x2d, R12
+   \   000180   ........     CALLA   #TI_CC_SPIWriteReg
+    118              TI_CC_SPIWriteReg(TI_CCxxx0_TEST0,    0x0B); // Various test settings.
+   \   000184   7D400B00     MOV.B   #0xb, R13
+   \   000188   7C402E00     MOV.B   #0x2e, R12
+   \   00018C   ........     BRA     #TI_CC_SPIWriteReg
+    119          }
+    120          
+    121          // PATABLE (0 dBm output power)
+
+   \                                 In  segment DATA16_I, align 1, align-sorted
+   \   000000                REQUIRE ?cstart_init_copy
+    122          extern char paTable[] = {0xC0};
+   \                     paTable:
+   \   000000                DS8 1
+   \   000001                REQUIRE `?<Initializer for paTable>`
+
+   \                                 In  segment DATA16_I, align 1, align-sorted
+   \   000000                REQUIRE ?cstart_init_copy
+    123          extern char paTableLen = 1;
+   \                     paTableLen:
+   \   000000                DS8 1
+   \   000001                REQUIRE `?<Initializer for paTableLen>`
+    124          
+    125          #endif
+    126          
+    127          //-----------------------------------------------------------------------------
+    128          //  void RFSendPacket(char *txBuffer, char size)
+    129          //
+    130          //  DESCRIPTION:
+    131          //  This function transmits a packet with length up to 63 bytes.  To use this
+    132          //  function, GD00 must be configured to be asserted when sync word is sent and
+    133          //  de-asserted at the end of the packet, which is accomplished by setting the
+    134          //  IOCFG0 register to 0x06, per the CCxxxx datasheet.  GDO0 goes high at
+    135          //  packet start and returns low when complete.  The function polls GDO0 to
+    136          //  ensure packet completion before returning.
+    137          //
+    138          //  ARGUMENTS:
+    139          //      char *txBuffer
+    140          //          Pointer to a buffer containing the data to be transmitted
+    141          //
+    142          //      char size
+    143          //          The size of the txBuffer
+    144          //-----------------------------------------------------------------------------
+
+   \                                 In  segment CODE, align 2
+    145          void RFSendPacket(char *txBuffer, char size)
+   \                     RFSendPacket:
+    146          {
+   \   000000   1B15         PUSHM.W #0x2, R11
+   \   000002   0B4C         MOV.W   R12, R11
+   \   000004   4A4D         MOV.B   R13, R10
+    147            TI_CC_SPIStrobe(TI_CCxxx0_SIDLE);  
+   \   000006   7C403600     MOV.B   #0x36, R12
+   \   00000A   ........     CALLA   #TI_CC_SPIStrobe
+    148            TI_CC_SPIWriteBurstReg(TI_CCxxx0_TXFIFO, txBuffer, size); // Write TX data
+   \   00000E   4E4A         MOV.B   R10, R14
+   \   000010   0D4B         MOV.W   R11, R13
+   \   000012   7C403F00     MOV.B   #0x3f, R12
+   \   000016   ........     CALLA   #TI_CC_SPIWriteBurstReg
+    149          
+    150            // The CC1100 won't transmit the contents of the FIFO until the state is
+    151            // changed to TX state.  During configuration we placed it in RX state and
+    152            // configured it to return to RX whenever it is done transmitting, so it is
+    153            // in RX now.  Use the appropriate library function to change the state to TX.
+    154            TI_CC_SPIStrobe(TI_CCxxx0_STX);           // Change state to TX, initiating
+   \   00001A   7C403500     MOV.B   #0x35, R12
+   \   00001E   ........     CALLA   #TI_CC_SPIStrobe
+    155                                                      // data transfer  
+    156          
+    157            while (!(TI_CC_GDO0_PxIN&TI_CC_GDO0_PIN));// Wait GDO0 to go hi -> sync TX'ed
+   \                     ??RFSendPacket_0:
+   \   000022   E2B22000     BIT.B   #0x4, &0x20
+   \   000026   FD2B         JNC     ??RFSendPacket_0
+    158            while (TI_CC_GDO0_PxIN&TI_CC_GDO0_PIN);   // Wait GDO0 to clear -> end of pkt
+   \                     ??RFSendPacket_1:
+   \   000028   E2B22000     BIT.B   #0x4, &0x20
+   \   00002C   FD2F         JC      ??RFSendPacket_1
+    159            
+    160            TI_CC_SPIStrobe(TI_CCxxx0_SRX);
+   \   00002E   7C403400     MOV.B   #0x34, R12
+   \   000032   ........     CALLA   #TI_CC_SPIStrobe
+    161          }
+   \   000036   1A17         POPM.W  #0x2, R11
+   \   000038   1001         RETA
+   \   00003A                REQUIRE P1IN
+    162          
+    163          //-----------------------------------------------------------------------------
+    164          //  char RFReceivePacket(char *rxBuffer, char *length)
+    165          //
+    166          //  DESCRIPTION:
+    167          //  Receives a packet of variable length (first byte in the packet must be the
+    168          //  length byte).  The packet length should not exceed the RXFIFO size.  To use
+    169          //  this function, APPEND_STATUS in the PKTCTRL1 register must be enabled.  It
+    170          //  is assumed that the function is called after it is known that a packet has
+    171          //  been received; for example, in response to GDO0 going low when it is
+    172          //  configured to output packet reception status.
+    173          //
+    174          //  The RXBYTES register is first read to ensure there are bytes in the FIFO.
+    175          //  This is done because the GDO signal will go high even if the FIFO is flushed
+    176          //  due to address filtering, CRC filtering, or packet length filtering.
+    177          //
+    178          //  ARGUMENTS:
+    179          //      char *rxBuffer
+    180          //          Pointer to the buffer where the incoming data should be stored
+    181          //      char *length
+    182          //          Pointer to location where length will be returned
+    183          //
+    184          //  RETURN VALUE:
+    185          //      char
+    186          //          0x80:  CRC OK
+    187          //          0x00:  CRC NOT OK (or no pkt was put in the RXFIFO due to filtering)
+    188          //-----------------------------------------------------------------------------
+
+   \                                 In  segment CODE, align 2
+    189          char RFReceivePacket(char *rxBuffer, char *length)
+   \                     RFReceivePacket:
+    190          {
+   \   000000   3B15         PUSHM.W #0x4, R11
+   \   000002   2183         SUB.W   #0x2, SP
+   \   000004   0A4C         MOV.W   R12, R10
+   \   000006   0B4D         MOV.W   R13, R11
+    191            char status[2];
+    192            char pktLen;
+    193            
+    194            if ((TI_CC_SPIReadStatus(TI_CCxxx0_RXBYTES) & TI_CCxxx0_NUM_RXBYTES))
+   \   000008   7C403B00     MOV.B   #0x3b, R12
+   \   00000C   ........     CALLA   #TI_CC_SPIReadStatus
+   \   000010   7CB07F00     BIT.B   #0x7f, R12
+   \   000014   1924         JEQ     ??RFReceivePacket_0
+    195            {
+    196              // Use the appropriate library function to read the first byte in the
+    197              // RX FIFO, which is the length of the packet (the total remaining bytes
+    198              // in this packet after reading this byte).  
+    199              // Hint:  how many bytes are being retrieved?  One or multiple?  
+    200              pktLen = TI_CC_SPIReadReg(TI_CCxxx0_RXFIFO);
+   \   000016   7C403F00     MOV.B   #0x3f, R12
+   \   00001A   ........     CALLA   #TI_CC_SPIReadReg
+   \   00001E   484C         MOV.B   R12, R8
+    201              
+    202              // Use the appropriate library function to read the rest of the packet into
+    203              // rxBuffer (i.e., read pktLen bytes out of the FIFO)
+    204              // Hint:  how many bytes are being retrieved?  One or multiple?  
+    205              TI_CC_SPIReadBurstReg(TI_CCxxx0_RXFIFO, rxBuffer, pktLen); // Pull data
+   \   000020   4E48         MOV.B   R8, R14
+   \   000022   0D4A         MOV.W   R10, R13
+   \   000024   7C403F00     MOV.B   #0x3f, R12
+   \   000028   ........     CALLA   #TI_CC_SPIReadBurstReg
+    206              *length = pktLen;                       // Return the actual size
+   \   00002C   CB480000     MOV.B   R8, 0(R11)
+    207          
+    208              // Our initialization code configured this CC1100 to append two status
+    209              // bytes to the end of the received packets.  These bytes are still in the
+    210              // FIFO.  Use the appropriate library function to read these two bytes into
+    211              // the status array
+    212              TI_CC_SPIReadBurstReg(TI_CCxxx0_RXFIFO, status, 2);
+   \   000030   6E43         MOV.B   #0x2, R14
+   \   000032   0D41         MOV.W   SP, R13
+   \   000034   0D53         ADD.W   #0x0, R13
+   \   000036   7C403F00     MOV.B   #0x3f, R12
+   \   00003A   ........     CALLA   #TI_CC_SPIReadBurstReg
+    213          
+    214              return (char)(status[TI_CCxxx0_LQI_RX]&TI_CCxxx0_CRC_OK);
+   \   00003E   5C410100     MOV.B   0x1(SP), R12
+   \   000042   7CF08000     AND.B   #0x80, R12
+   \   000046   013C         JMP     ??RFReceivePacket_1
+    215            }
+    216            else
+    217              return 0;                               // Error
+   \                     ??RFReceivePacket_0:
+   \   000048   4C43         MOV.B   #0x0, R12
+   \                     ??RFReceivePacket_1:
+   \   00004A   2153         ADD.W   #0x2, SP
+   \   00004C   3817         POPM.W  #0x4, R11
+   \   00004E   1001         RETA
+    218          }
+    219          
+    220          //TI_CC_spi function definitions
+    221          //----------------------------------------------------------------------------
+    222          //  void TI_CC_SPISetup(void)
+    223          //
+    224          //  DESCRIPTION:
+    225          //  Configures the assigned interface to function as a SPI port and
+    226          //  initializes it.
+    227          //----------------------------------------------------------------------------
+    228          //  void TI_CC_SPIWriteReg(char addr, char value)
+    229          //
+    230          //  DESCRIPTION:
+    231          //  Writes "value" to a single configuration register at address "addr".
+    232          //----------------------------------------------------------------------------
+    233          //  void TI_CC_SPIWriteBurstReg(char addr, char *buffer, char count)
+    234          //
+    235          //  DESCRIPTION:
+    236          //  Writes values to multiple configuration registers, the first register being
+    237          //  at address "addr".  First data byte is at "buffer", and both addr and
+    238          //  buffer are incremented sequentially (within the CCxxxx and MSP430,
+    239          //  respectively) until "count" writes have been performed.
+    240          //----------------------------------------------------------------------------
+    241          //  char TI_CC_SPIReadReg(char addr)
+    242          //
+    243          //  DESCRIPTION:
+    244          //  Reads a single configuration register at address "addr" and returns the
+    245          //  value read.
+    246          //----------------------------------------------------------------------------
+    247          //  void TI_CC_SPIReadBurstReg(char addr, char *buffer, char count)
+    248          //
+    249          //  DESCRIPTION:
+    250          //  Reads multiple configuration registers, the first register being at address
+    251          //  "addr".  Values read are deposited sequentially starting at address
+    252          //  "buffer", until "count" registers have been read.
+    253          //----------------------------------------------------------------------------
+    254          //  char TI_CC_SPIReadStatus(char addr)
+    255          //
+    256          //  DESCRIPTION:
+    257          //  Special read function for reading status registers.  Reads status register
+    258          //  at register "addr" and returns the value read.
+    259          //----------------------------------------------------------------------------
+    260          //  void TI_CC_SPIStrobe(char strobe)
+    261          //
+    262          //  DESCRIPTION:
+    263          //  Special write function for writing to command strobe registers.  Writes
+    264          //  to the strobe at address "addr".
+    265          //----------------------------------------------------------------------------
+    266          
+    267          
+    268          // Delay function. # of CPU cycles delayed is similar to "cycles". Specifically,
+    269          // it's ((cycles-15) % 6) + 15.  Not exact, but gives a sense of the real-time
+    270          // delay.  Also, if MCLK ~1MHz, "cycles" is similar to # of useconds delayed.
+
+   \                                 In  segment CODE, align 2
+    271          void TI_CC_Wait(unsigned int cycles)
+   \                     TI_CC_Wait:
+   \                     ??TI_CC_Wait_0:
+    272          {
+    273            while(cycles>15)                          // 15 cycles consumed by overhead
+   \   000000   3C901000     CMP.W   #0x10, R12
+   \   000004   0328         JNC     ??TI_CC_Wait_1
+    274              cycles = cycles - 6;                    // 6 cycles consumed each iteration
+   \   000006   3C50FAFF     ADD.W   #0xfffa, R12
+   \   00000A   FA3F         JMP     ??TI_CC_Wait_0
+    275          }
+   \                     ??TI_CC_Wait_1:
+   \   00000C   1001         RETA
+    276          
+    277          
+    278          // SPI port functions
+    279          
+    280          #if TI_CC_RF_SER_INTF == TI_CC_SER_INTF_USART1
+    281          
+    282          
+
+   \                                 In  segment CODE, align 2
+    283          void TI_CC_SPISetup(void)
+   \                     TI_CC_SPISetup:
+    284          {
+    285            TI_CC_CSn_PxOUT |= TI_CC_CSn_PIN;
+   \   000000   E2D21D00     BIS.B   #0x4, &0x1d
+    286            TI_CC_CSn_PxDIR |= TI_CC_CSn_PIN;         // /CS disable
+   \   000004   E2D21E00     BIS.B   #0x4, &0x1e
+    287          
+    288            ME2 |= USPIE1;                            // Enable USART1 SPI mode
+   \   000008   F2D010000500 BIS.B   #0x10, &0x5
+    289            UCTL1 |= CHAR + SYNC + MM;                // 8-bit SPI Master **SWRST**
+   \   00000E   F2D016007800 BIS.B   #0x16, &0x78
+    290            UTCTL1 |= CKPL + SSEL1 + SSEL0 + STC;     // SMCLK, 3-pin mode
+   \   000014   F2D072007900 BIS.B   #0x72, &0x79
+    291            UBR01 = 0x02;                             // UCLK/2
+   \   00001A   E2437C00     MOV.B   #0x2, &0x7c
+    292            UBR11 = 0x00;                             // 0
+   \   00001E   C2437D00     MOV.B   #0x0, &0x7d
+    293            UMCTL1 = 0x00;                            // No modulation
+   \   000022   C2437B00     MOV.B   #0x0, &0x7b
+    294            TI_CC_SPI_USART1_PxSEL |= TI_CC_SPI_USART1_SIMO | TI_CC_SPI_USART1_SOMI | TI_CC_SPI_USART1_UCLK;
+   \   000026   F2D038001F00 BIS.B   #0x38, &0x1f
+    295                                                      // SPI option select
+    296            TI_CC_SPI_USART1_PxDIR |= TI_CC_SPI_USART1_SIMO + TI_CC_SPI_USART1_UCLK;
+   \   00002C   F2D028001E00 BIS.B   #0x28, &0x1e
+    297                                                      // SPI TXD out direction
+    298            UCTL1 &= ~SWRST;                          // Initialize USART state machine
+   \   000032   D2C37800     BIC.B   #0x1, &0x78
+    299          }
+   \   000036   1001         RETA
+   \   000038                REQUIRE P4OUT
+   \   000038                REQUIRE P4DIR
+   \   000038                REQUIRE ME2
+   \   000038                REQUIRE U1CTL
+   \   000038                REQUIRE U1TCTL
+   \   000038                REQUIRE U1BR0
+   \   000038                REQUIRE U1BR1
+   \   000038                REQUIRE U1MCTL
+   \   000038                REQUIRE P4SEL
+    300          
+
+   \                                 In  segment CODE, align 2
+    301          void TI_CC_SPIWriteReg(char addr, char value)
+   \                     TI_CC_SPIWriteReg:
+    302          {
+    303              TI_CC_CSn_PxOUT &= ~TI_CC_CSn_PIN;      // /CS enable
+   \   000000   E2C21D00     BIC.B   #0x4, &0x1d
+    304              while (TI_CC_SPI_USART1_PxIN&TI_CC_SPI_USART1_SOMI);// Wait for CCxxxx ready
+   \                     ??TI_CC_SPIWriteReg_0:
+   \   000004   F2B010001C00 BIT.B   #0x10, &0x1c
+   \   00000A   FC2F         JC      ??TI_CC_SPIWriteReg_0
+    305              IFG2 &= ~URXIFG1;                       // Clear flag
+   \   00000C   F2C010000300 BIC.B   #0x10, &0x3
+    306              U1TXBUF = addr;                         // Send address
+   \   000012   C24C7F00     MOV.B   R12, &0x7f
+    307              while(!(U1TCTL&TXEPT));                 // Wait for TX to finish
+   \                     ??TI_CC_SPIWriteReg_1:
+   \   000016   D2B37900     BIT.B   #0x1, &0x79
+   \   00001A   FD2B         JNC     ??TI_CC_SPIWriteReg_1
+    308              U1TXBUF = value;                        // Load data for TX after addr
+   \   00001C   C24D7F00     MOV.B   R13, &0x7f
+    309              while(!(U1TCTL&TXEPT));                 // Wait for end of addr TX
+   \                     ??TI_CC_SPIWriteReg_2:
+   \   000020   D2B37900     BIT.B   #0x1, &0x79
+   \   000024   FD2B         JNC     ??TI_CC_SPIWriteReg_2
+    310              TI_CC_CSn_PxOUT |= TI_CC_CSn_PIN;       // /CS disable
+   \   000026   E2D21D00     BIS.B   #0x4, &0x1d
+    311          }
+   \   00002A   1001         RETA
+   \   00002C                REQUIRE P4OUT
+   \   00002C                REQUIRE P4IN
+   \   00002C                REQUIRE IFG2
+   \   00002C                REQUIRE U1TXBUF
+   \   00002C                REQUIRE U1TCTL
+    312          
+
+   \                                 In  segment CODE, align 2
+    313          void TI_CC_SPIWriteBurstReg(char addr, char *buffer, char count)
+   \                     TI_CC_SPIWriteBurstReg:
+    314          {
+   \   000000   0A12         PUSH.W  R10
+    315              char i;
+    316          
+    317              TI_CC_CSn_PxOUT &= ~TI_CC_CSn_PIN;      // /CS enable
+   \   000002   E2C21D00     BIC.B   #0x4, &0x1d
+    318              while (TI_CC_SPI_USART1_PxIN&TI_CC_SPI_USART1_SOMI);// Wait for CCxxxx ready
+   \                     ??TI_CC_SPIWriteBurstReg_0:
+   \   000006   F2B010001C00 BIT.B   #0x10, &0x1c
+   \   00000C   FC2F         JC      ??TI_CC_SPIWriteBurstReg_0
+    319              U1TXBUF = addr | TI_CCxxx0_WRITE_BURST; // Send address
+   \   00000E   4A4C         MOV.B   R12, R10
+   \   000010   7AD04000     BIS.B   #0x40, R10
+   \   000014   C24A7F00     MOV.B   R10, &0x7f
+    320              while (!(IFG2&UTXIFG1));                // Wait for TX to finish
+   \                     ??TI_CC_SPIWriteBurstReg_1:
+   \   000018   F2B020000300 BIT.B   #0x20, &0x3
+   \   00001E   FC2B         JNC     ??TI_CC_SPIWriteBurstReg_1
+    321              for (i = 0; i < count; i++)
+   \   000020   4F43         MOV.B   #0x0, R15
+   \                     ??TI_CC_SPIWriteBurstReg_3:
+   \   000022   4F9E         CMP.B   R14, R15
+   \   000024   0B2C         JC      ??TI_CC_SPIWriteBurstReg_4
+    322              {
+    323                U1TXBUF = buffer[i];                  // Send data
+   \   000026   4F4F         MOV.B   R15, R15
+   \   000028   0A4D         MOV.W   R13, R10
+   \   00002A   0A5F         ADD.W   R15, R10
+   \   00002C   E24A7F00     MOV.B   @R10, &0x7f
+    324                while (!(IFG2&UTXIFG1));              // Wait for TX to finish
+   \                     ??TI_CC_SPIWriteBurstReg_2:
+   \   000030   F2B020000300 BIT.B   #0x20, &0x3
+   \   000036   FC2B         JNC     ??TI_CC_SPIWriteBurstReg_2
+    325              }
+   \   000038   5F53         ADD.B   #0x1, R15
+   \   00003A   F33F         JMP     ??TI_CC_SPIWriteBurstReg_3
+    326             
+    327              while(!(U1TCTL&TXEPT));
+   \                     ??TI_CC_SPIWriteBurstReg_4:
+   \   00003C   D2B37900     BIT.B   #0x1, &0x79
+   \   000040   FD2B         JNC     ??TI_CC_SPIWriteBurstReg_4
+    328              TI_CC_CSn_PxOUT |= TI_CC_CSn_PIN;       // /CS disable
+   \   000042   E2D21D00     BIS.B   #0x4, &0x1d
+    329          }
+   \   000046   3A41         POP.W   R10
+   \   000048   1001         RETA
+   \   00004A                REQUIRE P4OUT
+   \   00004A                REQUIRE P4IN
+   \   00004A                REQUIRE U1TXBUF
+   \   00004A                REQUIRE IFG2
+   \   00004A                REQUIRE U1TCTL
+    330          
+
+   \                                 In  segment CODE, align 2
+    331          char TI_CC_SPIReadReg(char addr)
+   \                     TI_CC_SPIReadReg:
+    332          {
+   \   000000   4E4C         MOV.B   R12, R14
+    333            char x;
+    334          
+    335            TI_CC_CSn_PxOUT &= ~TI_CC_CSn_PIN;        // /CS enable
+   \   000002   E2C21D00     BIC.B   #0x4, &0x1d
+    336            while (TI_CC_SPI_USART1_PxIN&TI_CC_SPI_USART1_SOMI);// Wait for CCxxxx ready
+   \                     ??TI_CC_SPIReadReg_0:
+   \   000006   F2B010001C00 BIT.B   #0x10, &0x1c
+   \   00000C   FC2F         JC      ??TI_CC_SPIReadReg_0
+    337           
+    338            U1TXBUF = (addr | TI_CCxxx0_READ_SINGLE); // Send address
+   \   00000E   4F4E         MOV.B   R14, R15
+   \   000010   7FD08000     BIS.B   #0x80, R15
+   \   000014   C24F7F00     MOV.B   R15, &0x7f
+    339            while(!(U1TCTL&TXEPT));                   // Wait for addr to be sent
+   \                     ??TI_CC_SPIReadReg_1:
+   \   000018   D2B37900     BIT.B   #0x1, &0x79
+   \   00001C   FD2B         JNC     ??TI_CC_SPIReadReg_1
+    340            U1TXBUF = 0;                              // Load dummy byte for TX after addr
+   \   00001E   C2437F00     MOV.B   #0x0, &0x7f
+    341            while(!(U1TCTL&TXEPT));                   // Wait for end of dummy byte TX
+   \                     ??TI_CC_SPIReadReg_2:
+   \   000022   D2B37900     BIT.B   #0x1, &0x79
+   \   000026   FD2B         JNC     ??TI_CC_SPIReadReg_2
+    342            x = U1RXBUF;                              // Read data
+   \   000028   5C427E00     MOV.B   &0x7e, R12
+    343            TI_CC_CSn_PxOUT |= TI_CC_CSn_PIN;         // /CS disable
+   \   00002C   E2D21D00     BIS.B   #0x4, &0x1d
+    344          
+    345            return x;
+   \   000030   1001         RETA
+   \   000032                REQUIRE P4OUT
+   \   000032                REQUIRE P4IN
+   \   000032                REQUIRE U1TXBUF
+   \   000032                REQUIRE U1TCTL
+   \   000032                REQUIRE U1RXBUF
+    346          }
+    347          
+
+   \                                 In  segment CODE, align 2
+    348          void TI_CC_SPIReadBurstReg(char addr, char *buffer, char count)
+   \                     TI_CC_SPIReadBurstReg:
+    349          {
+   \   000000   0A12         PUSH.W  R10
+    350            unsigned int i;
+    351          
+    352            TI_CC_CSn_PxOUT &= ~TI_CC_CSn_PIN;        // /CS enable
+   \   000002   E2C21D00     BIC.B   #0x4, &0x1d
+    353            while (TI_CC_SPI_USART1_PxIN&TI_CC_SPI_USART1_SOMI);// Wait for CCxxxx ready
+   \                     ??TI_CC_SPIReadBurstReg_0:
+   \   000006   F2B010001C00 BIT.B   #0x10, &0x1c
+   \   00000C   FC2F         JC      ??TI_CC_SPIReadBurstReg_0
+    354            
+    355            U1TXBUF = (addr | TI_CCxxx0_READ_BURST);  // Send address
+   \   00000E   4F4C         MOV.B   R12, R15
+   \   000010   7FD0C000     BIS.B   #0xc0, R15
+   \   000014   C24F7F00     MOV.B   R15, &0x7f
+    356            while (!(IFG2&UTXIFG1));                  // Wait for TXBUF ready
+   \                     ??TI_CC_SPIReadBurstReg_1:
+   \   000018   F2B020000300 BIT.B   #0x20, &0x3
+   \   00001E   FC2B         JNC     ??TI_CC_SPIReadBurstReg_1
+    357            U1TXBUF = 0;                              // Dummy write to read 1st data byte
+   \   000020   C2437F00     MOV.B   #0x0, &0x7f
+    358            // Addr byte is now being TX'ed, with dummy byte to follow immediately after
+    359            //while (!(IFG2&URXIFG1));                  // Wait for end of addr byte TX
+    360            while(!(U1TCTL&TXEPT));
+   \                     ??TI_CC_SPIReadBurstReg_2:
+   \   000024   D2B37900     BIT.B   #0x1, &0x79
+   \   000028   FD2B         JNC     ??TI_CC_SPIReadBurstReg_2
+    361            // First data byte now in RXBUF
+    362            for (i = 0; i < (count-1); i++)
+   \   00002A   0A43         MOV.W   #0x0, R10
+   \                     ??TI_CC_SPIReadBurstReg_4:
+   \   00002C   4F4E         MOV.B   R14, R15
+   \   00002E   3F53         ADD.W   #0xffff, R15
+   \   000030   0A9F         CMP.W   R15, R10
+   \   000032   0D2C         JC      ??TI_CC_SPIReadBurstReg_5
+    363            {
+    364              U1TXBUF = 0;                            //Initiate next data RX, meanwhile..
+   \   000034   C2437F00     MOV.B   #0x0, &0x7f
+    365              buffer[i] = U1RXBUF;                    // Store data from last data RX
+   \   000038   0F4D         MOV.W   R13, R15
+   \   00003A   0F5A         ADD.W   R10, R15
+   \   00003C   DF427E000000 MOV.B   &0x7e, 0(R15)
+    366              while (!(IFG2&URXIFG1));                // Wait for end of data RX
+   \                     ??TI_CC_SPIReadBurstReg_3:
+   \   000042   F2B010000300 BIT.B   #0x10, &0x3
+   \   000048   FC2B         JNC     ??TI_CC_SPIReadBurstReg_3
+    367            }
+   \   00004A   1A53         ADD.W   #0x1, R10
+   \   00004C   EF3F         JMP     ??TI_CC_SPIReadBurstReg_4
+    368            buffer[count-1] = U1RXBUF;                // Store last RX byte in buffer
+   \                     ??TI_CC_SPIReadBurstReg_5:
+   \   00004E   4E4E         MOV.B   R14, R14
+   \   000050   0F4D         MOV.W   R13, R15
+   \   000052   0F5E         ADD.W   R14, R15
+   \   000054   DF427E00FFFF MOV.B   &0x7e, 0xffff(R15)
+    369            TI_CC_CSn_PxOUT |= TI_CC_CSn_PIN;         // /CS disable
+   \   00005A   E2D21D00     BIS.B   #0x4, &0x1d
+    370          }
+   \   00005E   3A41         POP.W   R10
+   \   000060   1001         RETA
+   \   000062                REQUIRE P4OUT
+   \   000062                REQUIRE P4IN
+   \   000062                REQUIRE U1TXBUF
+   \   000062                REQUIRE IFG2
+   \   000062                REQUIRE U1TCTL
+   \   000062                REQUIRE U1RXBUF
+    371          
+
+   \                                 In  segment CODE, align 2
+    372          char TI_CC_SPIReadStatus(char addr)
+   \                     TI_CC_SPIReadStatus:
+    373          {
+   \   000000   4E4C         MOV.B   R12, R14
+    374            char x;
+    375          
+    376            TI_CC_CSn_PxOUT &= ~TI_CC_CSn_PIN;        // /CS enable
+   \   000002   E2C21D00     BIC.B   #0x4, &0x1d
+    377            while (TI_CC_SPI_USART1_PxIN&TI_CC_SPI_USART1_SOMI);// Wait for CCxxxx ready
+   \                     ??TI_CC_SPIReadStatus_0:
+   \   000006   F2B010001C00 BIT.B   #0x10, &0x1c
+   \   00000C   FC2F         JC      ??TI_CC_SPIReadStatus_0
+    378            
+    379            U1TXBUF = (addr | TI_CCxxx0_READ_BURST);  // Send address
+   \   00000E   4F4E         MOV.B   R14, R15
+   \   000010   7FD0C000     BIS.B   #0xc0, R15
+   \   000014   C24F7F00     MOV.B   R15, &0x7f
+    380            
+    381            while(!(U1TCTL&TXEPT));                   // Wait for addr to be sent
+   \                     ??TI_CC_SPIReadStatus_1:
+   \   000018   D2B37900     BIT.B   #0x1, &0x79
+   \   00001C   FD2B         JNC     ??TI_CC_SPIReadStatus_1
+    382            
+    383            U1TXBUF = 0;                              // Dummy write so we can read data
+   \   00001E   C2437F00     MOV.B   #0x0, &0x7f
+    384            
+    385            while(!(U1TCTL&TXEPT));                   // Wait for end of dummy byte TX
+   \                     ??TI_CC_SPIReadStatus_2:
+   \   000022   D2B37900     BIT.B   #0x1, &0x79
+   \   000026   FD2B         JNC     ??TI_CC_SPIReadStatus_2
+    386            x = U1RXBUF;                              // Read data
+   \   000028   5C427E00     MOV.B   &0x7e, R12
+    387            TI_CC_CSn_PxOUT |= TI_CC_CSn_PIN;         // /CS disable
+   \   00002C   E2D21D00     BIS.B   #0x4, &0x1d
+    388          
+    389            return x;
+   \   000030   1001         RETA
+   \   000032                REQUIRE P4OUT
+   \   000032                REQUIRE P4IN
+   \   000032                REQUIRE U1TXBUF
+   \   000032                REQUIRE U1TCTL
+   \   000032                REQUIRE U1RXBUF
+    390          }
+    391          
+
+   \                                 In  segment CODE, align 2
+    392          void TI_CC_SPIStrobe(char strobe)
+   \                     TI_CC_SPIStrobe:
+    393          {
+    394            TI_CC_CSn_PxOUT &= ~TI_CC_CSn_PIN;        // /CS enable
+   \   000000   E2C21D00     BIC.B   #0x4, &0x1d
+    395            while (TI_CC_SPI_USART1_PxIN&TI_CC_SPI_USART1_SOMI);// Wait for CCxxxx ready
+   \                     ??TI_CC_SPIStrobe_0:
+   \   000004   F2B010001C00 BIT.B   #0x10, &0x1c
+   \   00000A   FC2F         JC      ??TI_CC_SPIStrobe_0
+    396            U1TXBUF = strobe;                         // Send strobe
+   \   00000C   C24C7F00     MOV.B   R12, &0x7f
+    397            // Strobe addr is now being TX'ed
+    398            while(!(U1TCTL&TXEPT));                   // Wait for end of addr TX
+   \                     ??TI_CC_SPIStrobe_1:
+   \   000010   D2B37900     BIT.B   #0x1, &0x79
+   \   000014   FD2B         JNC     ??TI_CC_SPIStrobe_1
+    399            TI_CC_CSn_PxOUT |= TI_CC_CSn_PIN;         // /CS disable
+   \   000016   E2D21D00     BIS.B   #0x4, &0x1d
+    400          }
+   \   00001A   1001         RETA
+   \   00001C                REQUIRE P4OUT
+   \   00001C                REQUIRE P4IN
+   \   00001C                REQUIRE U1TXBUF
+   \   00001C                REQUIRE U1TCTL
+    401          
+
+   \                                 In  segment CODE, align 2
+    402          void TI_CC_PowerupResetCCxxxx(void)
+   \                     TI_CC_PowerupResetCCxxxx:
+    403          {
+    404            TI_CC_CSn_PxOUT |= TI_CC_CSn_PIN;
+   \   000000   E2D21D00     BIS.B   #0x4, &0x1d
+    405            TI_CC_Wait(30);
+   \   000004   3C401E00     MOV.W   #0x1e, R12
+   \   000008   ........     CALLA   #TI_CC_Wait
+    406            TI_CC_CSn_PxOUT &= ~TI_CC_CSn_PIN;
+   \   00000C   E2C21D00     BIC.B   #0x4, &0x1d
+    407            TI_CC_Wait(30);
+   \   000010   3C401E00     MOV.W   #0x1e, R12
+   \   000014   ........     CALLA   #TI_CC_Wait
+    408            TI_CC_CSn_PxOUT |= TI_CC_CSn_PIN;
+   \   000018   E2D21D00     BIS.B   #0x4, &0x1d
+    409            TI_CC_Wait(45);
+   \   00001C   3C402D00     MOV.W   #0x2d, R12
+   \   000020   ........     CALLA   #TI_CC_Wait
+    410          
+    411            TI_CC_CSn_PxOUT &= ~TI_CC_CSn_PIN;        // /CS enable
+   \   000024   E2C21D00     BIC.B   #0x4, &0x1d
+    412            while (TI_CC_SPI_USART1_PxIN&TI_CC_SPI_USART1_SOMI);// Wait for CCxxxx ready
+   \                     ??TI_CC_PowerupResetCCxxxx_0:
+   \   000028   F2B010001C00 BIT.B   #0x10, &0x1c
+   \   00002E   FC2F         JC      ??TI_CC_PowerupResetCCxxxx_0
+    413            U1TXBUF = TI_CCxxx0_SRES;                 // Send strobe
+   \   000030   F24030007F00 MOV.B   #0x30, &0x7f
+    414            // Strobe addr is now being TX'ed
+    415            IFG2 &= ~URXIFG1;                         // Clear flag
+   \   000036   F2C010000300 BIC.B   #0x10, &0x3
+    416            while (!(IFG2&URXIFG1));                  // Wait for end of addr TX
+   \                     ??TI_CC_PowerupResetCCxxxx_1:
+   \   00003C   F2B010000300 BIT.B   #0x10, &0x3
+   \   000042   FC2B         JNC     ??TI_CC_PowerupResetCCxxxx_1
+    417            while (TI_CC_SPI_USART1_PxIN&TI_CC_SPI_USART1_SOMI);
+   \                     ??TI_CC_PowerupResetCCxxxx_2:
+   \   000044   F2B010001C00 BIT.B   #0x10, &0x1c
+   \   00004A   FC2F         JC      ??TI_CC_PowerupResetCCxxxx_2
+    418            TI_CC_CSn_PxOUT |= TI_CC_CSn_PIN;         // /CS disable
+   \   00004C   E2D21D00     BIS.B   #0x4, &0x1d
+    419          }
+   \   000050   1001         RETA
+   \   000052                REQUIRE P4OUT
+   \   000052                REQUIRE P4IN
+   \   000052                REQUIRE U1TXBUF
+   \   000052                REQUIRE IFG2
+
+   \                                 In  segment DATA16_ID, align 1, align-sorted
+   \                     `?<Initializer for paTable>`:
+   \   000000   C0           DC8 192
+
+   \                                 In  segment DATA16_ID, align 1, align-sorted
+   \                     `?<Initializer for paTableLen>`:
+   \   000000   01           DC8 1
+    420          
+    421          
+    422          
+    423          #endif
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+     14   RFReceivePacket
+       14   -> TI_CC_SPIReadBurstReg
+       14   -> TI_CC_SPIReadReg
+       14   -> TI_CC_SPIReadStatus
+      8   RFSendPacket
+        8   -> TI_CC_SPIStrobe
+        8   -> TI_CC_SPIWriteBurstReg
+      4   TI_CC_PowerupResetCCxxxx
+        4   -> TI_CC_Wait
+      6   TI_CC_SPIReadBurstReg
+      4   TI_CC_SPIReadReg
+      4   TI_CC_SPIReadStatus
+      4   TI_CC_SPISetup
+      4   TI_CC_SPIStrobe
+      6   TI_CC_SPIWriteBurstReg
+      4   TI_CC_SPIWriteReg
+      4   TI_CC_Wait
+      6   blastString
+      4   halUARTSetup
+      4   writeRFSettings
+        4   -> TI_CC_SPIWriteReg
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       1  ?<Initializer for paTable>
+       1  ?<Initializer for paTableLen>
+       1  IE2
+       1  IFG2
+       1  ME2
+       1  P1IN
+       1  P2SEL
+       1  P4DIR
+       1  P4IN
+       1  P4OUT
+       1  P4SEL
+      80  RFReceivePacket
+      58  RFSendPacket
+      82  TI_CC_PowerupResetCCxxxx
+      98  TI_CC_SPIReadBurstReg
+      50  TI_CC_SPIReadReg
+      50  TI_CC_SPIReadStatus
+      56  TI_CC_SPISetup
+      28  TI_CC_SPIStrobe
+      74  TI_CC_SPIWriteBurstReg
+      44  TI_CC_SPIWriteReg
+      14  TI_CC_Wait
+       1  U1BR0
+       1  U1BR1
+       1  U1CTL
+       1  U1MCTL
+       1  U1RXBUF
+       1  U1TCTL
+       1  U1TXBUF
+       1  UCA0BR0
+       1  UCA0BR1
+       1  UCA0CTL1
+       1  UCA0MCTL
+       1  UCA0TXBUF
+      40  blastString
+      36  halUARTSetup
+       1  paTable
+       1  paTableLen
+     400  writeRFSettings
+
+ 
+ 1 110 bytes in segment CODE
+    21 bytes in segment DATA16_AN
+     2 bytes in segment DATA16_I
+     2 bytes in segment DATA16_ID
+ 
+ 1 110 bytes of CODE  memory
+     2 bytes of CONST memory
+     2 bytes of DATA  memory (+ 21 bytes shared)
+
+Errors: none
+Warnings: none

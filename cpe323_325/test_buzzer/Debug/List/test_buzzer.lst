@@ -1,0 +1,398 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V6.10.2.50871/W32 for MSP430         08/Oct/2014  18:11:26
+# Copyright 1996-2014 IAR Systems AB.
+# Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.10
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  D:\uah\cpe323\test_buzzer\test_buzzer.c
+#    Command line  =  
+#        D:\uah\cpe323\test_buzzer\test_buzzer.c -lCN
+#        D:\uah\cpe323\test_buzzer\Debug\List\ -o
+#        D:\uah\cpe323\test_buzzer\Debug\Obj\ --no_cse --no_unroll --no_inline
+#        --no_code_motion --no_tbaa --debug -D__MSP430FG4618__ -e --double=32
+#        --dlib_config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.0\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On
+#        --multiplier=16 --segment __data16=DATA16 --segment __data20=DATA20
+#        --code_model=large
+#    List file     =  D:\uah\cpe323\test_buzzer\Debug\List\test_buzzer.lst
+#    Object file   =  D:\uah\cpe323\test_buzzer\Debug\Obj\test_buzzer.r43
+#
+###############################################################################
+
+D:\uah\cpe323\test_buzzer\test_buzzer.c
+      1          /***********************************************************************
+      2           * A buzzer test. Nothing more.
+      3           **********************************************************************/
+      4          
+      5          #include <msp430.h> // The *correct* include statement
+
+   \                                 In  segment DATA16_AN, at 0x52
+   \   unsigned char volatile SCFQCTL
+   \                     SCFQCTL:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x23
+   \   unsigned char volatile P1IFG
+   \                     P1IFG:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x24
+   \   unsigned char volatile P1IES
+   \                     P1IES:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x25
+   \   unsigned char volatile P1IE
+   \                     P1IE:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x29
+   \   unsigned char volatile P2OUT
+   \                     P2OUT:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x2a
+   \   unsigned char volatile P2DIR
+   \                     P2DIR:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x2e
+   \   unsigned char volatile P2SEL
+   \                     P2SEL:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x1a
+   \   unsigned char volatile P3DIR
+   \                     P3DIR:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x1b
+   \   unsigned char volatile P3SEL
+   \                     P3SEL:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x180
+   \   unsigned short volatile TBCTL
+   \                     TBCTL:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x18a
+   \   unsigned short volatile TBCCTL4
+   \                     TBCCTL4:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x192
+   \   unsigned short volatile TBCCR0
+   \                     TBCCR0:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x19a
+   \   unsigned short volatile TBCCR4
+   \                     TBCCR4:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x120
+   \   unsigned short volatile WDTCTL
+   \                     WDTCTL:
+   \   000000                DS8 2
+      6          #include <intrinsics.h>
+      7          
+
+   \                                 In  segment DATA16_C, align 2, align-sorted
+      8          const int freq_aclk = 32767;
+   \                     freq_aclk:
+   \   000000   FF7F         DC16 32767
+
+   \                                 In  segment DATA16_I, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_copy
+      9          volatile int fractionOfSecond = 1000; // 1000 clicks from aclk
+   \                     fractionOfSecond:
+   \   000000                DS8 2
+   \   000002                REQUIRE `?<Initializer for fractionOfSecond>`
+
+   \                                 In  segment DATA16_I, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_copy
+     10          volatile int adjustFactor = 1000; // Amount to change timerPeriod by
+   \                     adjustFactor:
+   \   000000                DS8 2
+   \   000002                REQUIRE `?<Initializer for adjustFactor>`
+
+   \                                 In  segment DATA16_I, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_copy
+     11          volatile int TBperiod = 33; // every 33 clicks, Timer_B goes off
+   \                     TBperiod:
+   \   000000                DS8 2
+   \   000002                REQUIRE `?<Initializer for TBperiod>`
+     12          
+
+   \                                 In  segment CODE, align 2
+     13          void main(void)
+   \                     main:
+     14          {
+     15          	WDTCTL = WDT_ADLY_250;	// 1 s interval timer
+   \   000000   B2401D5A2001 MOV.W   #0x5a1d, &0x120
+     16          	P2DIR |= BIT2;			// Set P2.2 to output direction
+   \   000006   E2D22A00     BIS.B   #0x4, &0x2a
+     17          	P2DIR |= BIT1;
+   \   00000A   E2D32A00     BIS.B   #0x2, &0x2a
+     18          	P3DIR |= BIT5;
+   \   00000E   F2D020001A00 BIS.B   #0x20, &0x1a
+     19          	//P1DIR |= BIT1;
+     20          
+     21          	P3SEL |= BIT5;
+   \   000014   F2D020001B00 BIS.B   #0x20, &0x1b
+     22          	P2SEL |= BIT1;
+   \   00001A   E2D32E00     BIS.B   #0x2, &0x2e
+     23                  
+     24                  
+     25                  
+     26          	TBCCTL4 = OUTMOD_4;
+   \   00001E   B24080008A01 MOV.W   #0x80, &0x18a
+     27          	//TB0CCTL0 = OUTMOD_4;
+     28                  TBCCR4 = 33;
+   \   000024   B24021009A01 MOV.W   #0x21, &0x19a
+     29          	TBCTL = TBSSEL_1 + MC_2; // There is no such thing as "AMCLK", we're using TXSSEL_1=ACLK
+   \   00002A   B24020018001 MOV.W   #0x120, &0x180
+     30                  
+     31          	//current = 33;//(rate / clocker);
+     32          
+     33          	//TBCCR0 = 33;//current; // 32767
+     34          	//we want a 900Hz tone
+     35          	// So, 1000Hz is a period of 1/1000.
+     36          	// Which is 0.0001 seconds, which is 1 ms, which is 1000 us
+     37                  
+     38          	//_EINT();			// Enable interrupts
+     39          	// __enable_interrupt(); // Same as _EINT()?
+     40          	P1IE |= 0x0003;		// P1.0 interrupt enabled
+   \   000030   F2D003002500 BIS.B   #0x3, &0x25
+     41          	P1IES |= 0x0003;	// P1.0 hi -> low edge
+   \   000036   F2D003002400 BIS.B   #0x3, &0x24
+     42          	P1IFG &= ~0x0003;	// Clear P1.0 IFG
+   \   00003C   F2F0FC002300 AND.B   #0xfc, &0x23
+     43          
+     44          	//TB0CCR4 = TB0CCR0;
+     45          
+     46                  
+     47          	//P2OUT &= ~BIT1;
+     48          	//P3OUT |= ~BIT5;
+     49          
+     50          	//IE1 |= WDTIE;                     // Enable WDT interrupt
+     51          
+     52          	//_BIS_SR(LPM0_bits + GIE);         // Enter LPM0 w/ interrupt
+     53          
+     54          	while (1)
+     55          	{
+     56          		asm("NOP");
+   \                     ??main_0:
+   \   000042   0343         NOP
+   \   000044   FE3F         JMP     ??main_0
+   \   000046                REQUIRE WDTCTL
+   \   000046                REQUIRE P2DIR
+   \   000046                REQUIRE P3DIR
+   \   000046                REQUIRE P3SEL
+   \   000046                REQUIRE P2SEL
+   \   000046                REQUIRE TBCCTL4
+   \   000046                REQUIRE TBCCR4
+   \   000046                REQUIRE TBCTL
+   \   000046                REQUIRE P1IE
+   \   000046                REQUIRE P1IES
+   \   000046                REQUIRE P1IFG
+     57          	}
+     58          }
+     59          
+     60          // Watchdog Timer interrupt service routine
+     61          #pragma vector=WDT_VECTOR
+
+   \                                 In  segment ISR_CODE, align 2
+     62          __interrupt void watchdog_timer(void)
+   \                     watchdog_timer:
+     63          {
+     64              P2OUT ^= BIT2;			// Toggle P2.2 using exclusive-OR
+   \   000000   E2E22900     XOR.B   #0x4, &0x29
+     65              //P3OUT ^= BIT5;
+     66              //P1OUT ^= BIT1;
+     67          }
+   \   000004   0013         RETI
+   \   000006                REQUIRE P2OUT
+     68          
+     69          /*
+     70           * Port 1 interrupt service
+     71           */
+     72          #pragma vector = PORT1_VECTOR // The fuck does pragma mean? or vector for that matter.
+
+   \                                 In  segment ISR_CODE, align 2
+     73          __interrupt void Port1_ISR (void)
+   \                     Port1_ISR:
+     74          {
+   \   000000   5F15         PUSHM.W #0x6, R15
+     75          	// Constant delay debounce, arbitrary looper value
+     76          	// At SCFQCTL=30, we delay 20 NOP instructions.
+     77          	// At SCFQCTL=60, we delay 40 NOP instructions.
+     78          	// At SCFQCTL=120, we delay 80 NOP instructions.
+     79          	// A linear relationship between clock and delay :)
+     80          	int factor = (SCFQCTL / 30);
+   \   000002   5C425200     MOV.B   &0x52, R12
+   \   000006   7E401E00     MOV.B   #0x1e, R14
+   \   00000A   ........     CALLA   #?DivMod8u
+   \   00000E   4A4C         MOV.B   R12, R10
+     81          	int looper = (20 * factor);
+   \   000010   0B4A         MOV.W   R10, R11
+   \   000012   5B06         RLAM.W  #0x2, R11
+   \   000014   0F4B         MOV.W   R11, R15
+   \   000016   5B06         RLAM.W  #0x2, R11
+   \   000018   0B5F         ADD.W   R15, R11
+     82          
+     83          	for (int c = 0; c < looper; c++)
+   \   00001A   0F43         MOV.W   #0x0, R15
+   \                     ??Port1_ISR_0:
+   \   00001C   0F9B         CMP.W   R11, R15
+   \   00001E   0334         JGE     ??Port1_ISR_1
+     84          	{
+     85          		asm("NOP");
+   \   000020   0343         NOP
+     86          	}
+   \   000022   1F53         ADD.W   #0x1, R15
+   \   000024   FB3F         JMP     ??Port1_ISR_0
+     87          
+     88          //	if (((SW1) == 0) && ((SW2) != 0))
+     89          //	{
+     90          //		timerPeriod += adjustFactor;
+     91          //	}
+     92          //	else if (((SW2) == 0) && ((SW1) != 0))
+     93          //	{
+     94          //		timerPeriod -= adjustFactor;
+     95          //	}
+     96          
+     97          	TBperiod = (freq_aclk / fractionOfSecond);
+   \                     ??Port1_ISR_1:
+   \   000026   1C42....     MOV.W   &freq_aclk, R12
+   \   00002A   1E42....     MOV.W   &fractionOfSecond, R14
+   \   00002E   ........     CALLA   #?DivMod16s
+   \   000032   824C....     MOV.W   R12, &TBperiod
+     98          
+     99          	TB0CCR0 = TBperiod;
+   \   000036   9242....9201 MOV.W   &TBperiod, &0x192
+    100          		
+    101          	P1IFG &= ~BIT1;		// Clear P1.1 IFG
+   \   00003C   E2C32300     BIC.B   #0x2, &0x23
+    102          	P1IFG &= ~BIT0;		// Clear P1.0 IFG
+   \   000040   D2C32300     BIC.B   #0x1, &0x23
+    103          }
+   \   000044   5A17         POPM.W  #0x6, R15
+   \   000046   0013         RETI
+   \   000048                REQUIRE SCFQCTL
+   \   000048                REQUIRE TBCCR0
+   \   000048                REQUIRE P1IFG
+
+   \                                 In  segment INTVEC, offset 0x28, root
+   \                     `??Port1_ISR??INTVEC 40`:
+   \   000028   ....         DC16    Port1_ISR
+
+   \                                 In  segment INTVEC, offset 0x34, root
+   \                     `??watchdog_timer??INTVEC 52`:
+   \   000034   ....         DC16    watchdog_timer
+
+   \                                 In  segment DATA16_ID, align 2, align-sorted
+   \                     `?<Initializer for fractionOfSecond>`:
+   \   000000   E803         DC16 1000
+
+   \                                 In  segment DATA16_ID, align 2, align-sorted
+   \                     `?<Initializer for adjustFactor>`:
+   \   000000   E803         DC16 1000
+
+   \                                 In  segment DATA16_ID, align 2, align-sorted
+   \                     `?<Initializer for TBperiod>`:
+   \   000000   2100         DC16 33
+    104          
+    105          
+    106          
+    107          
+    108          
+    109          
+    110          
+    111          
+    112          
+    113          
+    114          
+    115          
+    116          
+    117          
+    118          
+    119          
+    120          
+    121          
+    122          
+    123          
+    124          
+    125          
+    126          
+    127          
+    128          
+    129          
+    130          
+    131          
+    132          
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+     16   Port1_ISR
+      4   main
+      4   watchdog_timer
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       2  ?<Initializer for TBperiod>
+       2  ?<Initializer for adjustFactor>
+       2  ?<Initializer for fractionOfSecond>
+       2  ??Port1_ISR??INTVEC 40
+       2  ??watchdog_timer??INTVEC 52
+       1  P1IE
+       1  P1IES
+       1  P1IFG
+       1  P2DIR
+       1  P2OUT
+       1  P2SEL
+       1  P3DIR
+       1  P3SEL
+      72  Port1_ISR
+       1  SCFQCTL
+       2  TBCCR0
+       2  TBCCR4
+       2  TBCCTL4
+       2  TBCTL
+       2  TBperiod
+       2  WDTCTL
+       2  adjustFactor
+       2  fractionOfSecond
+       2  freq_aclk
+      70  main
+       6  watchdog_timer
+
+ 
+ 70 bytes in segment CODE
+ 19 bytes in segment DATA16_AN
+  2 bytes in segment DATA16_C
+  6 bytes in segment DATA16_I
+  6 bytes in segment DATA16_ID
+  4 bytes in segment INTVEC
+ 78 bytes in segment ISR_CODE
+ 
+ 148 bytes of CODE  memory
+   8 bytes of CONST memory (+  4 bytes shared)
+   6 bytes of DATA  memory (+ 19 bytes shared)
+
+Errors: none
+Warnings: none

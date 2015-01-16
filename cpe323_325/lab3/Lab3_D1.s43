@@ -1,0 +1,45 @@
+/*-------------------------------------------------------------------
+* Program    : Counts the number of characters E in a string
+* Input      : The input string is the myStr
+* Output     : The port one displays the number of E's in the string
+* Written by : A. Milenkovic
+* Date       : August 14, 2008
+* Description: MSP430 IAR EW; Demonstration of the MSP430 assembler
+*---------------------------------------------------------------------*/
+
+#include "msp430.h"                     ; #define controlled include file
+
+        ORG 0FF00h
+myStr   DB "HELLO WORLD, I AM THE MSP430!" ; the string is placed on the stack
+; the null character is automatically added after the '!'
+
+        NAME    main                    ; module name
+
+        PUBLIC  main                    ; make the main label visible
+                                        ; outside this module
+        ORG     0FFFEh
+        DC16    init                    ; set reset vector to 'init' label
+
+        RSEG    CSTACK                  ; pre-declaration of segment
+        RSEG    CODE                    ; place program in 'CODE' segment
+
+init:   MOV     #SFE(CSTACK), SP        ; set up stack
+
+main:   NOP                             ; main program
+        MOV.W   #WDTPW+WDTHOLD,&WDTCTL  ; Stop watchdog timer
+        BIS.B   #0FFh,&P1DIR            ; configure P1.x output
+        MOV.W   #myStr, R4              ; load the starting address of the string into the register R4
+        CLR.B   R5                      ; register R5 will serve as a counter
+gnext:  MOV.B   @R4+, R6                ; get a new character
+        CMP     #0,R6					; is it a null character
+        JEQ     lend                    ; if yes, go to the end
+        CMP.B   #'E',R6					; is it an 'E' character
+        JNE     gnext					; if not, go to the next
+        INC     R5                      ; if yes, increment counter
+        JMP     gnext					; go to the next character
+
+lend:   MOV.B   R5,&P1OUT                ; Set all P1 pins
+        BIS.W   #LPM4,SR                 ; LPM4
+        NOP                              ; Required only for debugger
+
+        END

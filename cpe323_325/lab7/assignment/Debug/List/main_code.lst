@@ -1,0 +1,312 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V6.10.2.50871/W32 for MSP430         13/Oct/2014  16:26:27
+# Copyright 1996-2014 IAR Systems AB.
+# Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.10
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  D:\uah\cpe323\test_buzzer_02\main_code.c
+#    Command line  =  
+#        D:\uah\cpe323\test_buzzer_02\main_code.c -lCN
+#        D:\uah\cpe323\test_buzzer_02\Debug\List\ -o
+#        D:\uah\cpe323\test_buzzer_02\Debug\Obj\ --no_cse --no_unroll
+#        --no_inline --no_code_motion --no_tbaa --debug -D__MSP430FG4618__ -e
+#        --double=32 --dlib_config "C:\Program Files (x86)\IAR Systems\Embedded
+#        Workbench 7.0\430\lib\dlib\dl430xlsfn.h" --core=430X
+#        --data_model=small -On --multiplier=16 --segment __data16=DATA16
+#        --segment __data20=DATA20 --code_model=large
+#    List file     =  D:\uah\cpe323\test_buzzer_02\Debug\List\main_code.lst
+#    Object file   =  D:\uah\cpe323\test_buzzer_02\Debug\Obj\main_code.r43
+#
+###############################################################################
+
+D:\uah\cpe323\test_buzzer_02\main_code.c
+      1          /***********************************************************************
+      2           * Title: TEST: Buzzer 02
+      3           * Date Due: NEVAR!
+      4           * 
+      5           * Description:
+      6           * This program will test the buzzer.
+      7           *
+      8           * By: Christopher 'ctag' Bero <csb0019@uah.edu>
+      9           * Project: https://github.com/ctag/uah
+     10           *
+     11           * This software is licensed under the GPLv3,
+     12           * consult the LICENSE file for more information.
+     13           **********************************************************************/
+     14          
+     15          #include <msp430.h> // The *correct* include statement
+
+   \                                 In  segment DATA16_AN, at 0x52
+   \   unsigned char volatile SCFQCTL
+   \                     SCFQCTL:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x20
+   \   unsigned char const volatile P1IN
+   \                     P1IN:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x23
+   \   unsigned char volatile P1IFG
+   \                     P1IFG:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x1a
+   \   unsigned char volatile P3DIR
+   \                     P3DIR:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x1b
+   \   unsigned char volatile P3SEL
+   \                     P3SEL:
+   \   000000                DS8 1
+
+   \                                 In  segment DATA16_AN, at 0x180
+   \   unsigned short volatile TBCTL
+   \                     TBCTL:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x18a
+   \   unsigned short volatile TBCCTL4
+   \                     TBCCTL4:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x192
+   \   unsigned short volatile TBCCR0
+   \                     TBCCR0:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x19a
+   \   unsigned short volatile TBCCR4
+   \                     TBCCR4:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x120
+   \   unsigned short volatile WDTCTL
+   \                     WDTCTL:
+   \   000000                DS8 2
+     16          
+     17          #define SW1 0x01&P1IN	// B1 - P1.0 switch SW1 
+     18          #define SW2 0x02&P1IN	// B2 - P1.1 switch SW2
+     19          
+
+   \                                 In  segment CODE, align 2
+     20          void main(void)
+   \                     main:
+     21          {
+     22          	//WDTCTL = WDT_ADLY_250;	// 1 s interval timer
+     23          	WDTCTL = (WDTPW|WDTHOLD);
+   \   000000   B240805A2001 MOV.W   #0x5a80, &0x120
+     24          	
+     25          	P3DIR |= BIT5; // Set P3.5 to OUT
+   \   000006   F2D020001A00 BIS.B   #0x20, &0x1a
+     26          	P3SEL |= BIT5; // Setup the special TB4 function of P3.5
+   \   00000C   F2D020001B00 BIS.B   #0x20, &0x1b
+     27          	
+     28          	//_EINT();			// Enable interrupts
+     29          	// __enable_interrupt(); // Same as _EINT()?
+     30          	
+     31          	//IE1 |= WDTIE;                     // Enable WDT interrupt
+     32          	//_BIS_SR(LPM0_bits + GIE);         // Enter LPM0 w/ interrupt
+     33          	
+     34          	// Setup Timer_B
+     35          	// [0000][00 01] [01 01] [0000]
+     36          	TBCTL = 0x0150;
+   \   000012   B24050018001 MOV.W   #0x150, &0x180
+     37          	// ACLK = 32,768Hz / 2 = 16,384Hz
+     38          	
+     39          	// We want 900Hz, so TCCR0 = 19
+     40          	//TBCCR0 = 19;
+     41          	
+     42          	// We want 400Hz,
+     43          	//TBCCR0 = 28;
+     44          	
+     45          	// We want 100Hz
+     46          	TBCCR0 = 112;
+   \   000018   B24070009201 MOV.W   #0x70, &0x192
+     47          	
+     48          	// Setup TBCCTLx
+     49          	// [0000] [0000] [1000] [0000]
+     50          	TBCCTL4 = 0x0080;
+   \   00001E   B24080008A01 MOV.W   #0x80, &0x18a
+     51          	
+     52          	TBCCR4 = 1; // doesn't matter
+   \   000024   92439A01     MOV.W   #0x1, &0x19a
+     53          	
+     54          	
+     55          	while (1)
+     56          	{
+     57          		asm("NOP");
+   \                     ??main_0:
+   \   000028   0343         NOP
+   \   00002A   FE3F         JMP     ??main_0
+   \   00002C                REQUIRE WDTCTL
+   \   00002C                REQUIRE P3DIR
+   \   00002C                REQUIRE P3SEL
+   \   00002C                REQUIRE TBCTL
+   \   00002C                REQUIRE TBCCR0
+   \   00002C                REQUIRE TBCCTL4
+   \   00002C                REQUIRE TBCCR4
+     58          	}
+     59          }
+     60          
+     61          /*
+     62           * Watchdog Timer interrupt service routine
+     63           */
+     64          #pragma vector = WDT_VECTOR
+
+   \                                 In  segment ISR_CODE, align 2
+     65          __interrupt void watchdog_timer(void)
+   \                     watchdog_timer:
+     66          {
+     67          
+     68          }
+   \   000000   0013         RETI
+     69          
+     70          /*
+     71           * Port 1 interrupt service routine
+     72           */
+     73          #pragma vector = PORT1_VECTOR
+
+   \                                 In  segment ISR_CODE, align 2
+     74          __interrupt void Port1_ISR (void)
+   \                     Port1_ISR:
+     75          {
+   \   000000   3F15         PUSHM.W #0x4, R15
+     76          	// Constant delay debounce
+     77          	int factor = (SCFQCTL / 30);
+   \   000002   5C425200     MOV.B   &0x52, R12
+   \   000006   7E401E00     MOV.B   #0x1e, R14
+   \   00000A   ........     CALLA   #?DivMod8u
+   \   00000E   4C4C         MOV.B   R12, R12
+     78          	int looper = (20 * factor);
+   \   000010   0F4C         MOV.W   R12, R15
+   \   000012   5F06         RLAM.W  #0x2, R15
+   \   000014   0E4F         MOV.W   R15, R14
+   \   000016   5F06         RLAM.W  #0x2, R15
+   \   000018   0F5E         ADD.W   R14, R15
+     79          	for (int c = 0; c < looper; c++)
+   \   00001A   0E43         MOV.W   #0x0, R14
+   \                     ??Port1_ISR_0:
+   \   00001C   0E9F         CMP.W   R15, R14
+   \   00001E   0334         JGE     ??Port1_ISR_1
+     80          	{ asm("NOP"); }
+   \   000020   0343         NOP
+   \   000022   1E53         ADD.W   #0x1, R14
+   \   000024   FB3F         JMP     ??Port1_ISR_0
+     81          
+     82          	if (((SW1) == 0) && ((SW2) != 0)) // SW1 is pressed
+   \                     ??Port1_ISR_1:
+   \   000026   D2B32000     BIT.B   #0x1, &0x20
+   \   00002A   032C         JC      ??Port1_ISR_2
+   \   00002C   E2B32000     BIT.B   #0x2, &0x20
+   \   000030   052C         JC      ??Port1_ISR_3
+     83          	{
+     84          	
+     85          	} else if (((SW2) == 0) && ((SW1) != 0)) // SW2 is pressed
+   \                     ??Port1_ISR_2:
+   \   000032   E2B32000     BIT.B   #0x2, &0x20
+   \   000036   022C         JC      ??Port1_ISR_3
+   \   000038   5E422000     MOV.B   &0x20, R14
+     86          	{
+     87          	
+     88          	}
+     89          
+     90          	P1IFG &= ~BIT1;		// Clear P1.1 IFG
+   \                     ??Port1_ISR_3:
+   \   00003C   E2C32300     BIC.B   #0x2, &0x23
+     91          	P1IFG &= ~BIT0;		// Clear P1.0 IFG
+   \   000040   D2C32300     BIC.B   #0x1, &0x23
+     92          }
+   \   000044   3C17         POPM.W  #0x4, R15
+   \   000046   0013         RETI
+   \   000048                REQUIRE SCFQCTL
+   \   000048                REQUIRE P1IN
+   \   000048                REQUIRE P1IFG
+
+   \                                 In  segment INTVEC, offset 0x28, root
+   \                     `??Port1_ISR??INTVEC 40`:
+   \   000028   ....         DC16    Port1_ISR
+
+   \                                 In  segment INTVEC, offset 0x34, root
+   \                     `??watchdog_timer??INTVEC 52`:
+   \   000034   ....         DC16    watchdog_timer
+     93          
+     94          
+     95          
+     96          
+     97          
+     98          
+     99          
+    100          
+    101          
+    102          
+    103          
+    104          
+    105          
+    106          
+    107          
+    108          
+    109          
+    110          
+    111          
+    112          
+    113          
+    114          
+    115          
+    116          
+    117          
+    118          
+    119          
+    120          
+    121          
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+     12   Port1_ISR
+      4   main
+      4   watchdog_timer
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       2  ??Port1_ISR??INTVEC 40
+       2  ??watchdog_timer??INTVEC 52
+       1  P1IFG
+       1  P1IN
+       1  P3DIR
+       1  P3SEL
+      72  Port1_ISR
+       1  SCFQCTL
+       2  TBCCR0
+       2  TBCCR4
+       2  TBCCTL4
+       2  TBCTL
+       2  WDTCTL
+      44  main
+       2  watchdog_timer
+
+ 
+ 44 bytes in segment CODE
+ 15 bytes in segment DATA16_AN
+  4 bytes in segment INTVEC
+ 74 bytes in segment ISR_CODE
+ 
+ 118 bytes of CODE  memory
+   0 bytes of CONST memory (+  4 bytes shared)
+   0 bytes of DATA  memory (+ 15 bytes shared)
+
+Errors: none
+Warnings: none

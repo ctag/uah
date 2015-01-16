@@ -1,0 +1,40 @@
+;------------------------------------------------------------------------------
+; Program  : Subroutine for that sums up elements of an interger array
+; Input    : The input parameters are passed through the stack:
+;              starting address of the array
+;              array length
+;              display id
+; Output   : No output parameters
+;------------------------------------------------------------------------------*/
+#include "msp430.h"                     ; #define controlled include file	
+
+        PUBLIC suma_sp
+
+		RSEG CODE
+		
+suma_sp:
+        ; save the registers on the stack
+        PUSH    R7                      ; temporal sum
+        PUSH    R6                      ; array length
+        PUSH    R4                      ; pointer to array
+        CLR     R7
+        MOV     10(SP), R6               ; retrieve array length
+        MOV     12(SP), R4
+lnext:  ADD     @R4+, R7
+        DEC     R6
+        JNZ     lnext
+        MOV     8(SP), R4               ; get id from the stack
+        BIT     #1, R4                 	; display on P1&P2
+        JNZ     lp34                    ; it's P3&P4
+        MOV.B   R7, P1OUT
+        SWPB    R7
+        MOV.B   R7, P2OUT
+        JMP     lend
+lp34:   MOV.B   R7, P3OUT
+        SWPB    R7
+        MOV.B   R7, P4OUT
+lend:   POP     R4                      ; restore R4
+        POP     R6
+        POP     R7
+        RET
+        END
