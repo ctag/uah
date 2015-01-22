@@ -21,8 +21,6 @@ MainWindow::MainWindow(QWidget *parent) :
     tmodel = new QSqlTableModel;
     timer = new QTimer;
     
-    
-            
             
     /*
      * Signal/Slots
