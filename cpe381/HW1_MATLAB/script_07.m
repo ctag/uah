@@ -17,6 +17,6 @@ abs_x_t = abs(x_t);
 
 % p7_c
 y_t = exp(-x_axis)*cos(2*pi*x_axis)*x_t;
-plog(x_axis, y_t);
+plot(x_axis, y_t);
 
 
