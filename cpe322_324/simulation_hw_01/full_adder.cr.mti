@@ -1,0 +1,11 @@
+C:/Users/csb0019/Documents/uah/cpe322_324/simulation_hw_01/full_adder.v {1 {vlog -work work C:/Users/csb0019/Documents/uah/cpe322_324/simulation_hw_01/full_adder.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module full_adder
+-- Compiling module four_bit_sub_add
+-- Compiling module fullsubadd
+-- Compiling module mux2_1
+
+Top level modules:
+	full_adder
+
+} {} {}}

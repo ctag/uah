@@ -1,0 +1,24 @@
+force {sim:/eight_bit_sub_add/B_CIN} 	0 0ns, 0 50ns, 1 100ns, 1 150ns, 1 200ns, 1 250ns, 0 300ns, 0 400ns
+
+force {sim:/eight_bit_sub_add/A[0]} 	1 0ns, 1 50ns, 1 100ns, 1 150ns, 0 200ns, 1 250ns, 1 300ns, 0 400ns
+force {sim:/eight_bit_sub_add/A[1]} 	0 0ns, 1 50ns, 1 100ns, 1 150ns, 1 200ns, 1 250ns, 1 300ns, 1 400ns
+force {sim:/eight_bit_sub_add/A[2]} 	0 0ns, 1 50ns, 1 100ns, 1 150ns, 1 200ns, 1 250ns, 1 300ns, 1 400ns
+force {sim:/eight_bit_sub_add/A[3]} 	0 0ns, 1 50ns, 0 100ns, 1 150ns, 1 200ns, 1 250ns, 1 300ns, 0 400ns
+force {sim:/eight_bit_sub_add/A[4]} 	0 0ns, 1 50ns, 0 100ns, 1 150ns, 1 200ns, 1 250ns, 1 300ns, 0 400ns
+force {sim:/eight_bit_sub_add/A[5]} 	0 0ns, 1 50ns, 0 100ns, 1 150ns, 1 200ns, 1 250ns, 1 300ns, 1 400ns
+force {sim:/eight_bit_sub_add/A[6]} 	0 0ns, 1 50ns, 0 100ns, 1 150ns, 1 200ns, 1 250ns, 1 300ns, 0 400ns
+force {sim:/eight_bit_sub_add/A[7]} 	0 0ns, 1 50ns, 0 100ns, 1 150ns, 1 200ns, 1 250ns, 1 300ns, 0 400ns
+
+force {sim:/eight_bit_sub_add/B[0]} 	1 0ns, 1 50ns, 1 100ns, 1 150ns, 1 200ns, 1 250ns, 1 300ns, 1 400ns
+force {sim:/eight_bit_sub_add/B[1]} 	0 0ns, 1 50ns, 1 100ns, 1 150ns, 1 200ns, 1 250ns, 1 300ns, 1 400ns
+force {sim:/eight_bit_sub_add/B[2]} 	0 0ns, 0 50ns, 1 100ns, 1 150ns, 1 200ns, 1 250ns, 1 300ns, 1 400ns
+force {sim:/eight_bit_sub_add/B[3]} 	0 0ns, 0 50ns, 1 100ns, 1 150ns, 1 200ns, 1 250ns, 1 300ns, 1 400ns
+force {sim:/eight_bit_sub_add/B[4]} 	0 0ns, 0 50ns, 0 100ns, 1 150ns, 1 200ns, 1 250ns, 1 300ns, 1 400ns
+force {sim:/eight_bit_sub_add/B[5]} 	0 0ns, 0 50ns, 0 100ns, 1 150ns, 1 200ns, 1 250ns, 1 300ns, 1 400ns
+force {sim:/eight_bit_sub_add/B[6]} 	0 0ns, 0 50ns, 0 100ns, 0 150ns, 1 200ns, 1 250ns, 1 300ns, 1 400ns
+force {sim:/eight_bit_sub_add/B[7]} 	0 0ns, 0 50ns, 0 100ns, 0 150ns, 1 200ns, 1 250ns, 1 300ns, 1 400ns
+
+force {sim:/eight_bit_sub_add/SUB_ADD}	1 0ns, 0 50ns, 1 100ns, 0 150ns, 1 200ns, 0 250ns, 1 300ns, 0 400ns
+
+run 450ns
+

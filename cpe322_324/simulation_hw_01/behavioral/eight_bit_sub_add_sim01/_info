@@ -1,0 +1,21 @@
+m255
+K3
+13
+cModel Technology
+dC:\Users\csb0019\AppData\Local\Temp
+veight_bit_sub_add
+!s100 294j`zbkFE]VO]HWB30i73
+IThZ9BUWez9M0J;ZB_:HOg0
+VoVM[dRf7XigniWjllojTi3
+dC:\Users\csb0019\Documents\uah\cpe322_324\simulation_hw_01\behavioral
+w1423003555
+8C:/Users/csb0019/Documents/uah/cpe322_324/simulation_hw_01/behavioral/eight_bit_sub_add_sim01/eight_bit_sub_add.v
+FC:/Users/csb0019/Documents/uah/cpe322_324/simulation_hw_01/behavioral/eight_bit_sub_add_sim01/eight_bit_sub_add.v
+L0 5
+OV;L;6.5b;42
+r1
+!s85 0
+31
+!s101 -O0
+!s102 -nocovercells
+o-work eight_bit_sub_add_sim01 -nocovercells -O0
