@@ -1,0 +1,25 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\csb0019\Documents\uah\cpe322_324\lab03\structural\simulation\modelsim
+veight_bit_sub_add
+!i10b 1
+!s100 PDW::cIi0GU:SPbe9SF^90
+IlChJ2bfX;a8;D4BTM1XLN2
+VoVM[dRf7XigniWjllojTi3
+Z1 dC:\Users\csb0019\Documents\uah\cpe322_324\lab03\structural\simulation\modelsim
+w1423255560
+8eight_bit_add_sub_7_1200mv_85c_slow.vo
+Feight_bit_add_sub_7_1200mv_85c_slow.vo
+L0 31
+OV;L;10.1d;51
+r1
+!s85 0
+31
+!s108 1423256167.551000
+!s107 eight_bit_add_sub_7_1200mv_85c_slow.vo|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+.|eight_bit_add_sub_7_1200mv_85c_slow.vo|
+!s101 -O0
+o-vlog01compat -work work -O0
+!s92 -vlog01compat -work work +incdir+. -O0

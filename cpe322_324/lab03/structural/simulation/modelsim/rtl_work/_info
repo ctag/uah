@@ -1,0 +1,85 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\csb0019\Documents\uah\cpe322_324\lab03\structural\simulation\modelsim
+veight_bit_sub_add
+!i10b 1
+!s100 _9ViG<`BM16860chhkHFV0
+I6K8c_l;R262WO>67bZ4i]1
+VoVM[dRf7XigniWjllojTi3
+Z1 dC:\Users\csb0019\Documents\uah\cpe322_324\lab03\structural\simulation\modelsim
+Z2 w1423254101
+Z3 8C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/eight_bit_sub_add.v
+Z4 FC:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/eight_bit_sub_add.v
+L0 15
+Z5 OV;L;10.1d;51
+r1
+!s85 0
+31
+Z6 !s108 1423256092.306000
+Z7 !s107 C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/eight_bit_sub_add.v|
+Z8 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural|C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/eight_bit_sub_add.v|
+!s101 -O0
+Z9 o-vlog01compat -work work -O0
+Z10 !s92 -vlog01compat -work work +incdir+C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural -O0
+vfour_bit_sub_add
+!i10b 1
+!s100 fLA8jC@;>GTeAG^TC;UGQ1
+I[:gEcb2;k]PaBMRgf5Zan2
+VWi?j>N>;bnX^lUXMmOd>V3
+R1
+R2
+R3
+R4
+L0 27
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!s101 -O0
+R9
+R10
+vfullsubadd
+!i10b 1
+!s100 mNL`QNcJdVh5M6l5@TM<d0
+IMBMPmWCV=0MXI@WGClN<a2
+VeNT:kZ7Qf3O1IUV^U9NLj3
+R1
+R2
+R3
+R4
+L0 41
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!s101 -O0
+R9
+R10
+vmux2_1
+!i10b 1
+!s100 foNfJYJc9f4MaM42;XH]X1
+IzRz@6QBjYTjNL2LSifIAN0
+VmEU5M`I@z17QT2Zagb62`0
+R1
+R2
+R3
+R4
+L0 56
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!s101 -O0
+R9
+R10
