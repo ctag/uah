@@ -1,0 +1,238 @@
+# Reading C:/altera/13.0sp1/modelsim_ase/tcl/vsim/pref.tcl 
+# do eight_bit_add_sub_run_msim_gate_verilog.do 
+# if {[file exists gate_work]} {
+# 	vdel -lib gate_work -all
+# }
+# vlib gate_work
+# vmap work gate_work
+# Copying C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# ** Warning: Copied C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini.
+#          Updated modelsim.ini.
+# 
+# vlog -vlog01compat -work work +incdir+. {eight_bit_add_sub_7_1200mv_85c_slow.vo}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module eight_bit_sub_add
+# 
+# Top level modules:
+# 	eight_bit_sub_add
+# 
+vsim work.eight_bit_sub_add
+# vsim work.eight_bit_sub_add 
+# Loading work.eight_bit_sub_add
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(142): Instantiation of 'cycloneive_io_obuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(155): Instantiation of 'cycloneive_io_obuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(168): Instantiation of 'cycloneive_io_obuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(181): Instantiation of 'cycloneive_io_obuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(194): Instantiation of 'cycloneive_io_obuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(207): Instantiation of 'cycloneive_io_obuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(220): Instantiation of 'cycloneive_io_obuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(233): Instantiation of 'cycloneive_io_obuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(246): Instantiation of 'cycloneive_io_obuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(256): Instantiation of 'cycloneive_io_ibuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(266): Instantiation of 'cycloneive_io_ibuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(276): Instantiation of 'cycloneive_io_ibuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(293): Instantiation of 'cycloneive_lcell_comb' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(303): Instantiation of 'cycloneive_io_ibuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(313): Instantiation of 'cycloneive_io_ibuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(330): Instantiation of 'cycloneive_lcell_comb' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(340): Instantiation of 'cycloneive_io_ibuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(357): Instantiation of 'cycloneive_lcell_comb' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(367): Instantiation of 'cycloneive_io_ibuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(384): Instantiation of 'cycloneive_lcell_comb' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(394): Instantiation of 'cycloneive_io_ibuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(411): Instantiation of 'cycloneive_lcell_comb' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(428): Instantiation of 'cycloneive_lcell_comb' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(438): Instantiation of 'cycloneive_io_ibuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(448): Instantiation of 'cycloneive_io_ibuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(465): Instantiation of 'cycloneive_lcell_comb' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(482): Instantiation of 'cycloneive_lcell_comb' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(492): Instantiation of 'cycloneive_io_ibuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(502): Instantiation of 'cycloneive_io_ibuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(519): Instantiation of 'cycloneive_lcell_comb' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(536): Instantiation of 'cycloneive_lcell_comb' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(546): Instantiation of 'cycloneive_io_ibuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(556): Instantiation of 'cycloneive_io_ibuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(573): Instantiation of 'cycloneive_lcell_comb' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(590): Instantiation of 'cycloneive_lcell_comb' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(600): Instantiation of 'cycloneive_io_ibuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(610): Instantiation of 'cycloneive_io_ibuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(627): Instantiation of 'cycloneive_lcell_comb' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(644): Instantiation of 'cycloneive_lcell_comb' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(654): Instantiation of 'cycloneive_io_ibuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(664): Instantiation of 'cycloneive_io_ibuf' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(681): Instantiation of 'cycloneive_lcell_comb' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# ** Error: (vsim-3033) eight_bit_add_sub_7_1200mv_85c_slow.vo(698): Instantiation of 'cycloneive_lcell_comb' failed. The design unit was not found.
+# 
+#         Region: /eight_bit_sub_add
+#         Searched libraries:
+#             C:/Users/csb0019/Documents/uah/cpe322_324/lab03/structural/simulation/modelsim/gate_work
+# Error loading design

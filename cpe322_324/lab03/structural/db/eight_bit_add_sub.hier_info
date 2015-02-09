@@ -1,0 +1,234 @@
+|eight_bit_sub_add
+D_S[0] <= four_bit_sub_add:C0.port0
+D_S[1] <= four_bit_sub_add:C0.port0
+D_S[2] <= four_bit_sub_add:C0.port0
+D_S[3] <= four_bit_sub_add:C0.port0
+D_S[4] <= four_bit_sub_add:C1.port0
+D_S[5] <= four_bit_sub_add:C1.port0
+D_S[6] <= four_bit_sub_add:C1.port0
+D_S[7] <= four_bit_sub_add:C1.port0
+B_COUT <= four_bit_sub_add:C1.port1
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+A[3] => A[3].IN1
+A[4] => A[4].IN1
+A[5] => A[5].IN1
+A[6] => A[6].IN1
+A[7] => A[7].IN1
+B[0] => B[0].IN1
+B[1] => B[1].IN1
+B[2] => B[2].IN1
+B[3] => B[3].IN1
+B[4] => B[4].IN1
+B[5] => B[5].IN1
+B[6] => B[6].IN1
+B[7] => B[7].IN1
+B_CIN => B_CIN.IN1
+SUB_ADD => SUB_ADD.IN2
+
+
+|eight_bit_sub_add|four_bit_sub_add:C0
+d_s[0] <= fullsubadd:C0.port0
+d_s[1] <= fullsubadd:C1.port0
+d_s[2] <= fullsubadd:C2.port0
+d_s[3] <= fullsubadd:C3.port0
+b_cout <= fullsubadd:C3.port1
+a[0] => a[0].IN1
+a[1] => a[1].IN1
+a[2] => a[2].IN1
+a[3] => a[3].IN1
+b[0] => b[0].IN1
+b[1] => b[1].IN1
+b[2] => b[2].IN1
+b[3] => b[3].IN1
+b_cin => b_cin.IN1
+sub_add => sub_add.IN4
+
+
+|eight_bit_sub_add|four_bit_sub_add:C0|fullsubadd:C0
+dif_sum <= C6.DB_MAX_OUTPUT_PORT_TYPE
+b_cout <= C5.DB_MAX_OUTPUT_PORT_TYPE
+x => x.IN1
+y => C2.IN1
+y => C3.IN0
+y => C6.IN0
+b_cin => C3.IN1
+b_cin => C4.IN1
+b_cin => C6.IN1
+sub_add => sub_add.IN1
+
+
+|eight_bit_sub_add|four_bit_sub_add:C0|fullsubadd:C0|mux2_1:C1
+o <= G3.DB_MAX_OUTPUT_PORT_TYPE
+i0 => G1.IN0
+i1 => G2.IN0
+sel => G2.IN1
+sel => G1.IN1
+
+
+|eight_bit_sub_add|four_bit_sub_add:C0|fullsubadd:C1
+dif_sum <= C6.DB_MAX_OUTPUT_PORT_TYPE
+b_cout <= C5.DB_MAX_OUTPUT_PORT_TYPE
+x => x.IN1
+y => C2.IN1
+y => C3.IN0
+y => C6.IN0
+b_cin => C3.IN1
+b_cin => C4.IN1
+b_cin => C6.IN1
+sub_add => sub_add.IN1
+
+
+|eight_bit_sub_add|four_bit_sub_add:C0|fullsubadd:C1|mux2_1:C1
+o <= G3.DB_MAX_OUTPUT_PORT_TYPE
+i0 => G1.IN0
+i1 => G2.IN0
+sel => G2.IN1
+sel => G1.IN1
+
+
+|eight_bit_sub_add|four_bit_sub_add:C0|fullsubadd:C2
+dif_sum <= C6.DB_MAX_OUTPUT_PORT_TYPE
+b_cout <= C5.DB_MAX_OUTPUT_PORT_TYPE
+x => x.IN1
+y => C2.IN1
+y => C3.IN0
+y => C6.IN0
+b_cin => C3.IN1
+b_cin => C4.IN1
+b_cin => C6.IN1
+sub_add => sub_add.IN1
+
+
+|eight_bit_sub_add|four_bit_sub_add:C0|fullsubadd:C2|mux2_1:C1
+o <= G3.DB_MAX_OUTPUT_PORT_TYPE
+i0 => G1.IN0
+i1 => G2.IN0
+sel => G2.IN1
+sel => G1.IN1
+
+
+|eight_bit_sub_add|four_bit_sub_add:C0|fullsubadd:C3
+dif_sum <= C6.DB_MAX_OUTPUT_PORT_TYPE
+b_cout <= C5.DB_MAX_OUTPUT_PORT_TYPE
+x => x.IN1
+y => C2.IN1
+y => C3.IN0
+y => C6.IN0
+b_cin => C3.IN1
+b_cin => C4.IN1
+b_cin => C6.IN1
+sub_add => sub_add.IN1
+
+
+|eight_bit_sub_add|four_bit_sub_add:C0|fullsubadd:C3|mux2_1:C1
+o <= G3.DB_MAX_OUTPUT_PORT_TYPE
+i0 => G1.IN0
+i1 => G2.IN0
+sel => G2.IN1
+sel => G1.IN1
+
+
+|eight_bit_sub_add|four_bit_sub_add:C1
+d_s[0] <= fullsubadd:C0.port0
+d_s[1] <= fullsubadd:C1.port0
+d_s[2] <= fullsubadd:C2.port0
+d_s[3] <= fullsubadd:C3.port0
+b_cout <= fullsubadd:C3.port1
+a[0] => a[0].IN1
+a[1] => a[1].IN1
+a[2] => a[2].IN1
+a[3] => a[3].IN1
+b[0] => b[0].IN1
+b[1] => b[1].IN1
+b[2] => b[2].IN1
+b[3] => b[3].IN1
+b_cin => b_cin.IN1
+sub_add => sub_add.IN4
+
+
+|eight_bit_sub_add|four_bit_sub_add:C1|fullsubadd:C0
+dif_sum <= C6.DB_MAX_OUTPUT_PORT_TYPE
+b_cout <= C5.DB_MAX_OUTPUT_PORT_TYPE
+x => x.IN1
+y => C2.IN1
+y => C3.IN0
+y => C6.IN0
+b_cin => C3.IN1
+b_cin => C4.IN1
+b_cin => C6.IN1
+sub_add => sub_add.IN1
+
+
+|eight_bit_sub_add|four_bit_sub_add:C1|fullsubadd:C0|mux2_1:C1
+o <= G3.DB_MAX_OUTPUT_PORT_TYPE
+i0 => G1.IN0
+i1 => G2.IN0
+sel => G2.IN1
+sel => G1.IN1
+
+
+|eight_bit_sub_add|four_bit_sub_add:C1|fullsubadd:C1
+dif_sum <= C6.DB_MAX_OUTPUT_PORT_TYPE
+b_cout <= C5.DB_MAX_OUTPUT_PORT_TYPE
+x => x.IN1
+y => C2.IN1
+y => C3.IN0
+y => C6.IN0
+b_cin => C3.IN1
+b_cin => C4.IN1
+b_cin => C6.IN1
+sub_add => sub_add.IN1
+
+
+|eight_bit_sub_add|four_bit_sub_add:C1|fullsubadd:C1|mux2_1:C1
+o <= G3.DB_MAX_OUTPUT_PORT_TYPE
+i0 => G1.IN0
+i1 => G2.IN0
+sel => G2.IN1
+sel => G1.IN1
+
+
+|eight_bit_sub_add|four_bit_sub_add:C1|fullsubadd:C2
+dif_sum <= C6.DB_MAX_OUTPUT_PORT_TYPE
+b_cout <= C5.DB_MAX_OUTPUT_PORT_TYPE
+x => x.IN1
+y => C2.IN1
+y => C3.IN0
+y => C6.IN0
+b_cin => C3.IN1
+b_cin => C4.IN1
+b_cin => C6.IN1
+sub_add => sub_add.IN1
+
+
+|eight_bit_sub_add|four_bit_sub_add:C1|fullsubadd:C2|mux2_1:C1
+o <= G3.DB_MAX_OUTPUT_PORT_TYPE
+i0 => G1.IN0
+i1 => G2.IN0
+sel => G2.IN1
+sel => G1.IN1
+
+
+|eight_bit_sub_add|four_bit_sub_add:C1|fullsubadd:C3
+dif_sum <= C6.DB_MAX_OUTPUT_PORT_TYPE
+b_cout <= C5.DB_MAX_OUTPUT_PORT_TYPE
+x => x.IN1
+y => C2.IN1
+y => C3.IN0
+y => C6.IN0
+b_cin => C3.IN1
+b_cin => C4.IN1
+b_cin => C6.IN1
+sub_add => sub_add.IN1
+
+
+|eight_bit_sub_add|four_bit_sub_add:C1|fullsubadd:C3|mux2_1:C1
+o <= G3.DB_MAX_OUTPUT_PORT_TYPE
+i0 => G1.IN0
+i1 => G2.IN0
+sel => G2.IN1
+sel => G1.IN1
+
+
