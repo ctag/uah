@@ -1,3 +1,7 @@
+#
+# Stimulus for Structural Model
+#
+
 force {sim:/full_adder/B_CIN} 	0 0ns, 0 50ns, 1 100ns, 1 150ns, 1 200ns, 1 250ns, 0 300ns, 0 400ns
 
 force {sim:/full_adder/A[0]} 	1 0ns, 1 50ns, 1 100ns, 1 150ns, 0 200ns, 1 250ns, 1 300ns, 0 400ns
