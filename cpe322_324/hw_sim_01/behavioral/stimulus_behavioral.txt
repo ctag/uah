@@ -28,4 +28,3 @@ force {sim:/eight_bit_sub_add/B[7]} 	0 0ns, 0 50ns, 0 100ns, 0 150ns, 1 200ns, 0
 force {sim:/eight_bit_sub_add/SUB_ADD}	0 0ns, 1 50ns, 0 100ns, 1 150ns, 0 200ns, 1 250ns, 0 300ns, 1 350ns, 0 400ns
 
 run 500ns
-
