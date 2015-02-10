@@ -1,0 +1,84 @@
+# Reading C:/altera/13.0sp1/modelsim_ase/tcl/vsim/pref.tcl 
+# do eight_bit_sub_add_run_msim_gate_verilog.do 
+# if {[file exists gate_work]} {
+# 	vdel -lib gate_work -all
+# }
+# vlib gate_work
+# vmap work gate_work
+# Copying C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# ** Warning: Copied C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini.
+#          Updated modelsim.ini.
+# 
+# vlog -vlog01compat -work work +incdir+. {eight_bit_sub_add_min_1200mv_0c_fast.vo}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module eight_bit_sub_add
+# 
+# Top level modules:
+# 	eight_bit_sub_add
+# 
+vsim +altera -L cycloneive_ver -do eight_bit_sub_add_run_msim_gate_verilog.do -l msim_transcript -gui gate_work.eight_bit_sub_add
+# vsim +altera -L cycloneive_ver -do eight_bit_sub_add_run_msim_gate_verilog.do -l msim_transcript -gui gate_work.eight_bit_sub_add 
+# Loading gate_work.eight_bit_sub_add
+# Loading cycloneive_ver.cycloneive_io_ibuf
+# Loading cycloneive_ver.cycloneive_io_obuf
+# Loading cycloneive_ver.cycloneive_lcell_comb
+# SDF 10.1d Compiler 2012.11 Nov  2 2012
+# 
+# Loading instances from eight_bit_sub_add_min_1200mv_0c_v_fast.sdo
+# Loading timing data from eight_bit_sub_add_min_1200mv_0c_v_fast.sdo
+# ** Note: (vsim-3587) SDF Backannotation Successfully Completed.
+#    Time: 0 ps  Iteration: 0  Instance: /eight_bit_sub_add File: eight_bit_sub_add_min_1200mv_0c_fast.vo
+# do eight_bit_sub_add_run_msim_gate_verilog.do 
+# if {[file exists gate_work]} {
+# 	vdel -lib gate_work -all
+# }
+# vlib gate_work
+# vmap work gate_work
+# Modifying modelsim.ini
+# 
+# vlog -vlog01compat -work work +incdir+. {eight_bit_sub_add_min_1200mv_0c_fast.vo}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module eight_bit_sub_add
+# 
+# Top level modules:
+# 	eight_bit_sub_add
+# 
+add wave -position insertpoint  \
+sim:/eight_bit_sub_add/D_S \
+sim:/eight_bit_sub_add/B_COUT \
+sim:/eight_bit_sub_add/A \
+sim:/eight_bit_sub_add/B \
+sim:/eight_bit_sub_add/B_CIN \
+sim:/eight_bit_sub_add/SUB_ADD
+add list  \
+sim:/eight_bit_sub_add/D_S \
+sim:/eight_bit_sub_add/B_COUT \
+sim:/eight_bit_sub_add/A \
+sim:/eight_bit_sub_add/B \
+sim:/eight_bit_sub_add/B_CIN \
+sim:/eight_bit_sub_add/SUB_ADD
+force {sim:/eight_bit_sub_add/B_CIN} 	0 0ns, 0 50ns, 1 100ns, 1 150ns, 1 200ns, 1 250ns, 1 300ns, 0 350ns, 0 400ns
+
+force {sim:/eight_bit_sub_add/A[0]} 	0 0ns, 1 50ns, 1 100ns, 1 150ns, 1 200ns, 1 250ns, 1 300ns, 1 350ns, 1 400ns
+force {sim:/eight_bit_sub_add/A[1]} 	0 0ns, 1 50ns, 0 100ns, 1 150ns, 1 200ns, 1 250ns, 1 300ns, 0 350ns, 1 400ns
+force {sim:/eight_bit_sub_add/A[2]} 	0 0ns, 1 50ns, 0 100ns, 1 150ns, 1 200ns, 1 250ns, 1 300ns, 0 350ns, 0 400ns
+force {sim:/eight_bit_sub_add/A[3]} 	0 0ns, 1 50ns, 0 100ns, 1 150ns, 1 200ns, 1 250ns, 1 300ns, 0 350ns, 0 400ns
+force {sim:/eight_bit_sub_add/A[4]} 	0 0ns, 0 50ns, 0 100ns, 0 150ns, 1 200ns, 1 250ns, 1 300ns, 1 350ns, 0 400ns
+force {sim:/eight_bit_sub_add/A[5]} 	0 0ns, 0 50ns, 0 100ns, 0 150ns, 1 200ns, 1 250ns, 1 300ns, 1 350ns, 0 400ns
+force {sim:/eight_bit_sub_add/A[6]} 	0 0ns, 0 50ns, 0 100ns, 0 150ns, 1 200ns, 1 250ns, 1 300ns, 1 350ns, 0 400ns
+force {sim:/eight_bit_sub_add/A[7]} 	0 0ns, 0 50ns, 0 100ns, 0 150ns, 0 200ns, 0 250ns, 1 300ns, 1 350ns, 0 400ns
+F
+# invalid command name "F"
+force {sim:/eight_bit_sub_add/B[0]} 	0 0ns, 1 50ns, 0 100ns, 1 150ns, 1 200ns, 1 250ns, 1 300ns, 1 350ns, 1 400ns
+force {sim:/eight_bit_sub_add/B[1]} 	0 0ns, 0 50ns, 1 100ns, 1 150ns, 1 200ns, 1 250ns, 1 300ns, 0 350ns, 0 400ns
+force {sim:/eight_bit_sub_add/B[2]} 	0 0ns, 0 50ns, 1 100ns, 0 150ns, 1 200ns, 1 250ns, 1 300ns, 0 350ns, 0 400ns
+force {sim:/eight_bit_sub_add/B[3]} 	0 0ns, 0 50ns, 1 100ns, 0 150ns, 1 200ns, 1 250ns, 1 300ns, 0 350ns, 0 400ns
+force {sim:/eight_bit_sub_add/B[4]} 	0 0ns, 0 50ns, 0 100ns, 0 150ns, 1 200ns, 1 250ns, 1 300ns, 0 350ns, 0 400ns
+force {sim:/eight_bit_sub_add/B[5]} 	0 0ns, 0 50ns, 0 100ns, 0 150ns, 1 200ns, 1 250ns, 1 300ns, 0 350ns, 0 400ns
+force {sim:/eight_bit_sub_add/B[6]} 	0 0ns, 0 50ns, 0 100ns, 0 150ns, 1 200ns, 1 250ns, 1 300ns, 1 350ns, 0 400ns
+force {sim:/eight_bit_sub_add/B[7]} 	0 0ns, 0 50ns, 0 100ns, 0 150ns, 1 200ns, 0 250ns, 1 300ns, 1 350ns, 0 400ns
+
+force {sim:/eight_bit_sub_add/SUB_ADD}	0 0ns, 1 50ns, 0 100ns, 1 150ns, 0 200ns, 1 250ns, 0 300ns, 1 350ns, 0 400ns
+
+run 500ns
