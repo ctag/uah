@@ -1,8 +1,0 @@
-C:/Users/csb0019/Documents/uah/cpe322_324/simulation_hw_01/behavioral/eight_bit_sub_add_sim01/eight_bit_sub_add.v {1 {vlog -work eight_bit_sub_add_sim01 -nocovercells C:/Users/csb0019/Documents/uah/cpe322_324/simulation_hw_01/behavioral/eight_bit_sub_add_sim01/eight_bit_sub_add.v
-Model Technology ModelSim ALTERA vlog 6.5b Compiler 2009.10 Oct  1 2009
--- Compiling module eight_bit_sub_add
-
-Top level modules:
-	eight_bit_sub_add
-
-} {} {}}

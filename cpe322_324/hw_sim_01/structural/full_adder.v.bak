@@ -1,8 +1,0 @@
-module eight_bit_sub_add(D_S,B_COUT,A,B,B_CIN,SUB_ADD);
-	output [7:0] D_S;
-	output B_COUT;
-	input [7:0] A,B;
-	input B_CIN, SUB_ADD;
-	wire n0;
-	
-	four_bit_sub_add C0(D_S[3:0],n0,A[3:0],B[3:0],B_CIN,SUB_ADD);
