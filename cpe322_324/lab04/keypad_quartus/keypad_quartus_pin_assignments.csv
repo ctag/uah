@@ -1,0 +1,86 @@
+# Copyright (C) 1991-2013 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+
+# Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
+# File: C:\Users\csb0019\Documents\uah\cpe322_324\lab04\keypad_quartus\keypad_quartus_pin_assignments.csv
+# Generated on: Fri Feb 13 14:12:58 2015
+
+# Note: The column header names should not be changed if you wish to import this .csv file into the Quartus II software.
+
+To,Direction,Location,I/O Bank,VREF Group,Fitter Location,I/O Standard,Reserved,Current Strength,Slew Rate,Differential Pair
+ROW[3],Output,PIN_AC22,4,B4_N0,PIN_T4,,,,,
+ROW[2],Output,PIN_AF25,4,B4_N1,PIN_G3,,,,,
+ROW[1],Output,PIN_AE21,4,B4_N1,PIN_G4,,,,,
+ROW[0],Output,PIN_AF24,4,B4_N1,PIN_G6,,,,,
+HEX7[6],Output,PIN_AA14,3,B3_N0,PIN_G5,,,,,
+HEX7[5],Output,PIN_AG18,4,B4_N2,PIN_J4,,,,,
+HEX7[4],Output,PIN_AF17,4,B4_N2,PIN_V4,,,,,
+HEX7[3],Output,PIN_AH17,4,B4_N2,PIN_M3,,,,,
+HEX7[2],Output,PIN_AG17,4,B4_N2,PIN_U2,,,,,
+HEX7[1],Output,PIN_AE17,4,B4_N2,PIN_K1,,,,,
+HEX7[0],Output,PIN_AD17,4,B4_N2,PIN_L7,,,,,
+HEX6[6],Output,PIN_AC17,4,B4_N2,PIN_K2,,,,,
+HEX6[5],Output,PIN_AA15,4,B4_N2,PIN_J3,,,,,
+HEX6[4],Output,PIN_AB15,4,B4_N2,PIN_H5,,,,,
+HEX6[3],Output,PIN_AB17,4,B4_N1,PIN_L4,,,,,
+HEX6[2],Output,PIN_AA16,4,B4_N2,PIN_R3,,,,,
+HEX6[1],Output,PIN_AB16,4,B4_N2,PIN_H4,,,,,
+HEX6[0],Output,PIN_AA17,4,B4_N1,PIN_L3,,,,,
+HEX5[6],Output,PIN_AH18,4,B4_N2,PIN_L5,,,,,
+HEX5[5],Output,PIN_AF18,4,B4_N1,PIN_E1,,,,,
+HEX5[4],Output,PIN_AG19,4,B4_N2,PIN_R1,,,,,
+HEX5[3],Output,PIN_AH19,4,B4_N2,PIN_L2,,,,,
+HEX5[2],Output,PIN_AB18,4,B4_N0,PIN_U3,,,,,
+HEX5[1],Output,PIN_AC18,4,B4_N1,PIN_K3,,,,,
+HEX5[0],Output,PIN_AD18,4,B4_N1,PIN_L8,,,,,
+HEX4[6],Output,PIN_AE18,4,B4_N2,PIN_G2,,,,,
+HEX4[5],Output,PIN_AF19,4,B4_N1,PIN_K4,,,,,
+HEX4[4],Output,PIN_AE19,4,B4_N1,PIN_M5,,,,,
+HEX4[3],Output,PIN_AH21,4,B4_N2,PIN_M7,,,,,
+HEX4[2],Output,PIN_AG21,4,B4_N2,PIN_R2,,,,,
+HEX4[1],Output,PIN_AA19,4,B4_N0,PIN_J5,,,,,
+HEX4[0],Output,PIN_AB19,4,B4_N0,PIN_L1,,,,,
+HEX3[6],Output,PIN_Y19,4,B4_N0,PIN_F1,,,,,
+HEX3[5],Output,PIN_AF23,4,B4_N0,PIN_N3,,,,,
+HEX3[4],Output,PIN_AD24,4,B4_N0,PIN_P2,,,,,
+HEX3[3],Output,PIN_AA21,4,B4_N0,PIN_L6,,,,,
+HEX3[2],Output,PIN_AB20,4,B4_N0,PIN_T7,,,,,
+HEX3[1],Output,PIN_U21,5,B5_N0,PIN_J6,,,,,
+HEX3[0],Output,PIN_V21,5,B5_N1,PIN_M4,,,,,
+HEX2[6],Output,PIN_W28,5,B5_N1,PIN_G1,,,,,
+HEX2[5],Output,PIN_W27,5,B5_N1,PIN_N4,,,,,
+HEX2[4],Output,PIN_Y26,5,B5_N1,PIN_V3,,,,,
+HEX2[3],Output,PIN_W26,5,B5_N1,PIN_H6,,,,,
+HEX2[2],Output,PIN_Y25,5,B5_N1,PIN_R7,,,,,
+HEX2[1],Output,PIN_AA26,5,B5_N1,PIN_F3,,,,,
+HEX2[0],Output,PIN_AA25,5,B5_N1,PIN_D2,,,,,
+HEX1[6],Output,PIN_U24,5,B5_N0,PIN_F2,,,,,
+HEX1[5],Output,PIN_U23,5,B5_N1,PIN_K7,,,,,
+HEX1[4],Output,PIN_W25,5,B5_N1,PIN_R5,,,,,
+HEX1[3],Output,PIN_W22,5,B5_N0,PIN_K8,,,,,
+HEX1[2],Output,PIN_W21,5,B5_N1,PIN_M8,,,,,
+HEX1[1],Output,PIN_Y22,5,B5_N0,PIN_H3,,,,,
+HEX1[0],Output,PIN_M24,6,B6_N2,PIN_M1,,,,,
+HEX0[6],Output,PIN_H22,6,B6_N0,PIN_F5,,,,,
+HEX0[5],Output,PIN_J22,6,B6_N0,PIN_E3,,,,,
+HEX0[4],Output,PIN_L25,6,B6_N1,PIN_T3,,,,,
+HEX0[3],Output,PIN_L26,6,B6_N1,PIN_R4,,,,,
+HEX0[2],Output,PIN_E17,7,B7_N2,PIN_R6,,,,,
+HEX0[1],Output,PIN_F22,7,B7_N0,PIN_J7,,,,,
+HEX0[0],Output,PIN_G18,7,B7_N2,PIN_M2,,,,,
+COL[3],Input,PIN_AF15,4,B4_N2,PIN_U1,,,,,
+COL[2],Input,PIN_AD19,4,B4_N0,PIN_U4,,,,,
+COL[1],Input,PIN_AF16,4,B4_N2,PIN_N8,,,,,
+COL[0],Input,PIN_AC19,4,B4_N0,PIN_P1,,,,,
+CLOCK_50,Input,PIN_Y2,2,B2_N0,PIN_J1,,,,,
