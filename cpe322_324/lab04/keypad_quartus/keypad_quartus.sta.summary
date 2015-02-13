@@ -1,0 +1,149 @@
+------------------------------------------------------------
+TimeQuest Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'CLOCK_50'
+Slack : -1.836
+TNS   : -20.135
+
+Type  : Slow 1200mV 85C Model Setup 'clock_gen:C0|count[12]'
+Slack : -1.716
+TNS   : -1.881
+
+Type  : Slow 1200mV 85C Model Setup 'clock_gen:C0|scan_clk'
+Slack : -0.885
+TNS   : -2.831
+
+Type  : Slow 1200mV 85C Model Setup 'debounce:C2|lpm_shiftreg0:inst|lpm_shiftreg:LPM_SHIFTREG_component|dffs[0]'
+Slack : -0.177
+TNS   : -1.485
+
+Type  : Slow 1200mV 85C Model Hold 'CLOCK_50'
+Slack : -0.935
+TNS   : -2.913
+
+Type  : Slow 1200mV 85C Model Hold 'debounce:C2|lpm_shiftreg0:inst|lpm_shiftreg:LPM_SHIFTREG_component|dffs[0]'
+Slack : -0.083
+TNS   : -0.182
+
+Type  : Slow 1200mV 85C Model Hold 'clock_gen:C0|count[12]'
+Slack : 0.468
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'clock_gen:C0|scan_clk'
+Slack : 0.475
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'CLOCK_50'
+Slack : -3.000
+TNS   : -24.845
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'debounce:C2|lpm_shiftreg0:inst|lpm_shiftreg:LPM_SHIFTREG_component|dffs[0]'
+Slack : -1.285
+TNS   : -71.960
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clock_gen:C0|count[12]'
+Slack : -1.285
+TNS   : -10.280
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clock_gen:C0|scan_clk'
+Slack : -1.285
+TNS   : -5.140
+
+Type  : Slow 1200mV 0C Model Setup 'CLOCK_50'
+Slack : -1.557
+TNS   : -16.526
+
+Type  : Slow 1200mV 0C Model Setup 'clock_gen:C0|count[12]'
+Slack : -1.390
+TNS   : -1.443
+
+Type  : Slow 1200mV 0C Model Setup 'clock_gen:C0|scan_clk'
+Slack : -0.703
+TNS   : -2.155
+
+Type  : Slow 1200mV 0C Model Setup 'debounce:C2|lpm_shiftreg0:inst|lpm_shiftreg:LPM_SHIFTREG_component|dffs[0]'
+Slack : -0.128
+TNS   : -0.423
+
+Type  : Slow 1200mV 0C Model Hold 'CLOCK_50'
+Slack : -0.796
+TNS   : -2.414
+
+Type  : Slow 1200mV 0C Model Hold 'debounce:C2|lpm_shiftreg0:inst|lpm_shiftreg:LPM_SHIFTREG_component|dffs[0]'
+Slack : -0.011
+TNS   : -0.020
+
+Type  : Slow 1200mV 0C Model Hold 'clock_gen:C0|scan_clk'
+Slack : 0.428
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clock_gen:C0|count[12]'
+Slack : 0.431
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'CLOCK_50'
+Slack : -3.000
+TNS   : -24.845
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'debounce:C2|lpm_shiftreg0:inst|lpm_shiftreg:LPM_SHIFTREG_component|dffs[0]'
+Slack : -1.285
+TNS   : -71.960
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clock_gen:C0|count[12]'
+Slack : -1.285
+TNS   : -10.280
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clock_gen:C0|scan_clk'
+Slack : -1.285
+TNS   : -5.140
+
+Type  : Fast 1200mV 0C Model Setup 'clock_gen:C0|count[12]'
+Slack : -0.432
+TNS   : -0.432
+
+Type  : Fast 1200mV 0C Model Setup 'CLOCK_50'
+Slack : -0.365
+TNS   : -2.004
+
+Type  : Fast 1200mV 0C Model Setup 'clock_gen:C0|scan_clk'
+Slack : 0.081
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'debounce:C2|lpm_shiftreg0:inst|lpm_shiftreg:LPM_SHIFTREG_component|dffs[0]'
+Slack : 0.130
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'CLOCK_50'
+Slack : -0.626
+TNS   : -2.276
+
+Type  : Fast 1200mV 0C Model Hold 'debounce:C2|lpm_shiftreg0:inst|lpm_shiftreg:LPM_SHIFTREG_component|dffs[0]'
+Slack : 0.149
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clock_gen:C0|count[12]'
+Slack : 0.211
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clock_gen:C0|scan_clk'
+Slack : 0.219
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'CLOCK_50'
+Slack : -3.000
+TNS   : -21.042
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'debounce:C2|lpm_shiftreg0:inst|lpm_shiftreg:LPM_SHIFTREG_component|dffs[0]'
+Slack : -1.000
+TNS   : -56.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clock_gen:C0|count[12]'
+Slack : -1.000
+TNS   : -8.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clock_gen:C0|scan_clk'
+Slack : -1.000
+TNS   : -4.000
+
+------------------------------------------------------------

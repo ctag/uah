@@ -1,0 +1,454 @@
+|keypad_quartus
+HEX0[0] <= hex_seven_shift:C4.hex0[0]
+HEX0[1] <= hex_seven_shift:C4.hex0[1]
+HEX0[2] <= hex_seven_shift:C4.hex0[2]
+HEX0[3] <= hex_seven_shift:C4.hex0[3]
+HEX0[4] <= hex_seven_shift:C4.hex0[4]
+HEX0[5] <= hex_seven_shift:C4.hex0[5]
+HEX0[6] <= hex_seven_shift:C4.hex0[6]
+CLOCK_50 => clock_gen:C0.clk_in
+COL[0] => key_scan:C1.col[0]
+COL[1] => key_scan:C1.col[1]
+COL[2] => key_scan:C1.col[2]
+COL[3] => key_scan:C1.col[3]
+HEX1[0] <= hex_seven_shift:C4.hex1[0]
+HEX1[1] <= hex_seven_shift:C4.hex1[1]
+HEX1[2] <= hex_seven_shift:C4.hex1[2]
+HEX1[3] <= hex_seven_shift:C4.hex1[3]
+HEX1[4] <= hex_seven_shift:C4.hex1[4]
+HEX1[5] <= hex_seven_shift:C4.hex1[5]
+HEX1[6] <= hex_seven_shift:C4.hex1[6]
+HEX2[0] <= hex_seven_shift:C4.hex2[0]
+HEX2[1] <= hex_seven_shift:C4.hex2[1]
+HEX2[2] <= hex_seven_shift:C4.hex2[2]
+HEX2[3] <= hex_seven_shift:C4.hex2[3]
+HEX2[4] <= hex_seven_shift:C4.hex2[4]
+HEX2[5] <= hex_seven_shift:C4.hex2[5]
+HEX2[6] <= hex_seven_shift:C4.hex2[6]
+HEX3[0] <= hex_seven_shift:C4.hex3[0]
+HEX3[1] <= hex_seven_shift:C4.hex3[1]
+HEX3[2] <= hex_seven_shift:C4.hex3[2]
+HEX3[3] <= hex_seven_shift:C4.hex3[3]
+HEX3[4] <= hex_seven_shift:C4.hex3[4]
+HEX3[5] <= hex_seven_shift:C4.hex3[5]
+HEX3[6] <= hex_seven_shift:C4.hex3[6]
+HEX4[0] <= hex_seven_shift:C4.hex4[0]
+HEX4[1] <= hex_seven_shift:C4.hex4[1]
+HEX4[2] <= hex_seven_shift:C4.hex4[2]
+HEX4[3] <= hex_seven_shift:C4.hex4[3]
+HEX4[4] <= hex_seven_shift:C4.hex4[4]
+HEX4[5] <= hex_seven_shift:C4.hex4[5]
+HEX4[6] <= hex_seven_shift:C4.hex4[6]
+HEX5[0] <= hex_seven_shift:C4.hex5[0]
+HEX5[1] <= hex_seven_shift:C4.hex5[1]
+HEX5[2] <= hex_seven_shift:C4.hex5[2]
+HEX5[3] <= hex_seven_shift:C4.hex5[3]
+HEX5[4] <= hex_seven_shift:C4.hex5[4]
+HEX5[5] <= hex_seven_shift:C4.hex5[5]
+HEX5[6] <= hex_seven_shift:C4.hex5[6]
+HEX6[0] <= hex_seven_shift:C4.hex6[0]
+HEX6[1] <= hex_seven_shift:C4.hex6[1]
+HEX6[2] <= hex_seven_shift:C4.hex6[2]
+HEX6[3] <= hex_seven_shift:C4.hex6[3]
+HEX6[4] <= hex_seven_shift:C4.hex6[4]
+HEX6[5] <= hex_seven_shift:C4.hex6[5]
+HEX6[6] <= hex_seven_shift:C4.hex6[6]
+HEX7[0] <= hex_seven_shift:C4.hex7[0]
+HEX7[1] <= hex_seven_shift:C4.hex7[1]
+HEX7[2] <= hex_seven_shift:C4.hex7[2]
+HEX7[3] <= hex_seven_shift:C4.hex7[3]
+HEX7[4] <= hex_seven_shift:C4.hex7[4]
+HEX7[5] <= hex_seven_shift:C4.hex7[5]
+HEX7[6] <= hex_seven_shift:C4.hex7[6]
+ROW[0] <= key_scan:C1.row[0]
+ROW[1] <= key_scan:C1.row[1]
+ROW[2] <= key_scan:C1.row[2]
+ROW[3] <= key_scan:C1.row[3]
+
+
+|keypad_quartus|hex_seven_shift:C4
+shift => hex7[0]~reg0.CLK
+shift => hex7[1]~reg0.CLK
+shift => hex7[2]~reg0.CLK
+shift => hex7[3]~reg0.CLK
+shift => hex7[4]~reg0.CLK
+shift => hex7[5]~reg0.CLK
+shift => hex7[6]~reg0.CLK
+shift => hex6[0]~reg0.CLK
+shift => hex6[1]~reg0.CLK
+shift => hex6[2]~reg0.CLK
+shift => hex6[3]~reg0.CLK
+shift => hex6[4]~reg0.CLK
+shift => hex6[5]~reg0.CLK
+shift => hex6[6]~reg0.CLK
+shift => hex5[0]~reg0.CLK
+shift => hex5[1]~reg0.CLK
+shift => hex5[2]~reg0.CLK
+shift => hex5[3]~reg0.CLK
+shift => hex5[4]~reg0.CLK
+shift => hex5[5]~reg0.CLK
+shift => hex5[6]~reg0.CLK
+shift => hex4[0]~reg0.CLK
+shift => hex4[1]~reg0.CLK
+shift => hex4[2]~reg0.CLK
+shift => hex4[3]~reg0.CLK
+shift => hex4[4]~reg0.CLK
+shift => hex4[5]~reg0.CLK
+shift => hex4[6]~reg0.CLK
+shift => hex3[0]~reg0.CLK
+shift => hex3[1]~reg0.CLK
+shift => hex3[2]~reg0.CLK
+shift => hex3[3]~reg0.CLK
+shift => hex3[4]~reg0.CLK
+shift => hex3[5]~reg0.CLK
+shift => hex3[6]~reg0.CLK
+shift => hex2[0]~reg0.CLK
+shift => hex2[1]~reg0.CLK
+shift => hex2[2]~reg0.CLK
+shift => hex2[3]~reg0.CLK
+shift => hex2[4]~reg0.CLK
+shift => hex2[5]~reg0.CLK
+shift => hex2[6]~reg0.CLK
+shift => hex1[0]~reg0.CLK
+shift => hex1[1]~reg0.CLK
+shift => hex1[2]~reg0.CLK
+shift => hex1[3]~reg0.CLK
+shift => hex1[4]~reg0.CLK
+shift => hex1[5]~reg0.CLK
+shift => hex1[6]~reg0.CLK
+shift => hex0[0]~reg0.CLK
+shift => hex0[1]~reg0.CLK
+shift => hex0[2]~reg0.CLK
+shift => hex0[3]~reg0.CLK
+shift => hex0[4]~reg0.CLK
+shift => hex0[5]~reg0.CLK
+shift => hex0[6]~reg0.CLK
+i[0] => Decoder0.IN3
+i[1] => Decoder0.IN2
+i[2] => Decoder0.IN1
+i[3] => Decoder0.IN0
+hex0[0] <= hex0[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex0[1] <= hex0[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex0[2] <= hex0[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex0[3] <= hex0[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex0[4] <= hex0[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex0[5] <= hex0[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex0[6] <= hex0[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex1[0] <= hex1[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex1[1] <= hex1[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex1[2] <= hex1[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex1[3] <= hex1[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex1[4] <= hex1[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex1[5] <= hex1[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex1[6] <= hex1[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex2[0] <= hex2[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex2[1] <= hex2[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex2[2] <= hex2[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex2[3] <= hex2[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex2[4] <= hex2[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex2[5] <= hex2[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex2[6] <= hex2[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex3[0] <= hex3[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex3[1] <= hex3[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex3[2] <= hex3[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex3[3] <= hex3[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex3[4] <= hex3[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex3[5] <= hex3[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex3[6] <= hex3[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex4[0] <= hex4[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex4[1] <= hex4[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex4[2] <= hex4[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex4[3] <= hex4[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex4[4] <= hex4[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex4[5] <= hex4[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex4[6] <= hex4[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex5[0] <= hex5[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex5[1] <= hex5[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex5[2] <= hex5[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex5[3] <= hex5[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex5[4] <= hex5[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex5[5] <= hex5[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex5[6] <= hex5[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex6[0] <= hex6[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex6[1] <= hex6[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex6[2] <= hex6[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex6[3] <= hex6[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex6[4] <= hex6[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex6[5] <= hex6[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex6[6] <= hex6[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex7[0] <= hex7[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex7[1] <= hex7[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex7[2] <= hex7[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex7[3] <= hex7[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex7[4] <= hex7[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex7[5] <= hex7[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+hex7[6] <= hex7[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|keypad_quartus|debounce:C2
+sig_out <= inst6.DB_MAX_OUTPUT_PORT_TYPE
+clk => lpm_shiftreg0:inst.clock
+sig_in => lpm_shiftreg0:inst.shiftin
+
+
+|keypad_quartus|debounce:C2|lpm_shiftreg0:inst
+clock => clock.IN1
+shiftin => shiftin.IN1
+q[0] <= lpm_shiftreg:LPM_SHIFTREG_component.q
+q[1] <= lpm_shiftreg:LPM_SHIFTREG_component.q
+q[2] <= lpm_shiftreg:LPM_SHIFTREG_component.q
+q[3] <= lpm_shiftreg:LPM_SHIFTREG_component.q
+q[4] <= lpm_shiftreg:LPM_SHIFTREG_component.q
+q[5] <= lpm_shiftreg:LPM_SHIFTREG_component.q
+q[6] <= lpm_shiftreg:LPM_SHIFTREG_component.q
+q[7] <= lpm_shiftreg:LPM_SHIFTREG_component.q
+
+
+|keypad_quartus|debounce:C2|lpm_shiftreg0:inst|lpm_shiftreg:LPM_SHIFTREG_component
+data[0] => _.IN1
+data[1] => _.IN1
+data[2] => _.IN1
+data[3] => _.IN1
+data[4] => _.IN1
+data[5] => _.IN1
+data[6] => _.IN1
+data[7] => _.IN1
+clock => dffs[7].CLK
+clock => dffs[6].CLK
+clock => dffs[5].CLK
+clock => dffs[4].CLK
+clock => dffs[3].CLK
+clock => dffs[2].CLK
+clock => dffs[1].CLK
+clock => dffs[0].CLK
+enable => dffs[7].ENA
+enable => dffs[6].ENA
+enable => dffs[5].ENA
+enable => dffs[4].ENA
+enable => dffs[3].ENA
+enable => dffs[2].ENA
+enable => dffs[1].ENA
+enable => dffs[0].ENA
+shiftin => _.IN1
+load => _.IN0
+load => _.IN0
+load => _.IN0
+load => _.IN0
+load => _.IN0
+load => _.IN0
+load => _.IN0
+load => _.IN0
+load => _.IN0
+aclr => ~NO_FANOUT~
+aset => ~NO_FANOUT~
+sclr => _.IN0
+sset => _.IN0
+sset => _.IN0
+sset => _.IN0
+sset => _.IN0
+sset => _.IN0
+sset => _.IN0
+sset => _.IN0
+sset => _.IN0
+q[0] <= dffs[0].DB_MAX_OUTPUT_PORT_TYPE
+q[1] <= dffs[1].DB_MAX_OUTPUT_PORT_TYPE
+q[2] <= dffs[2].DB_MAX_OUTPUT_PORT_TYPE
+q[3] <= dffs[3].DB_MAX_OUTPUT_PORT_TYPE
+q[4] <= dffs[4].DB_MAX_OUTPUT_PORT_TYPE
+q[5] <= dffs[5].DB_MAX_OUTPUT_PORT_TYPE
+q[6] <= dffs[6].DB_MAX_OUTPUT_PORT_TYPE
+q[7] <= dffs[7].DB_MAX_OUTPUT_PORT_TYPE
+shiftout <= shiftout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|keypad_quartus|key_scan:C1
+key_out <= lpm_mux1:inst2.result
+col[0] => lpm_mux1:inst2.data0
+col[1] => lpm_mux1:inst2.data1
+col[2] => lpm_mux1:inst2.data2
+col[3] => lpm_mux1:inst2.data3
+key_bd_code[0] <= lpm_counter0:inst.q[0]
+key_bd_code[1] <= lpm_counter0:inst.q[1]
+key_bd_code[2] <= lpm_counter0:inst.q[2]
+key_bd_code[3] <= lpm_counter0:inst.q[3]
+clk_in => lpm_counter0:inst.clock
+row[0] <= inst4.DB_MAX_OUTPUT_PORT_TYPE
+row[1] <= inst5.DB_MAX_OUTPUT_PORT_TYPE
+row[2] <= inst6.DB_MAX_OUTPUT_PORT_TYPE
+row[3] <= inst7.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|keypad_quartus|key_scan:C1|lpm_mux1:inst2
+data0 => sub_wire3[0].IN1
+data1 => sub_wire3[1].IN1
+data2 => sub_wire3[2].IN1
+data3 => sub_wire3[3].IN1
+sel[0] => sel[0].IN1
+sel[1] => sel[1].IN1
+result <= lpm_mux:LPM_MUX_component.result
+
+
+|keypad_quartus|key_scan:C1|lpm_mux1:inst2|lpm_mux:LPM_MUX_component
+data[0][0] => mux_arc:auto_generated.data[0]
+data[1][0] => mux_arc:auto_generated.data[1]
+data[2][0] => mux_arc:auto_generated.data[2]
+data[3][0] => mux_arc:auto_generated.data[3]
+sel[0] => mux_arc:auto_generated.sel[0]
+sel[1] => mux_arc:auto_generated.sel[1]
+clock => ~NO_FANOUT~
+aclr => ~NO_FANOUT~
+clken => ~NO_FANOUT~
+result[0] <= mux_arc:auto_generated.result[0]
+
+
+|keypad_quartus|key_scan:C1|lpm_mux1:inst2|lpm_mux:LPM_MUX_component|mux_arc:auto_generated
+data[0] => _.IN0
+data[0] => _.IN0
+data[1] => _.IN0
+data[2] => _.IN1
+data[2] => _.IN1
+data[3] => _.IN0
+result[0] <= result_node[0].DB_MAX_OUTPUT_PORT_TYPE
+sel[0] => _.IN1
+sel[0] => _.IN0
+sel[0] => _.IN0
+sel[0] => _.IN0
+sel[0] => _.IN0
+sel[0] => _.IN0
+sel[1] => _.IN0
+sel[1] => _.IN0
+sel[1] => _.IN0
+sel[1] => _.IN0
+
+
+|keypad_quartus|key_scan:C1|lpm_counter0:inst
+clock => clock.IN1
+q[0] <= lpm_counter:LPM_COUNTER_component.q
+q[1] <= lpm_counter:LPM_COUNTER_component.q
+q[2] <= lpm_counter:LPM_COUNTER_component.q
+q[3] <= lpm_counter:LPM_COUNTER_component.q
+
+
+|keypad_quartus|key_scan:C1|lpm_counter0:inst|lpm_counter:LPM_COUNTER_component
+clock => cntr_aph:auto_generated.clock
+clk_en => ~NO_FANOUT~
+cnt_en => ~NO_FANOUT~
+updown => ~NO_FANOUT~
+aclr => ~NO_FANOUT~
+aset => ~NO_FANOUT~
+aconst => ~NO_FANOUT~
+aload => ~NO_FANOUT~
+sclr => ~NO_FANOUT~
+sset => ~NO_FANOUT~
+sconst => ~NO_FANOUT~
+sload => ~NO_FANOUT~
+data[0] => ~NO_FANOUT~
+data[1] => ~NO_FANOUT~
+data[2] => ~NO_FANOUT~
+data[3] => ~NO_FANOUT~
+cin => ~NO_FANOUT~
+q[0] <= cntr_aph:auto_generated.q[0]
+q[1] <= cntr_aph:auto_generated.q[1]
+q[2] <= cntr_aph:auto_generated.q[2]
+q[3] <= cntr_aph:auto_generated.q[3]
+cout <= <GND>
+eq[0] <= <GND>
+eq[1] <= <GND>
+eq[2] <= <GND>
+eq[3] <= <GND>
+eq[4] <= <GND>
+eq[5] <= <GND>
+eq[6] <= <GND>
+eq[7] <= <GND>
+eq[8] <= <GND>
+eq[9] <= <GND>
+eq[10] <= <GND>
+eq[11] <= <GND>
+eq[12] <= <GND>
+eq[13] <= <GND>
+eq[14] <= <GND>
+eq[15] <= <GND>
+
+
+|keypad_quartus|key_scan:C1|lpm_counter0:inst|lpm_counter:LPM_COUNTER_component|cntr_aph:auto_generated
+clock => counter_reg_bit[3].CLK
+clock => counter_reg_bit[2].CLK
+clock => counter_reg_bit[1].CLK
+clock => counter_reg_bit[0].CLK
+q[0] <= counter_reg_bit[0].DB_MAX_OUTPUT_PORT_TYPE
+q[1] <= counter_reg_bit[1].DB_MAX_OUTPUT_PORT_TYPE
+q[2] <= counter_reg_bit[2].DB_MAX_OUTPUT_PORT_TYPE
+q[3] <= counter_reg_bit[3].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|keypad_quartus|key_scan:C1|lpm_decode1:inst1
+data[0] => data[0].IN1
+data[1] => data[1].IN1
+eq0 <= lpm_decode:LPM_DECODE_component.eq
+eq1 <= lpm_decode:LPM_DECODE_component.eq
+eq2 <= lpm_decode:LPM_DECODE_component.eq
+eq3 <= lpm_decode:LPM_DECODE_component.eq
+
+
+|keypad_quartus|key_scan:C1|lpm_decode1:inst1|lpm_decode:LPM_DECODE_component
+data[0] => decode_9bf:auto_generated.data[0]
+data[1] => decode_9bf:auto_generated.data[1]
+enable => ~NO_FANOUT~
+clock => ~NO_FANOUT~
+aclr => ~NO_FANOUT~
+clken => ~NO_FANOUT~
+eq[0] <= decode_9bf:auto_generated.eq[0]
+eq[1] <= decode_9bf:auto_generated.eq[1]
+eq[2] <= decode_9bf:auto_generated.eq[2]
+eq[3] <= decode_9bf:auto_generated.eq[3]
+
+
+|keypad_quartus|key_scan:C1|lpm_decode1:inst1|lpm_decode:LPM_DECODE_component|decode_9bf:auto_generated
+data[0] => w_anode15w[1].IN1
+data[0] => w_anode1w[1].IN0
+data[0] => w_anode24w[1].IN0
+data[0] => w_anode33w[1].IN1
+data[1] => w_anode15w[2].IN0
+data[1] => w_anode1w[2].IN0
+data[1] => w_anode24w[2].IN1
+data[1] => w_anode33w[2].IN1
+eq[0] <= w_anode1w[2].DB_MAX_OUTPUT_PORT_TYPE
+eq[1] <= w_anode15w[2].DB_MAX_OUTPUT_PORT_TYPE
+eq[2] <= w_anode24w[2].DB_MAX_OUTPUT_PORT_TYPE
+eq[3] <= w_anode33w[2].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|keypad_quartus|clock_gen:C0
+clk_in => count[0].CLK
+clk_in => count[1].CLK
+clk_in => count[2].CLK
+clk_in => count[3].CLK
+clk_in => count[4].CLK
+clk_in => count[5].CLK
+clk_in => count[6].CLK
+clk_in => count[7].CLK
+clk_in => count[8].CLK
+clk_in => count[9].CLK
+clk_in => count[10].CLK
+clk_in => count[11].CLK
+clk_in => count[12].CLK
+clk_in => count[13].CLK
+clk_in => count[14].CLK
+clk_in => count[15].CLK
+clk_in => count[16].CLK
+scan_en => scan_clk$latch.LATCH_ENABLE
+scan_clk <= scan_clk$latch.DB_MAX_OUTPUT_PORT_TYPE
+debounce_clk <= count[12].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|keypad_quartus|code_cnv:C3
+O[0] <= WideOr3.DB_MAX_OUTPUT_PORT_TYPE
+O[1] <= WideOr2.DB_MAX_OUTPUT_PORT_TYPE
+O[2] <= WideOr1.DB_MAX_OUTPUT_PORT_TYPE
+O[3] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
+I[0] => Decoder0.IN3
+I[1] => Decoder0.IN2
+I[2] => Decoder0.IN1
+I[3] => Decoder0.IN0
+
+

@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="keypad_quartus">
+		<CBX_INST_ENTRY INSTANCE_NAME="|keypad_quartus|key_scan:C1|lpm_counter0:inst|lpm_counter:LPM_COUNTER_component" CBX_FILE_NAME="cntr_aph.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|keypad_quartus|key_scan:C1|lpm_decode1:inst1|lpm_decode:LPM_DECODE_component" CBX_FILE_NAME="decode_9bf.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|keypad_quartus|key_scan:C1|lpm_mux1:inst2|lpm_mux:LPM_MUX_component" CBX_FILE_NAME="mux_arc.tdf"/>
+	</PROJECT>
+</LOG_ROOT>
