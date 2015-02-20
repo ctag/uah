@@ -1,0 +1,2 @@
+Warning (10273): Verilog HDL warning at keypad_scanner.v(236): extended using "x" or "z"
+Warning (10273): Verilog HDL warning at hex_seven_shift.v(42): extended using "x" or "z"
