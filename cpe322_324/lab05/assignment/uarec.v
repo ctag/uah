@@ -62,12 +62,266 @@ endmodule
 module rec_control_logic(input d,clk,en,h,f,output reg s,l,r);
 
    reg [3:0] state,next_state; // may want to use these
-
-   // Enter your modeling code here!
-
-      // include register update portion
-
-      // include combinational logic portion
+	
+	parameter S0 = 0, S1 = 1, S2 = 2, S3 = 3, S4 = 4, S5 = 5, S6 = 6, S7 = 7, S8 = 8, S9 = 9, S10 = 10;
+	
+	always @ (posedge clk)
+	begin
+		//next_state = state;
+		
+		case (state)
+			S0:
+				begin
+				if (en==1 && d==0)
+					begin
+					r = 1'b1;
+					s = 1'b0;
+					l = 1'b0;
+					next_state = S1;
+					end
+				else if (en==0)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					end
+				else if (en==1 && d==1)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					end
+				end
+			S1:
+				begin
+				if (en && (d==0 && h==1))
+					begin
+					r = 1'b1;
+					s = 1'b0;
+					l = 1'b0;
+					next_state = S2;
+					end
+				else if (en==1 && d==1)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					next_state = S0;
+					end
+				else if (en==0)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					end
+				else if (en==1 && (d==0 && h==0))
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					end
+				end
+			S2:
+				begin
+				if (en==1 && f==1)
+					begin
+					r = 1'b1;
+					s = 1'b1;
+					l = 1'b0;
+					next_state = S3;
+					end
+				else if (en==0)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					end
+				else if (en==1 && f==0)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					end
+				end
+			S3:
+				begin
+				if (en==1 && f==1)
+					begin
+					r = 1'b1;
+					s = 1'b1;
+					l = 1'b0;
+					next_state = S4;
+					end
+				else if (en==0)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					end
+				else if (en==1 && f==0)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					end
+				end
+			S4:
+				begin
+				if (en==1 && f==1)
+					begin
+					r = 1'b1;
+					s = 1'b1;
+					l = 1'b0;
+					next_state = S5;
+					end
+				else if (en==0)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					end
+				else if (en==1 && f==0)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					end
+				end
+			S5:
+				begin
+				if (en==1 && f==1)
+					begin
+					r = 1'b1;
+					s = 1'b1;
+					l = 1'b0;
+					next_state = S6;
+					end
+				else if (en==0)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					end
+				else if (en==1 && f==0)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					end
+				end
+			S6:
+				begin
+				if (en==1 && f==1)
+					begin
+					r = 1'b1;
+					s = 1'b1;
+					l = 1'b0;
+					next_state = S7;
+					end
+				else if (en==0)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					end
+				else if (en==1 && f==0)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					end
+				end
+			S7:
+				begin
+				if (en==1 && f==1)
+					begin
+					r = 1'b1;
+					s = 1'b1;
+					l = 1'b0;
+					next_state = S8;
+					end
+				else if (en==0)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					end
+				else if (en==1 && f==0)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					end
+				end
+			S8:
+				begin
+				if (en==1 && f==1)
+					begin
+					r = 1'b1;
+					s = 1'b1;
+					l = 1'b0;
+					next_state = S9;
+					end
+				else if (en==0)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					end
+				else if (en==1 && f==0)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					end
+				end
+			S9:
+				begin
+				if (en==1 && f==1)
+					begin
+					r = 1'b1;
+					s = 1'b1;
+					l = 1'b0;
+					next_state = S10;
+					end
+				else if (en==0)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					end
+				else if (en==1 && f==0)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					end
+				end
+			S10:
+				begin
+				if (en==1 && f==1)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b1;
+					next_state = S0;
+					end
+				else if (en==0)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					end
+				else if (en==1 && f==0)
+					begin
+					r = 1'b0;
+					s = 1'b0;
+					l = 1'b0;
+					end
+				end
+		endcase
+		state = next_state;
+	end
 				 
 endmodule
 

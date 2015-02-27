@@ -253,18 +253,21 @@ i_ => state.1.DATAIN
 
 
 |lab5|bin_to_ascii:C3
-O[0] <= <GND>
-O[1] <= <GND>
-O[2] <= <GND>
-O[3] <= <GND>
-O[4] <= <GND>
-O[5] <= <GND>
-O[6] <= <GND>
+O[0] <= WideOr3.DB_MAX_OUTPUT_PORT_TYPE
+O[1] <= WideOr2.DB_MAX_OUTPUT_PORT_TYPE
+O[2] <= WideOr1.DB_MAX_OUTPUT_PORT_TYPE
+O[3] <= Decoder0.DB_MAX_OUTPUT_PORT_TYPE
+O[4] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
+O[5] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
+O[6] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
 O[7] <= <GND>
-I[0] => ~NO_FANOUT~
-I[1] => ~NO_FANOUT~
-I[2] => ~NO_FANOUT~
-I[3] => ~NO_FANOUT~
+I[0] => Decoder1.IN3
+I[1] => Decoder0.IN2
+I[1] => Decoder1.IN2
+I[2] => Decoder0.IN1
+I[2] => Decoder1.IN1
+I[3] => Decoder0.IN0
+I[3] => Decoder1.IN0
 
 
 |lab5|uasend:C4
@@ -283,11 +286,37 @@ serial_out <= shift_reg_10_l_en:C1.dout
 
 
 |lab5|uasend:C4|send_control_logic:C0
-go => ~NO_FANOUT~
-en => ~NO_FANOUT~
-clk => ~NO_FANOUT~
-l <= <GND>
-s <= <GND>
+go => next_state.OUTPUTSELECT
+go => next_state.OUTPUTSELECT
+go => next_state.OUTPUTSELECT
+go => next_state.OUTPUTSELECT
+go => next_state.OUTPUTSELECT
+go => next_state.OUTPUTSELECT
+go => next_state.OUTPUTSELECT
+go => next_state.OUTPUTSELECT
+go => next_state.OUTPUTSELECT
+go => next_state.OUTPUTSELECT
+go => next_state.OUTPUTSELECT
+go => l.DATAB
+en => s.DATAA
+en => next_state.OUTPUTSELECT
+en => next_state.OUTPUTSELECT
+en => next_state.OUTPUTSELECT
+en => next_state.OUTPUTSELECT
+en => next_state.OUTPUTSELECT
+en => next_state.OUTPUTSELECT
+en => next_state.OUTPUTSELECT
+en => next_state.OUTPUTSELECT
+en => next_state.OUTPUTSELECT
+en => next_state.OUTPUTSELECT
+en => next_state.OUTPUTSELECT
+en => next_state.OUTPUTSELECT
+clk => s~reg0.CLK
+clk => l~reg0.CLK
+clk => state~1.DATAIN
+clk => next_state~23.DATAIN
+l <= l~reg0.DB_MAX_OUTPUT_PORT_TYPE
+s <= s~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |lab5|uasend:C4|shift_reg_10_l_en:C1
@@ -496,14 +525,37 @@ f <= f~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |lab5|uarec:C6|rec_control_logic:C2
-d => ~NO_FANOUT~
-clk => ~NO_FANOUT~
-en => ~NO_FANOUT~
-h => ~NO_FANOUT~
-f => ~NO_FANOUT~
-s <= <GND>
-l <= <GND>
-r <= <GND>
+d => always0.IN0
+d => always0.IN0
+d => always0.IN0
+d => always0.IN0
+clk => l~reg0.CLK
+clk => s~reg0.CLK
+clk => r~reg0.CLK
+clk => state~1.DATAIN
+clk => next_state~12.DATAIN
+en => always0.IN1
+en => always0.IN1
+en => always0.IN1
+en => always0.IN1
+en => always0.IN0
+en => always0.IN0
+en => r.OUTPUTSELECT
+en => s.OUTPUTSELECT
+en => l.OUTPUTSELECT
+en => r.OUTPUTSELECT
+en => s.OUTPUTSELECT
+en => l.OUTPUTSELECT
+en => r.OUTPUTSELECT
+en => s.OUTPUTSELECT
+en => l.OUTPUTSELECT
+h => always0.IN1
+h => always0.IN1
+f => always0.IN1
+f => always0.IN1
+s <= s~reg0.DB_MAX_OUTPUT_PORT_TYPE
+l <= l~reg0.DB_MAX_OUTPUT_PORT_TYPE
+r <= r~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |lab5|uarec:C6|shift_reg_8_en:C3

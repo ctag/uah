@@ -13,6 +13,62 @@ state.1000 0 0 1 0 0 0 0 0 0 0 1
 state.1001 0 1 0 0 0 0 0 0 0 0 1 
 state.1010 1 0 0 0 0 0 0 0 0 0 1 
 
+State Machine - |lab5|uarec:C6|rec_control_logic:C2|state
+Name state.S10 state.S9 state.S8 state.S7 state.S6 state.S5 state.S4 state.S3 state.S2 state.S1 state.S0 
+state.S0 0 0 0 0 0 0 0 0 0 0 0 
+state.S1 0 0 0 0 0 0 0 0 0 1 1 
+state.S2 0 0 0 0 0 0 0 0 1 0 1 
+state.S3 0 0 0 0 0 0 0 1 0 0 1 
+state.S4 0 0 0 0 0 0 1 0 0 0 1 
+state.S5 0 0 0 0 0 1 0 0 0 0 1 
+state.S6 0 0 0 0 1 0 0 0 0 0 1 
+state.S7 0 0 0 1 0 0 0 0 0 0 1 
+state.S8 0 0 1 0 0 0 0 0 0 0 1 
+state.S9 0 1 0 0 0 0 0 0 0 0 1 
+state.S10 1 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |lab5|uarec:C6|rec_control_logic:C2|next_state
+Name next_state.S10 next_state.S9 next_state.S8 next_state.S7 next_state.S6 next_state.S5 next_state.S4 next_state.S3 next_state.S2 next_state.S1 next_state.S0 
+next_state.S0 0 0 0 0 0 0 0 0 0 0 0 
+next_state.S1 0 0 0 0 0 0 0 0 0 1 1 
+next_state.S2 0 0 0 0 0 0 0 0 1 0 1 
+next_state.S3 0 0 0 0 0 0 0 1 0 0 1 
+next_state.S4 0 0 0 0 0 0 1 0 0 0 1 
+next_state.S5 0 0 0 0 0 1 0 0 0 0 1 
+next_state.S6 0 0 0 0 1 0 0 0 0 0 1 
+next_state.S7 0 0 0 1 0 0 0 0 0 0 1 
+next_state.S8 0 0 1 0 0 0 0 0 0 0 1 
+next_state.S9 0 1 0 0 0 0 0 0 0 0 1 
+next_state.S10 1 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |lab5|uasend:C4|send_control_logic:C0|state
+Name state.S10 state.S9 state.S8 state.S7 state.S6 state.S5 state.S4 state.S3 state.S2 state.S1 state.S0 
+state.S0 0 0 0 0 0 0 0 0 0 0 0 
+state.S1 0 0 0 0 0 0 0 0 0 1 1 
+state.S2 0 0 0 0 0 0 0 0 1 0 1 
+state.S3 0 0 0 0 0 0 0 1 0 0 1 
+state.S4 0 0 0 0 0 0 1 0 0 0 1 
+state.S5 0 0 0 0 0 1 0 0 0 0 1 
+state.S6 0 0 0 0 1 0 0 0 0 0 1 
+state.S7 0 0 0 1 0 0 0 0 0 0 1 
+state.S8 0 0 1 0 0 0 0 0 0 0 1 
+state.S9 0 1 0 0 0 0 0 0 0 0 1 
+state.S10 1 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |lab5|uasend:C4|send_control_logic:C0|next_state
+Name next_state.S10 next_state.S9 next_state.S8 next_state.S7 next_state.S6 next_state.S5 next_state.S4 next_state.S3 next_state.S2 next_state.S1 next_state.S0 
+next_state.S0 0 0 0 0 0 0 0 0 0 0 0 
+next_state.S1 0 0 0 0 0 0 0 0 0 1 1 
+next_state.S2 0 0 0 0 0 0 0 0 1 0 1 
+next_state.S3 0 0 0 0 0 0 0 1 0 0 1 
+next_state.S4 0 0 0 0 0 0 1 0 0 0 1 
+next_state.S5 0 0 0 0 0 1 0 0 0 0 1 
+next_state.S6 0 0 0 0 1 0 0 0 0 0 1 
+next_state.S7 0 0 0 1 0 0 0 0 0 0 1 
+next_state.S8 0 0 1 0 0 0 0 0 0 0 1 
+next_state.S9 0 1 0 0 0 0 0 0 0 0 1 
+next_state.S10 1 0 0 0 0 0 0 0 0 0 1 
+
 State Machine - |lab5|one_shot:C2|state
 Name state.1 
 state.0 0 
