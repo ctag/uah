@@ -1,0 +1,27 @@
+#
+# Stimulus
+# [0] is LSB
+# SUB_ADD: 0=add (A+B), 1=subtract (A-B)
+# Library: cycloneive_ver
+#
+
+#add list Bin reset clk Bout
+
+#add wave Bin reset clk Bout
+
+force Bin 	0 0ns, 0 50ns, 1 100ns, 0 150ns, 0 200ns, 1 250ns, 0 300ns, 1 350ns, 0 400ns, 1 450ns
+
+force clk	0 0ns, 1 25ns, 0 50ns, 1 75ns, 0 100ns, 1 125ns, 0 150ns, 1 175ns, 0 200ns, 1 225ns, 0 250ns, 1 275ns, 0 300ns, 1 325ns, 0 350ns, 1 375ns, 0 400ns, 1 425ns, 0 450ns, 1 475ns, 0 500ns, 1 525ns, 0 550ns, 1 575ns, 0 600ns, 1 625ns, 0 650ns, 1 675ns, 0 700ns, 1 725ns, 0 750ns, 1 775ns, 0 800ns, 1 825ns, 0 850ns, 1 875ns
+
+force reset 1 0ns, 0 50ns, 										1 300ns, 0 350ns
+
+run 1000ns
+
+
+# Sample input: 	01001 101
+# Returned output:	01110 010
+
+# Formatted:
+# Original input: 	101 10010
+# 2s complement:	011 01111
+# Program output: 	011 01110 <- incorrect output

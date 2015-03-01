@@ -1,0 +1,8 @@
+E:/uah/cpe322_324/hw_sim_02/verilog_test.v {1 {vlog -work work E:/uah/cpe322_324/hw_sim_02/verilog_test.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module twos_complement
+
+Top level modules:
+	twos_complement
+
+} {} {}}
