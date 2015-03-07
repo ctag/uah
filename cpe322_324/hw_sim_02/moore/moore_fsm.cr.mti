@@ -1,0 +1,8 @@
+E:/uah/cpe322_324/hw_sim_02/moore/moore_fsm.v {1 {vlog -work work E:/uah/cpe322_324/hw_sim_02/moore/moore_fsm.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module moore_fsm
+
+Top level modules:
+	moore_fsm
+
+} {} {}}
