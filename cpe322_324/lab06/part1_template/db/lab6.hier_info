@@ -1,0 +1,161 @@
+|lab6
+SIG => SIG.IN3
+CLOCK_50 => CLOCK_50.IN5
+HEX3[0] <= HEX3[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX3[1] <= HEX3[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX3[2] <= HEX3[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX3[3] <= HEX3[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX3[4] <= HEX3[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX3[5] <= HEX3[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX3[6] <= HEX3[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX2[0] <= HEX2[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX2[1] <= HEX2[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX2[2] <= HEX2[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX2[3] <= HEX2[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX2[4] <= HEX2[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX2[5] <= HEX2[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX2[6] <= HEX2[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX1[0] <= HEX1[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX1[1] <= HEX1[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX1[2] <= HEX1[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX1[3] <= HEX1[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX1[4] <= HEX1[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX1[5] <= HEX1[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX1[6] <= HEX1[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX0[0] <= HEX0[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX0[1] <= HEX0[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX0[2] <= HEX0[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX0[3] <= HEX0[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX0[4] <= HEX0[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX0[5] <= HEX0[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+HEX0[6] <= HEX0[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|lab6|count_enabler:C0
+reset => en_out~reg0.PRESET
+reset => count[0].ACLR
+reset => count[1].PRESET
+reset => count[2].PRESET
+reset => count[3].PRESET
+reset => count[4].PRESET
+reset => count[5].ACLR
+reset => count[6].PRESET
+reset => count[7].PRESET
+reset => count[8].PRESET
+reset => count[9].ACLR
+clk => en_out~reg0.CLK
+clk => count[0].CLK
+clk => count[1].CLK
+clk => count[2].CLK
+clk => count[3].CLK
+clk => count[4].CLK
+clk => count[5].CLK
+clk => count[6].CLK
+clk => count[7].CLK
+clk => count[8].CLK
+clk => count[9].CLK
+en_out <= en_out~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|lab6|d_ff:C1
+d => o~reg0.DATAIN
+clk => o~reg0.CLK
+o <= o~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|lab6|bcd_counter:C2
+clear => ~NO_FANOUT~
+en => ~NO_FANOUT~
+clk => ~NO_FANOUT~
+o[0] <= <GND>
+o[1] <= <GND>
+o[2] <= <GND>
+o[3] <= <GND>
+o[4] <= <GND>
+o[5] <= <GND>
+o[6] <= <GND>
+o[7] <= <GND>
+o[8] <= <GND>
+o[9] <= <GND>
+o[10] <= <GND>
+o[11] <= <GND>
+o[12] <= <GND>
+o[13] <= <GND>
+o[14] <= <GND>
+o[15] <= <GND>
+
+
+|lab6|d_ff_16_en:C3
+d[0] => o[0]~reg0.DATAIN
+d[1] => o[1]~reg0.DATAIN
+d[2] => o[2]~reg0.DATAIN
+d[3] => o[3]~reg0.DATAIN
+d[4] => o[4]~reg0.DATAIN
+d[5] => o[5]~reg0.DATAIN
+d[6] => o[6]~reg0.DATAIN
+d[7] => o[7]~reg0.DATAIN
+d[8] => o[8]~reg0.DATAIN
+d[9] => o[9]~reg0.DATAIN
+d[10] => o[10]~reg0.DATAIN
+d[11] => o[11]~reg0.DATAIN
+d[12] => o[12]~reg0.DATAIN
+d[13] => o[13]~reg0.DATAIN
+d[14] => o[14]~reg0.DATAIN
+d[15] => o[15]~reg0.DATAIN
+en => o[4]~reg0.ENA
+en => o[3]~reg0.ENA
+en => o[2]~reg0.ENA
+en => o[1]~reg0.ENA
+en => o[0]~reg0.ENA
+en => o[5]~reg0.ENA
+en => o[6]~reg0.ENA
+en => o[7]~reg0.ENA
+en => o[8]~reg0.ENA
+en => o[9]~reg0.ENA
+en => o[10]~reg0.ENA
+en => o[11]~reg0.ENA
+en => o[12]~reg0.ENA
+en => o[13]~reg0.ENA
+en => o[14]~reg0.ENA
+en => o[15]~reg0.ENA
+clk => o[0]~reg0.CLK
+clk => o[1]~reg0.CLK
+clk => o[2]~reg0.CLK
+clk => o[3]~reg0.CLK
+clk => o[4]~reg0.CLK
+clk => o[5]~reg0.CLK
+clk => o[6]~reg0.CLK
+clk => o[7]~reg0.CLK
+clk => o[8]~reg0.CLK
+clk => o[9]~reg0.CLK
+clk => o[10]~reg0.CLK
+clk => o[11]~reg0.CLK
+clk => o[12]~reg0.CLK
+clk => o[13]~reg0.CLK
+clk => o[14]~reg0.CLK
+clk => o[15]~reg0.CLK
+o[0] <= o[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+o[1] <= o[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+o[2] <= o[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+o[3] <= o[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+o[4] <= o[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+o[5] <= o[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+o[6] <= o[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+o[7] <= o[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+o[8] <= o[8]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+o[9] <= o[9]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+o[10] <= o[10]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+o[11] <= o[11]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+o[12] <= o[12]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+o[13] <= o[13]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+o[14] <= o[14]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+o[15] <= o[15]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|lab6|one_shot:C4
+tr => o.IN1
+tr => state.DATAIN
+clk => state.CLK
+o <= o.DB_MAX_OUTPUT_PORT_TYPE
+
+
