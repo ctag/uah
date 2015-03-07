@@ -1,5 +1,5 @@
 Analysis & Synthesis report for lab5
-Fri Feb 27 15:51:17 2015
+Sat Mar 07 14:01:08 2015
 Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
 
 
@@ -14,22 +14,19 @@ Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Ver
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
   8. State Machine - |lab5|lcd:C7|state
-  9. State Machine - |lab5|uarec:C6|rec_control_logic:C2|state
- 10. State Machine - |lab5|uarec:C6|rec_control_logic:C2|next_state
- 11. State Machine - |lab5|uasend:C4|send_control_logic:C0|state
- 12. State Machine - |lab5|uasend:C4|send_control_logic:C0|next_state
- 13. State Machine - |lab5|one_shot:C2|state
- 14. User-Specified and Inferred Latches
- 15. Registers Removed During Synthesis
- 16. General Register Statistics
- 17. Inverted Register Statistics
- 18. Multiplexer Restructuring Statistics (Restructuring Performed)
- 19. Parameter Settings for User Entity Instance: uasend:C4|send_control_logic:C0
- 20. Parameter Settings for User Entity Instance: uarec:C6|rec_control_logic:C2
- 21. Port Connectivity Checks: "uasend:C4|shift_reg_10_l_en:C1"
- 22. Elapsed Time Per Partition
- 23. Analysis & Synthesis Messages
- 24. Analysis & Synthesis Suppressed Messages
+  9. State Machine - |lab5|uasend:C4|send_control_logic:C0|state
+ 10. State Machine - |lab5|uasend:C4|send_control_logic:C0|next_state
+ 11. State Machine - |lab5|one_shot:C2|state
+ 12. User-Specified and Inferred Latches
+ 13. Registers Removed During Synthesis
+ 14. General Register Statistics
+ 15. Inverted Register Statistics
+ 16. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 17. Parameter Settings for User Entity Instance: uasend:C4|send_control_logic:C0
+ 18. Port Connectivity Checks: "uasend:C4|shift_reg_10_l_en:C1"
+ 19. Elapsed Time Per Partition
+ 20. Analysis & Synthesis Messages
+ 21. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -55,15 +52,15 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                          ;
 +------------------------------------+--------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Feb 27 15:51:17 2015            ;
+; Analysis & Synthesis Status        ; Successful - Sat Mar 07 14:01:08 2015            ;
 ; Quartus II 32-bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version ;
 ; Revision Name                      ; lab5                                             ;
 ; Top-level Entity Name              ; lab5                                             ;
 ; Family                             ; Cyclone IV E                                     ;
-; Total logic elements               ; 371                                              ;
-;     Total combinational functions  ; 291                                              ;
-;     Dedicated logic registers      ; 211                                              ;
-; Total registers                    ; 211                                              ;
+; Total logic elements               ; 367                                              ;
+;     Total combinational functions  ; 287                                              ;
+;     Dedicated logic registers      ; 201                                              ;
+; Total registers                    ; 201                                              ;
 ; Total pins                         ; 80                                               ;
 ; Total virtual pins                 ; 0                                                ;
 ; Total memory bits                  ; 0                                                ;
@@ -198,28 +195,28 @@ applicable agreement for further details.
 +---------------------------------------------+----------------+
 ; Resource                                    ; Usage          ;
 +---------------------------------------------+----------------+
-; Estimated Total logic elements              ; 371            ;
+; Estimated Total logic elements              ; 367            ;
 ;                                             ;                ;
-; Total combinational functions               ; 291            ;
+; Total combinational functions               ; 287            ;
 ; Logic element usage by number of LUT inputs ;                ;
-;     -- 4 input functions                    ; 148            ;
-;     -- 3 input functions                    ; 30             ;
-;     -- <=2 input functions                  ; 113            ;
+;     -- 4 input functions                    ; 143            ;
+;     -- 3 input functions                    ; 32             ;
+;     -- <=2 input functions                  ; 112            ;
 ;                                             ;                ;
 ; Logic elements by mode                      ;                ;
-;     -- normal mode                          ; 241            ;
+;     -- normal mode                          ; 237            ;
 ;     -- arithmetic mode                      ; 50             ;
 ;                                             ;                ;
-; Total registers                             ; 211            ;
-;     -- Dedicated logic registers            ; 211            ;
+; Total registers                             ; 201            ;
+;     -- Dedicated logic registers            ; 201            ;
 ;     -- I/O registers                        ; 0              ;
 ;                                             ;                ;
 ; I/O pins                                    ; 80             ;
 ; Embedded Multiplier 9-bit elements          ; 0              ;
 ; Maximum fan-out node                        ; CLOCK_50~input ;
-; Maximum fan-out                             ; 142            ;
-; Total fan-out                               ; 1554           ;
-; Average fan-out                             ; 2.35           ;
+; Maximum fan-out                             ; 132            ;
+; Total fan-out                               ; 1517           ;
+; Average fan-out                             ; 2.34           ;
 +---------------------------------------------+----------------+
 
 
@@ -228,7 +225,7 @@ applicable agreement for further details.
 +--------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node     ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                     ; Library Name ;
 +--------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------+--------------+
-; |lab5                          ; 291 (0)           ; 211 (0)      ; 0           ; 0            ; 0       ; 0         ; 80   ; 0            ; |lab5                                                   ; work         ;
+; |lab5                          ; 287 (0)           ; 201 (0)      ; 0           ; 0            ; 0       ; 0         ; 80   ; 0            ; |lab5                                                   ; work         ;
 ;    |bin_to_ascii:C3|           ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab5|bin_to_ascii:C3                                   ; work         ;
 ;    |clock_en:C1|               ; 22 (22)           ; 15 (15)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab5|clock_en:C1                                       ; work         ;
 ;    |hex_seven_shift:C5|        ; 7 (7)             ; 56 (56)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab5|hex_seven_shift:C5                                ; work         ;
@@ -244,9 +241,9 @@ applicable agreement for further details.
 ;          |mux_4_1:C1|          ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab5|keypad_scanner:C0|key_scan:C1|mux_4_1:C1          ; work         ;
 ;    |lcd:C7|                    ; 164 (164)         ; 56 (56)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab5|lcd:C7                                            ; work         ;
 ;    |one_shot:C2|               ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab5|one_shot:C2                                       ; work         ;
-;    |uarec:C6|                  ; 43 (0)            ; 29 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab5|uarec:C6                                          ; work         ;
-;       |cycle_count_16:C1|      ; 13 (13)           ; 7 (7)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab5|uarec:C6|cycle_count_16:C1                        ; work         ;
-;       |rec_control_logic:C2|   ; 30 (30)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab5|uarec:C6|rec_control_logic:C2                     ; work         ;
+;    |uarec:C6|                  ; 39 (0)            ; 19 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab5|uarec:C6                                          ; work         ;
+;       |cycle_count_16:C1|      ; 14 (14)           ; 7 (7)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab5|uarec:C6|cycle_count_16:C1                        ; work         ;
+;       |rec_control_logic:C2|   ; 25 (25)           ; 4 (4)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab5|uarec:C6|rec_control_logic:C2                     ; work         ;
 ;       |shift_reg_8_en:C3|      ; 0 (0)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab5|uarec:C6|shift_reg_8_en:C3                        ; work         ;
 ;    |uasend:C4|                 ; 19 (0)            ; 25 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab5|uasend:C4                                         ; work         ;
 ;       |send_control_logic:C0|  ; 6 (6)             ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab5|uasend:C4|send_control_logic:C0                   ; work         ;
@@ -273,46 +270,6 @@ Encoding Type:  One-Hot
 ; state.1001 ; 0          ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
 ; state.1010 ; 1          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 0          ; 1          ;
 +------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+
-
-
-Encoding Type:  One-Hot
-+-------------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |lab5|uarec:C6|rec_control_logic:C2|state                                                                           ;
-+-----------+-----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+
-; Name      ; state.S10 ; state.S9 ; state.S8 ; state.S7 ; state.S6 ; state.S5 ; state.S4 ; state.S3 ; state.S2 ; state.S1 ; state.S0 ;
-+-----------+-----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+
-; state.S0  ; 0         ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ;
-; state.S1  ; 0         ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ; 1        ;
-; state.S2  ; 0         ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ; 0        ; 1        ;
-; state.S3  ; 0         ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ; 0        ; 0        ; 1        ;
-; state.S4  ; 0         ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ; 0        ; 0        ; 0        ; 1        ;
-; state.S5  ; 0         ; 0        ; 0        ; 0        ; 0        ; 1        ; 0        ; 0        ; 0        ; 0        ; 1        ;
-; state.S6  ; 0         ; 0        ; 0        ; 0        ; 1        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ;
-; state.S7  ; 0         ; 0        ; 0        ; 1        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ;
-; state.S8  ; 0         ; 0        ; 1        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ;
-; state.S9  ; 0         ; 1        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ;
-; state.S10 ; 1         ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ;
-+-----------+-----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+
-
-
-Encoding Type:  One-Hot
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |lab5|uarec:C6|rec_control_logic:C2|next_state                                                                                                                                  ;
-+----------------+----------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+
-; Name           ; next_state.S10 ; next_state.S9 ; next_state.S8 ; next_state.S7 ; next_state.S6 ; next_state.S5 ; next_state.S4 ; next_state.S3 ; next_state.S2 ; next_state.S1 ; next_state.S0 ;
-+----------------+----------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+
-; next_state.S0  ; 0              ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ;
-; next_state.S1  ; 0              ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ; 1             ;
-; next_state.S2  ; 0              ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ; 0             ; 1             ;
-; next_state.S3  ; 0              ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ; 0             ; 0             ; 1             ;
-; next_state.S4  ; 0              ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ; 0             ; 0             ; 0             ; 1             ;
-; next_state.S5  ; 0              ; 0             ; 0             ; 0             ; 0             ; 1             ; 0             ; 0             ; 0             ; 0             ; 1             ;
-; next_state.S6  ; 0              ; 0             ; 0             ; 0             ; 1             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ;
-; next_state.S7  ; 0              ; 0             ; 0             ; 1             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ;
-; next_state.S8  ; 0              ; 0             ; 1             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ;
-; next_state.S9  ; 0              ; 1             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ;
-; next_state.S10 ; 1              ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 0             ; 1             ;
-+----------------+----------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+
 
 
 Encoding Type:  One-Hot
@@ -366,14 +323,18 @@ Encoding Type:  One-Hot
 +---------+-------------------------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------+
-; User-Specified and Inferred Latches                                                                                     ;
-+----------------------------------------------------+-------------------------------------------+------------------------+
-; Latch Name                                         ; Latch Enable Signal                       ; Free of Timing Hazards ;
-+----------------------------------------------------+-------------------------------------------+------------------------+
-; keypad_scanner:C0|clock_gen:C0|scan_clk            ; keypad_scanner:C0|debounce:C2|jk_ff:FF0|q ; yes                    ;
-; Number of user-specified and inferred latches = 1  ;                                           ;                        ;
-+----------------------------------------------------+-------------------------------------------+------------------------+
++---------------------------------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                                       ;
++----------------------------------------------------+---------------------------------------------+------------------------+
+; Latch Name                                         ; Latch Enable Signal                         ; Free of Timing Hazards ;
++----------------------------------------------------+---------------------------------------------+------------------------+
+; keypad_scanner:C0|clock_gen:C0|scan_clk            ; keypad_scanner:C0|debounce:C2|jk_ff:FF0|q   ; yes                    ;
+; uarec:C6|rec_control_logic:C2|next_state[3]        ; uarec:C6|rec_control_logic:C2|next_state[0] ; yes                    ;
+; uarec:C6|rec_control_logic:C2|next_state[2]        ; uarec:C6|rec_control_logic:C2|next_state[0] ; yes                    ;
+; uarec:C6|rec_control_logic:C2|next_state[1]        ; uarec:C6|rec_control_logic:C2|next_state[0] ; yes                    ;
+; uarec:C6|rec_control_logic:C2|next_state[0]        ; uarec:C6|rec_control_logic:C2|next_state[0] ; yes                    ;
+; Number of user-specified and inferred latches = 5  ;                                             ;                        ;
++----------------------------------------------------+---------------------------------------------+------------------------+
 Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
 
 
@@ -387,14 +348,6 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; lcd:C7|state~14                               ; Lost fanout                                                ;
 ; lcd:C7|state~15                               ; Lost fanout                                                ;
 ; lcd:C7|state~16                               ; Lost fanout                                                ;
-; uarec:C6|rec_control_logic:C2|state~2         ; Lost fanout                                                ;
-; uarec:C6|rec_control_logic:C2|state~3         ; Lost fanout                                                ;
-; uarec:C6|rec_control_logic:C2|state~4         ; Lost fanout                                                ;
-; uarec:C6|rec_control_logic:C2|state~5         ; Lost fanout                                                ;
-; uarec:C6|rec_control_logic:C2|next_state~13   ; Lost fanout                                                ;
-; uarec:C6|rec_control_logic:C2|next_state~14   ; Lost fanout                                                ;
-; uarec:C6|rec_control_logic:C2|next_state~15   ; Lost fanout                                                ;
-; uarec:C6|rec_control_logic:C2|next_state~16   ; Lost fanout                                                ;
 ; uasend:C4|send_control_logic:C0|state~2       ; Lost fanout                                                ;
 ; uasend:C4|send_control_logic:C0|state~3       ; Lost fanout                                                ;
 ; uasend:C4|send_control_logic:C0|state~4       ; Lost fanout                                                ;
@@ -404,11 +357,6 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; uasend:C4|send_control_logic:C0|next_state~26 ; Lost fanout                                                ;
 ; uasend:C4|send_control_logic:C0|next_state~27 ; Lost fanout                                                ;
 ; uasend:C4|send_control_logic:C0|state.S0      ; Merged with uasend:C4|send_control_logic:C0|next_state.S0  ;
-; uarec:C6|rec_control_logic:C2|state.S10       ; Merged with uarec:C6|rec_control_logic:C2|next_state.S10   ;
-; uarec:C6|rec_control_logic:C2|state.S3        ; Merged with uarec:C6|rec_control_logic:C2|next_state.S3    ;
-; uarec:C6|rec_control_logic:C2|state.S2        ; Merged with uarec:C6|rec_control_logic:C2|next_state.S2    ;
-; uarec:C6|rec_control_logic:C2|state.S1        ; Merged with uarec:C6|rec_control_logic:C2|next_state.S1    ;
-; uarec:C6|rec_control_logic:C2|state.S0        ; Merged with uarec:C6|rec_control_logic:C2|next_state.S0    ;
 ; uasend:C4|send_control_logic:C0|state.S10     ; Merged with uasend:C4|send_control_logic:C0|next_state.S10 ;
 ; uasend:C4|send_control_logic:C0|state.S9      ; Merged with uasend:C4|send_control_logic:C0|next_state.S9  ;
 ; uasend:C4|send_control_logic:C0|state.S8      ; Merged with uasend:C4|send_control_logic:C0|next_state.S8  ;
@@ -418,14 +366,8 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; uasend:C4|send_control_logic:C0|state.S4      ; Merged with uasend:C4|send_control_logic:C0|next_state.S4  ;
 ; uasend:C4|send_control_logic:C0|state.S3      ; Merged with uasend:C4|send_control_logic:C0|next_state.S3  ;
 ; uasend:C4|send_control_logic:C0|state.S2      ; Merged with uasend:C4|send_control_logic:C0|next_state.S2  ;
-; uarec:C6|rec_control_logic:C2|state.S9        ; Merged with uarec:C6|rec_control_logic:C2|next_state.S9    ;
-; uarec:C6|rec_control_logic:C2|state.S8        ; Merged with uarec:C6|rec_control_logic:C2|next_state.S8    ;
-; uarec:C6|rec_control_logic:C2|state.S7        ; Merged with uarec:C6|rec_control_logic:C2|next_state.S7    ;
-; uarec:C6|rec_control_logic:C2|state.S6        ; Merged with uarec:C6|rec_control_logic:C2|next_state.S6    ;
-; uarec:C6|rec_control_logic:C2|state.S5        ; Merged with uarec:C6|rec_control_logic:C2|next_state.S5    ;
-; uarec:C6|rec_control_logic:C2|state.S4        ; Merged with uarec:C6|rec_control_logic:C2|next_state.S4    ;
 ; keypad_scanner:C0|clock_gen:C0|count[0]       ; Merged with clock_en:C1|count1[0]                          ;
-; Total Number of Removed Registers = 43        ;                                                            ;
+; Total Number of Removed Registers = 24        ;                                                            ;
 +-----------------------------------------------+------------------------------------------------------------+
 
 
@@ -434,8 +376,8 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 211   ;
-; Number of registers using Synchronous Clear  ; 1     ;
+; Total registers                              ; 201   ;
+; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 2     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
@@ -454,23 +396,22 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------+---------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                 ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                       ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------+
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |lab5|uasend:C4|shift_reg_10_l_en:C1|sendbuf[0]  ;
-; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |lab5|uasend:C4|shift_reg_10_l_en:C1|sendbuf[7]  ;
-; 5:1                ; 6 bits    ; 18 LEs        ; 6 LEs                ; 12 LEs                 ; Yes        ; |lab5|lcd:C7|lcount[5]                           ;
-; 7:1                ; 5 bits    ; 20 LEs        ; 5 LEs                ; 15 LEs                 ; Yes        ; |lab5|lcd:C7|ch_num[4]                           ;
-; 6:1                ; 3 bits    ; 12 LEs        ; 9 LEs                ; 3 LEs                  ; Yes        ; |lab5|uarec:C6|rec_control_logic:C2|r            ;
-; 13:1               ; 21 bits   ; 168 LEs       ; 21 LEs               ; 147 LEs                ; Yes        ; |lab5|lcd:C7|lwait[7]                            ;
-; 14:1               ; 2 bits    ; 18 LEs        ; 4 LEs                ; 14 LEs                 ; Yes        ; |lab5|lcd:C7|data_out[1]                         ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |lab5|uarec:C6|cycle_count_16:C1|count           ;
-; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |lab5|uasend:C4|send_control_logic:C0|next_state ;
-; 7:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |lab5|lcd:C7|Selector49                          ;
-; 7:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |lab5|uarec:C6|rec_control_logic:C2|Selector5    ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                        ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------+
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |lab5|uasend:C4|shift_reg_10_l_en:C1|sendbuf[0]   ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |lab5|uasend:C4|shift_reg_10_l_en:C1|sendbuf[2]   ;
+; 5:1                ; 6 bits    ; 18 LEs        ; 6 LEs                ; 12 LEs                 ; Yes        ; |lab5|lcd:C7|lcount[2]                            ;
+; 7:1                ; 5 bits    ; 20 LEs        ; 5 LEs                ; 15 LEs                 ; Yes        ; |lab5|lcd:C7|ch_num[0]                            ;
+; 13:1               ; 21 bits   ; 168 LEs       ; 21 LEs               ; 147 LEs                ; Yes        ; |lab5|lcd:C7|lwait[8]                             ;
+; 14:1               ; 2 bits    ; 18 LEs        ; 4 LEs                ; 14 LEs                 ; Yes        ; |lab5|lcd:C7|data_out[1]                          ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |lab5|uarec:C6|cycle_count_16:C1|count            ;
+; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |lab5|uasend:C4|send_control_logic:C0|next_state  ;
+; 7:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |lab5|lcd:C7|Selector48                           ;
+; 13:1               ; 4 bits    ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; No         ; |lab5|uarec:C6|rec_control_logic:C2|next_state[0] ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------+
 
 
 +------------------------------------------------------------------------------+
@@ -493,26 +434,6 @@ Note: All latches listed above may not be present at the end of synthesis due to
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+----------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: uarec:C6|rec_control_logic:C2 ;
-+----------------+-------+---------------------------------------------------+
-; Parameter Name ; Value ; Type                                              ;
-+----------------+-------+---------------------------------------------------+
-; S0             ; 0     ; Signed Integer                                    ;
-; S1             ; 1     ; Signed Integer                                    ;
-; S2             ; 2     ; Signed Integer                                    ;
-; S3             ; 3     ; Signed Integer                                    ;
-; S4             ; 4     ; Signed Integer                                    ;
-; S5             ; 5     ; Signed Integer                                    ;
-; S6             ; 6     ; Signed Integer                                    ;
-; S7             ; 7     ; Signed Integer                                    ;
-; S8             ; 8     ; Signed Integer                                    ;
-; S9             ; 9     ; Signed Integer                                    ;
-; S10            ; 10    ; Signed Integer                                    ;
-+----------------+-------+---------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
 +------------------------------------------------------------+
 ; Port Connectivity Checks: "uasend:C4|shift_reg_10_l_en:C1" ;
 +--------+-------+----------+--------------------------------+
@@ -528,7 +449,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:02     ;
+; Top            ; 00:00:04     ;
 +----------------+--------------+
 
 
@@ -538,7 +459,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 32-bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
-    Info: Processing started: Fri Feb 27 15:51:12 2015
+    Info: Processing started: Sat Mar 07 14:00:57 2015
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off lab5 -c lab5
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file lcd.v
@@ -601,29 +522,43 @@ Info (12128): Elaborating entity "uarec" for hierarchy "uarec:C6"
 Info (12128): Elaborating entity "cycle_count_16" for hierarchy "uarec:C6|cycle_count_16:C1"
 Warning (10230): Verilog HDL assignment warning at uarec.v(51): truncated value with size 32 to match size of target (5)
 Info (12128): Elaborating entity "rec_control_logic" for hierarchy "uarec:C6|rec_control_logic:C2"
+Warning (10230): Verilog HDL assignment warning at uarec.v(139): truncated value with size 32 to match size of target (4)
+Warning (10240): Verilog HDL Always Construct warning at uarec.v(72): inferring latch(es) for variable "next_state", which holds its previous value in one or more paths through the always construct
+Info (10041): Inferred latch for "next_state[0]" at uarec.v(156)
+Info (10041): Inferred latch for "next_state[1]" at uarec.v(156)
+Info (10041): Inferred latch for "next_state[2]" at uarec.v(156)
+Info (10041): Inferred latch for "next_state[3]" at uarec.v(156)
 Info (12128): Elaborating entity "shift_reg_8_en" for hierarchy "uarec:C6|shift_reg_8_en:C3"
 Info (12128): Elaborating entity "lcd" for hierarchy "lcd:C7"
 Warning (10230): Verilog HDL assignment warning at lcd.v(285): truncated value with size 32 to match size of target (21)
 Warning (10230): Verilog HDL assignment warning at lcd.v(259): truncated value with size 32 to match size of target (6)
 Warning (10230): Verilog HDL assignment warning at lcd.v(160): truncated value with size 32 to match size of target (5)
 Warning (10230): Verilog HDL assignment warning at lcd.v(198): truncated value with size 32 to match size of target (5)
+Warning (13012): Latch uarec:C6|rec_control_logic:C2|next_state[3] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal uarec:C6|rec_control_logic:C2|state[3]
+Warning (13012): Latch uarec:C6|rec_control_logic:C2|next_state[2] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal uarec:C6|rec_control_logic:C2|state[2]
+Warning (13012): Latch uarec:C6|rec_control_logic:C2|next_state[1] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal uarec:C6|rec_control_logic:C2|state[1]
+Warning (13012): Latch uarec:C6|rec_control_logic:C2|next_state[0] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal uarec:C6|rec_control_logic:C2|state[3]
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "LCD_RW" is stuck at GND
     Warning (13410): Pin "LCD_ON" is stuck at VCC
     Warning (13410): Pin "LCD_BLON" is stuck at VCC
 Info (286030): Timing-Driven Synthesis is running
-Info (17049): 20 registers lost all their fanouts during netlist optimizations.
+Info (17049): 12 registers lost all their fanouts during netlist optimizations.
 Info (144001): Generated suppressed messages file C:/Users/csb0019/Documents/uah/cpe322_324/lab05/assignment/output_files/lab5.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 461 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 460 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 6 input pins
     Info (21059): Implemented 74 output pins
-    Info (21061): Implemented 381 logic cells
-Info: Quartus II 32-bit Analysis & Synthesis was successful. 0 errors, 16 warnings
-    Info: Peak virtual memory: 340 megabytes
-    Info: Processing ended: Fri Feb 27 15:51:17 2015
-    Info: Elapsed time: 00:00:05
+    Info (21061): Implemented 380 logic cells
+Info: Quartus II 32-bit Analysis & Synthesis was successful. 0 errors, 26 warnings
+    Info: Peak virtual memory: 343 megabytes
+    Info: Processing ended: Sat Mar 07 14:01:08 2015
+    Info: Elapsed time: 00:00:11
     Info: Total CPU time (on all processors): 00:00:04
 
 

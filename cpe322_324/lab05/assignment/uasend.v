@@ -36,29 +36,6 @@ module send_control_logic(input go,en,clk, output reg l,
 	
 	parameter S0 = 0, S1 = 1, S2 = 2, S3 = 3, S4 = 4, S5 = 5, S6 = 6, S7 = 7, S8 = 8, S9 = 9, S10 = 10;
 	
-	/*
-	always @ (state)
-	begin
-		if (state == S0)
-		begin
-			if (go)
-			begin
-				next_state <= S1;
-				l <= go;
-				s <= 1'b0;
-			end
-			
-			else
-			begin
-				l <= 1'b0;
-				s <= 1'b0;
-			end
-		end
-			
-			state = next_state;
-	end
-	*/
-	
 	always @ ( posedge clk)
 	begin
 		if (state == S0)
