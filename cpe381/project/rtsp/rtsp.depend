@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1425877392 source:/home/berocs/Documents/uah/cpe381/project/rtsp/main.cpp
+	<iostream>
+	<fstream>
+	<iomanip>
+	"waver.h"
+	"riffheader.h"
+
+1425874115 /home/berocs/Documents/uah/cpe381/project/rtsp/waver.h
+	<iostream>
+	<fstream>
+
+1425876876 /home/berocs/Documents/uah/cpe381/project/rtsp/riffheader.h
+
+1425873943 source:/home/berocs/Documents/uah/cpe381/project/rtsp/riffheader.cpp
+	"riffheader.h"
+
+1425874123 source:/home/berocs/Documents/uah/cpe381/project/rtsp/waver.cpp
+	"waver.h"
+
