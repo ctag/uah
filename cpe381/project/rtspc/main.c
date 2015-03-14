@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h> /* M_PI */
+// #include <tgmath.h> /* For type indifferent sine function */
 #include <time.h>
 #include <limits.h>
 #include <stdbool.h>
