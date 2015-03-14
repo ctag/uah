@@ -1,10 +1,13 @@
 # depslib dependency file v1.0
-1426193050 source:/home/berocs/Documents/uah/cpe381/project/rtspc/main.c
+1426310064 source:/home/berocs/Documents/uah/cpe381/project/rtspc/main.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
+	<time.h>
+	<limits.h>
+	<stdbool.h>
 	"waver.h"
 
-1426193303 /home/berocs/Documents/uah/cpe381/project/rtspc/waver.h
+1426281085 /home/berocs/Documents/uah/cpe381/project/rtspc/waver.h
 	<stdint.h>
 

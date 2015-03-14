@@ -3,7 +3,8 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+#include <math.h> /* M_PI */
+#include <time.h>
 #include <limits.h>
 #include <stdbool.h>
 
@@ -68,19 +69,22 @@ void open_file (FILE ** _ptr, char _argv[], bool binary, bool write)
 	*_ptr = fopen(_argv, stream_params);
 }
 
+/*
+ * Print an overview of available flags
+ */
 void print_usage (char program[])
 {
 	// This block of text is modeled after the command `vim -h`
-		print_bar();
-		printf("Usage: \n%s -i input.wav -o output.wav [-s summary.txt] [-a 0.25] [-f 2400] [-h]\n", program);
-		printf("Arguments: \n");
-		printf("%-10s %-45s\n", "-i", "Input WAVE file. Required.");
-		printf("%-10s %-45s\n", "-o", "Output WAVE file. Required.");
-		printf("%-10s %-45s\n", "-s", "Summary file name.");
-		printf("%-10s %-45s\n", "-a", "Set sine amplitude. Double. Default 0.25.");
-		printf("%-10s %-45s\n", "-f", "Set sine frequency. Integer. Default 2.4KHz.");
-		printf("%-10s %-45s\n", "-h", "Print this help and exit.");
-		print_bar();
+	print_bar();
+	printf("Usage: \n%s -i input.wav -o output.wav [-s summary.txt] [-a 0.25] [-f 2400] [-h]\n", program);
+	printf("Arguments: \n");
+	printf("%-10s %-45s\n", "-i", "Input WAVE file. Required.");
+	printf("%-10s %-45s\n", "-o", "Output WAVE file. Required.");
+	printf("%-10s %-45s\n", "-s", "Summary file name.");
+	printf("%-10s %-45s\n", "-a", "Set sine amplitude. Double. Default 0.25.");
+	printf("%-10s %-45s\n", "-f", "Set sine frequency. Integer. Default 2.4KHz.");
+	printf("%-10s %-45s\n", "-h", "Print this help and exit.");
+	print_bar();
 }
 
 /*
@@ -88,6 +92,15 @@ void print_usage (char program[])
  */
 int main( int argc, char * argv[] )
 {
+	/**
+	 * Setup Clock
+	 */
+	clock_t runTime; // Create clock
+	runTime = clock(); // Assign current CLOCK_TICKS
+
+	/**
+	 * Print Header
+	 */
 	print_header();
 
 	/**
@@ -103,6 +116,7 @@ int main( int argc, char * argv[] )
 	int num_bytes = 0; // number of bytes in file
 	int num_samples = 0; // number of samples in file
 	int num_captures = 0; // number of captures (2 sample instances) in file
+	bool sineDefault = 1; // Use the array? If non-default params are given, generate sine wave manually.
 
 	short int maxSampleAmplitude = 0; // Value of max sample
 	unsigned int maxSampleIndex = 0; // Position of max sample
@@ -146,9 +160,11 @@ int main( int argc, char * argv[] )
 				} else if (argv[_index][1] == 'a') // Amplitude is next param
 				{
 					sineAmplitude = atof(argv[++_index]); // Convert the value to fp
+					sineDefault = 0; // No longer working with the default sine wave necessarily
 				} else if (argv[_index][1] == 'f') // Frequency is next param
 				{
 					sineFrequency = atoi(argv[++_index]); // Convert value to int
+					sineDefault = 0; // No longer working with the default sine wave necessarily
 				}
 			}
 		}
@@ -207,8 +223,8 @@ int main( int argc, char * argv[] )
 	 * Print Header Details
 	 * Write output file header
 	 */
+	// Get header from input file
 	fread(&input_header, sizeof(struct riffHeader), 1, input_file);
-
 	// Perform some basic error checking.
 	if (input_header.channels != 2)
 	{
@@ -225,28 +241,30 @@ int main( int argc, char * argv[] )
 		printf("Wrong format, looking for a PCM formatted file. Halting.");
 		return(1);
 	}
-
+	// Parse header
 	samplePeriod = (1.0 / input_header.sample_rate);
 	num_bytes = (input_header.size_data-8);
 	num_samples = num_bytes/2;
 	num_captures = num_samples/2;
-
+	// List information from header
 	print_properties(input_header);
-
+	// Write unaltered header to output file
 	fwrite(&input_header, sizeof(struct riffHeader), 1, output_file);
 
 	/**
 	 * Process input file two samples at a time
 	 */
 	unsigned short int sample_size = sizeof(int16_t);
+	unsigned short int default_sine_index = 0;
 	for (_index = 0; _index < num_captures; ++_index)
 	{
+		// Local variables
 		int16_t sample_left, sample_right;
 		double _sinVal;
-
+		// Pull next sample
 		fread(&sample_left, sample_size, 1, input_file);
 		fread(&sample_right, sample_size, 1, input_file);
-
+		// Check for max amplitude
 		if (abs(sample_left) > maxSampleAmplitude)
 		{
 			maxSampleAmplitude = abs(sample_left);
@@ -259,16 +277,30 @@ int main( int argc, char * argv[] )
 			maxSampleIndex = _index;
 			maxSampleChannel = 2;
 		}
+		// Choose sine wave generation device (array or function)
+		if (sineDefault)
+		{
+			_sinVal = default_sine[default_sine_index++];
+			if (default_sine_index >= 19)
+			{
+				default_sine_index = 0; // Reset index
+			}
 
-		_sinVal = sin(2*M_PI*(samplePeriod*_index)*sineFrequency)*(sineAmplitude*SHRT_MAX);
-
+		} else {
+			_sinVal = sin(2*M_PI*(samplePeriod*_index)*sineFrequency)*(sineAmplitude*SHRT_MAX);
+		}
+		// Generate modified sample
 		sample_left = sample_left + (_sinVal);
 		sample_right = sample_right + (_sinVal);
-
+		// Write modified samples to output stream
 		fwrite(&sample_left, sample_size, 1, output_file);
 		fwrite(&sample_right, sample_size, 1, output_file);
-
 	}
+
+	/**
+	 * End Clock
+	 */
+	runTime = clock() - runTime;
 
 	/**
 	 * Create summary file
@@ -277,15 +309,17 @@ int main( int argc, char * argv[] )
 	{
 		double file_time = (samplePeriod * _index);
 		fprintf(summary_file, "Summary File - CPE 381 - Christopher Bero\n");
-		fprintf(summary_file, "%-20s %10dHz\n", "Sampling Frequency:", input_header.sample_rate);
-		fprintf(summary_file, "%-20s %10fs\n", "Audio Time:", file_time);
-		fprintf(summary_file, "%-20s %10d\n", "Maximum amplitude:", maxSampleAmplitude);
-		fprintf(summary_file, "   - %-15s %10d\n", "At sample #:", maxSampleIndex);
-		fprintf(summary_file, "   - %-15s %10d\n", "Channel #:", maxSampleChannel);
-		fprintf(summary_file, "%-20s %10d\n", "Program Execution Time:", 1 /*TODO*/);
+		fprintf(summary_file, "=========================================\n");
+		fprintf(summary_file, "%-30s %8dHz\n", "Sampling Frequency:", input_header.sample_rate);
+		fprintf(summary_file, "%-30s %9fs\n", "Audio Time:", file_time);
+		fprintf(summary_file, "%-30s %10d\n", "Maximum amplitude:", maxSampleAmplitude);
+		fprintf(summary_file, "   - %-25s %10d\n", "At sample #:", maxSampleIndex);
+		fprintf(summary_file, "   - %-25s %10d\n", "Channel #:", maxSampleChannel);
+		fprintf(summary_file, "%-30s %9fs\n", "Program Execution Time:", ((float)runTime / CLOCKS_PER_SEC));
 		fclose(summary_file);
 	}
 
+	// Tidy up file streams
 	fclose(input_file);
 	fclose(output_file);
     return(0);
