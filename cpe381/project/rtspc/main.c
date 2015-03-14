@@ -275,9 +275,19 @@ int main( int argc, char * argv[] )
 	 */
 	if (summary_file)
 	{
-		//
+		double file_time = (samplePeriod * _index);
+		fprintf(summary_file, "Summary File - CPE 381 - Christopher Bero\n");
+		fprintf(summary_file, "%-20s %10dHz\n", "Sampling Frequency:", input_header.sample_rate);
+		fprintf(summary_file, "%-20s %10fs\n", "Audio Time:", file_time);
+		fprintf(summary_file, "%-20s %10d\n", "Maximum amplitude:", maxSampleAmplitude);
+		fprintf(summary_file, "   - %-15s %10d\n", "At sample #:", maxSampleIndex);
+		fprintf(summary_file, "   - %-15s %10d\n", "Channel #:", maxSampleChannel);
+		fprintf(summary_file, "%-20s %10d\n", "Program Execution Time:", 1 /*TODO*/);
+		fclose(summary_file);
 	}
 
+	fclose(input_file);
+	fclose(output_file);
     return(0);
 }
 
