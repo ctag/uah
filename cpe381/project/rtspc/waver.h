@@ -4,6 +4,17 @@
 #define WAVER_H_INCLUDED
 
 /**
+ * Default Sine Wave:
+ * Generated with MATLAB R2012a
+ * Amplitude: 0.25*(32767)
+ * Frequency: 2400Hz
+ * One Period: (1/2400)s
+ * Resolution: (1/44100)s
+ * Array Size: (1/2400)/(1/44100) = 18.375 ~ 19
+ */
+const static int16_t default_sine[] = {0,2747,5176,7005,8023,8113,7263,5572,3236,525,-2247,-4758,-6719,-7901,-8169,-7491,-5945,-3711,-1048};
+
+/**
  * http://www.topherlee.com/software/pcm-tut-wavformat.html
  *
  * Format:
@@ -23,22 +34,6 @@
  * [37-40]	- "data" - Data chunk header. Included in "size of data" below.
  * [41-44]	- Size of data section in bytes.
  */
-
-/**
- * Note:
- * F2 and CTL+F2 auto hides code:blocks panels
- */
-
-/**
- * Default Sine Wave:
- * Generated with MATLAB R2012a
- * Amplitude: 0.25*(32767)
- * Frequency: 2400Hz
- * One Period: (1/2400)s
- * Resolution: (1/44100)s
- * Array Size: (1/2400)/(1/44100) = 18.375 ~ 19
- */
-int16_t default_sine[] = {0,2747,5176,7005,8023,8113,7263,5572,3236,525,-2247,-4758,-6719,-7901,-8169,-7491,-5945,-3711,-1048};
 
  struct riffHeader {
     char 		riff[4]; 	// "RIFF"

@@ -76,15 +76,53 @@ void print_usage (char program[])
 {
 	// This block of text is modeled after the command `vim -h`
 	print_bar();
-	printf("Usage: \n%s -i input.wav -o output.wav [-s summary.txt] [-a 0.25] [-f 2400] [-h]\n", program);
+	printf("Usage: \n%s [-h] [-c] [-a 0.25] [-f 2400] [-s sum.txt] -i in.wav -o out.wav\n", program);
 	printf("Arguments: \n");
 	printf("%-10s %-45s\n", "-i", "Input WAVE file. Required.");
 	printf("%-10s %-45s\n", "-o", "Output WAVE file. Required.");
 	printf("%-10s %-45s\n", "-s", "Summary file name.");
-	printf("%-10s %-45s\n", "-a", "Set sine amplitude. Double. Default 0.25.");
+	printf("%-10s %-45s\n", "-a", "Set sine amplitude. Decimal. Default 0.25.");
 	printf("%-10s %-45s\n", "-f", "Set sine frequency. Integer. Default 2.4KHz.");
+	printf("%-10s %-45s\n", "-c", "Prevent sample container overflow.");
 	printf("%-10s %-45s\n", "-h", "Print this help and exit.");
 	print_bar();
+}
+
+int16_t safeAddition (int16_t sample, int16_t sine)
+{
+	/**
+	 * Variable declarations
+	 */
+	int16_t result = (sample + sine); // any overflow would occur here
+	bool sample_sign = 0, sine_sign = 0, result_sign = 0;
+	/**
+	 * Test sine of each
+	 */
+	if (sample >= 0)
+	{
+		sample_sign = 1;
+	}
+	if (sine >= 0)
+	{
+		sine_sign = 1;
+	}
+	if (result >= 0)
+	{
+		result_sign = 1;
+	}
+	/**
+	 * Catch overflow when adding to positive number or subtracting from negative
+	 */
+	if ((sample_sign&&sine_sign&&!result_sign) || (!sample_sign&&!sine_sign&&result_sign)) // Overflow
+	{
+		if (result_sign)
+		{
+			result = SHRT_MIN; // Set to int16 min
+		} else {
+			result = SHRT_MAX; // set to int16 max
+		}
+	}
+	return(result);
 }
 
 /*
@@ -117,6 +155,7 @@ int main( int argc, char * argv[] )
 	int num_samples = 0; // number of samples in file
 	int num_captures = 0; // number of captures (2 sample instances) in file
 	bool sineDefault = 1; // Use the array? If non-default params are given, generate sine wave manually.
+	bool checkOverflow = 0; // Check for integer overflow on outgoing samples?
 
 	short int maxSampleAmplitude = 0; // Value of max sample
 	unsigned int maxSampleIndex = 0; // Position of max sample
@@ -126,7 +165,7 @@ int main( int argc, char * argv[] )
 	 * Check that the correct number of arguments exist.
 	 * If they exist, process them into appropriate variables.
 	 */
-	if (argc < 5 || argc > 11)
+	if (argc < 5 || argc > 12)
 	{
 		// argv[0] usually holds the executable name.
 		print_usage(argv[0]);
@@ -141,12 +180,6 @@ int main( int argc, char * argv[] )
 					print_usage(argv[0]);
 					return(1);
 				}
-				// Check that there is a parameter to store
-				if (_index+1 >= argc) // There is no param to store
-				{
-					printf("\nInvalid flag. Halting.\n\n");
-					print_usage(argv[0]);
-				}
 				// Begin testing passed flag
 				if (argv[_index][1] == 'i') // Input filename should be next param
 				{
@@ -160,11 +193,21 @@ int main( int argc, char * argv[] )
 				} else if (argv[_index][1] == 'a') // Amplitude is next param
 				{
 					sineAmplitude = atof(argv[++_index]); // Convert the value to fp
+					if (sineAmplitude > 1 || sineAmplitude < 0) // Validate value gathered for amplitude
+					{
+						printf("\nValue given for sine wave amplitude is invalid. Halting.\n\n");
+						print_usage(argv[0]);
+						return(1);
+					}
 					sineDefault = 0; // No longer working with the default sine wave necessarily
 				} else if (argv[_index][1] == 'f') // Frequency is next param
 				{
 					sineFrequency = atoi(argv[++_index]); // Convert value to int
+					// Beware: frequency is not validated, user may specify absurd values.
 					sineDefault = 0; // No longer working with the default sine wave necessarily
+				} else if (argv[_index][1] == 'c') // Try to stop int16 overflow
+				{
+					checkOverflow = 1;
 				}
 			}
 		}
@@ -252,15 +295,21 @@ int main( int argc, char * argv[] )
 	fwrite(&input_header, sizeof(struct riffHeader), 1, output_file);
 
 	/**
+	 * Inform user of sine signal device and overflow method
+	 */
+	printf("Sine wave will be generated with %s.\n", (sineDefault) ? "static array" : "sin() function" );
+	printf("Overflow checking [will%s] be used.\n", (checkOverflow) ? "" : " not" );
+
+	/**
 	 * Process input file two samples at a time
 	 */
 	unsigned short int sample_size = sizeof(int16_t);
 	unsigned short int default_sine_index = 0;
+	printf("Processing samples... ");
 	for (_index = 0; _index < num_captures; ++_index)
 	{
 		// Local variables
-		int16_t sample_left, sample_right;
-		double _sinVal;
+		int16_t sample_left, sample_right, _sinVal;
 		// Pull next sample
 		fread(&sample_left, sample_size, 1, input_file);
 		fread(&sample_right, sample_size, 1, input_file);
@@ -290,12 +339,19 @@ int main( int argc, char * argv[] )
 			_sinVal = sin(2*M_PI*(samplePeriod*_index)*sineFrequency)*(sineAmplitude*SHRT_MAX);
 		}
 		// Generate modified sample
-		sample_left = sample_left + (_sinVal);
-		sample_right = sample_right + (_sinVal);
+		if (checkOverflow)
+		{
+			sample_left = safeAddition(sample_left, _sinVal);
+			sample_right = safeAddition(sample_right, _sinVal);
+		} else {
+			sample_left = sample_left + (_sinVal);
+			sample_right = sample_right + (_sinVal);
+		}
 		// Write modified samples to output stream
 		fwrite(&sample_left, sample_size, 1, output_file);
 		fwrite(&sample_right, sample_size, 1, output_file);
 	}
+	printf("Done!\n");
 
 	/**
 	 * End Clock
@@ -307,15 +363,16 @@ int main( int argc, char * argv[] )
 	 */
 	if (summary_file)
 	{
+		printf("Writing summary file.\n");
 		double file_time = (samplePeriod * _index);
 		fprintf(summary_file, "Summary File - CPE 381 - Christopher Bero\n");
 		fprintf(summary_file, "=========================================\n");
-		fprintf(summary_file, "%-30s %8dHz\n", "Sampling Frequency:", input_header.sample_rate);
-		fprintf(summary_file, "%-30s %9fs\n", "Audio Time:", file_time);
-		fprintf(summary_file, "%-30s %10d\n", "Maximum amplitude:", maxSampleAmplitude);
-		fprintf(summary_file, "   - %-25s %10d\n", "At sample #:", maxSampleIndex);
-		fprintf(summary_file, "   - %-25s %10d\n", "Channel #:", maxSampleChannel);
-		fprintf(summary_file, "%-30s %9fs\n", "Program Execution Time:", ((float)runTime / CLOCKS_PER_SEC));
+		fprintf(summary_file, "%-25s %13dHz\n", "Sampling Frequency:", input_header.sample_rate);
+		fprintf(summary_file, "%-25s %14fs\n", "Audio Time:", file_time);
+		fprintf(summary_file, "%-25s %15d\n", "Maximum amplitude:", maxSampleAmplitude);
+		fprintf(summary_file, "   - %-20s %15d\n", "At sample #:", maxSampleIndex);
+		fprintf(summary_file, "   - %-20s %15d\n", "Channel #:", maxSampleChannel);
+		fprintf(summary_file, "%-25s %14fs\n", "Program Execution Time:", ((float)runTime / CLOCKS_PER_SEC));
 		fclose(summary_file);
 	}
 
