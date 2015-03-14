@@ -24,6 +24,11 @@
  * [41-44]	- Size of data section in bytes.
  */
 
+/**
+ * Note:
+ * F2 and CTL+F2 auto hides code:blocks panels
+ */
+
  struct riffHeader {
     char 		riff[4]; 	// "RIFF"
     uint32_t 	size_file;
