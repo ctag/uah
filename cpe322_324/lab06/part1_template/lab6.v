@@ -20,7 +20,9 @@ module lab6(input SIG,CLOCK_50,output [6:0] HEX3,HEX2,HEX1,HEX0);
 
    // need to set the two parameters for this module in order
    // for it to generate the correct pulse rate 
-   count_enabler  #(??,????) C0(SIG,CLOCK_50,en_pulse);
+	
+	// Bero: Using Verilog 2001 syntax
+   count_enabler  #(.buswidth(16),.full_count(1771)) C0(SIG,CLOCK_50,en_pulse);
 
    d_ff           C1(SIG,CLOCK_50,cnt_clr);
 
@@ -121,9 +123,44 @@ endmodule
 // to the next value for each rising edge clock
 // cycle when the en input is '1'
 module bcd_counter(input clear,en,clk, output reg [15:0] o);
-
-   // Enter your Verilog HDL model for the 16 bit enabled
-   // BCD counter here!
+	/*
+	reg [15:0] counter = 0;
+	reg dig1[3:0];
+	reg dig2[3:0];
+	reg dig3[3:0];
+	reg dig4[3:0];
+	*/
+	reg doClear = 0;
+	reg doCount = 0;
+	
+   always @(posedge clk)
+	begin
+			o = o + en;
+			if (o[3:0] > 9)
+			begin
+				o[3:0] = 0;
+				o[7:4] = o[7:4] + 1;
+			end
+			if (o[7:4] > 9)
+			begin
+				o[7:4] = 0;
+				o[11:8] = o[11:8] + 1;
+			end
+			if (o[11:8] > 9)
+			begin
+				o[11:8] = 0;
+				o[15:12] = o[15:12] + 1;
+			end
+			if (o[15:12] > 9)
+			begin
+				o[15:12] = 0;
+				//o[7:4] = o[7:4] + 1;
+			end
+			if (clear)
+			begin
+				o = 0;
+			end
+	end
 
 endmodule
 

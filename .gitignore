@@ -66,7 +66,7 @@ Makefile*
 *.exe
 *.out
 *.app
-
+bin/
 
 ### C ###
 # Object files
