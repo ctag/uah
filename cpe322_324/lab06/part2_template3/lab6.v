@@ -48,7 +48,7 @@ module lab6(input SIG,CLOCK_50,output [6:0] HEX3,HEX2,HEX1,HEX0);
    // Do the following using an always @ procedural statement:
    always @(posedge CLOCK_50)
 
-      begin    
+      begin
       // measure the number of 0.01 uf time periods when sig=0 
       if (!sig)
          begin
@@ -57,7 +57,7 @@ module lab6(input SIG,CLOCK_50,output [6:0] HEX3,HEX2,HEX1,HEX0);
          // that is driven by the 50 Mhz clock is less than the
          // maximum count value -- if this is the case increment 
          // the value by one
-         if (count<????)
+         if (count<3543) // Manually entered, Bero
             count = count + 1;
          else
          
@@ -68,8 +68,8 @@ module lab6(input SIG,CLOCK_50,output [6:0] HEX3,HEX2,HEX1,HEX0);
             // count value to 0 to start a new count cycle
          
             // reset the 0.01 uf discharge time counter
-
-
+if (!SIG)
+				count = 0;
             
             //  increment BCD cap value count by 1. Do this only
             //  if cap value count has not reached the 9999 max. This will
@@ -77,11 +77,32 @@ module lab6(input SIG,CLOCK_50,output [6:0] HEX3,HEX2,HEX1,HEX0);
             //  are out of range.
             // You should in effect enter code that will increment
             // in BCD the count value by 1
-            
+        
+						bcdout = bcdout + 1;
+						if (bcdout[3:0] > 9)
+						begin
+							bcdout[3:0] = 0;
+							bcdout[7:4] = bcdout[7:4] + 1;
+						end
+						if (bcdout[7:4] > 9)
+						begin
+							bcdout[7:4] = 0;
+							bcdout[11:8] = bcdout[11:8] + 1;
+						end
+						if (bcdout[11:8] > 9)
+						begin
+							bcdout[11:8] = 0;
+							bcdout[15:12] = bcdout[15:12] + 1;
+						end
+						if (bcdout[15:12] > 9)
+						begin
+							bcdout[15:12] = 0;
+						end
             
             // Set the l_flg to enable first pass latching of display
             // variables and the clearing of binary count the next time
             // SIG is equal to a logic 1
+				l_flg = 1;
             end
          end
       // On the first clock cycle that sig=1 convert and latch the output
@@ -91,12 +112,16 @@ module lab6(input SIG,CLOCK_50,output [6:0] HEX3,HEX2,HEX1,HEX0);
          begin
          // when l_flg is true it is the first 50 Mhz clock cycle that
          // sig = 1
-            
+            if (l_flg)
+				begin
             // drive the appropriate seven segment dispaly (use
             // the bintohex task)
-            
+            bintohex(bcdout[15:12], HEX3);
+				bintohex(bcdout[11:8], HEX2);
+				bintohex(bcdout[7:4], HEX1);
+				bintohex(bcdout[3:0], HEX0);
             // clear the capacitance BCD count value
-            
+            count = 0;
             // set the 0.01 uf capacitance counter to the midrange
             // value to allow it to be offset by one half of its
             // maximum value -- this allows it to round up values
@@ -104,6 +129,8 @@ module lab6(input SIG,CLOCK_50,output [6:0] HEX3,HEX2,HEX1,HEX0);
             
             // reset the l_flg to false -- this allows only one
             // pass through this outputing and reseting phase
+				l_flg = 0;
+				end
          end
       end   
    // binary to 7-seg hexadecimal output task
