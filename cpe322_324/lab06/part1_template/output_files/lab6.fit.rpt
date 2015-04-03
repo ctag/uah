@@ -1,5 +1,5 @@
 Fitter report for lab6
-Fri Mar 20 13:50:00 2015
+Fri Apr 03 00:13:55 2015
 Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
 
 
@@ -66,7 +66,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------------+
 ; Fitter Summary                                                                        ;
 +------------------------------------+--------------------------------------------------+
-; Fitter Status                      ; Successful - Fri Mar 20 13:50:00 2015            ;
+; Fitter Status                      ; Successful - Fri Apr 03 00:13:55 2015            ;
 ; Quartus II 32-bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version ;
 ; Revision Name                      ; lab6                                             ;
 ; Top-level Entity Name              ; lab6                                             ;
@@ -153,12 +153,12 @@ applicable agreement for further details.
 ; Number detected on machine ; 2           ;
 ; Maximum allowed            ; 2           ;
 ;                            ;             ;
-; Average used               ; 1.39        ;
+; Average used               ; 1.30        ;
 ; Maximum used               ; 2           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;  39.1%      ;
+;     Processor 2            ;  30.4%      ;
 +----------------------------+-------------+
 
 
@@ -1884,7 +1884,7 @@ Info (170194): Fitter routing operations ending: elapsed time is 00:00:01
 Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info (170201): Optimizations that may affect the design's routability were skipped
     Info (170200): Optimizations that may affect the design's timing were skipped
-Info (11888): Total time spent on timing analysis during the Fitter is 0.23 seconds.
+Info (11888): Total time spent on timing analysis during the Fitter is 0.27 seconds.
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
@@ -1892,9 +1892,9 @@ Info (334004): Delay annotation completed successfully
 Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:02
 Info (144001): Generated suppressed messages file C:/Users/csb0019/Documents/uah/cpe322_324/lab06/part1_template/output_files/lab6.fit.smsg
 Info: Quartus II 32-bit Fitter was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 707 megabytes
-    Info: Processing ended: Fri Mar 20 13:50:01 2015
-    Info: Elapsed time: 00:00:26
+    Info: Peak virtual memory: 697 megabytes
+    Info: Processing ended: Fri Apr 03 00:13:56 2015
+    Info: Elapsed time: 00:00:25
     Info: Total CPU time (on all processors): 00:00:28
 
 

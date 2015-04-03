@@ -57,7 +57,7 @@ module lab6(input SIG,CLOCK_50,output [6:0] HEX3,HEX2,HEX1,HEX0);
          // that is driven by the 50 Mhz clock is less than the
          // maximum count value -- if this is the case increment 
          // the value by one
-         if (count<3543) // Manually entered, Bero
+         if (count<1771) // Manually entered, Bero
             count = count + 1;
          else
          
@@ -121,7 +121,8 @@ if (!SIG)
 				bintohex(bcdout[7:4], HEX1);
 				bintohex(bcdout[3:0], HEX0);
             // clear the capacitance BCD count value
-            count = 0;
+            bcdout = 0;
+				count = 0;
             // set the 0.01 uf capacitance counter to the midrange
             // value to allow it to be offset by one half of its
             // maximum value -- this allows it to round up values

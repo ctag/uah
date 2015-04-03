@@ -1,5 +1,5 @@
 Assembler report for lab6
-Fri Mar 20 13:50:10 2015
+Fri Apr 03 00:14:06 2015
 Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Fri Mar 20 13:50:10 2015 ;
+; Assembler Status      ; Successful - Fri Apr 03 00:14:06 2015 ;
 ; Revision Name         ; lab6                                  ;
 ; Top-level Entity Name ; lab6                                  ;
 ; Family                ; Cyclone IV E                          ;
@@ -103,13 +103,13 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 32-bit Assembler
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
-    Info: Processing started: Fri Mar 20 13:50:01 2015
+    Info: Processing started: Fri Apr 03 00:13:57 2015
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off lab6 -c lab6
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus II 32-bit Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 358 megabytes
-    Info: Processing ended: Fri Mar 20 13:50:10 2015
+    Info: Peak virtual memory: 355 megabytes
+    Info: Processing ended: Fri Apr 03 00:14:06 2015
     Info: Elapsed time: 00:00:09
     Info: Total CPU time (on all processors): 00:00:08
 

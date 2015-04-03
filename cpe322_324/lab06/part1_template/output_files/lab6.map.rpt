@@ -1,5 +1,5 @@
 Analysis & Synthesis report for lab6
-Fri Mar 20 13:49:34 2015
+Fri Apr 03 00:13:30 2015
 Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
 
 
@@ -46,7 +46,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                          ;
 +------------------------------------+--------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Mar 20 13:49:34 2015            ;
+; Analysis & Synthesis Status        ; Successful - Fri Apr 03 00:13:30 2015            ;
 ; Quartus II 32-bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version ;
 ; Revision Name                      ; lab6                                             ;
 ; Top-level Entity Name              ; lab6                                             ;
@@ -301,7 +301,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 32-bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
-    Info: Processing started: Fri Mar 20 13:49:31 2015
+    Info: Processing started: Fri Apr 03 00:13:27 2015
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off lab6 -c lab6
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 6 design units, including 6 entities, in source file lab6.v
@@ -336,8 +336,8 @@ Info (21057): Implemented 159 device resources after synthesis - the final resou
     Info (21059): Implemented 28 output pins
     Info (21061): Implemented 129 logic cells
 Info: Quartus II 32-bit Analysis & Synthesis was successful. 0 errors, 8 warnings
-    Info: Peak virtual memory: 351 megabytes
-    Info: Processing ended: Fri Mar 20 13:49:34 2015
+    Info: Peak virtual memory: 348 megabytes
+    Info: Processing ended: Fri Apr 03 00:13:30 2015
     Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:03
 

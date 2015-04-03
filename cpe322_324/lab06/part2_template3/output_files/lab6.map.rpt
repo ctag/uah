@@ -1,5 +1,5 @@
 Analysis & Synthesis report for lab6
-Fri Mar 20 14:24:08 2015
+Fri Apr 03 00:11:29 2015
 Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
 
 
@@ -43,7 +43,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                          ;
 +------------------------------------+--------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Mar 20 14:24:08 2015            ;
+; Analysis & Synthesis Status        ; Successful - Fri Apr 03 00:11:29 2015            ;
 ; Quartus II 32-bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version ;
 ; Revision Name                      ; lab6                                             ;
 ; Top-level Entity Name              ; lab6                                             ;
@@ -182,9 +182,9 @@ applicable agreement for further details.
 ;                                             ;                ;
 ; Total combinational functions               ; 110            ;
 ; Logic element usage by number of LUT inputs ;                ;
-;     -- 4 input functions                    ; 63             ;
-;     -- 3 input functions                    ; 12             ;
-;     -- <=2 input functions                  ; 35             ;
+;     -- 4 input functions                    ; 52             ;
+;     -- 3 input functions                    ; 18             ;
+;     -- <=2 input functions                  ; 40             ;
 ;                                             ;                ;
 ; Logic elements by mode                      ;                ;
 ;     -- normal mode                          ; 85             ;
@@ -198,8 +198,8 @@ applicable agreement for further details.
 ; Embedded Multiplier 9-bit elements          ; 0              ;
 ; Maximum fan-out node                        ; CLOCK_50~input ;
 ; Maximum fan-out                             ; 58             ;
-; Total fan-out                               ; 583            ;
-; Average fan-out                             ; 2.56           ;
+; Total fan-out                               ; 571            ;
+; Average fan-out                             ; 2.50           ;
 +---------------------------------------------+----------------+
 
 
@@ -219,7 +219,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
 ; Total registers                              ; 58    ;
-; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Clear  ; 4     ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
@@ -233,7 +233,11 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
-; 5:1                ; 11 bits   ; 33 LEs        ; 11 LEs               ; 22 LEs                 ; Yes        ; |lab6|count[10]            ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |lab6|bcdout[2]            ;
+; 5:1                ; 3 bits    ; 9 LEs         ; 3 LEs                ; 6 LEs                  ; Yes        ; |lab6|bcdout[7]            ;
+; 5:1                ; 3 bits    ; 9 LEs         ; 3 LEs                ; 6 LEs                  ; Yes        ; |lab6|bcdout[11]           ;
+; 5:1                ; 3 bits    ; 9 LEs         ; 3 LEs                ; 6 LEs                  ; Yes        ; |lab6|bcdout[15]           ;
+; 5:1                ; 11 bits   ; 33 LEs        ; 11 LEs               ; 22 LEs                 ; Yes        ; |lab6|count[2]             ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
 
 
@@ -252,7 +256,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II 32-bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
-    Info: Processing started: Fri Mar 20 14:24:05 2015
+    Info: Processing started: Fri Apr 03 00:11:26 2015
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off lab6 -c lab6
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file lab6.v
@@ -272,8 +276,8 @@ Info (21057): Implemented 141 device resources after synthesis - the final resou
     Info (21059): Implemented 28 output pins
     Info (21061): Implemented 111 logic cells
 Info: Quartus II 32-bit Analysis & Synthesis was successful. 0 errors, 5 warnings
-    Info: Peak virtual memory: 347 megabytes
-    Info: Processing ended: Fri Mar 20 14:24:08 2015
+    Info: Peak virtual memory: 344 megabytes
+    Info: Processing ended: Fri Apr 03 00:11:29 2015
     Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:03
 
