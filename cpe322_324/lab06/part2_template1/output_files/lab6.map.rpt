@@ -1,6 +1,6 @@
 Analysis & Synthesis report for lab6
-Sat Feb 21 10:40:09 2015
-Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
+Fri Apr 03 00:00:14 2015
+Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
 
 
 ---------------------
@@ -42,8 +42,8 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                          ;
 +------------------------------------+--------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Feb 21 10:40:09 2015            ;
-; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version ;
+; Analysis & Synthesis Status        ; Successful - Fri Apr 03 00:00:14 2015            ;
+; Quartus II 32-bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version ;
 ; Revision Name                      ; lab6                                             ;
 ; Top-level Entity Name              ; lab6                                             ;
 ; Family                             ; Cyclone IV E                                     ;
@@ -151,25 +151,25 @@ applicable agreement for further details.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 4           ;
-; Maximum allowed            ; 4           ;
+; Number detected on machine ; 2           ;
+; Maximum allowed            ; 2           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
 ; Maximum used               ; 1           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processors 2-4         ;   0.0%      ;
+;     Processor 2            ;   0.0%      ;
 +----------------------------+-------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                     ;
-+----------------------------------+-----------------+------------------------+------------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                                       ; Library ;
-+----------------------------------+-----------------+------------------------+------------------------------------------------------------------------------------+---------+
-; lab6.v                           ; yes             ; User Verilog HDL File  ; C:/Users/wells/Documents/cpe324_sp_15/labs/lab6/cpe324_lab6_part2_template1/lab6.v ;         ;
-+----------------------------------+-----------------+------------------------+------------------------------------------------------------------------------------+---------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                         ;
++----------------------------------+-----------------+------------------------+------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                           ; Library ;
++----------------------------------+-----------------+------------------------+------------------------------------------------------------------------+---------+
+; lab6.v                           ; yes             ; User Verilog HDL File  ; C:/Users/csb0019/Documents/uah/cpe322_324/lab06/part2_template1/lab6.v ;         ;
++----------------------------------+-----------------+------------------------+------------------------------------------------------------------------+---------+
 
 
 +-----------------------------------------------------+
@@ -239,14 +239,15 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
-Info: Running Quartus II 64-Bit Analysis & Synthesis
+Info: Running Quartus II 32-bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
-    Info: Processing started: Sat Feb 21 10:40:07 2015
+    Info: Processing started: Fri Apr 03 00:00:11 2015
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off lab6 -c lab6
-Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file lab6.v
     Info (12023): Found entity 1: lab6
 Info (12127): Elaborating entity "lab6" for the top level hierarchy
+Warning (10036): Verilog HDL or VHDL warning at lab6.v(8): object "l_flg" assigned a value but never read
 Warning (10036): Verilog HDL or VHDL warning at lab6.v(12): object "count" assigned a value but never read
 Warning (10034): Output port "HEX3" at lab6.v(6) has no driver
 Warning (10034): Output port "HEX2" at lab6.v(6) has no driver
@@ -282,7 +283,7 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "HEX0[4]" is stuck at GND
     Warning (13410): Pin "HEX0[5]" is stuck at GND
     Warning (13410): Pin "HEX0[6]" is stuck at GND
-Info (144001): Generated suppressed messages file C:/Users/wells/Documents/cpe324_sp_15/labs/lab6/cpe324_lab6_part2_template1/output_files/lab6.map.smsg
+Info (144001): Generated suppressed messages file C:/Users/csb0019/Documents/uah/cpe322_324/lab06/part2_template1/output_files/lab6.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 2 input pin(s) that do not drive logic
@@ -291,16 +292,16 @@ Warning (21074): Design contains 2 input pin(s) that do not drive logic
 Info (21057): Implemented 30 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 2 input pins
     Info (21059): Implemented 28 output pins
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 38 warnings
-    Info: Peak virtual memory: 436 megabytes
-    Info: Processing ended: Sat Feb 21 10:40:09 2015
-    Info: Elapsed time: 00:00:02
-    Info: Total CPU time (on all processors): 00:00:01
+Info: Quartus II 32-bit Analysis & Synthesis was successful. 0 errors, 39 warnings
+    Info: Peak virtual memory: 336 megabytes
+    Info: Processing ended: Fri Apr 03 00:00:14 2015
+    Info: Elapsed time: 00:00:03
+    Info: Total CPU time (on all processors): 00:00:02
 
 
 +------------------------------------------+
 ; Analysis & Synthesis Suppressed Messages ;
 +------------------------------------------+
-The suppressed messages can be found in C:/Users/wells/Documents/cpe324_sp_15/labs/lab6/cpe324_lab6_part2_template1/output_files/lab6.map.smsg.
+The suppressed messages can be found in C:/Users/csb0019/Documents/uah/cpe322_324/lab06/part2_template1/output_files/lab6.map.smsg.
 
 

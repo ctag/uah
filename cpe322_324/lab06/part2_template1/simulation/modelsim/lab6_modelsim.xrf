@@ -1,7 +1,7 @@
 vendor_name = ModelSim
-source_file = 1, C:/Users/wells/Documents/cpe324_sp_15/labs/lab6/cpe324_lab6_part2_template1/lab6.v
-source_file = 1, C:/Users/wells/Documents/cpe324_sp_15/labs/lab6/cpe324_lab6_part2_template1/db/lab6.cbx.xml
-source_file = 1, C:/Users/wells/Documents/cpe324_sp_15/labs/lab6/cpe324_lab6_part2_template1/lab6.sdc
+source_file = 1, C:/Users/csb0019/Documents/uah/cpe322_324/lab06/part2_template1/lab6.v
+source_file = 1, C:/Users/csb0019/Documents/uah/cpe322_324/lab06/part2_template1/db/lab6.cbx.xml
+source_file = 1, C:/Users/csb0019/Documents/uah/cpe322_324/lab06/part2_template1/lab6.sdc
 design_name = lab6
 instance = comp, \HEX3[0]~output , HEX3[0]~output, lab6, 1
 instance = comp, \HEX3[1]~output , HEX3[1]~output, lab6, 1
