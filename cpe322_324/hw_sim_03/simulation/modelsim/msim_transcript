@@ -1,0 +1,54 @@
+# Reading C:/altera/13.0sp1/modelsim_ase/tcl/vsim/pref.tcl 
+# do DS1620_INTERFACE_run_msim_rtl_verilog.do 
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Copying C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# ** Warning: Copied C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini.
+#          Updated modelsim.ini.
+# 
+# vlog -vlog01compat -work work +incdir+C:/Users/csb0019/Documents/uah/cpe322_324/hw_sim_03 {C:/Users/csb0019/Documents/uah/cpe322_324/hw_sim_03/ds1620_interface.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module DS1620_INTERFACE
+# 
+# Top level modules:
+# 	DS1620_INTERFACE
+# 
+vsim work.DS1620_INTERFACE
+# vsim work.DS1620_INTERFACE 
+# Loading work.DS1620_INTERFACE
+vsim work.DS1620_INTERFACE
+# vsim work.DS1620_INTERFACE 
+# Loading work.DS1620_INTERFACE
+add wave -position insertpoint  \
+sim:/DS1620_INTERFACE/CLR \
+sim:/DS1620_INTERFACE/CLK_IN \
+sim:/DS1620_INTERFACE/TEMP \
+sim:/DS1620_INTERFACE/CLK_OUT \
+sim:/DS1620_INTERFACE/RST \
+sim:/DS1620_INTERFACE/TRI_EN \
+sim:/DS1620_INTERFACE/DQ_IN \
+sim:/DS1620_INTERFACE/DQ_OUT \
+sim:/DS1620_INTERFACE/count \
+sim:/DS1620_INTERFACE/dq_out_buff
+force CLR 1 0, 0 100
+
+force DQ_IN 1 0, 0 40 -repeat 80
+
+force CLK_IN 0 0, 1 20 -repeat 40
+
+run 4000
+add list  \
+sim:/DS1620_INTERFACE/CLR \
+sim:/DS1620_INTERFACE/CLK_IN \
+sim:/DS1620_INTERFACE/TEMP \
+sim:/DS1620_INTERFACE/CLK_OUT \
+sim:/DS1620_INTERFACE/RST \
+sim:/DS1620_INTERFACE/TRI_EN \
+sim:/DS1620_INTERFACE/DQ_IN \
+sim:/DS1620_INTERFACE/DQ_OUT \
+sim:/DS1620_INTERFACE/count \
+sim:/DS1620_INTERFACE/dq_out_buff

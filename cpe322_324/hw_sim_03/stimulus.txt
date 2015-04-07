@@ -9,10 +9,10 @@
 
 #add wave Bin reset clk Bout
 
-force CLR 1 0
+force CLR 1 0, 0 100
 
-force DQ_IN 1 0, 0 40 -repeat 50
+force DQ_IN 1 0, 0 40 -repeat 80
 
-force CLK_IN 0 0, 1 20 - repeat 100
+force CLK_IN 0 0, 1 20 -repeat 40
 
-run 2000
+run 4000

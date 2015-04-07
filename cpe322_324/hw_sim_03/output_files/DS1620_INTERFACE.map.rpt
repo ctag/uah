@@ -1,0 +1,398 @@
+Analysis & Synthesis report for DS1620_INTERFACE
+Tue Apr 07 17:53:44 2015
+Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. User-Specified and Inferred Latches
+  9. General Register Statistics
+ 10. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 11. Elapsed Time Per Partition
+ 12. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++---------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                          ;
++------------------------------------+--------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Tue Apr 07 17:53:44 2015            ;
+; Quartus II 32-bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version ;
+; Revision Name                      ; DS1620_INTERFACE                                 ;
+; Top-level Entity Name              ; DS1620_INTERFACE                                 ;
+; Family                             ; Cyclone IV E                                     ;
+; Total logic elements               ; 91                                               ;
+;     Total combinational functions  ; 91                                               ;
+;     Dedicated logic registers      ; 0                                                ;
+; Total registers                    ; 0                                                ;
+; Total pins                         ; 16                                               ;
+; Total virtual pins                 ; 0                                                ;
+; Total memory bits                  ; 0                                                ;
+; Embedded Multiplier 9-bit elements ; 0                                                ;
+; Total PLLs                         ; 0                                                ;
++------------------------------------+--------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP4CE115F29C7      ;                    ;
+; Top-level entity name                                                      ; DS1620_INTERFACE   ; DS1620_INTERFACE   ;
+; Family name                                                                ; Cyclone IV E       ; Cyclone IV GX      ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                  ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                       ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 2           ;
+; Maximum allowed            ; 2           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.0%      ;
++----------------------------+-------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                         ;
++----------------------------------+-----------------+------------------------+------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                           ; Library ;
++----------------------------------+-----------------+------------------------+------------------------------------------------------------------------+---------+
+; ds1620_interface.v               ; yes             ; User Verilog HDL File  ; C:/Users/csb0019/Documents/uah/cpe322_324/hw_sim_03/ds1620_interface.v ;         ;
++----------------------------------+-----------------+------------------------+------------------------------------------------------------------------+---------+
+
+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimated Total logic elements              ; 91        ;
+;                                             ;           ;
+; Total combinational functions               ; 91        ;
+; Logic element usage by number of LUT inputs ;           ;
+;     -- 4 input functions                    ; 19        ;
+;     -- 3 input functions                    ; 43        ;
+;     -- <=2 input functions                  ; 29        ;
+;                                             ;           ;
+; Logic elements by mode                      ;           ;
+;     -- normal mode                          ; 79        ;
+;     -- arithmetic mode                      ; 12        ;
+;                                             ;           ;
+; Total registers                             ; 0         ;
+;     -- Dedicated logic registers            ; 0         ;
+;     -- I/O registers                        ; 0         ;
+;                                             ;           ;
+; I/O pins                                    ; 16        ;
+; Embedded Multiplier 9-bit elements          ; 0         ;
+; Maximum fan-out node                        ; CLR~input ;
+; Maximum fan-out                             ; 27        ;
+; Total fan-out                               ; 290       ;
+; Average fan-out                             ; 2.36      ;
++---------------------------------------------+-----------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                         ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
+; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ; Library Name ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
+; |DS1620_INTERFACE          ; 91 (91)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 16   ; 0            ; |DS1620_INTERFACE   ; work         ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++----------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                ;
++-----------------------------------------------------+---------------------+------------------------+
+; Latch Name                                          ; Latch Enable Signal ; Free of Timing Hazards ;
++-----------------------------------------------------+---------------------+------------------------+
+; TEMP[0]$latch                                       ; TEMP[8]             ; yes                    ;
+; TEMP[1]$latch                                       ; TEMP[8]             ; yes                    ;
+; TEMP[2]$latch                                       ; TEMP[8]             ; yes                    ;
+; TEMP[3]$latch                                       ; TEMP[8]             ; yes                    ;
+; TEMP[4]$latch                                       ; TEMP[8]             ; yes                    ;
+; TEMP[5]$latch                                       ; TEMP[8]             ; yes                    ;
+; TEMP[6]$latch                                       ; TEMP[8]             ; yes                    ;
+; TEMP[7]$latch                                       ; TEMP[8]             ; yes                    ;
+; TEMP[8]$latch                                       ; TEMP[8]             ; yes                    ;
+; CLK_OUT$latch                                       ; CLK_OUT             ; yes                    ;
+; RST$latch                                           ; RST                 ; yes                    ;
+; TRI_EN$latch                                        ; RST                 ; yes                    ;
+; DQ_OUT$latch                                        ; RST                 ; yes                    ;
+; dq_out_buff[0]                                      ; dq_out_buff[0]      ; yes                    ;
+; count[3]                                            ; CLK_IN              ; yes                    ;
+; count[1]                                            ; CLK_IN              ; yes                    ;
+; count[2]                                            ; CLK_IN              ; yes                    ;
+; count[0]                                            ; CLK_IN              ; yes                    ;
+; count[4]                                            ; CLK_IN              ; yes                    ;
+; dq_out_buff[1]                                      ; dq_out_buff[0]      ; yes                    ;
+; dq_out_buff[2]                                      ; dq_out_buff[0]      ; yes                    ;
+; dq_out_buff[3]                                      ; dq_out_buff[0]      ; yes                    ;
+; dq_out_buff[4]                                      ; dq_out_buff[0]      ; yes                    ;
+; dq_out_buff[5]                                      ; dq_out_buff[0]      ; yes                    ;
+; dq_out_buff[6]                                      ; dq_out_buff[0]      ; yes                    ;
+; dq_out_buff[7]                                      ; dq_out_buff[0]      ; yes                    ;
+; dq_out_buff[8]                                      ; dq_out_buff[0]      ; yes                    ;
+; Number of user-specified and inferred latches = 27  ;                     ;                        ;
++-----------------------------------------------------+---------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 0     ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------+
+; 3:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; No         ; |DS1620_INTERFACE|dq_out_buff[8] ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:01     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 32-bit Analysis & Synthesis
+    Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
+    Info: Processing started: Tue Apr 07 17:53:41 2015
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off DS1620_INTERFACE -c DS1620_INTERFACE
+Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file ds1620_interface.v
+    Info (12023): Found entity 1: DS1620_INTERFACE
+Info (12127): Elaborating entity "DS1620_INTERFACE" for the top level hierarchy
+Warning (10235): Verilog HDL Always Construct warning at ds1620_interface.v(59): variable "count" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at ds1620_interface.v(65): variable "count" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at ds1620_interface.v(67): variable "count" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at ds1620_interface.v(70): variable "CLR" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at ds1620_interface.v(84): variable "count" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at ds1620_interface.v(92): variable "count" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at ds1620_interface.v(100): variable "count" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at ds1620_interface.v(108): variable "count" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at ds1620_interface.v(109): variable "dq_out_buff" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at ds1620_interface.v(110): variable "DQ_IN" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at ds1620_interface.v(114): variable "count" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10230): Verilog HDL assignment warning at ds1620_interface.v(115): truncated value with size 32 to match size of target (9)
+Warning (10235): Verilog HDL Always Construct warning at ds1620_interface.v(119): variable "count" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at ds1620_interface.v(122): variable "count" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10230): Verilog HDL assignment warning at ds1620_interface.v(122): truncated value with size 32 to match size of target (5)
+Warning (10240): Verilog HDL Always Construct warning at ds1620_interface.v(56): inferring latch(es) for variable "CLK_OUT", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at ds1620_interface.v(56): inferring latch(es) for variable "count", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at ds1620_interface.v(56): inferring latch(es) for variable "dq_out_buff", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at ds1620_interface.v(56): inferring latch(es) for variable "TEMP", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at ds1620_interface.v(56): inferring latch(es) for variable "RST", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at ds1620_interface.v(56): inferring latch(es) for variable "DQ_OUT", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at ds1620_interface.v(56): inferring latch(es) for variable "TRI_EN", which holds its previous value in one or more paths through the always construct
+Info (10041): Inferred latch for "TRI_EN" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "DQ_OUT" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "RST" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "TEMP[0]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "TEMP[1]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "TEMP[2]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "TEMP[3]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "TEMP[4]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "TEMP[5]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "TEMP[6]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "TEMP[7]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "TEMP[8]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "dq_out_buff[0]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "dq_out_buff[1]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "dq_out_buff[2]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "dq_out_buff[3]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "dq_out_buff[4]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "dq_out_buff[5]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "dq_out_buff[6]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "dq_out_buff[7]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "dq_out_buff[8]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "count[0]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "count[1]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "count[2]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "count[3]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "count[4]" at ds1620_interface.v(62)
+Info (10041): Inferred latch for "CLK_OUT" at ds1620_interface.v(62)
+Warning (13012): Latch TEMP[0]$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal CLR
+Warning (13012): Latch TEMP[1]$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal CLR
+Warning (13012): Latch TEMP[2]$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal CLR
+Warning (13012): Latch TEMP[3]$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal CLR
+Warning (13012): Latch TEMP[4]$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal CLR
+Warning (13012): Latch TEMP[5]$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal CLR
+Warning (13012): Latch TEMP[6]$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal CLR
+Warning (13012): Latch TEMP[7]$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal CLR
+Warning (13012): Latch TEMP[8]$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal CLR
+Warning (13012): Latch CLK_OUT$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal CLK_IN
+Warning (13012): Latch dq_out_buff[0] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal CLR
+Warning (13012): Latch dq_out_buff[1] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal CLR
+Warning (13012): Latch dq_out_buff[2] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal CLR
+Warning (13012): Latch dq_out_buff[3] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal CLR
+Warning (13012): Latch dq_out_buff[4] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal CLR
+Warning (13012): Latch dq_out_buff[5] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal CLR
+Warning (13012): Latch dq_out_buff[6] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal CLR
+Warning (13012): Latch dq_out_buff[7] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal CLR
+Warning (13012): Latch dq_out_buff[8] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal CLR
+Info (286030): Timing-Driven Synthesis is running
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 107 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 3 input pins
+    Info (21059): Implemented 13 output pins
+    Info (21061): Implemented 91 logic cells
+Info: Quartus II 32-bit Analysis & Synthesis was successful. 0 errors, 60 warnings
+    Info: Peak virtual memory: 340 megabytes
+    Info: Processing ended: Tue Apr 07 17:53:44 2015
+    Info: Elapsed time: 00:00:03
+    Info: Total CPU time (on all processors): 00:00:03
+
+

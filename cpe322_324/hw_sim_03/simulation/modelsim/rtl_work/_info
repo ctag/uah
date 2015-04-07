@@ -1,0 +1,26 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\csb0019\Documents\uah\cpe322_324\hw_sim_03\simulation\modelsim
+vDS1620_INTERFACE
+!i10b 1
+!s100 e^OTQJlVnRz[0n3e^C@Gc3
+IFeITPV@XMG3=dX=zHEK>Y0
+V^ScN7<=@Mn=ne@eOYNe`R0
+Z1 dC:\Users\csb0019\Documents\uah\cpe322_324\hw_sim_03\simulation\modelsim
+w1428447220
+8C:/Users/csb0019/Documents/uah/cpe322_324/hw_sim_03/ds1620_interface.v
+FC:/Users/csb0019/Documents/uah/cpe322_324/hw_sim_03/ds1620_interface.v
+L0 39
+OV;L;10.1d;51
+r1
+!s85 0
+31
+!s108 1428447393.938000
+!s107 C:/Users/csb0019/Documents/uah/cpe322_324/hw_sim_03/ds1620_interface.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/csb0019/Documents/uah/cpe322_324/hw_sim_03|C:/Users/csb0019/Documents/uah/cpe322_324/hw_sim_03/ds1620_interface.v|
+!s101 -O0
+o-vlog01compat -work work -O0
+!s92 -vlog01compat -work work +incdir+C:/Users/csb0019/Documents/uah/cpe322_324/hw_sim_03 -O0
+n@d@s1620_@i@n@t@e@r@f@a@c@e

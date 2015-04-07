@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Tue Apr 07 17:53:44 2015
+Quartus II 32-bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version
+Revision Name : DS1620_INTERFACE
+Top-level Entity Name : DS1620_INTERFACE
+Family : Cyclone IV E
+Total logic elements : 91
+    Total combinational functions : 91
+    Dedicated logic registers : 0
+Total registers : 0
+Total pins : 16
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0
