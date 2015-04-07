@@ -39,6 +39,107 @@
 module DS1620_INTERFACE(input CLR, CLK_IN, output reg [8:0] TEMP,
    output CLK_OUT,RST,TRI_EN, input DQ_IN, output reg DQ_OUT);
 
-// Enter your model for the DS1620_INTERFACE HERE!
+reg count[4:0];
+reg dq_out_buff[8:0];
 
+initial
+begin
+	count = 0;
+	dq_out_buff = 0;
+	DQ_OUT = 0;
+	TEMP = 0;
+	CLK_OUT = 1;
+	RST = 0;
+	TRI_EN = 0;
+end
+
+always @(CLK_IN)
+begin
+if (CLK_IN == 1) // posedge
+begin
+	// Handle clk_out
+	if (count > 1 && count < 19)
+		CLK_OUT = CLK_IN;
+	else if (count == 26 || count == 27)
+		CLK_OUT = 0;
+	else
+		CLK_OUT = 1;
+	
+	if (CLR)
+	begin
+		count = 1;
+		dq_out_buff = 0;
+		TEMP = 0;
+		CLK_OUT = 1;
+	end
+	else // CLR not set
+	begin
+		if (count > 31) begin
+			count = 1; // Proceed to loop
+		end
+		
+		// Handle RST output
+		if (count < 20) begin
+			RST = 1;
+		end
+		else begin
+			RST = 0;
+		end
+		
+		// Handle DQ_OUT
+		if (count == 2 || count == 4 || count == 6 || count == 8) begin
+			DQ_OUT = 0;
+		end
+		else begin
+			DQ_out = 1;
+		end
+		
+		// Handle TRI_EN output
+		if (count > 1 && count < 11) begin
+			TRI_EN = 1;
+		end
+		else begin
+			TRI_EN = 0;
+		end
+		
+		// Handle Filling DQ_OUT_BUFF
+		if (count > 9 && count < 19) begin
+			DQ_OUT_BUFF = DQ_OUT_BUFF << 1; // make room to load next input
+			DQ_OUT_BUFF[0] = DQ_IN;
+		end
+		
+		// Handle TEMP output
+		if (count == 19) begin
+			TEMP = (!DQ_OUT_BUFF)+1;
+		end
+		
+		count = count + 1; // Prep for next clock cycle
+	end
+end
+
+else // CLK_IN is negedge
+begin // Only concerned with clk_out
+	CLK_OUT = CLK_IN;
+end
+
+end
 endmodule
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
