@@ -12,8 +12,8 @@
 /*
  * Project Header
  */
-#include "waver.h"
-#include "fdacoefs.h"
+#include "main.h"
+#include "fircoefs.h"
 
 /*
  * Print a formatting bar
@@ -87,6 +87,12 @@ void print_usage (char program[])
 	print_bar();
 }
 
+int16_t iterate_fir (int16_t * sample_left, int16_t * sample_right)
+{
+	//
+	return 0;
+}
+
 /*
  * Main method
  */
@@ -96,7 +102,6 @@ int main( int argc, char * argv[] )
 	 * Setup Clock
 	 */
 	clock_t runTime; // Create clock
-	runTime = clock(); // Assign current CLOCK_TICKS
 
 	/**
 	 * Print Header
@@ -218,14 +223,11 @@ int main( int argc, char * argv[] )
 
 	/**
 	 * Read input file header
-	 * Parse
-	 * Print Header Details
-	 * Write output file header
 	 */
 	// Get header from input file
 	fread(&input_header, sizeof(struct riffHeader), 1, input_file);
 	// Perform some basic error checking.
-	if (input_header.channels != 2)
+	if (input_header.channels > 2 || input_header.channels < 1)
 	{
 		printf("Wrong number of channels. Halting.");
 		return(1);
@@ -241,7 +243,9 @@ int main( int argc, char * argv[] )
 		return(1);
 	}
 
-	// Parse header
+	/**
+	 * Parse header
+	 */
 	samplePeriod = (1.0 / input_header.sample_rate);
 	num_bytes = (input_header.size_data-8);
 	num_samples = num_bytes/2;
@@ -252,7 +256,7 @@ int main( int argc, char * argv[] )
 	fwrite(&input_header, sizeof(struct riffHeader), 1, output_file);
 
 	/**
-	 * Process input file two samples at a time
+	 * Setup variables for processing loop
 	 */
 	unsigned short int sample_size = sizeof(int16_t);
 	int filter_size = 0;
@@ -270,8 +274,17 @@ int main( int argc, char * argv[] )
 		filter_left[_index] = 0;
 		filter_right[_index] = 0;
 	}
-
 	printf("Processing samples... ");
+	fflush(stdout);
+
+	/**
+	 * Start timer
+	 */
+	runTime = clock(); // Assign current CLOCK_TICKS
+
+	/**
+	 * Process input file two samples (one capture) at a time
+	 */
 	for (_index = 0; _index < num_captures; ++_index)
 	{
 		// Local variables
@@ -353,9 +366,12 @@ int main( int argc, char * argv[] )
 		fclose(summary_file);
 	}
 
-	// Tidy up file streams
+	/**
+	 * Close file streams
+	 */
 	fclose(input_file);
 	fclose(output_file);
+
     return(0);
 }
 

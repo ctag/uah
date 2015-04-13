@@ -4,6 +4,14 @@
 #define WAVER_H_INCLUDED
 
 /**
+ * Sampling struct
+ */
+typedef struct {
+    int16_t l; // Left (or mono) channel
+    int16_t r; // Right channel
+}sample;
+
+/**
  * Default Sine Wave:
  * Generated with MATLAB R2012a
  * Amplitude: 0.25*(32767)

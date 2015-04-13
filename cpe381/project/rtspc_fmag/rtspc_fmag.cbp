@@ -11,6 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters='&quot;-i bero_christopher-csb_orig.wav -o tmp.dat&quot;' />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
@@ -31,9 +32,19 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="_kiss_fft_guts.h" />
+		<Unit filename="kiss_fft.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="kiss_fft.h" />
+		<Unit filename="kiss_fftr.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="kiss_fftr.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="waver.h" />
 		<Extensions>
 			<envvars />
 			<code_completion />
