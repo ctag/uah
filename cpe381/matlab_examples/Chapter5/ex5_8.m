@@ -17,9 +17,17 @@ x=t*m+m1*(-t+T0);x=2*x;
  end
 figure(1)
 subplot(211)
-ezplot(x1,[0,5*T0]); grid; axis([0 5*T0 -0.2 1.2]); title(' '); xlabel('t'); ylabel('x(t)')
-k=0:N-1;Xk1=2*pi*Xk;wk=[-fliplr(k(2:N-1)) k]*w0;Xk=[fliplr(Xk1(2:N-1)) Xk1];
+ezplot(x1,[0,5*T0]); 
+grid; 
+axis([0 5*T0 -0.2 1.2]); 
+title(' '); xlabel('t'); ylabel('x(t)')
+k=0:N-1;
+Xk1=2*pi*Xk;
+wk=[-fliplr(k(2:N-1)) k]*w0;
+Xk=[fliplr(Xk1(2:N-1)) Xk1];
 
 subplot(212)
-stem(wk,Xk,'filled');grid;axis([min(wk) -min(wk)  1.5*min(Xk) 1.5*max(Xk)]);
- xlabel('\Omega'); ylabel('X(\Omega)')
+stem(wk,Xk,'filled');
+grid;
+axis([min(wk) -min(wk)  1.5*min(Xk) 1.5*max(Xk)]);
+xlabel('\Omega'); ylabel('X(\Omega)')

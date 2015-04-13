@@ -1,11 +1,10 @@
 % Example 5.7
-%clear all;clf
+clear all;clf
 syms t w 
 ind=input('part 1 or 2?   ')
 if ind==1.
-    %y1=exp(-abs(t))
-    %y1=y1*0.5*exp(-j*10*t)+y1*0.5*exp(j*10*t)
-    y1=mod;
+    y1=exp(-abs(t))
+    y1=y1*0.5*exp(-j*10*t)+y1*0.5*exp(j*10*t)
     Y1=fourier(y1)
     
     figure(1)
@@ -27,7 +26,7 @@ if ind==1.
     grid; 
     title(' '); xlabel('\Omega'); ylabel('<Y_1(\Omega)')
     axis([-20 20 -1.5 1.5]);
-    %xlabel('\Omega')
+    xlabel('\Omega')
 else
     m=heaviside(t+5)-heaviside(t)
     m1=heaviside(t)-heaviside(t-5);

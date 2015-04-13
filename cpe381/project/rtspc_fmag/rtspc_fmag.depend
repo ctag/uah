@@ -1,0 +1,37 @@
+# depslib dependency file v1.0
+1428629497 source:/home/berocs/Documents/uah/cpe381/project/rtspc_fmag/kiss_fft.c
+	"_kiss_fft_guts.h"
+
+1428629497 /home/berocs/Documents/uah/cpe381/project/rtspc_fmag/_kiss_fft_guts.h
+	"kiss_fft.h"
+	<limits.h>
+	<alloca.h>
+
+1428883258 /home/berocs/Documents/uah/cpe381/project/rtspc_fmag/kiss_fft.h
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	<string.h>
+	<xmmintrin.h>
+	<sys/types.h>
+
+1428629497 source:/home/berocs/Documents/uah/cpe381/project/rtspc_fmag/kiss_fftr.c
+	"kiss_fftr.h"
+	"_kiss_fft_guts.h"
+
+1428629497 /home/berocs/Documents/uah/cpe381/project/rtspc_fmag/kiss_fftr.h
+	"kiss_fft.h"
+
+1428893864 source:/home/berocs/Documents/uah/cpe381/project/rtspc_fmag/main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<time.h>
+	<limits.h>
+	<stdbool.h>
+	"waver.h"
+	"kiss_fftr.h"
+
+1426352783 /home/berocs/Documents/uah/cpe381/project/rtspc_fmag/waver.h
+	<stdint.h>
+

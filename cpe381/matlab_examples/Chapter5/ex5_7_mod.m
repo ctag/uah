@@ -6,12 +6,12 @@ if ind==1.
     %y1=exp(-abs(t))
     %y1=y1*0.5*exp(-j*10*t)+y1*0.5*exp(j*10*t)
     y1=mod;
-    Y1=fourier(y1)
+    Y1=fft(y1);
     
     figure(1)
     
     subplot(221)
-    ezplot(y1,[-6,6]);
+    plot(y1,[-6,6]);
     grid;
     axis([-6 6 -1.2 1.2]); 
     title(' '); xlabel('t'); ylabel('y_1(t)')

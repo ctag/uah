@@ -13,7 +13,7 @@
  * Project Header
  */
 #include "waver.h"
-#include "fdacoefs.h"
+#include "kiss_fftr.h"
 
 /*
  * Print a formatting bar
@@ -29,9 +29,9 @@ void print_bar ()
 void print_header ()
 {
 	print_bar();
-	printf("RTSPC_FILTER\n");
+	printf("RTSPC_FMAG\n");
 	printf("By: Christopher Bero [csb0019@uah.edu]\n");
-	printf("For CPE 381 - Project Part 2 - April 2015\n");
+	printf("For CPE 381 - Project Errata - April 2015\n");
 	print_bar();
 }
 
@@ -76,13 +76,11 @@ void print_usage (char program[])
 {
 	// This block of text is modeled after the command `vim -h`
 	print_bar();
-	printf("Usage: \n%s [-h] [-f 2400][-p] [-s sum.txt] -i in.wav -o out.wav\n", program);
+	printf("Usage: \n%s [-h] [-s sum.txt] -i in.wav -o out.dat\n", program);
 	printf("Arguments: \n");
 	printf("%-10s %-45s\n", "-i", "Input WAVE file. Required.");
-	printf("%-10s %-45s\n", "-o", "Output WAVE file. Required.");
+	printf("%-10s %-45s\n", "-o", "Output DAT file. For Gnuplot.");
 	printf("%-10s %-45s\n", "-s", "Summary file name.");
-	printf("%-10s %-45s\n", "-f", "Kill (2*pi*freq*t) with array. Integer.");
-	printf("%-10s %-45s\n", "-p", "Use predesigned low-pass filter.");
 	printf("%-10s %-45s\n", "-h", "Print this help and exit.");
 	print_bar();
 }
@@ -108,15 +106,12 @@ int main( int argc, char * argv[] )
 	 */
 	struct riffHeader input_header; // packed structure for RIFF file header
 	short unsigned int inputFileIndex = 0, outputFileIndex = 0, summaryFileIndex = 0; // location of file names in argv[]
-	unsigned int _index; // Generic for() loop index
+	unsigned long int _index; // Generic for() loop index
 
 	double samplePeriod = 0; // Period of sample
-	int num_bytes = 0; // number of bytes in file
-	int num_samples = 0; // number of samples in file
-	int num_captures = 0; // number of captures (2 sample instances) in file
-	bool arrayKill = false; // Whether to use arrays for filtering attempt
-	bool matlabKill = false; // Use matlab array for filtering attempt
-	int arrayKillFreq = 0; // Frequency to kill
+	unsigned long int num_bytes = 0; // number of bytes in file
+	unsigned long int num_samples = 0; // number of samples in file
+	unsigned long int num_captures = 0; // number of captures (2 sample instances) in file
 
 	/**
 	 * Check that the correct number of arguments exist.
@@ -148,23 +143,6 @@ int main( int argc, char * argv[] )
 				{
 					summaryFileIndex = ++_index;
 				}
-				 else if (argv[_index][1] == 'f') // Freq to kill should be next param
-				{
-					if (matlabKill) {
-						printf("Only f or p flags at any one time. Exiting.");
-						return -1;
-					}
-					arrayKill = true;
-					arrayKillFreq = atoi(argv[++_index]);
-				}
-				else if (argv[_index][1] == 'p') // Freq to kill should be next param
-				{
-					if (arrayKill) {
-						printf("Only f or p flags at any one time. Exiting.");
-						return -1;
-					}
-					matlabKill = true;
-				}
 			}
 		}
 	}
@@ -187,7 +165,7 @@ int main( int argc, char * argv[] )
 	FILE * summary_file = 0;
 
 	open_file(&input_file, argv[inputFileIndex], true, false);
-	open_file(&output_file, argv[outputFileIndex], true, true);
+	open_file(&output_file, argv[outputFileIndex], false, true);
 	if (summaryFileIndex != 0)
 	{
 		open_file(&summary_file, argv[summaryFileIndex], false, true);
@@ -245,35 +223,26 @@ int main( int argc, char * argv[] )
 	samplePeriod = (1.0 / input_header.sample_rate);
 	num_bytes = (input_header.size_data-8);
 	num_samples = num_bytes/2;
-	num_captures = num_samples/2;
+	num_captures = ((num_samples/4)*2);
+	unsigned int num_bins = (num_captures/2)+1;
+
 	// List information from header
 	print_properties(input_header);
-	// Write unaltered header to output file
-	fwrite(&input_header, sizeof(struct riffHeader), 1, output_file);
+
+	// Variables for the processing loop
+	unsigned short int sample_size = sizeof(int16_t);
+	kiss_fftr_cfg cfg = kiss_fftr_alloc(num_captures, 0, NULL, NULL);
+	kiss_fft_scalar timedata[num_captures];
+	kiss_fft_cpx *freqdata;
+	freqdata = (kiss_fft_cpx *)calloc(num_bins, sizeof(kiss_fft_cpx));
 
 	/**
 	 * Process input file two samples at a time
 	 */
-	unsigned short int sample_size = sizeof(int16_t);
-	int filter_size = 0;
-	if (arrayKill) {
-		filter_size = ceil(input_header.sample_rate / (double)arrayKillFreq);
-		printf("Using arrayKill method for: %d. Array size: %d. ", arrayKillFreq, filter_size);
-	} else if (matlabKill) {
-		filter_size = BL;
-		printf("Using matlabKill method for. ");
-	}
-	int16_t filter_left[filter_size];
-	int16_t filter_right[filter_size];
-	for (_index = 0; _index < (filter_size); ++_index)
-	{
-		filter_left[_index] = 0;
-		filter_right[_index] = 0;
-	}
-
 	printf("Processing samples... ");
 	for (_index = 0; _index < num_captures; ++_index)
 	{
+		//printf("index: %d", _index);
 		// Local variables
 		int16_t sample_left, sample_right;
 
@@ -282,56 +251,42 @@ int main( int argc, char * argv[] )
 		fread(&sample_right, sample_size, 1, input_file);
 
 		// Processing here
-		if (arrayKill)
+		timedata[_index] = (kiss_fft_scalar)sample_left;
+		//printf("\ntimedata[%d]: %f \t %d", _index, timedata[_index], sample_left);
+	}
+	//const kiss_fft_scalar * timeptr = &timedata;
+	kiss_fftr(cfg, &timedata, freqdata);
+	free(cfg);
+	printf("Done!\n");
+
+	printf("\n\nProcessing freqdata... ");
+
+	unsigned long int fft_max = 0;
+	int index_max = 0;
+	// calculate max
+	for (_index = 0; _index < num_bins; ++_index)
+	{
+		unsigned long int freqpt = (unsigned long int)fabs(freqdata[_index].r);
+		if (freqpt > fft_max)
 		{
-			int _i = 0;
-			long int avg_left = sample_left, avg_right = sample_right; // for arrayKill method
-			// Left
-			for (_i = (filter_size-1); _i > 0; --_i)
-			{
-				filter_left[_i] = filter_left[_i-1];
-				avg_left += filter_left[_i];
-			}
-			filter_left[0] = sample_left;
-			sample_left = avg_left/filter_size;
-			// Right
-			for (_i = (filter_size-1); _i > 0; --_i)
-			{
-				filter_right[_i] = filter_right[_i-1];
-				avg_right += filter_right[_i];
-			}
-			filter_right[0] = sample_right;
-			sample_right = avg_right/filter_size;
-		} else if (matlabKill) {
-			long _i = 0;
-			double out_left = 0, out_right = 0;
-			// Left
-			for (_i = (filter_size-1); _i > 0; --_i)
-			{
-				filter_left[_i] = filter_left[_i-1];
-				out_left += (double)(filter_left[_i]*B[(filter_size-1)-_i]);
-			}
-			filter_left[0] = sample_left;
-			out_left += (double)(filter_left[0]*B[(filter_size-1)]);
-			//printf("\nSample: %d, filter: %d. ", sample_left, (int)out_left);
-			sample_left = (int16_t)out_left;
-			// Right
-			for (_i = (filter_size-1); _i > 0; --_i)
-			{
-				filter_right[_i] = filter_right[_i-1];
-				out_right += (filter_right[_i]*B[_i]);
-			}
-			filter_right[0] = sample_right;
-			out_right += (filter_right[0]*B[0]);
-			//printf("\tRight Sample: %d, filter: %d. ", sample_right, (int16_t)out_right);
-			sample_right = (int16_t)out_right;
+			fft_max = freqpt;
+			index_max = _index;
 		}
 
-		// Write modified samples to output stream
-		fwrite(&sample_left, sample_size, 1, output_file);
-		fwrite(&sample_right, sample_size, 1, output_file);
 	}
-	printf("Done!\n");
+	printf("\nMax: %lu", fft_max);
+	//long unsigned int _threshold = ((float)fft_max*0.0005);
+	//printf("\nThreshold: %lu.\n", _threshold);
+	unsigned long int fft_previous = 0;
+	for (_index = 0; _index < num_bins; ++_index)
+	{
+		unsigned long int freqpt = (unsigned long int)fabs(freqdata[_index].r);
+		//if (abs(freqpt - fft_previous) > _threshold)
+		//{
+			fprintf(output_file, "%lu\t%lu\t%f\n", _index, freqpt, freqdata[_index].r);
+			fft_previous = freqdata[_index].r;
+		//}
+	}
 
 	/**
 	 * End Clock
@@ -358,6 +313,23 @@ int main( int argc, char * argv[] )
 	fclose(output_file);
     return(0);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
