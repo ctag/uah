@@ -75,6 +75,9 @@ bin/
 *.obj
 *.elf
 
+# CodeBlocks
+obj/
+
 # Precompiled Headers
 *.gch
 *.pch
