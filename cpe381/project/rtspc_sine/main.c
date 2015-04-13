@@ -135,7 +135,6 @@ int main( int argc, char * argv[] )
 	 * Setup Clock
 	 */
 	clock_t runTime; // Create clock
-	runTime = clock(); // Assign current CLOCK_TICKS
 
 	/**
 	 * Print Header
@@ -302,11 +301,17 @@ int main( int argc, char * argv[] )
 	printf("Overflow checking [will%s] be used.\n", (checkOverflow) ? "" : " not" );
 
 	/**
+	 * Start clock
+	 */
+	runTime = clock(); // Assign current CLOCK_TICKS
+
+	/**
 	 * Process input file two samples at a time
 	 */
 	unsigned short int sample_size = sizeof(int16_t);
 	unsigned short int default_sine_index = 0;
 	printf("Processing samples... ");
+	fflush(stdout); // Clear buffer to force text to console.
 	for (_index = 0; _index < num_captures; ++_index)
 	{
 		// Local variables
