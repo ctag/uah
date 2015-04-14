@@ -14,6 +14,7 @@
  */
 #include "main.h"
 #include "fircoefs.h"
+#include "iircoefs.h"
 
 /*
  * Print a formatting bar
@@ -87,10 +88,33 @@ void print_usage (char program[])
 	print_bar();
 }
 
-int16_t iterate_fir (int16_t * sample_left, int16_t * sample_right)
+// array_size must be the size of buffer and fir_coefs!
+void iterate_fir (Sample *current, Sample *buffer, float * fir_coefs, int array_size)
+{
+	// Local variables
+	long _i = 0;
+	float out_left = 0, out_right = 0;
+	// Shift buffer and accumulate output
+	for (_i = (array_size-1); _i > 0; --_i)
+	{
+		buffer[_i].l = buffer[_i-1].l;
+		buffer[_i].r = buffer[_i-1].r;
+		out_left += (float)(buffer[_i].l*fir_coefs[_i]);
+		out_right += (float)(buffer[_i].r*fir_coefs[_i]);
+	}
+	// Last sample is not from buffer
+	buffer[0].l = current->l;
+	out_left += (buffer[0].l*B[0]);
+	buffer[0].r = current->r;
+	out_right += (buffer[0].r*B[0]);
+	// Set the input samples to output values
+	current->l = (int16_t)out_left;
+	current->r = (int16_t)out_right;
+}
+
+void iterate_iir ()
 {
 	//
-	return 0;
 }
 
 /*
@@ -259,14 +283,8 @@ int main( int argc, char * argv[] )
 	 * Setup variables for processing loop
 	 */
 	unsigned short int sample_size = sizeof(int16_t);
-	int filter_size = 0;
-	if (arrayKill) {
-		filter_size = ceil(input_header.sample_rate / (double)arrayKillFreq);
-		printf("Using arrayKill method for: %d. Array size: %d. ", arrayKillFreq, filter_size);
-	} else if (matlabKill) {
-		filter_size = BL;
-		printf("Using matlabKill method for. ");
-	}
+	Sample * current;
+	current = (Sample*)malloc(sizeof(Sample));
 	int16_t filter_left[filter_size];
 	int16_t filter_right[filter_size];
 	for (_index = 0; _index < (filter_size); ++_index)
@@ -287,58 +305,13 @@ int main( int argc, char * argv[] )
 	 */
 	for (_index = 0; _index < num_captures; ++_index)
 	{
-		// Local variables
-		int16_t sample_left, sample_right;
 
 		// Pull next sample
-		fread(&sample_left, sample_size, 1, input_file);
-		fread(&sample_right, sample_size, 1, input_file);
+		fread(current->left, sample_size, 1, input_file);
+		fread(current->right, sample_size, 1, input_file);
 
 		// Processing here
-		if (arrayKill)
-		{
-			int _i = 0;
-			long int avg_left = sample_left, avg_right = sample_right; // for arrayKill method
-			// Left
-			for (_i = (filter_size-1); _i > 0; --_i)
-			{
-				filter_left[_i] = filter_left[_i-1];
-				avg_left += filter_left[_i];
-			}
-			filter_left[0] = sample_left;
-			sample_left = avg_left/filter_size;
-			// Right
-			for (_i = (filter_size-1); _i > 0; --_i)
-			{
-				filter_right[_i] = filter_right[_i-1];
-				avg_right += filter_right[_i];
-			}
-			filter_right[0] = sample_right;
-			sample_right = avg_right/filter_size;
-		} else if (matlabKill) {
-			long _i = 0;
-			double out_left = 0, out_right = 0;
-			// Left
-			for (_i = (filter_size-1); _i > 0; --_i)
-			{
-				filter_left[_i] = filter_left[_i-1];
-				out_left += (double)(filter_left[_i]*B[(filter_size-1)-_i]);
-			}
-			filter_left[0] = sample_left;
-			out_left += (double)(filter_left[0]*B[(filter_size-1)]);
-			//printf("\nSample: %d, filter: %d. ", sample_left, (int)out_left);
-			sample_left = (int16_t)out_left;
-			// Right
-			for (_i = (filter_size-1); _i > 0; --_i)
-			{
-				filter_right[_i] = filter_right[_i-1];
-				out_right += (filter_right[_i]*B[_i]);
-			}
-			filter_right[0] = sample_right;
-			out_right += (filter_right[0]*B[0]);
-			//printf("\tRight Sample: %d, filter: %d. ", sample_right, (int16_t)out_right);
-			sample_right = (int16_t)out_right;
-		}
+
 
 		// Write modified samples to output stream
 		fwrite(&sample_left, sample_size, 1, output_file);
@@ -374,6 +347,17 @@ int main( int argc, char * argv[] )
 
     return(0);
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

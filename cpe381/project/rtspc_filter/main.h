@@ -9,7 +9,7 @@
 typedef struct {
     int16_t l; // Left (or mono) channel
     int16_t r; // Right channel
-}sample;
+} Sample;
 
 /**
  * Default Sine Wave:
