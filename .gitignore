@@ -78,6 +78,9 @@ bin/
 # CodeBlocks
 obj/
 
+# Libreoffice
+.~*
+
 # Precompiled Headers
 *.gch
 *.pch
