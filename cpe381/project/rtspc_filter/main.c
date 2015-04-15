@@ -108,7 +108,6 @@ int main( int argc, char * argv[] )
 	unsigned int _index; // Generic for() loop index
 	float samplePeriod = 0; // Period of sample
 	float sampleRate = 0; // Sampling rate, used to find samplePeriod.
-	unsigned int audioTime = 0; // Total length of signal in seconds.
 	int num_bytes = 0; // number of bytes in file
 	int num_samples = 0; // number of samples in file
 	int num_captures = 0; // number of captures (2 sample instances) in file
@@ -124,7 +123,7 @@ int main( int argc, char * argv[] )
 	 * If they exist, process them into appropriate variables.
 	 * argv[0] usually holds the executable name.
 	 */
-	if (argc < 3 || argc > 6)
+	if (argc < 3 || argc > 9)
 	{
 		print_usage(argv[0]);
 		return(0); // End process and give the user another shot to format the command.
@@ -234,7 +233,6 @@ int main( int argc, char * argv[] )
 	 */
 	sampleRate = input_header.sample_rate;
 	samplePeriod = (1.0 / sampleRate);
-	audioTime = (num_captures / sampleRate);
 	num_bytes = (input_header.size_data-8);
 	num_samples = num_bytes/2;
 	num_captures = num_samples/2;
@@ -292,13 +290,11 @@ int main( int argc, char * argv[] )
 	 * Setup variables for processing loop
 	 */
 	unsigned short int sample_size = sizeof(int16_t);
-	//Sample * current;
 	Sample * buffer_in;
 	// Perhaps float datatype will give me better precision for IIR? Its an experiment!
 	SampleReal * buffer_out;
 	long unsigned int processingTime = 0;
 
-	//current = (Sample*)malloc(sizeof(Sample));
 	buffer_in = (Sample*)calloc(filter_size,sizeof(Sample));
 	buffer_out = (SampleReal*)calloc((buffer_out_size),sizeof(SampleReal));
 
@@ -317,20 +313,10 @@ int main( int argc, char * argv[] )
 	/**
 	 * Start timer
 	 */
+	printf("\nfilter_size: %d, buffer_out_size: %d.", filter_size, buffer_out_size);
 	printf("\nProcessing samples");
-	printf("\nFilter size: %d, buffer out size: %d", filter_size, buffer_out_size);
 	fflush(stdout);
 	runTime = clock(); // Assign current CLOCK_TICKS
-
-	real64_T _count = 0, _count2 = 0;
-	for (_index = 0; _index < buffer_out_size; ++_index)
-	{
-		printf("\nBuffer [%d]: %e , %e", _index, filter[_index], filter_den[_index]);
-		_count += filter_den[_index];
-		_count2 += filter[_index];
-	}
-	printf("\n\n%e\t%e\n\n", _count, _count2);
-	//return -1;
 
 	/**
 	 * Process input file two samples (one capture) at a time.
@@ -350,79 +336,30 @@ int main( int argc, char * argv[] )
 		{
 			buffer_in[_i].l = buffer_in[_i-1].l;
 			buffer_in[_i].r = buffer_in[_i-1].r;
-		}
-
-		// Pull next sample into buffer_in
-		fread(&buffer_in[0].l, sample_size, 1, input_file);
-		fread(&buffer_in[0].r, sample_size, 1, input_file);
-
-		for (_i = (filter_size-1); _i >= 0; --_i)
-		{
-			accumulator.l += (buffer_in[_i].l*filter[_i]);
-			accumulator.r += (buffer_in[_i].r*filter[_i]);
-		}
-
-		// Shift buffer_out,
-		// If FIR, then this is skipped due to the buffer size of 1
-		for (_i = (buffer_out_size-1); _i > 0; --_i)
-		{
-			buffer_out[_i].l = buffer_out[_i-1].l;
-			buffer_out[_i].r = buffer_out[_i-1].r;
-		}
-
-		// Shift buffer_out,
-		// If FIR, then this is skipped due to the buffer size of 1
-		for (_i = (buffer_out_size-1); _i > 0; --_i)
-		{
-			accumulator.l -= (buffer_out[_i].l*filter_den[_i]);
-			accumulator.r -= (buffer_out[_i].r*filter_den[_i]);
-		}
-
-		// Compute next value for buffer_out
-		buffer_out[0].l = accumulator.l;
-		buffer_out[0].r = accumulator.r;
-		output.l = (int16_t)accumulator.l;
-		output.r = (int16_t)accumulator.r;
-
-		/*printf("\nBuffer [%d] ", _index);
-		for (_i = 0; _i < buffer_out_size; ++_i)
-		{
-			printf(", %d:%e", buffer_in[_i].l, buffer_out[_i].l);
-		}
-		printf(", %d", output.l);*/
-
-		// Write modified capture to output stream
-		fwrite(&output.l, sample_size, 1, output_file);
-		fwrite(&output.r, sample_size, 1, output_file);
-
-/*
-		// Shift buffer_in to make room for new sample and accumulate output
-		for (_i = (filter_size-1); _i > 0; --_i)
-		{
-			buffer_in[_i].l = buffer_in[_i-1].l;
-			buffer_in[_i].r = buffer_in[_i-1].r;
 			accumulator.l += (buffer_in[_i].l*filter[_i]);
 			accumulator.r += (buffer_in[_i].r*filter[_i]);
 		}
 
 		// Pull next sample into buffer_in
 		fread(&buffer_in[0].l, sample_size, 1, input_file);
-		fread(&buffer_in[0].r, sample_size, 1, input_file);
+		if (stereo)
+		{
+			// This loses a considerable amount of performance for mono files.
+			fread(&buffer_in[0].r, sample_size, 1, input_file);
+		}
 
-		// Accumulate last input sample
+		// Process t=0 sample
 		accumulator.l += (buffer_in[0].l*filter[0]);
 		accumulator.r += (buffer_in[0].r*filter[0]);
 
-		printf("\nAccum: %e\t%e", accumulator.l, accumulator.r);
-
 		// Shift buffer_out,
 		// If FIR, then this is skipped due to the buffer size of 1
 		for (_i = (buffer_out_size-1); _i > 0; --_i)
 		{
-			accumulator.l -= (buffer_out[_i].l*filter_den[_i]);
-			accumulator.r -= (buffer_out[_i].r*filter_den[_i]);
 			buffer_out[_i].l = buffer_out[_i-1].l;
 			buffer_out[_i].r = buffer_out[_i-1].r;
+			accumulator.l -= (buffer_out[_i].l*filter_den[_i]);
+			accumulator.r -= (buffer_out[_i].r*filter_den[_i]);
 		}
 
 		// Compute next value for buffer_out
@@ -431,20 +368,12 @@ int main( int argc, char * argv[] )
 		output.l = (int16_t)accumulator.l;
 		output.r = (int16_t)accumulator.r;
 
-		printf("\nBuffer [%d] ", _index);
-		for (_i = 0; _i < buffer_out_size; ++_i)
-		{
-			printf(", %d:%e", buffer_in[_i].l, buffer_out[_i].l);
-		}
-		printf(", %d", output.l);
-
 		// Write modified capture to output stream
 		fwrite(&output.l, sample_size, 1, output_file);
-		fwrite(&output.r, sample_size, 1, output_file);
-
-		//printf("\nBuffer out: %e\t%e", buffer_out[0].l, buffer_out[0].r);
-		printf("\nout s: %e\t%e", accumulator.l, accumulator.r);
-		//printf("\noutput: %d\t%d", output.l, output.r);
+		if (stereo)
+		{
+			fwrite(&output.r, sample_size, 1, output_file);
+		}
 
 		// Print rolling ellipses
 		if ( currentTime > processingTime)
@@ -453,7 +382,7 @@ int main( int argc, char * argv[] )
 			printf(".");
 			fflush(stdout);
 		}
-		*/
+
 	}
 
 	/**
@@ -465,7 +394,6 @@ int main( int argc, char * argv[] )
 	/**
 	 * Clean up from processing
 	 */
-	//free(current);
 	free(buffer_in);
 	free(buffer_out);
 
@@ -474,13 +402,15 @@ int main( int argc, char * argv[] )
 	 */
 	if (summary_file)
 	{
+		float executionTime = ((float)runTime / CLOCKS_PER_SEC);
 		printf("Writing summary file.\n");
 		double file_time = (samplePeriod * _index);
 		fprintf(summary_file, "Summary File - CPE 381 - Christopher Bero\n");
 		fprintf(summary_file, "=========================================\n");
 		fprintf(summary_file, "%-25s %13dHz\n", "Sampling Frequency:", input_header.sample_rate);
 		fprintf(summary_file, "%-25s %14fs\n", "Audio Time:", file_time);
-		fprintf(summary_file, "%-25s %14fs\n", "Program Execution Time:", ((float)runTime / CLOCKS_PER_SEC));
+		fprintf(summary_file, "%-25s %14fs\n", "Program Execution Time:", executionTime);
+		fprintf(summary_file, "%-25s %15s\n", "Ran in:", ((file_time >= (int)executionTime)?"Real Time!":"Not Real Time."));
 		fclose(summary_file);
 	}
 
