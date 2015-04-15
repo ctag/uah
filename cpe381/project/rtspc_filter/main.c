@@ -407,6 +407,7 @@ int main( int argc, char * argv[] )
 		double file_time = (samplePeriod * _index);
 		fprintf(summary_file, "Summary File - CPE 381 - Christopher Bero\n");
 		fprintf(summary_file, "=========================================\n");
+		fprintf(summary_file, "%-25s %15s\n", "Filter Technique:", ((use_iir)?"IIR":"FIR"));
 		fprintf(summary_file, "%-25s %13dHz\n", "Sampling Frequency:", input_header.sample_rate);
 		fprintf(summary_file, "%-25s %14fs\n", "Audio Time:", file_time);
 		fprintf(summary_file, "%-25s %14fs\n", "Program Execution Time:", executionTime);
