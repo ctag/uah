@@ -31,10 +31,13 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="fircoefs.h" />
+		<Unit filename="iircoefs.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="waver.h" />
+		<Unit filename="main.h" />
+		<Unit filename="tmwtypes.h" />
 		<Extensions>
 			<envvars />
 			<code_completion />

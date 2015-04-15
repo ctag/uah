@@ -1,16 +1,33 @@
 # depslib dependency file v1.0
-1428782300 source:/home/berocs/Documents/uah/cpe381/project/rtspc_filter/main.c
+1429068301 source:/home/berocs/Documents/uah/cpe381/project/rtspc_filter/main.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
 	<time.h>
 	<limits.h>
 	<stdbool.h>
-	"waver.h"
-	"fdacoefs.h"
+	"main.h"
 
 1426352783 /home/berocs/Documents/uah/cpe381/project/rtspc_filter/waver.h
 	<stdint.h>
 
 1428783643 /home/berocs/Documents/uah/cpe381/project/rtspc_filter/fdacoefs.h
+
+1429060527 /home/berocs/Documents/uah/cpe381/project/rtspc_filter/main.h
+	<stdint.h>
+	"fircoefs.h"
+	"iircoefs.h"
+	"tmwtypes.h"
+
+1429038571 /home/berocs/Documents/uah/cpe381/project/rtspc_filter/fircoefs.h
+	"tmwtypes.h"
+
+1429069469 /home/berocs/Documents/uah/cpe381/project/rtspc_filter/iircoefs.h
+	"tmwtypes.h"
+
+1429037710 /home/berocs/Documents/uah/cpe381/project/rtspc_filter/tmwtypes.h
+	<limits.h>
+	<stdbool.h>
+	<float.h>
+	<stddef.h>
 

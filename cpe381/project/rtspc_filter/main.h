@@ -1,5 +1,9 @@
 #include <stdint.h>
 
+#include "fircoefs.h"
+#include "iircoefs.h"
+#include "tmwtypes.h"
+
 #ifndef WAVER_H_INCLUDED
 #define WAVER_H_INCLUDED
 
@@ -10,6 +14,11 @@ typedef struct {
     int16_t l; // Left (or mono) channel
     int16_t r; // Right channel
 } Sample;
+
+typedef struct {
+    real64_T l; // Left (or mono) channel
+    real64_T r; // Right channel
+} SampleReal;
 
 /**
  * Default Sine Wave:
