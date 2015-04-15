@@ -12,7 +12,7 @@
 /*
  * Project Header
  */
-#include "waver.h"
+#include "main.h"
 #include "kiss_fftr.h"
 
 /*
@@ -76,7 +76,7 @@ void print_usage (char program[])
 {
 	// This block of text is modeled after the command `vim -h`
 	print_bar();
-	printf("Usage: \n%s [-h] [-s sum.txt] -i in.wav -o out.dat\n", program);
+	printf("Usage: \n%s [-h] [-s sum.txt] [-o out.dat] [-r] -i in.wav\n", program);
 	printf("Arguments: \n");
 	printf("%-10s %-45s\n", "-i", "Input WAVE file. Required.");
 	printf("%-10s %-45s\n", "-o", "Output DAT file. For Gnuplot.");
@@ -94,7 +94,6 @@ int main( int argc, char * argv[] )
 	 * Setup Clock
 	 */
 	clock_t runTime; // Create clock
-	runTime = clock(); // Assign current CLOCK_TICKS
 
 	/**
 	 * Print Header
@@ -113,11 +112,15 @@ int main( int argc, char * argv[] )
 	unsigned long int num_samples = 0; // number of samples in file
 	unsigned long int num_captures = 0; // number of captures (2 sample instances) in file
 
+	FILE * input_file = 0;
+	FILE * output_file = 0;
+	FILE * summary_file = 0;
+
 	/**
 	 * Check that the correct number of arguments exist.
 	 * If they exist, process them into appropriate variables.
 	 */
-	if (argc < 3 || argc > 12)
+	if (argc < 3 || argc > 8)
 	{
 		// argv[0] usually holds the executable name.
 		print_usage(argv[0]);
@@ -150,7 +153,7 @@ int main( int argc, char * argv[] )
 	/**
 	 * Check that required params are read in correctly
 	 */
-	if (inputFileIndex == 0 || outputFileIndex == 0)
+	if (inputFileIndex == 0)
 	{
 		printf("Improper flag usage. Halting.");
 		print_usage(argv[0]);
@@ -160,12 +163,11 @@ int main( int argc, char * argv[] )
 	/**
 	 * Setup File Streams
 	 */
-	FILE * input_file = 0;
-	FILE * output_file = 0;
-	FILE * summary_file = 0;
-
 	open_file(&input_file, argv[inputFileIndex], true, false);
-	open_file(&output_file, argv[outputFileIndex], false, true);
+	if (outputFileIndex != 0)
+	{
+		open_file(&output_file, argv[outputFileIndex], false, true);
+	}
 	if (summaryFileIndex != 0)
 	{
 		open_file(&summary_file, argv[summaryFileIndex], false, true);
@@ -178,12 +180,14 @@ int main( int argc, char * argv[] )
 	}
 	printf("Input file opened.\n");
 
-	if (!output_file)
+	if (!output_file && outputFileIndex)
 	{
 		printf("Could not open output file stream. Program halting.\n");
 		return(1);
+	} else if (output_file)
+	{
+		printf("Output file opened.\n");
 	}
-	printf("Output file opened.\n");
 
 	if (!summary_file && summaryFileIndex)
 	{
@@ -224,7 +228,7 @@ int main( int argc, char * argv[] )
 	num_bytes = (input_header.size_data-8);
 	num_samples = num_bytes/2;
 	num_captures = ((num_samples/4)*2);
-	unsigned int num_bins = (num_captures/2)+1;
+	unsigned int num_bins = num_captures; //(num_captures/2)+1;
 
 	// List information from header
 	print_properties(input_header);
@@ -232,60 +236,101 @@ int main( int argc, char * argv[] )
 	// Variables for the processing loop
 	unsigned short int sample_size = sizeof(int16_t);
 	kiss_fftr_cfg cfg = kiss_fftr_alloc(num_captures, 0, NULL, NULL);
-	kiss_fft_scalar timedata[num_captures];
-	kiss_fft_cpx *freqdata;
-	freqdata = (kiss_fft_cpx *)calloc(num_bins, sizeof(kiss_fft_cpx));
+	kiss_fft_scalar * timedata_left = NULL;
+	kiss_fft_scalar * timedata_right = NULL;
+	kiss_fft_cpx *freqdata_left = NULL;
+	kiss_fft_cpx *freqdata_right = NULL;
+
+	timedata_left = (kiss_fft_scalar *)calloc(num_captures, sizeof(kiss_fft_scalar));
+	timedata_right = (kiss_fft_scalar *)calloc(num_captures, sizeof(kiss_fft_scalar));
+	freqdata_left = (kiss_fft_cpx *)calloc(num_bins, sizeof(kiss_fft_cpx));
+	freqdata_right = (kiss_fft_cpx *)calloc(num_bins, sizeof(kiss_fft_cpx));
+
+	/**
+	 * Run Clock
+	 */
+	printf("\nProcessing samples...");
+	fflush(stdout);
+	runTime = clock(); // Assign current CLOCK_TICKS
 
 	/**
 	 * Process input file two samples at a time
 	 */
-	printf("Processing samples... ");
 	for (_index = 0; _index < num_captures; ++_index)
 	{
-		//printf("index: %d", _index);
 		// Local variables
 		int16_t sample_left, sample_right;
+
 
 		// Pull next sample
 		fread(&sample_left, sample_size, 1, input_file);
 		fread(&sample_right, sample_size, 1, input_file);
 
 		// Processing here
-		timedata[_index] = (kiss_fft_scalar)sample_left;
-		//printf("\ntimedata[%d]: %f \t %d", _index, timedata[_index], sample_left);
+		timedata_left[_index] = (kiss_fft_scalar)sample_left;
+		timedata_right[_index] = (kiss_fft_scalar)sample_right;
 	}
-	//const kiss_fft_scalar * timeptr = &timedata;
-	kiss_fftr(cfg, &timedata, freqdata);
+
+	const kiss_fft_scalar * timePtr_left = timedata_left;
+	const kiss_fft_scalar * timePtr_right = timedata_right;
+
+	kiss_fftr(cfg, timePtr_left, freqdata_left);
+	kiss_fftr(cfg, timePtr_right, freqdata_right);
+
 	free(cfg);
-	printf("Done!\n");
+	printf(" Done!");
 
-	printf("\n\nProcessing freqdata... ");
 
-	unsigned long int fft_max = 0;
-	int index_max = 0;
-	// calculate max
-	for (_index = 0; _index < num_bins; ++_index)
+	printf("\nProcessing freqdata... ");
+
+	/**
+	 * Correct for one-sided plot.
+	 * All r[i] are made absolute value (to plot magnitude)
+	 * And all r[i>0] are multiplied by 2 to account for negative spectrum not represented.
+	 */
+	freqdata_left[0].r = fabs(freqdata_left[0].r);
+	freqdata_right[0].r = fabs(freqdata_right[0].r);
+	for (_index = 1; _index < num_bins; ++_index)
 	{
-		unsigned long int freqpt = (unsigned long int)fabs(freqdata[_index].r);
-		if (freqpt > fft_max)
-		{
-			fft_max = freqpt;
-			index_max = _index;
-		}
-
+		freqdata_left[_index].r = fabs(2.0*freqdata_left[_index].r);
+		freqdata_right[_index].r = fabs(2.0*freqdata_right[_index].r);
 	}
-	printf("\nMax: %lu", fft_max);
-	//long unsigned int _threshold = ((float)fft_max*0.0005);
-	//printf("\nThreshold: %lu.\n", _threshold);
-	unsigned long int fft_previous = 0;
+
+	/**
+	 * Calculate frequency of maximal component in left or right channel
+	 */
+	kiss_fft_scalar fft_max = 0;
+	kiss_fft_scalar freq_max = 0;
 	for (_index = 0; _index < num_bins; ++_index)
 	{
-		unsigned long int freqpt = (unsigned long int)fabs(freqdata[_index].r);
-		//if (abs(freqpt - fft_previous) > _threshold)
-		//{
-			fprintf(output_file, "%lu\t%lu\t%f\n", _index, freqpt, freqdata[_index].r);
-			fft_previous = freqdata[_index].r;
-		//}
+		if (freqdata_left[_index].r > fft_max)
+		{
+			fft_max = freqdata_left[_index].r;//freqpt;
+			freq_max = (((float)_index*input_header.sample_rate)/num_bins);
+		} else if (freqdata_right[_index].r > fft_max)
+		{
+			fft_max = freqdata_right[_index].r;//freqpt;
+			freq_max = (((float)_index*input_header.sample_rate)/num_bins);
+		}
+	}
+	printf(" Done!");
+
+	// Disclose frequency of maximal component.
+	printf("\nMaximum spectral component should be at: %fHz", freq_max);
+
+	/**
+	 * Create output plot data
+	 */
+	if (outputFileIndex != 0 && output_file)
+	{
+		printf("\nWriting plot data to output file...");
+		for (_index = 0; _index < num_bins; ++_index)
+		{
+			fprintf(output_file, "%f\t%ld\t%ld\n", (((float)_index*input_header.sample_rate)/num_bins),
+					(unsigned long int)freqdata_left[_index].r, (unsigned long int)freqdata_right[_index].r);
+		}
+		fclose(output_file);
+		printf(" Done!");
 	}
 
 	/**
@@ -298,19 +343,30 @@ int main( int argc, char * argv[] )
 	 */
 	if (summary_file)
 	{
-		printf("Writing summary file.\n");
+		printf("\nWriting summary file.");
 		double file_time = (samplePeriod * _index);
+		double executionTime = ((float)runTime / CLOCKS_PER_SEC);
 		fprintf(summary_file, "Summary File - CPE 381 - Christopher Bero\n");
 		fprintf(summary_file, "=========================================\n");
 		fprintf(summary_file, "%-25s %13dHz\n", "Sampling Frequency:", input_header.sample_rate);
 		fprintf(summary_file, "%-25s %14fs\n", "Audio Time:", file_time);
-		fprintf(summary_file, "%-25s %14fs\n", "Program Execution Time:", ((float)runTime / CLOCKS_PER_SEC));
+		fprintf(summary_file, "%-25s %14fs\n", "Program Execution Time:", executionTime);
+		fprintf(summary_file, "%-25s %15s\n", "Ran in:", ((file_time >= executionTime)?"Real Time!":"Not Real Time."));
+		fprintf(summary_file, "%-25s %13fHz\n", "Dominant component:", freq_max);
+		fprintf(summary_file, "%-25s %15s\n", "Data file:", (outputFileIndex)?argv[outputFileIndex]:"N/A");
 		fclose(summary_file);
 	}
 
+	free(freqdata_left);
+	free(freqdata_right);
+	free(timedata_left);
+	free(timedata_right);
+
 	// Tidy up file streams
 	fclose(input_file);
-	fclose(output_file);
+
+	// End program
+	printf("\n\n");
     return(0);
 }
 

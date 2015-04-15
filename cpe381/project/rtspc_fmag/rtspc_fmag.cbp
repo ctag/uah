@@ -44,7 +44,7 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="waver.h" />
+		<Unit filename="main.h" />
 		<Extensions>
 			<envvars />
 			<code_completion />
