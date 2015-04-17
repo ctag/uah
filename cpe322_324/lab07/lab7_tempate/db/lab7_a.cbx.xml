@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="lab7_a">
+		<CBX_INST_ENTRY INSTANCE_NAME="|lab7_a|altsyncram:sin_table_rtl_0" CBX_FILE_NAME="altsyncram_dc71.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|lab7_a|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_ckm.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|lab7_a|lpm_mult:Mult0" CBX_FILE_NAME="mult_36t.tdf"/>
+	</PROJECT>
+</LOG_ROOT>

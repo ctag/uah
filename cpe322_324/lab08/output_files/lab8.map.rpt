@@ -1,5 +1,5 @@
 Analysis & Synthesis report for lab8
-Fri Apr 10 14:22:15 2015
+Fri Apr 17 13:38:11 2015
 Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
 
 
@@ -45,7 +45,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                          ;
 +------------------------------------+--------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Apr 10 14:22:15 2015            ;
+; Analysis & Synthesis Status        ; Successful - Fri Apr 17 13:38:11 2015            ;
 ; Quartus II 32-bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version ;
 ; Revision Name                      ; lab8                                             ;
 ; Top-level Entity Name              ; lab8                                             ;
@@ -286,7 +286,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 Info: *******************************************************************
 Info: Running Quartus II 32-bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
-    Info: Processing started: Fri Apr 10 14:22:08 2015
+    Info: Processing started: Fri Apr 17 13:38:05 2015
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off lab8 -c lab8
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 10 design units, including 5 entities, in source file lab8_ip_core.vhd
@@ -383,8 +383,8 @@ Info (21057): Implemented 76 device resources after synthesis - the final resour
     Info (21061): Implemented 42 logic cells
 Info: Quartus II 32-bit Analysis & Synthesis was successful. 0 errors, 45 warnings
     Info: Peak virtual memory: 359 megabytes
-    Info: Processing ended: Fri Apr 10 14:22:15 2015
-    Info: Elapsed time: 00:00:07
+    Info: Processing ended: Fri Apr 17 13:38:11 2015
+    Info: Elapsed time: 00:00:06
     Info: Total CPU time (on all processors): 00:00:03
 
 

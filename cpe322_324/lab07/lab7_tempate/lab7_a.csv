@@ -1,0 +1,43 @@
+# Copyright (C) 1991-2013 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+
+# Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
+# File: J:\e_backup2\class\logic_design\cpe324_sp_14\labs\lab7\solution\lab7.csv
+# Generated on: Tue Mar 11 12:18:13 2014
+
+# Note: The column header names should not be changed if you wish to import this .csv file into the Quartus II software.
+
+To,Direction,Location,I/O Bank,VREF Group,Fitter Location,I/O Standard,Reserved,Current Strength,Differential Pair
+clk,Input,PIN_D13,3,B3_N0,PIN_D13,,,,
+d_bit,Output,PIN_L19,5,B5_N1,PIN_L19,,,,
+freq[11],Input,PIN_A13,4,B4_N1,PIN_A13,,,,
+freq[10],Input,PIN_B13,4,B4_N1,PIN_B13,,,,
+freq[9],Input,PIN_C13,3,B3_N0,PIN_C13,,,,
+freq[8],Input,PIN_AC13,8,B8_N0,PIN_AC13,,,,
+freq[7],Input,PIN_AD13,8,B8_N0,PIN_AD13,,,,
+freq[6],Input,PIN_AF14,7,B7_N1,PIN_AF14,,,,
+freq[5],Input,PIN_AE14,7,B7_N1,PIN_AE14,,,,
+freq[4],Input,PIN_P25,6,B6_N0,PIN_P25,,,,
+freq[3],Input,PIN_N26,5,B5_N1,PIN_N26,,,,
+freq[2],Input,PIN_N25,5,B5_N1,PIN_N25,,,,
+freq[1],Input,PIN_W26,6,B6_N1,PIN_W26,,,,
+freq[0],Input,PIN_P23,6,B6_N0,PIN_P23,,,,
+vol[7],Input,PIN_V2,1,B1_N0,PIN_V2,,,,
+vol[6],Input,PIN_V1,1,B1_N0,PIN_V1,,,,
+vol[5],Input,PIN_U4,1,B1_N0,PIN_U4,,,,
+vol[4],Input,PIN_U3,1,B1_N0,PIN_U3,,,,
+vol[3],Input,PIN_T7,1,B1_N0,PIN_T7,,,,
+vol[2],Input,PIN_P2,1,B1_N0,PIN_P2,,,,
+vol[1],Input,PIN_P1,1,B1_N0,PIN_P1,,,,
+vol[0],Input,PIN_N1,2,B2_N1,PIN_N1,,,,
