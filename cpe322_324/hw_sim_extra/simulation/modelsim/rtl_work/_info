@@ -1,0 +1,25 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\csb0019\Documents\uah\cpe322_324\hw_sim_extra\simulation\modelsim
+vtexter_control
+!i10b 1
+!s100 He6=OT03:W5WXnKnVATAP1
+Iza<lc[Y<9=S<37<m_AUBY3
+V3d@F[:`ZF@LME4Q;gnN]00
+Z1 dC:\Users\csb0019\Documents\uah\cpe322_324\hw_sim_extra\simulation\modelsim
+w1430235129
+8C:/Users/csb0019/Documents/uah/cpe322_324/hw_sim_extra/texter_control.v
+FC:/Users/csb0019/Documents/uah/cpe322_324/hw_sim_extra/texter_control.v
+L0 3
+OV;L;10.1d;51
+r1
+!s85 0
+31
+!s108 1430235262.141000
+!s107 C:/Users/csb0019/Documents/uah/cpe322_324/hw_sim_extra/texter_control.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/csb0019/Documents/uah/cpe322_324/hw_sim_extra|C:/Users/csb0019/Documents/uah/cpe322_324/hw_sim_extra/texter_control.v|
+!s101 -O0
+o-vlog01compat -work work -O0
+!s92 -vlog01compat -work work +incdir+C:/Users/csb0019/Documents/uah/cpe322_324/hw_sim_extra -O0

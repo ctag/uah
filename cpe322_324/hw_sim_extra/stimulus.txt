@@ -1,0 +1,22 @@
+#
+# Stimulus
+# [0] is LSB
+# SUB_ADD: 0=add (A+B), 1=subtract (A-B)
+# Library: cycloneive_ver
+#
+
+#add list Bin reset clk Bout
+
+#add wave Bin reset clk Bout
+
+force dc_error 0 0, 1 800, 0 1000
+
+force dash_dit 1 0, 0 50 -repeat 100
+
+force space 0 0, 1 400 -repeat 800
+
+force sw 1 0, 0 200 -repeat 400
+
+force clk 0 0, 1 20 -repeat 40
+
+run 4000

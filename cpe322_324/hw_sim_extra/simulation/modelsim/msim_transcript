@@ -1,0 +1,80 @@
+# Reading C:/altera/13.0sp1/modelsim_ase/tcl/vsim/pref.tcl 
+# do texter_control_run_msim_rtl_verilog.do 
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Copying C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# ** Warning: Copied C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini.
+#          Updated modelsim.ini.
+# 
+# vlog -vlog01compat -work work +incdir+C:/Users/csb0019/Documents/uah/cpe322_324/hw_sim_extra {C:/Users/csb0019/Documents/uah/cpe322_324/hw_sim_extra/texter_control.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module texter_control
+# 
+# Top level modules:
+# 	texter_control
+# 
+vsim -voptargs=+acc work.texter_control
+# vsim -voptargs=+acc work.texter_control 
+# Loading work.texter_control
+add wave -position insertpoint  \
+sim:/texter_control/clk \
+sim:/texter_control/sw \
+sim:/texter_control/dash_dit \
+sim:/texter_control/dc_error \
+sim:/texter_control/space \
+sim:/texter_control/tm_reset \
+sim:/texter_control/nxt_char \
+sim:/texter_control/back_sp \
+sim:/texter_control/nxt_bit \
+sim:/texter_control/sp_load \
+sim:/texter_control/out_char \
+sim:/texter_control/out_space \
+sim:/texter_control/state \
+sim:/texter_control/nextstate
+add list  \
+sim:/texter_control/clk \
+sim:/texter_control/sw \
+sim:/texter_control/dash_dit \
+sim:/texter_control/dc_error \
+sim:/texter_control/space \
+sim:/texter_control/tm_reset \
+sim:/texter_control/nxt_char \
+sim:/texter_control/back_sp \
+sim:/texter_control/nxt_bit \
+sim:/texter_control/sp_load \
+sim:/texter_control/out_char \
+sim:/texter_control/out_space \
+sim:/texter_control/state \
+sim:/texter_control/nextstate
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+force dc_error 0 0, 1 800, 0 1000
+
+force dash_dit 1 0, 0 50 -repeat 100
+
+force space 0 0, 1 400 -repeat 800
+
+force sw 1 0, 0 200 -repeat 400
+
+force clk 0 0, 1 20 -repeat 40
+
+run 4000

@@ -1,0 +1,18 @@
+
+State Machine - |texter_control|state
+Name state.101 state.100 state.011 state.010 state.001 state.000 
+state.000 0 0 0 0 0 0 
+state.001 0 0 0 0 1 1 
+state.010 0 0 0 1 0 1 
+state.011 0 0 1 0 0 1 
+state.100 0 1 0 0 0 1 
+state.101 1 0 0 0 0 1 
+
+State Machine - |texter_control|nextstate
+Name nextstate.101 nextstate.100 nextstate.011 nextstate.010 nextstate.001 nextstate.000 
+nextstate.000 0 0 0 0 0 0 
+nextstate.001 0 0 0 0 1 1 
+nextstate.010 0 0 0 1 0 1 
+nextstate.011 0 0 1 0 0 1 
+nextstate.100 0 1 0 0 0 1 
+nextstate.101 1 0 0 0 0 1 
