@@ -1,12 +1,15 @@
+% p4
+% Prompt for and calculate an equation
 
 x=input('Enter x:');
 u=input('Enter mu:');
 
-NUM=(log(1+(u*abs(x))));
-DEN=(log(1+u));
+num=(log(1+(u*abs(x))));
+den=(log(1+u));
 
-y=((NUM/DEN).*sign(x));
+y=((num/den).*sign(x));
 
+figure;
 p=plot(x,y);
 set(p,'Color','black');
 ylabel('output (y)');

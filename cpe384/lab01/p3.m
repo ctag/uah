@@ -1,4 +1,5 @@
-
+% p3
+% Solve a small system of equations
 
 a1=input('Enter the value of a1:');
 b1=input('Enter the value of b1:');
@@ -18,4 +19,4 @@ d3=input('Enter the value of d3:');
 A=[a1 b1 c1; a2 b2 c2; a3 b3 c3];
 d=[d1; d2; d3];
 
-ans=inv(A)*d
+sol=A\d
