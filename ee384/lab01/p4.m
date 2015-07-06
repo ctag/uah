@@ -1,4 +1,7 @@
-% p4
+% Lab 01 - Problem 4
+% EE384
+% Christopher Bero
+
 % Prompt for and calculate an equation
 
 x=input('Enter x:');

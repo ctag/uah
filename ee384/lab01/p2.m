@@ -1,3 +1,7 @@
+% Lab 01 - Problem 2
+% EE384
+% Christopher Bero
+
 % p2a
 t=0:1:50;
 y1=cos(t);

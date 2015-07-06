@@ -1,4 +1,6 @@
-% Lab 04 Problem 2
+% Lab 04 - Problem 2
+% EE384
+% Christopher Bero
 
 % P2.a
 fs=8000;

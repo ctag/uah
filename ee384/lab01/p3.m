@@ -1,4 +1,7 @@
-% p3
+% Lab 01 - Problem 3
+% EE384
+% Christopher Bero
+
 % Solve a small system of equations
 
 a1=input('Enter the value of a1:');

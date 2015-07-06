@@ -1,3 +1,6 @@
+% Lab 02 - Problem 1
+% EE384
+% Christopher Bero
 
 % n1=1;
 % n2=10;

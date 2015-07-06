@@ -1,4 +1,6 @@
-% Lab 03, Problem 2
+% Lab 03 - Problem 2
+% EE384
+% Christopher Bero
 
 % 2.a
 fs=50;

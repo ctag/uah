@@ -1,4 +1,6 @@
-% Lab 04 Problem 1
+% Lab 04 - Problem 1
+% EE384
+% Christopher Bero
 
 % P1.a
 x=[1,2,3,4,5,6,7,8];

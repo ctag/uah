@@ -1,4 +1,6 @@
-% P2
+% Lab 02 - Problem 2
+% EE384
+% Christopher Bero
 
 % 2.2
 n=-10:10;

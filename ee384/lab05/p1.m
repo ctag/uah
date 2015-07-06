@@ -1,6 +1,6 @@
-% Problem 1
+% Lab 05 - Problem 1
+% EE384
 % Christopher Bero
-% EE 384
 
 % P1.a
 % Read and listen to test.wav

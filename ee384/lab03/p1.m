@@ -1,4 +1,6 @@
-% Lab 03, Problem 1
+% Lab 03 - Problem 1
+% EE384
+% Christopher Bero
 
 % 1.a
 % Load and plot ECG data

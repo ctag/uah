@@ -1,4 +1,6 @@
-% Lab 03, Problem 3
+% Lab 03 - Problem 3
+% EE384
+% Christopher Bero
 
 % 3.a
 t1=0:(1/50000):1;
