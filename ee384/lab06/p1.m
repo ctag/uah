@@ -32,8 +32,8 @@ ylabel('Magnitude');
 
 % P1.b
 fig2=figure();
-highpass=p1_lowpass;
-y2=filter(highpass,y1);
+lowpass=p1_lowpass;
+y2=filter(lowpass,y1);
 subplot(2,1,1);
 plot(t,y2);
 title('1.b Lowpass Filtered Signal');
@@ -71,7 +71,7 @@ ylabel('Magnitude');
 % P1.d
 fig4=figure();
 bandpass=p1_bandpass;
-y4=filter(highpass,y1);
+y4=filter(bandpass,y1);
 subplot(2,1,1);
 plot(t,y4);
 title('1.d Bandpass Filtered Signal');
