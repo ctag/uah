@@ -9,7 +9,9 @@ function [ keys ] = dtmfdecode( tone, fs )
 % can be shifted in the incoming signal.
 % To do this, I plan to check 0.05 second chunks since the smallest
 % audio (silence) is 0.1s. So we're employing Nyquist's Frequency 
-% to make sure that the silence is noticed.
+% to make sure that the silence is noticed. Then we'll parse the 
+% incoming signal by using silence as a cue to move on to the 
+% next button tone.
 
 % DTMF
 %  ___________________________
@@ -24,9 +26,13 @@ function [ keys ] = dtmfdecode( tone, fs )
 rd=0.05; % Reference duration
 cols=[1209 1336 1477];
 rows=[697 770 852 941];
+keys_list=[1 2 3; 4 5 6; 7 8 9; 11 10 12];
 len=length(tone);
 keys_index=1;
+%keys=[];
 prev_f=0;
+
+
 
 % States
 % 1 - Consuming silence
@@ -43,25 +49,41 @@ for section = 0:1:uint16(floor( ( (len)/fs )/rd )-1)
     %plot(p_vals,p_sig);
     %hold on;
     stacked_sig( ((section*fs)*rd)+1 : ((section+1)*fs)*rd ) = this_sig;
-    p_power=sum(p_sig);
-    str=sprintf('Power is %d', p_power);
-    disp(str);
+    p_power=sum(abs(p_sig));
     
     % State 1
+    if state == 1
+		stacked_sig=zeros(1,len-1);
+		if p_power > (prev_power*3)
+			%disp('Found signal');
+			state=2;
+		end
+		
+	end
     
     % State 2
     if state == 2
         if p_power < (prev_power/3)
-            disp('Found silence');
-            %state=1;
+            %disp('Found silence');
+            state=1;
+            
             [stacked_vals,stacked_p]=powerSpec(stacked_sig,fs);
-            %plot(stacked_vals,stacked_p);
-            [C,I]=max(stacked_p)
-            stacked_vals(I)
-            stacked_vals
-            stacked_p
+            max_col_range=find(stacked_vals>1109&stacked_vals<1577);
+            max_row_range=find(stacked_vals>597&stacked_vals<1041);
+            [C,I]=max(stacked_p(max_col_range));
+            col_button_freq=floor(stacked_vals(I+(min(max_col_range)-1)));
+            [C,I]=max(stacked_p(max_row_range));
+            row_button_freq=floor(stacked_vals(I+min(max_row_range)-1));
+            
+            col_index=find(cols>(col_button_freq-10) & cols<(col_button_freq+10)); %mod((button-1),3)+1;
+			row_index=find(rows>(row_button_freq-10) & rows<(row_button_freq+10)); %int8(ceil(button/3));
+            keys(keys_index)=keys_list(row_index,col_index);
+            keys_index=keys_index+1;
+        else
+			
         end
     end
+    
     prev_power=p_power;
 end
 

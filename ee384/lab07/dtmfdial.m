@@ -40,8 +40,6 @@ for button = keys
     % Create time vectors
     t=0:(1/fs):td;
     
-    length(t)
-    
     % Generate the button's sound
     touch_tone=sin(2*pi*t*freq1)+sin(2*pi*t*freq2);
     silence=zeros(1,(sd*fs));
