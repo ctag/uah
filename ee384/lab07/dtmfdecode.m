@@ -51,13 +51,15 @@ for section = 0:1:uint16(floor( ( (len)/fs )/rd )-1)
     
     % State 2
     if state == 2
-        if p_power < (prev_power/2)
+        if p_power < (prev_power/3)
             disp('Found silence');
             %state=1;
             [stacked_vals,stacked_p]=powerSpec(stacked_sig,fs);
-            plot(stacked_vals,stacked_p);
+            %plot(stacked_vals,stacked_p);
             [C,I]=max(stacked_p)
             stacked_vals(I)
+            stacked_vals
+            stacked_p
         end
     end
     prev_power=p_power;
