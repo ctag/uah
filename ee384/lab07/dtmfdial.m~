@@ -41,14 +41,15 @@ for button = keys
     t=0:(1/fs):td;
     
     length(t)
+    length(silent_t)
+    length((len+1):(len+length(t)+length(silent_t)))
     
     % Generate the button's sound
     touch_tone=sin(2*pi*t*freq1)+sin(2*pi*t*freq2);
-    silence=zeros(1,(sd*fs));
     
     % Append to output
-    tone((len+1):(len+length(t)+length(silence)))=[touch_tone silence];
-    len=(len+length(t)+length(silence));
+    tone((len+1):(len+length(t)+length(silent_t)))=[touch_tone zeros(silent_t)];
+    len=(len+length(t)+length(silent_t));
 end
 
 %plot(tone);
