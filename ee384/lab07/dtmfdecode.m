@@ -11,7 +11,9 @@ function [ keys ] = dtmfdecode( tone, fs )
 % audio (silence) is 0.1s. So we're employing Nyquist's Frequency 
 % to make sure that the silence is noticed. Then we'll parse the 
 % incoming signal by using silence as a cue to move on to the 
-% next button tone.
+% next button tone. In order to make the frequency detection more
+% accurate, the tone slices of 0.05s will be stacked until silence
+% is detected. Then the stacked tone is analyzed for frequencies.
 
 % DTMF
 %  ___________________________
@@ -24,15 +26,11 @@ function [ keys ] = dtmfdecode( tone, fs )
 
 % Variables
 rd=0.05; % Reference duration
-cols=[1209 1336 1477];
-rows=[697 770 852 941];
-keys_list=[1 2 3; 4 5 6; 7 8 9; 11 10 12];
-len=length(tone);
-keys_index=1;
-%keys=[];
-prev_f=0;
-
-
+cols=[1209 1336 1477]; % Frequencies from table
+rows=[697 770 852 941]; % Frequencies from table
+keys_list=[1 2 3; 4 5 6; 7 8 9; 11 10 12]; % Go backwards from frequency index to key
+len=length(tone); % Length of input
+keys_index=1; % Index for list of keys
 
 % States
 % 1 - Consuming silence
@@ -43,51 +41,60 @@ prev_sig=zeros(1,rd*fs);
 prev_power=sum(prev_sig);
 stacked_sig=zeros(1,len-1);
 
-for section = 0:1:uint16(floor( ( (len)/fs )/rd )-1)
-    this_sig=tone( ((section*fs)*rd)+1 : ((section+1)*fs)*rd );
-    [p_vals,p_sig]=powerSpec(this_sig,fs);
-    %plot(p_vals,p_sig);
-    %hold on;
-    stacked_sig( ((section*fs)*rd)+1 : ((section+1)*fs)*rd ) = this_sig;
+for section = 0:1:uint64(floor( ( (len)/fs )/rd )-1)
+    % Extract 0.05s chunk of signal
+    this_sig=tone( ((section*fs)*rd)+1 : ((section+1)*fs)*rd )
+    % Get the power spectrum of this chunk
+    [p_vals,p_sig]=freqSpec_1s(this_sig,fs);
+    % Get a rough overall magnitude for comparison
     p_power=sum(abs(p_sig));
     
     % State 1
     if state == 1
-		stacked_sig=zeros(1,len-1);
-		if p_power > (prev_power*3)
-			%disp('Found signal');
-			state=2;
-		end
-		
-	end
-    
-    % State 2
-    if state == 2
+        % Check for start of new tone
+        if p_power > (prev_power*3)
+            stacked_sig=zeros(1,len-1);
+            state=2;
+        end
+    elseif state == 2
+        % Stack signal slices
+        stacked_sig( ((section*fs)*rd)+1 : ((section+1)*fs)*rd ) = this_sig;
+        
+        % Check for end of this tone
         if p_power < (prev_power/3)
-            %disp('Found silence');
             state=1;
             
+            % Get the rough power spectrum
             [stacked_vals,stacked_p]=powerSpec(stacked_sig,fs);
-            max_col_range=find(stacked_vals>1109&stacked_vals<1577);
+            plot(stacked_vals,stacked_p);
+            
+            % Create subranges to match the frequencies we're looking for
+            max_col_index=find(stacked_vals>1109,1);
+            min_col_index=find(stacked_vals<1577,1);
             max_row_range=find(stacked_vals>597&stacked_vals<1041);
-            [C,I]=max(stacked_p(max_col_range));
-            col_button_freq=floor(stacked_vals(I+(min(max_col_range)-1)));
+            
+            % Get the maximum frequencies
+            [C,I]=max(stacked_p(min_col_index:max_col_index));
             [C,I]=max(stacked_p(max_row_range));
+            
+            col_button_freq=floor(stacked_vals(I+min_col_index-1));
             row_button_freq=floor(stacked_vals(I+min(max_row_range)-1));
             
-            col_index=find(cols>(col_button_freq-10) & cols<(col_button_freq+10)); %mod((button-1),3)+1;
-			row_index=find(rows>(row_button_freq-10) & rows<(row_button_freq+10)); %int8(ceil(button/3));
+            % Get the keys_list indecies
+            col_index=find(cols>(col_button_freq-20) & cols<(col_button_freq+20));
+			row_index=find(rows>(row_button_freq-20) & rows<(row_button_freq+20));
+            col_button_freq
+            col_index
+            row_button_freq
+            row_index
+            
+            % Find the key value and append to list
             keys(keys_index)=keys_list(row_index,col_index);
             keys_index=keys_index+1;
-        else
-			
         end
     end
-    
     prev_power=p_power;
 end
-
-
 
 end
 

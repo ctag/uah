@@ -16,12 +16,12 @@ function [ tone, fs ] = dtmfdial( keys )
 fs=8000; % Sampling frequency
 td=0.5; % Tone duration
 sd=0.1; % Space duration
-cols=[1209 1336 1477];
-rows=[697 770 852 941];
-len=0;
+cols=[1209 1336 1477]; % Frequencies from table
+rows=[697 770 852 941]; % Frequencies from table
+tone_len=0; % Index for tone variable
 tone=zeros(1,(length(keys))*fs*0.6); % Initialize sound vector
 
-% for every button listed in the input vector
+% For every button value in the input vector.
 for button = keys
     % Fix the keymapping so that buttons are sequential
     if button == 10
@@ -29,6 +29,7 @@ for button = keys
     elseif button == 11
         button = 10;
     end
+    
     % Get row and column index
     col_index=mod((button-1),3)+1;
     row_index=int8(ceil(button/3));
@@ -37,22 +38,17 @@ for button = keys
     freq1=cols(col_index);
     freq2=rows(row_index);
     
-    % Create time vectors
+    % Create tone's time vector
     t=0:(1/fs):td;
     
-    % Generate the button's sound
-    touch_tone=sin(2*pi*t*freq1)+sin(2*pi*t*freq2);
+    % Generate the tone
+    button_tone=sin(2*pi*t*freq1)+sin(2*pi*t*freq2);
     silence=zeros(1,(sd*fs));
     
     % Append to output
-    tone((len+1):(len+length(t)+length(silence)))=[touch_tone silence];
-    len=(len+length(t)+length(silence));
+    tone((tone_len+1):(tone_len+length(t)+length(silence)))=[button_tone silence];
+    tone_len=(tone_len+length(t)+length(silence));
 end
-
-%plot(tone);
-
-% Splicing example
-% tone(24005:24006) = [20 21];
 
 end
 

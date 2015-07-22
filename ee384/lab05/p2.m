@@ -36,22 +36,18 @@ ylabel('Carrier Value');
 % P2.c
 % Plot the frequency spectrum of message and modulated signals
 % What are the differences between the two plots?
-samples=length(t);
-fl=2^ceil(log2(samples));
-bins=(-fl/2:fl/2-1)/(fl*1.e-4);
-
-sig_resp=fftshift(fft(sig,fl));
-carrier_resp=fftshift(fft(carrier,fl));
+[sig_bins, sig_resp]=freqSpec_2s(sig, sfs);
+[carrier_bins, carrier_resp]=freqSpec_2s(carrier, sfs);
 
 fig2=figure();
 subplot(2,1,1);
-plot(bins,abs(sig_resp));
+plot(sig_bins,abs(sig_resp));
 title('P2.c Message Response');
 xlabel('Frequency');
 ylabel('Message Response Magnitude');
 
 subplot(2,1,2);
-plot(bins,abs(carrier_resp));
+plot(carrier_bins,abs(carrier_resp));
 title('P2.c Carrier Response');
 xlabel('Frequency');
 ylabel('Carrier Response Magnitude');
