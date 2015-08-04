@@ -43,16 +43,18 @@ stacked_sig=zeros(1,len-1);
 
 for section = 0:1:uint64(floor( ( (len)/fs )/rd )-1)
     % Extract 0.05s chunk of signal
-    this_sig=tone( ((section*fs)*rd)+1 : ((section+1)*fs)*rd )
+    this_sig=tone( ((section*fs)*rd)+1 : ((section+1)*fs)*rd );
+    
     % Get the power spectrum of this chunk
     [p_vals,p_sig]=freqSpec_1s(this_sig,fs);
+    
     % Get a rough overall magnitude for comparison
     p_power=sum(abs(p_sig));
     
     % State 1
     if state == 1
         % Check for start of new tone
-        if p_power > (prev_power*3)
+        if p_power > (prev_power*1.3)
             stacked_sig=zeros(1,len-1);
             state=2;
         end
@@ -61,32 +63,32 @@ for section = 0:1:uint64(floor( ( (len)/fs )/rd )-1)
         stacked_sig( ((section*fs)*rd)+1 : ((section+1)*fs)*rd ) = this_sig;
         
         % Check for end of this tone
-        if p_power < (prev_power/3)
+        if p_power < (prev_power/1.3)
             state=1;
             
             % Get the rough power spectrum
             [stacked_vals,stacked_p]=powerSpec(stacked_sig,fs);
-            plot(stacked_vals,stacked_p);
+            %figure();
+            %plot(stacked_vals,stacked_p);
             
             % Create subranges to match the frequencies we're looking for
-            max_col_index=find(stacked_vals>1109,1);
-            min_col_index=find(stacked_vals<1577,1);
-            max_row_range=find(stacked_vals>597&stacked_vals<1041);
+            %max_col_index=find(stacked_vals>1109,1);
+            %min_col_index=find(stacked_vals<1577,1);
+            max_col_range=find(stacked_vals>1109 & stacked_vals<1577);
+            max_row_range=find(stacked_vals>597 & stacked_vals<1041);
             
             % Get the maximum frequencies
-            [C,I]=max(stacked_p(min_col_index:max_col_index));
-            [C,I]=max(stacked_p(max_row_range));
+            %[C_col,I_col]=max(stacked_p(min_col_index:max_col_index));
+            [C_col,I_col]=max(stacked_p(max_col_range));
+            [C_row,I_row]=max(stacked_p(max_row_range));
             
-            col_button_freq=floor(stacked_vals(I+min_col_index-1));
-            row_button_freq=floor(stacked_vals(I+min(max_row_range)-1));
+            %col_button_freq=floor(stacked_vals(I_col+min_col_index-1));
+            col_button_freq=floor(stacked_vals(I_col+min(max_col_range)-1));
+            row_button_freq=floor(stacked_vals(I_row+min(max_row_range)-1));
             
             % Get the keys_list indecies
-            col_index=find(cols>(col_button_freq-20) & cols<(col_button_freq+20));
-			row_index=find(rows>(row_button_freq-20) & rows<(row_button_freq+20));
-            col_button_freq
-            col_index
-            row_button_freq
-            row_index
+            col_index=find(cols>(col_button_freq-10) & cols<(col_button_freq+10));
+			row_index=find(rows>(row_button_freq-10) & rows<(row_button_freq+10));
             
             % Find the key value and append to list
             keys(keys_index)=keys_list(row_index,col_index);
