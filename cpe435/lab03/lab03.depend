@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1441415277 source:/home/berocs/Documents/uah/cpe435/lab03/lab03/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<unistd.h>
+	<sys/types.h>
+	<sys/wait.h>
+	<ctype.h>
+
