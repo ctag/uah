@@ -8,3 +8,13 @@
 	<sys/wait.h>
 	<ctype.h>
 
+1441428077 source:/home/berocs/Documents/uah/cpe434_435/lab03/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<unistd.h>
+	<sys/types.h>
+	<sys/wait.h>
+	<ctype.h>
+	<fcntl.h>
+
