@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1441915358 source:/home/berocs/Documents/uah/cpe434_435/lab04/shm_test/main.c
+	<stdio.h>
+	<stdlib.h>
+	<sys/shm.h>
+	<sys/stat.h>
+
