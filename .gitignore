@@ -1,3 +1,6 @@
+# code::blocks layout
+*.layout
+
 # Created by https://www.gitignore.io
 
 ### Qt ###
