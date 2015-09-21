@@ -94,7 +94,11 @@ int strToInt (char * string, int * output)
 	return(0);
 }
 
-void CloseAll (struct summerType * shmSum, int shmId, char * input_string)
+/**
+ * closeAll
+ * close shm and free pointers
+ */
+void closeAll (struct summerType * shmSum, int shmId, char * input_string)
 {
 	// Tell other processes to exit
 	shmSum->flag = -1;
@@ -134,6 +138,7 @@ int main( int argc, char *argv[] )
 	if (shmId == -1)
 	{
 		printf("\nError creating shared memory. Exiting.\n");
+		free(input_string);
 		return(-1);
 	}
 
@@ -142,6 +147,7 @@ int main( int argc, char *argv[] )
 	if (shmSum < 0)
 	{
 		printf("\nError attaching shared memory. Exiting.\n");
+		closeAll(shmSum, shmId, input_string);
 		return(-1);
 	}
 
@@ -149,7 +155,7 @@ int main( int argc, char *argv[] )
 	if (shmctl(shmId, SHM_STAT, &shmStat) == -1)
 	{
 		printf("\n\nError fetching stats for the shared memory. Exiting.\n\n");
-		CloseAll(shmSum, shmId, input_string);
+		closeAll(shmSum, shmId, input_string);
 		return(-1);
 	}
 
@@ -176,6 +182,7 @@ int main( int argc, char *argv[] )
 	else
 	{
 		printf("\nA weird number of processes are attached to the memory. Exiting.\n");
+		closeAll(shmSum, shmId, input_string);
 		return(-1);
 	}
 
@@ -217,7 +224,6 @@ int main( int argc, char *argv[] )
 			printf("\nResult: %d", shmSum->sum);
 		}
 	}
-
 	else /* Compute sum */
 	{
 		while (1)
@@ -239,7 +245,7 @@ int main( int argc, char *argv[] )
 	}
 
 	// Close and detach shm
-	CloseAll(shmSum, shmId, input_string);
+	closeAll(shmSum, shmId, input_string);
 
     return 0;
 }
