@@ -153,11 +153,11 @@ void fill_matrix(double *numbers,int data_size)
    int i;
    srand48(SEED);
    for(i=0;i<data_size;i++) {
-      numbers[i]=drand48()*(MAX_VALUE-MIN_VALUE) + MIN_VALUE;
+      //numbers[i]=drand48()*(MAX_VALUE-MIN_VALUE) + MIN_VALUE;
       //to verify may want to initialize the numbers array with a pattern
       //that has a known answer such as the sum of numbers from 0 to N-1
       // The result of that summation is (N+1)*N/2!!
-      //numbers[i]=i+10; // to do so uncomment this line
+      numbers[i]=i; // to do so uncomment this line
    }
 }
 
@@ -188,6 +188,7 @@ void scatter(int num_size,double *numbers,double *group,int rank,int numtasks)
    
    /* determine group size */
    group_size = num_size/numtasks;
+   if (rank ==0) cout << endl << "Group size 1: " << group_size;
 
    /* set up initial beginning element to be start of numbers array */   
    begin_element = group_size;
@@ -197,17 +198,33 @@ void scatter(int num_size,double *numbers,double *group,int rank,int numtasks)
       // in MPI process 0 case just copy portion of data over to the group array
       for (i=0;i<group_size;i++) group[i]=numbers[i];
       /* in other cases perform interprocess communication */
-      for(mpitask=1;mpitask<numtasks;mpitask++) {
-         /* send group portion of numbers array to other tasks */
-         MPI_Send(&numbers[begin_element],group_size,MPI_DOUBLE, 
-               mpitask,type,MPI_COMM_WORLD);
-         begin_element += group_size;
+      for(mpitask=1;mpitask<(numtasks-1);mpitask++) {
+		/* send group portion of numbers array to other tasks */
+		MPI_Send(&numbers[begin_element],group_size,MPI_DOUBLE, 
+		mpitask,type,MPI_COMM_WORLD);
+		begin_element += group_size;
       }
+		cout << endl << "Last task: " << mpitask;
+		cout << endl << "remainder: " << (num_size%numtasks);
+		group_size = group_size + (num_size%numtasks);
+		cout << endl << "Group size 2: " << group_size;
+		fflush(stdout);
+		MPI_Send(&numbers[begin_element],group_size,MPI_DOUBLE, 
+		mpitask,type,MPI_COMM_WORLD);
    }
    /* if a non root process just receive the data */
    else {
-      MPI_Recv(group,group_size,MPI_DOUBLE,
-               0,type, MPI_COMM_WORLD,&status);  
+	   if (rank == (numtasks-1))
+	   {
+		   group_size += (num_size%numtasks);
+		   MPI_Recv(group,group_size,MPI_DOUBLE,
+               0,type, MPI_COMM_WORLD,&status); 
+	   }
+	   else
+	   {
+		   MPI_Recv(group,group_size,MPI_DOUBLE,
+               0,type, MPI_COMM_WORLD,&status); 
+	   }
    }
 }
 /*
@@ -300,7 +317,14 @@ int main( int argc, char *argv[])
 
    // dynamically allocate from heap the numbers and group arrays
    numbers = new (nothrow) double[data_size];
-   group = new (nothrow) double[data_size/numtasks+1];
+   if (rank == (numtasks-1))
+   {
+	   group = new (nothrow) double[data_size/numtasks+1+(data_size%numtasks)];
+   }
+   else
+   {
+	   group = new (nothrow) double[data_size/numtasks+1];
+   }
    if (numbers==0 || group==0) { // check for null pointers
       cout << "Memory Allocation Error" << endl;
       MPI_Finalize(); // Exit MPI
@@ -316,6 +340,7 @@ int main( int argc, char *argv[])
       cout << "numbers matrix =" << endl; 
       print_matrix(numbers,data_size);
       cout << endl;
+	cout << "data size " << data_size;
    }
    // scatter the numbers matrix to all processing elements in
    // the system
@@ -323,8 +348,17 @@ int main( int argc, char *argv[])
 
    // sum up elements in the group associated with the
    // current process
-   num_group = data_size/numtasks; // determine local list size 
+   if (rank == (numtasks-1))
+   {
+	   num_group = (data_size/numtasks) + (data_size%numtasks); // determine local list size 
                                    // group
+   }
+   else
+   {
+	   num_group = data_size/numtasks; // determine local list size 
+                                   // group
+   }
+   
    
    for (i=0;i<num_group;i++)
    {
@@ -349,6 +383,7 @@ int main( int argc, char *argv[])
 	// output sum from root MPI process
 	if (rank==0) 
 	{
+		cout << endl << "Expected outcome: " << (data_size)*(data_size-1)/2.0;
 		cout << endl << "Sum of numbers is " << setprecision(8) << vals.sum;
 		cout << endl << "Max of numbers is " << setprecision(8) << vals.max;
 		cout << endl << "Min of numbers is " << setprecision(8) << vals.min << endl;

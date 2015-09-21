@@ -1,0 +1,14 @@
+all : setup p1
+
+setup :
+	#module load openmpi
+	mkdir -p bin
+
+p1 : src/add_num_MPI.cpp
+	mpiCC -o bin/add_num_MPI src/add_num_MPI.cpp
+
+p2 : src/add_num_MPI2.cpp
+	mpiCC -o bin/add_num_MPI2 src/add_num_MPI2.cpp
+
+clean :
+	rm -f *.o bin/*
