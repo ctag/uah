@@ -4,6 +4,8 @@
 /*                                    in Huntsville            */
 /***************************************************************/
 /*
+ * add_num_MPI_rev3 - CPE412 - HW2
+ * 
 This program illustrates the basic concepts of SPMD programming using 
 MPI.  The program represents a common example that is used throughout 
 the CPE 412/512 text, the distributed addition of a sequence of numbers.

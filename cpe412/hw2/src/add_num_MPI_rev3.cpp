@@ -4,6 +4,8 @@
 /*                                    in Huntsville            */
 /***************************************************************/
 /*
+ * add_num_MPI_rev3 - CPE412 - HW2
+ * 
 This program illustrates the basic concepts of SPMD programming using 
 MPI.  The program represents a common example that is used throughout 
 the CPE 412/512 text, the distributed addition of a sequence of numbers.
@@ -317,7 +319,8 @@ int main( int argc, char *argv[])
    data_size=get_data_size(argc,argv,rank,numtasks);
 
    // dynamically allocate from heap the numbers and group arrays
-   numbers = new (nothrow) double[data_size + (data_size/numtasks) + 1];
+   if (rank==0) printf("\nnumbers length: %d", data_size + ((data_size/numtasks)+1));
+   numbers = new (nothrow) double[data_size + ((data_size/numtasks)+1)];
    /*if (rank == (numtasks-1))
    {
 	   group = new (nothrow) double[data_size/numtasks+1+(data_size%numtasks)];
@@ -338,43 +341,24 @@ int main( int argc, char *argv[])
       // initialize numbers matrix with random data
       fill_matrix(numbers,data_size);
       
-      cout << endl << "Data size: " << data_size << ", end: " << (data_size+(data_size/numtasks+1));
+      cout << endl << "Data size: " << data_size << ", end: " << ((data_size/numtasks)+1)*numtasks;
       
-      for (i=data_size; i<(data_size+(data_size/numtasks+1)); i++)
+      for (i=data_size; i<((data_size/numtasks)+1)*numtasks; i++)
 	   {
 		   numbers[i] = -1;
 	   }
 
       // and print the numbers matrix
       cout << "numbers matrix =" << endl; 
-      print_matrix(numbers,data_size + (data_size/numtasks+1)/*data_size*/);
+      print_matrix(numbers,((data_size/numtasks)+1)*numtasks/*data_size*/);
       cout << endl;
-	cout << "data size " << data_size;
    }
-   
+
    // scatter the numbers matrix to all processing elements in
    // the system
    //scatter(data_size,numbers,group,rank,numtasks);
-   MPI_Scatter(numbers, (data_size/numtasks+1), MPI_DOUBLE, group, (data_size/numtasks+1), MPI_DOUBLE, 0, MPI_COMM_WORLD);
+   MPI_Scatter(numbers, ((data_size/numtasks)+1), MPI_DOUBLE, group, ((data_size/numtasks)+1), MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
-	for (i=0; i<(data_size/numtasks+1);i++)
-	{
-		//cout << endl << "rank " << rank << ", group " << i << ":" << group[i];
-		fflush(stdout);
-	}
-
-   // sum up elements in the group associated with the
-   // current process
-   /*if (rank == (numtasks-1))
-   {
-	   num_group = (data_size/numtasks) + (data_size%numtasks); // determine local list size 
-                                   // group
-   }
-   else
-   {
-	   num_group = data_size/numtasks; // determine local list size 
-                                   // group
-   }*/
    
    num_group = data_size/numtasks+1; // determine local list size 
                                    // group
@@ -401,7 +385,10 @@ int main( int argc, char *argv[])
    }
 
    // obtain final sum by summing up partial sums from other MPI tasks/
-   vals=reduce(pt_vals,rank,numtasks);
+   //vals=reduce(pt_vals,rank,numtasks);
+   MPI_Reduce(&pt_vals.sum, &vals.sum, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+   MPI_Reduce(&pt_vals.min, &vals.min, 1, MPI_DOUBLE, MPI_MIN, 0, MPI_COMM_WORLD);
+   MPI_Reduce(&pt_vals.max, &vals.max, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
 
 	// output sum from root MPI process
 	if (rank==0) 

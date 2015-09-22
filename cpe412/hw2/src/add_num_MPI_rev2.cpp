@@ -4,6 +4,8 @@
 /*                                    in Huntsville            */
 /***************************************************************/
 /*
+ * add_num_MPI_rev2 - CPE412 - HW2
+ * 
 This program illustrates the basic concepts of SPMD programming using 
 MPI.  The program represents a common example that is used throughout 
 the CPE 412/512 text, the distributed addition of a sequence of numbers.
@@ -153,11 +155,11 @@ void fill_matrix(double *numbers,int data_size)
    int i;
    srand48(SEED);
    for(i=0;i<data_size;i++) {
-      //numbers[i]=drand48()*(MAX_VALUE-MIN_VALUE) + MIN_VALUE;
+      numbers[i]=drand48()*(MAX_VALUE-MIN_VALUE) + MIN_VALUE;
       //to verify may want to initialize the numbers array with a pattern
       //that has a known answer such as the sum of numbers from 0 to N-1
       // The result of that summation is (N+1)*N/2!!
-      numbers[i]=i; // to do so uncomment this line
+      //numbers[i]=i; // to do so uncomment this line
    }
 }
 
@@ -383,7 +385,7 @@ int main( int argc, char *argv[])
 	// output sum from root MPI process
 	if (rank==0) 
 	{
-		cout << endl << "Expected outcome: " << (data_size)*(data_size-1)/2.0;
+		//cout << endl << "Expected outcome: " << (data_size)*(data_size-1)/2.0;
 		cout << endl << "Sum of numbers is " << setprecision(8) << vals.sum;
 		cout << endl << "Max of numbers is " << setprecision(8) << vals.max;
 		cout << endl << "Min of numbers is " << setprecision(8) << vals.min << endl;
