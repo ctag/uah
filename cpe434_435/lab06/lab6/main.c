@@ -90,25 +90,6 @@ int prompt(char * input, short unsigned int input_len)
  * then converts them to an int
  * Returns 0 on success.
  */
-//int strToInt (char * string, int * output)
-//{
-//	// Variables
-//	unsigned int index;
-//	index = 0;
-//
-//	while (string[index] != '\0')
-//	{
-//		if (isdigit(string[index]) == 0)
-//		{
-//			// not a digit
-//			return(-1);
-//		}
-//		index++;
-//	}
-//	// All chars should be digits
-//	*output = atoi(string);
-//	return(0);
-//}
 int strToInt (char * string)
 {
 	// Variables
@@ -186,6 +167,39 @@ int rrDone (process * rootProc)
 	return(1);
 }
 
+void swapProcs (process * firstProc, process * secondProc)
+{
+	int tmpPriority;
+	int tmpPid;
+	int tmpBurst;
+	tmpPriority = secondProc->priority;
+	tmpPid = secondProc->pid;
+	tmpBurst = secondProc->burst;
+	secondProc->priority = firstProc->priority;
+	secondProc->pid = firstProc->pid;
+	secondProc->burst = firstProc->burst;
+	firstProc->priority = tmpPriority;
+	firstProc->pid = tmpPid;
+	firstProc->burst = tmpBurst;
+}
+
+void sortList (process * rootProc)
+{
+	process * thisProc;
+	if (rootProc->next == NULL)
+		return;
+	thisProc = rootProc->next;
+	while(1)
+	{
+		if (thisProc->priority > rootProc->priority)
+			swapProcs(rootProc, thisProc);
+		if (thisProc->next == NULL)
+			break;
+		thisProc = thisProc->next;
+	}
+	sortList(rootProc->next);
+}
+
 int main( int argc, char *argv[] )
 {
 	// Variables
@@ -225,8 +239,6 @@ int main( int argc, char *argv[] )
 	{
 		printf("\nOK, I will schedule the tasks as Priority Processing.");
 		isProcRR = 0;
-		printf("\nOh no! This isn't implemented yet!\n");
-		return(-1);
 	}
 	else
 	{
@@ -306,6 +318,28 @@ int main( int argc, char *argv[] )
 		}
 	}
 
+	// if PP, collect first process priority
+	if (!isProcRR)
+	{
+		printf("\nPlease enter the priority of the first process >");
+		if (prompt(input_string, input_string_size) != 0)
+		{
+			printf("\nError collecting user input. Exiting.\n");
+			//closeAll(msgId, input_string);
+			return(-1);
+		}
+		else
+		{
+			rootProc->priority = strToInt(input_string);
+			if (rootProc->burst <= 0)
+			{
+				printf("\nError, invalid ascii to int conversion. Exiting.\n");
+				//closeAll(msgId, input_string);
+				return(-1);
+			}
+		}
+	}
+
 	// Continue collecting PID/Burst pairs until -1 is entered for a PID.
 	prevProc = rootProc;
 	while (1)
@@ -345,16 +379,48 @@ int main( int argc, char *argv[] )
 				return(-1);
 			}
 		}
+		// Enter priority
+		if (!isProcRR)
+		{
+			printf("\nPlease enter the priority of the next process >");
+			if (prompt(input_string, input_string_size) != 0)
+			{
+				printf("\nError collecting user input. Exiting.\n");
+				//closeAll(msgId, input_string);
+				return(-1);
+			}
+			else
+			{
+				thisProc->priority = strToInt(input_string);
+				if (thisProc->burst <= 0)
+				{
+					printf("\nError, invalid ascii to int conversion. Exiting.\n");
+					//closeAll(msgId, input_string);
+					return(-1);
+				}
+			}
+		}
 		prevProc->next = thisProc;
 		thisProc->prev = prevProc;
 		prevProc = thisProc;
+	}
+
+	// if PP, sort by priority
+	if (!isProcRR)
+	{
+		printf("\nSorting processes by priority.");
+		sortList(rootProc);
 	}
 
 	// Print all process's
 	thisProc = rootProc;
 	while (1)
 	{
-		printf("\nPID: %d Burst: %d", thisProc->pid, thisProc->burst);
+		if (isProcRR)
+			printf("\nPID: %d Burst: %d", thisProc->pid, thisProc->burst);
+		else
+			printf("\nPID: %d Burst: %d%s priority: %d",
+					thisProc->pid, thisProc->burst, time_unit, thisProc->priority);
 		if (thisProc->next == NULL)
 			break;
 		thisProc = thisProc->next;
@@ -362,15 +428,15 @@ int main( int argc, char *argv[] )
 	printf("\n");
 
 	// Simulate scheduling
-	if (isProcRR)
+	int localQuantum;
+	thisProc = rootProc;
+	while (1)
 	{
-		thisProc = rootProc;
-		while (1)
-		{
-			int localQuantum;
-			printf("\n=====");
-			printf("\nBegin time: %d%s.", time, time_unit);
+		printf("\n=====");
+		printf("\nBegin time: %d%s.", time, time_unit);
 
+		if (isProcRR)
+		{
 			if (thisProc->working + time_quantum >= thisProc->burst)
 			{
 				localQuantum = thisProc->burst - thisProc->working;
@@ -385,26 +451,33 @@ int main( int argc, char *argv[] )
 
 			printf(" Pid %d worked for %d%s", thisProc->pid, localQuantum, time_unit);
 			printf("\nAll other processes accumulated %d%s of wait time.", localQuantum, time_unit);
-
-			printf("\nEnd time: %d%s.", time, time_unit);
-			fflush(stdout);
-
-			if (rrDone(rootProc) == 1)
-			{
-				break;
-			}
-
-			if (thisProc->next == NULL)
-			{
-				thisProc = rootProc;
-			} else {
-				thisProc = thisProc->next;
-			}
 		}
-	}
-	else
-	{
-		//
+		else
+		{
+			localQuantum = thisProc->burst;
+			thisProc->working += localQuantum;
+			time += localQuantum;
+			updateRound(rootProc, thisProc, localQuantum);
+			printf(" Pid %d worked for %d%s and is done.", thisProc->pid, localQuantum, time_unit);
+			printf("\nAll other processes accumulated %d%s of wait time.", localQuantum, time_unit);
+		}
+
+		printf("\nEnd time: %d%s.", time, time_unit);
+		fflush(stdout);
+
+		if (rrDone(rootProc) == 1)
+		{
+			break;
+		}
+
+		if (thisProc->next == NULL)
+		{
+			thisProc = rootProc;
+		}
+		else
+		{
+			thisProc = thisProc->next;
+		}
 	}
 	printf("\n");
 
