@@ -21,6 +21,10 @@
 #include <sys/shm.h> 	// SHM - message queue
 #include <sys/msg.h>	// MSG - Message Queues
 
+// Generate two programs from this source
+#define ISPROCRR 0
+#define ISPROCPP 1
+
 // Process Struct
 typedef struct process {
 	int pid; 	/* Process ID; RR and PP */
@@ -28,12 +32,10 @@ typedef struct process {
 	int t_round; /* Turn around time. Total time needed for process to complete (working + waiting); RR and PP */
 
 	int working; /* Working time, amount of burst done so far; RR only */
-	//int waiting; /* waiting time; rr only */
 
 	int priority; /* Process priority; PP only */
 
 	struct process * next; /* Access the next process in the list */
-	struct process * prev; /* Acces the previous process; PP only */
 } process;
 
 process * initProc ()
@@ -44,10 +46,8 @@ process * initProc ()
 	newProc->burst = -1;
 	newProc->t_round = 0;
 	newProc->working = 0;
-	//newProc->waiting = 0;
 	newProc->priority = 0;
 	newProc->next = NULL;
-	newProc->prev = NULL;
 	return(newProc);
 }
 
@@ -136,6 +136,26 @@ void closeAll (process * rootProc, char * time_unit, char * input_string)
 	free(time_unit);
 }
 
+void closeList (process * rootProc)
+{
+	process * thisProc;
+	process * nextProc;
+	thisProc = rootProc;
+	while (1)
+	{
+		//printf("\nFreeing pid: %d", thisProc->pid);
+		if (thisProc->next == NULL)
+		{
+			free(thisProc);
+			break;
+		}
+		nextProc = thisProc->next;
+		fflush(stdout);
+		free(thisProc);
+		thisProc = nextProc;
+	}
+}
+
 void updateRound (process * rootProc, process * workProc, int quantum)
 {
 	process * thisProc;
@@ -183,6 +203,25 @@ void swapProcs (process * firstProc, process * secondProc)
 	firstProc->burst = tmpBurst;
 }
 
+process findPid (process * rootProc, int pid)
+{
+	process * thisProc;
+	if (rootProc->next == NULL)
+		return *initProc();
+	if (rootProc->pid == pid)
+		return *rootProc;
+	thisProc = rootProc->next;
+	while(1)
+	{
+		if (thisProc->pid == pid)
+			return *thisProc;
+		if (thisProc->next == NULL)
+			break;
+		thisProc = thisProc->next;
+	}
+	return *initProc();
+}
+
 void sortList (process * rootProc)
 {
 	process * thisProc;
@@ -191,7 +230,7 @@ void sortList (process * rootProc)
 	thisProc = rootProc->next;
 	while(1)
 	{
-		if (thisProc->priority > rootProc->priority)
+		if (thisProc->priority < rootProc->priority)
 			swapProcs(rootProc, thisProc);
 		if (thisProc->next == NULL)
 			break;
@@ -216,6 +255,8 @@ int main( int argc, char *argv[] )
 	int totalWait = 0;
 	int numProcs = 1;
 	double avgWait = 0;
+	int * rrOrder; /* the order of process execution for RR */
+	int rrOrderLen;
 
 	// Initialize
 	input_string = (char*)malloc(sizeof(char) * input_string_size);
@@ -223,28 +264,41 @@ int main( int argc, char *argv[] )
 	rootProc = initProc();
 
 	// Determine what role this process has
-	printf("\nAre we scheduling with (R)ound Robin or (P)riority Processing? (r/p) >");
-	if (prompt(input_string, input_string_size) != 0)
+	// if ISPROC is set, then we're going with that instead
+	if (ISPROCRR)
 	{
-		printf("\nError collecting user input. Exiting.\n");
-		//closeAll(msgId, input_string);
-		return(-1);
-	}
-	if (input_string[0] == 'r' || input_string[0] == 'R')
-	{
-		printf("\nOK, I will schedule the tasks as Round Robin.");
 		isProcRR = 1;
 	}
-	else if (input_string[0] == 'p' || input_string[0] == 'P')
+	else if (ISPROCPP)
 	{
-		printf("\nOK, I will schedule the tasks as Priority Processing.");
 		isProcRR = 0;
 	}
 	else
 	{
-		printf("\nInput doesn't seem to be any of 'r', 'R', 'p', 'P'. Exiting.\n");
-		return(-1);
+		printf("\nAre we scheduling with (R)ound Robin or (P)riority Processing? (r/p) >");
+		if (prompt(input_string, input_string_size) != 0)
+		{
+			printf("\nError collecting user input. Exiting.\n");
+			//closeAll(msgId, input_string);
+			return(-1);
+		}
+		if (input_string[0] == 'r' || input_string[0] == 'R')
+		{
+			printf("\nOK, I will schedule the tasks as Round Robin.");
+			isProcRR = 1;
+		}
+		else if (input_string[0] == 'p' || input_string[0] == 'P')
+		{
+			printf("\nOK, I will schedule the tasks as Priority Processing.");
+			isProcRR = 0;
+		}
+		else
+		{
+			printf("\nInput doesn't seem to be any of 'r', 'R', 'p', 'P'. Exiting.\n");
+			return(-1);
+		}
 	}
+
 
 	// Determine time units
 	printf("\nWhat time units are we dealing with? (ms, ns, ps, etc) >");
@@ -321,6 +375,7 @@ int main( int argc, char *argv[] )
 	// if PP, collect first process priority
 	if (!isProcRR)
 	{
+		printf("\nA lower integer value indicates a higher process priority.");
 		printf("\nPlease enter the priority of the first process >");
 		if (prompt(input_string, input_string_size) != 0)
 		{
@@ -401,7 +456,6 @@ int main( int argc, char *argv[] )
 			}
 		}
 		prevProc->next = thisProc;
-		thisProc->prev = prevProc;
 		prevProc = thisProc;
 	}
 
@@ -426,6 +480,79 @@ int main( int argc, char *argv[] )
 		thisProc = thisProc->next;
 	}
 	printf("\n");
+
+/* I misread the instructions. This section is not needed.
+	// If RR, collect the process order
+	if (isProcRR)
+	{
+		int index;
+		printf("\nPlease enter the length of the process scheduling order.");
+		printf("\nFor order of \"1, 2, 3\", enter 3 as the length");
+		printf("\n>");
+		if (prompt(input_string, input_string_size) != 0)
+		{
+			printf("\nError collecting user input. Exiting.\n");
+			//closeAll(msgId, input_string);
+			return(-1);
+		}
+		else
+		{
+			rrOrderLen = strToInt(input_string);
+			if (rrOrderLen <= 0)
+			{
+				printf("\nError, invalid ascii to int conversion. Exiting.\n");
+				//closeAll(msgId, input_string);
+				return(-1);
+			}
+			rrOrder = (int*)malloc(sizeof(int) * rrOrderLen);
+		}
+		printf("\nEnter the order by PID (first to execute is first to be entered).");
+		for (index = 0; index < rrOrderLen; ++index)
+		{
+			printf("\n>");
+			if (prompt(input_string, input_string_size) != 0)
+			{
+				printf("\nError collecting user input. Exiting.\n");
+				//closeAll(msgId, input_string);
+				return(-1);
+			}
+			else
+			{
+				rrOrder[index] = strToInt(input_string);
+				if (rrOrder[index] <= 0)
+				{
+					printf("\nError, invalid ascii to int conversion. Exiting.\n");
+					//closeAll(msgId, input_string);
+					return(-1);
+				}
+			}
+		}
+	}
+
+	// Create a linked list that matches the process order
+	if (isProcRR)
+	{
+        process * newRoot;
+        process * prevProc;
+        process * thisProc;
+        int index;
+        newRoot = initProc();
+        *newRoot = findPid(rootProc, rrOrder[0]);
+        thisProc = NULL;
+        prevProc = newRoot;
+        for (index = 1; index < rrOrderLen; ++index)
+		{
+			int pid = rrOrder[index];
+			thisProc = initProc();
+			*thisProc = findPid(rootProc, pid);
+			prevProc->next = thisProc;
+			thisProc->next = NULL;
+			prevProc = thisProc;
+		}
+		closeList(rootProc);
+		rootProc = newRoot;
+	}
+*/
 
 	// Simulate scheduling
 	int localQuantum;
@@ -487,13 +614,13 @@ int main( int argc, char *argv[] )
 	{
 		if (isProcRR)
 		{
-			printf("\nPID: %d Burst: %d%s Working: %d%s t_round: %d%s",
-				thisProc->pid, thisProc->burst, time_unit, thisProc->working, time_unit, thisProc->t_round, time_unit);
+			printf("\nPID: %d Burst: %d%s \tWaiting: %d%s \tt_round: %d%s",
+				thisProc->pid, thisProc->burst, time_unit, (thisProc->t_round - thisProc->burst), time_unit, thisProc->t_round, time_unit);
 		}
 		else
 		{
-			printf("\nPID: %d Burst: %d%s t_round: %d%s",
-				thisProc->pid, thisProc->burst, time_unit, thisProc->t_round, time_unit);
+			printf("\nPID: %d \tBurst: %d%s \t Waiting: %d%s \tt_round: %d%s",
+				thisProc->pid, thisProc->burst, time_unit, (thisProc->t_round-thisProc->burst), time_unit, thisProc->t_round, time_unit);
 		}
 
 		if (thisProc->next == NULL)
@@ -505,16 +632,33 @@ int main( int argc, char *argv[] )
 
 	// Calculate stats
 	thisProc = rootProc;
+	numProcs = 1;
 	while (1)
 	{
-		totalWait += thisProc->t_round - thisProc->burst;
+		totalWait += (thisProc->t_round - thisProc->burst);
 		if (thisProc->next == NULL)
 			break;
 		thisProc = thisProc->next;
 		numProcs++;
 	}
 	avgWait = ((double)totalWait / numProcs);
-	printf("\nAverage wait time: %lf%s", avgWait, time_unit);
+	printf("\nAverage wait time: %lf%s. Number of processes: %d", avgWait, time_unit, numProcs);
+
+	if (!isProcRR)
+	{
+		int totalRun = 0;
+		float avgRun = 0;
+		thisProc = rootProc;
+		while (1)
+		{
+			totalRun += (thisProc->t_round);
+			if (thisProc->next == NULL)
+				break;
+			thisProc = thisProc->next;
+		}
+		avgRun = ((double)totalRun / numProcs);
+		printf("\nAverage run time: %lf%s.", avgRun, time_unit);
+	}
 
 	// Close
 	closeAll(rootProc, time_unit, input_string);
