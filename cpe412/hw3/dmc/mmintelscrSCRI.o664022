@@ -1,0 +1,42 @@
+####################################################################
+#         Alabama Supercomputer Center - PBS Prologue
+# Your job id is : 664022
+# Your job name is : mmintelscrSCRI
+# Your job's queue is : class
+# Your username for this job is : uahcls16
+# Your group    for this job is : classq
+# Your job was allocated: 
+#	8 CPUs on dmc152
+# Your job started at : Thu Oct  1 03:10:19 CDT 2015
+####################################################################
+setting dmc scratch directory
+ 
+============================================================
+=====         Summary of your script job               =====
+============================================================
+  The script file is:  mm_intel.scr
+  The time limit is  16:00:00  HH:MM:SS.
+  The target directory is:  /home/uahcls16/uah/cpe412/hw3
+  The working directory is:  /scratch-local/uahcls16.mmintelscrSCRI.664022
+  The memory limit is:  8gb
+  The job will start running after:  201510010308.56
+  Look for:  mmintelscrSCRI  in queue:  class
+ 
+Lmod has detected the following error: The following module(s) are unknown:
+"openmp"
+
+   Please check the spelling or version number. Also try "module spider ..."
+
+####################################################################
+# Your job finished at : Thu Oct  1 04:32:07 CDT 2015
+# Your job id is : 664022
+# Your job name is : mmintelscrSCRI
+# Your job's queue is : class
+# Your username for this job is : uahcls16
+# Your group    for this job is : classq
+# Your job requested : cput=16:00:00,mem=8gb,neednodes=1:ppn=8,nodes=1:ppn=8,walltime=03:00:00
+# Your job used : cput=03:41:10,mem=1759448kb,vmem=4514520kb,walltime=01:21:48
+# Your job's parallel cpu utilization : 33%
+# Your job's memory utilization (mem) : 20.97%
+#         Alabama Supercomputer Center - PBS Epilogue
+####################################################################

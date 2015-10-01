@@ -176,13 +176,13 @@ int main( int argc, char *argv[])
    /*
      output numbers matrix
    */
-   cout << "A matrix =" << endl;
+   /*cout << "A matrix =" << endl;
    print_matrix(a,dim_l,dim_m);
    cout << endl;
 
    cout << "B matrix =" << endl;
    print_matrix(b,dim_m,dim_n);
-   cout << endl;
+   cout << endl;*/
 
    /*
    Start recording the execution time
@@ -206,8 +206,8 @@ int main( int argc, char *argv[])
    */
    TIMER_STOP;
 
-   cout << "C matrix =" << endl;
-   print_matrix(c,dim_l,dim_n);
+   /*cout << "C matrix =" << endl;
+   print_matrix(c,dim_l,dim_n);*/
    cout << endl;
    cout << "time=" << setprecision(8) <<  TIMER_ELAPSED/1000000.0
         << " seconds" << endl;
