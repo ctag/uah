@@ -1,0 +1,132 @@
+#!/bin/bash
+module load openmp
+#Execution commands for 1 MPI process
+./mm_mult_serial_intel 200 > mm_MPI_intel_1.txt
+./mm_mult_serial_intel 400 >> mm_MPI_intel_1.txt
+./mm_mult_serial_intel 600 >> mm_MPI_intel_1.txt
+./mm_mult_serial_intel 800 >> mm_MPI_intel_1.txt
+./mm_mult_serial_intel 1000 >>mm_MPI_intel_1.txt
+./mm_mult_serial_intel 1200 >>mm_MPI_intel_1.txt
+./mm_mult_serial_intel 1400 >>mm_MPI_intel_1.txt
+./mm_mult_serial_intel 1600 >>mm_MPI_intel_1.txt
+./mm_mult_serial_intel 1800 >>mm_MPI_intel_1.txt
+./mm_mult_serial_intel 2000 >>mm_MPI_intel_1.txt
+./mm_mult_serial_intel 2200 >>mm_MPI_intel_1.txt
+./mm_mult_serial_intel 2400 >>mm_MPI_intel_1.txt
+./mm_mult_serial_intel 2600 >>mm_MPI_intel_1.txt
+./mm_mult_serial_intel 2800 >>mm_MPI_intel_1.txt
+./mm_mult_serial_intel 3000 >>mm_MPI_intel_1.txt
+./mm_mult_serial_intel 3200 >>mm_MPI_intel_1.txt
+./mm_mult_serial_intel 3400 >>mm_MPI_intel_1.txt
+./mm_mult_serial_intel 3600 >>mm_MPI_intel_1.txt
+./mm_mult_serial_intel 3800 >>mm_MPI_intel_1.txt
+./mm_mult_serial_intel 4000 >>mm_MPI_intel_1.txt
+./mm_mult_serial_intel 4200 >>mm_MPI_intel_1.txt
+./mm_mult_serial_intel 4400 >>mm_MPI_intel_1.txt
+./mm_mult_serial_intel 4600 >>mm_MPI_intel_1.txt
+./mm_mult_serial_intel 4800 >>mm_MPI_intel_1.txt
+./mm_mult_serial_intel 5000 >>mm_MPI_intel_1.txt
+#MPI execution commands for 2 MPI process
+mpirun -np 2 mm_mult_MPI_intel 200 > mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 400 >> mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 600 >> mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 800 >> mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 1000 >>mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 1200 >>mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 1400 >>mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 1600 >>mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 1800 >>mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 2000 >>mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 2200 >>mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 2400 >>mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 2600 >>mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 2800 >>mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 3000 >>mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 3200 >>mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 3400 >>mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 3600 >>mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 3800 >>mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 4000 >>mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 4200 >>mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 4400 >>mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 4600 >>mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 4800 >>mm_MPI_intel_2.txt
+mpirun -np 2 mm_mult_MPI_intel 5000 >>mm_MPI_intel_2.txt
+#MPI execution commands for 4 MPI process
+mpirun -np 4 mm_mult_MPI_intel 200 > mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 400 >> mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 600 >> mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 800 >> mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 1000 >>mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 1200 >>mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 1400 >>mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 1600 >>mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 1800 >>mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 2000 >>mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 2200 >>mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 2400 >>mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 2600 >>mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 2800 >>mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 3000 >>mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 3200 >>mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 3400 >>mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 3600 >>mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 3800 >>mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 4000 >>mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 4200 >>mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 4400 >>mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 4600 >>mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 4800 >>mm_MPI_intel_4.txt
+mpirun -np 4 mm_mult_MPI_intel 5000 >>mm_MPI_intel_4.txt
+#MPI execution commands for 6 MPI process
+mpirun -np 6 mm_mult_MPI_intel 200 > mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 400 >> mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 600 >> mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 800 >> mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 1000 >>mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 1200 >>mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 1400 >>mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 1600 >>mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 1800 >>mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 2000 >>mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 2200 >>mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 2400 >>mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 2600 >>mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 2800 >>mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 3000 >>mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 3200 >>mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 3400 >>mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 3600 >>mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 3800 >>mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 4000 >>mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 4200 >>mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 4400 >>mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 4600 >>mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 4800 >>mm_MPI_intel_6.txt
+mpirun -np 6 mm_mult_MPI_intel 5000 >>mm_MPI_intel_6.txt
+#MPI execution commands for 8 MPI process
+mpirun -np 8 mm_mult_MPI_intel 200 > mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 400 >> mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 600 >> mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 800 >> mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 1000 >>mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 1200 >>mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 1400 >>mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 1600 >>mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 1800 >>mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 2000 >>mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 2200 >>mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 2400 >>mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 2600 >>mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 2800 >>mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 3000 >>mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 3200 >>mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 3400 >>mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 3600 >>mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 3800 >>mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 4000 >>mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 4200 >>mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 4400 >>mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 4600 >>mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 4800 >>mm_MPI_intel_8.txt
+mpirun -np 8 mm_mult_MPI_intel 5000 >>mm_MPI_intel_8.txt
