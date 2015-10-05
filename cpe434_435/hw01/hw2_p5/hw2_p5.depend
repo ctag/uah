@@ -1,6 +1,0 @@
-# depslib dependency file v1.0
-1443075507 source:/home/berocs/Documents/uah/cpe434_435/hw01/hw2_p5/main.c
-	<stdio.h>
-	<stdlib.h>
-	<pthread.h>
-

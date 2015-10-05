@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1443633032 source:/home/berocs/Documents/uah/cpe434_435/lab06/lab6/main.c
+1443633809 source:/home/berocs/Documents/uah/cpe434_435/lab06/lab6/main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
