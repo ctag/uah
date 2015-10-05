@@ -57,6 +57,7 @@ using namespace std;
 #include <string.h>
 #include <sys/time.h>
 
+#define DEBUG true
 #define MX_SZ 320
 #define SEED 2397           /* random number seed */
 #define MAX_VALUE  100.0    /* maximum size of array elements A, and B */
@@ -176,13 +177,16 @@ int main( int argc, char *argv[])
    /*
      output numbers matrix
    */
-   /*cout << "A matrix =" << endl;
-   print_matrix(a,dim_l,dim_m);
-   cout << endl;
+   if (DEBUG)
+   {
+		cout << "A matrix =" << endl;
+	   print_matrix(a,dim_l,dim_m);
+	   cout << endl;
 
-   cout << "B matrix =" << endl;
-   print_matrix(b,dim_m,dim_n);
-   cout << endl;*/
+	   cout << "B matrix =" << endl;
+	   print_matrix(b,dim_m,dim_n);
+	   cout << endl;
+   }
 
    /*
    Start recording the execution time
@@ -206,8 +210,12 @@ int main( int argc, char *argv[])
    */
    TIMER_STOP;
 
-   /*cout << "C matrix =" << endl;
-   print_matrix(c,dim_l,dim_n);*/
+   if (DEBUG)
+   {
+   	cout << "C matrix =" << endl;
+   print_matrix(c,dim_l,dim_n);
+   }
+
    cout << endl;
    cout << "time=" << setprecision(8) <<  TIMER_ELAPSED/1000000.0
         << " seconds" << endl;
