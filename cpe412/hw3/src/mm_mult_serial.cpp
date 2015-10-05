@@ -57,7 +57,7 @@ using namespace std;
 #include <string.h>
 #include <sys/time.h>
 
-#define DEBUG true
+#define DEBUG false
 #define MX_SZ 320
 #define SEED 2397           /* random number seed */
 #define MAX_VALUE  100.0    /* maximum size of array elements A, and B */

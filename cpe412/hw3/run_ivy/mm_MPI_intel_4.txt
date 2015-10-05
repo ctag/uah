@@ -1,0 +1,50 @@
+
+time=0.002869 seconds
+
+time=0.017861 seconds
+
+time=0.068177 seconds
+
+time=0.761172 seconds
+
+time=0.328281 seconds
+
+time=2.549704 seconds
+
+time=2.97284 seconds
+
+time=2.58565 seconds
+
+time=2.692605 seconds
+
+time=3.494083 seconds
+
+time=4.536942 seconds
+
+time=8.883463 seconds
+
+time=6.816511 seconds
+
+time=8.976941 seconds
+
+time=14.246777 seconds
+
+time=24.064858 seconds
+
+time=17.25617 seconds
+
+time=22.084714 seconds
+
+time=27.75147 seconds
+
+time=45.592191 seconds
+
+time=50.457454 seconds
+
+time=52.273813 seconds
+
+time=63.291397 seconds
+
+time=72.426237 seconds
+
+time=86.007599 seconds

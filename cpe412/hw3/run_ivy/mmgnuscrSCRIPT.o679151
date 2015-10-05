@@ -1,0 +1,37 @@
+####################################################################
+#         Alabama Supercomputer Center - PBS Prologue
+# Your job id is : 679151
+# Your job name is : mmgnuscrSCRIPT
+# Your job's queue is : class
+# Your username for this job is : uahcls16
+# Your group    for this job is : classq
+# Your job was allocated: 
+#	8 CPUs on dmc6
+# Your job started at : Mon Oct  5 01:26:38 CDT 2015
+####################################################################
+setting dmc scratch directory
+ 
+============================================================
+=====         Summary of your script job               =====
+============================================================
+  The script file is:  mm_gnu.scr
+  The time limit is  16:00:00  HH:MM:SS.
+  The target directory is:  /home/uahcls16/uah/cpe412/hw3
+  The working directory is:  /scratch-local/uahcls16.mmgnuscrSCRIPT.679151
+  The memory limit is:  8gb
+  The job will start running after:  201510050124.55
+  Look for:  mmgnuscrSCRIPT  in queue:  class
+ 
+####################################################################
+# Your job finished at : Mon Oct  5 02:33:10 CDT 2015
+# Your job id is : 679151
+# Your job name is : mmgnuscrSCRIPT
+# Your job's queue is : class
+# Your username for this job is : uahcls16
+# Your group    for this job is : classq
+# Your job requested : cput=16:00:00,mem=8gb,neednodes=1:ppn=8,nodes=1:ppn=8,walltime=03:00:00
+# Your job used : cput=02:47:56,mem=1135316kb,vmem=3927748kb,walltime=01:06:35
+# Your job's parallel cpu utilization : 31%
+# Your job's memory utilization (mem) : 13.53%
+#         Alabama Supercomputer Center - PBS Epilogue
+####################################################################

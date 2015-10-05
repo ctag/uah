@@ -26,7 +26,7 @@ using namespace std;
 #include <unistd.h>
 #include <math.h>
 
-#define DEBUG true			/* whether to output matrices or not */
+#define DEBUG false			/* whether to output matrices or not */
 #define MX_SZ 320
 #define SEED 2397           /* random number seed */
 #define MAX_VALUE  100.0    /* maximum size of array elements A, and B */

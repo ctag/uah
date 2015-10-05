@@ -1,0 +1,48 @@
+####################################################################
+#         Alabama Supercomputer Center - PBS Prologue
+# Your job id is : 679153
+# Your job name is : mmintelscrSCRI
+# Your job's queue is : class
+# Your username for this job is : uahcls16
+# Your group    for this job is : classq
+# Your job was allocated: 
+#	8 CPUs on dmc7
+# Your job started at : Mon Oct  5 01:26:38 CDT 2015
+####################################################################
+Lmod has detected the following error: Unable to load module: openmpi
+     /mnt/homeapps/apps/dmc/etc/modulefiles/openmpi/1.8.3-intel :
+/apps/dmc/apps/lmod/etc/SitePackage.lua:50: LuaSQL: database is locked
+
+
+While processing the following module(s):
+
+Module fullname      Module Filename
+---------------      ---------------
+intel/15.0.0         /mnt/homeapps/apps/dmc/etc/modulefiles/intel/15.0.0
+openmpi/1.8.3-intel  /mnt/homeapps/apps/dmc/etc/modulefiles/openmpi/1.8.3-intel
+setting dmc scratch directory
+ 
+============================================================
+=====         Summary of your script job               =====
+============================================================
+  The script file is:  mm_intel.scr
+  The time limit is  16:00:00  HH:MM:SS.
+  The target directory is:  /home/uahcls16/uah/cpe412/hw3
+  The working directory is:  /scratch-local/uahcls16.mmintelscrSCRI.679153
+  The memory limit is:  8gb
+  The job will start running after:  201510050125.41
+  Look for:  mmintelscrSCRI  in queue:  class
+ 
+####################################################################
+# Your job finished at : Mon Oct  5 02:35:10 CDT 2015
+# Your job id is : 679153
+# Your job name is : mmintelscrSCRI
+# Your job's queue is : class
+# Your username for this job is : uahcls16
+# Your group    for this job is : classq
+# Your job requested : cput=16:00:00,mem=8gb,neednodes=1:ppn=8,nodes=1:ppn=8,walltime=03:00:00
+# Your job used : cput=02:59:42,mem=1144260kb,vmem=3927492kb,walltime=01:08:34
+# Your job's parallel cpu utilization : 32%
+# Your job's memory utilization (mem) : 13.64%
+#         Alabama Supercomputer Center - PBS Epilogue
+####################################################################

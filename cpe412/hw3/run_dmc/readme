@@ -1,0 +1,3 @@
+This is from the previous version of mm_mult_MPI
+in which the entire matrices were copied to each 
+process. 
