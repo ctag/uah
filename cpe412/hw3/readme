@@ -1,0 +1,8 @@
+What's going on here:
+
+the graph folder has data files and saved images from the DMC queue script.
+
+The run_dmc and run_ivy have raw output from the queue scripts.
+
+src has the cpp source code to this homework.
+
