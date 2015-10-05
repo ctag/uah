@@ -1,5 +1,5 @@
 #!/bin/bash
-module load openmp
+module load openmpi
 #Execution commands for 1 MPI process
 ./bin/mm_mult_serial_gnu 200 > mm_MPI_gnu_1.txt
 ./bin/mm_mult_serial_gnu 400 >> mm_MPI_gnu_1.txt

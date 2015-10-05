@@ -3,29 +3,11 @@
 /* September 2015 -- B. Earl Wells -- University of Alabama       */
 /*                                    in Huntsville               */
 /******************************************************************/
-/*
-   This program is designed to perform matrix matrix multiplication
-   A x B = C, where A is an lxm matrix, B is a m x n matrix and
-   C is a l x n matrix. The program is designed to be a template
-   serial program that can be expanded into a parallel multiprocess
-   and/or a multi-threaded program.
-
-   The program randomly assigns the elements of the A and B matrix
-   with values between 0 and a MAX_VALUE. It then multiples the
-   two matrices with the result being placed in the C matrix.
-   The program prints out the A, B, and C matrices.
-
-   The program is executed using one or three command line parameters.
-   These parameters represent the dimension of the matrices. If only
-   one parameter is used then then it is assumed that square matrices are
-   to be created and multiplied together that have the specified
-   dimension. In cases where three command line parameters are entered
-   then the first parameter is the l dimension, the second the m, and
-   the third is the n dimension.
-
-   To execute:
-   mm_mult_serial [l_parameter] <m_parameter n_parameter>
-*/
+/**
+ * Christopher Bero
+ * CPE 412 - HW3
+ * This program is a modification of mm_mult_serial.cpp
+ */
 
 using namespace std;
 #include <iostream>
@@ -36,7 +18,7 @@ using namespace std;
 #include <sys/time.h>
 
 /**
- * Added headers for an MPI program
+ * headers for an MPI program
  */
 #include <mpi.h>
 #include <stdio.h>
@@ -44,6 +26,7 @@ using namespace std;
 #include <unistd.h>
 #include <math.h>
 
+#define DEBUG true			/* whether to output matrices or not */
 #define MX_SZ 320
 #define SEED 2397           /* random number seed */
 #define MAX_VALUE  100.0    /* maximum size of array elements A, and B */
@@ -55,27 +38,28 @@ using namespace std;
 #define TIMER_STOP      gettimeofday(&tv2, (struct timezone*)0)
 struct timeval tv1,tv2;
 
-/*
-This declaration facilitates the creation of two dimensional
-dynamically allocated arrays (i.e. the lxm A array, the mxn B
-array, and the lxn C array).  It allows pointer arithmetic to
-be applied to a single data stream that can be dynamically allocated.
-To address the element at row x, and column y you would use the
-following notation:  A(x,y),B(x,y), or C(x,y), respectively.
-Note that this differs from the normal C notation if A were a
-two dimensional array of A[x][y] but is still very descriptive
-of the data structure.
-*/
-float *a,*b,*c;
-#define A(i,j) *(a+((i*dim_m)+j))
-#define B(i,j) *(b+((i*dim_n)+j))
-#define C(i,j) *(c+((i*dim_n)+j))
+typedef struct matrix_dimensions
+{
+	/**
+	 * Corresponding:
+	 * [l,m] * [m,n] = [l,n]
+	 */
+	unsigned int l, m, n;
+} matrix_dimensions;
+
+/**
+ * Generic function which does the same as the definition statements
+ */
+float * cartesian (float * matrix, int row_sz, int row, int col)
+{
+	return( (matrix + (row * row_sz) + col) );
+}
 
 /*
    Routine to retrieve the data size of the numbers array from the
    command line or by prompting the user for the information
 */
-void get_index_size(int argc,char *argv[],int *dim_l,int *dim_m,int *dim_n)
+void get_index_size(int argc, char *argv[], unsigned int *dim_l, unsigned int *dim_m, unsigned int *dim_n)
 {
     if(argc!=2 && argc!=4)
     {
@@ -143,20 +127,25 @@ void print_matrix(float *array,int dim_m,int dim_n)
 */
 int main( int argc, char *argv[])
 {
-    float dot_prod; /* dot product result */
-    int dim_l,dim_n,dim_m; /* matrix dimensions */
-    long unsigned int i,j,k; /* indexes */
-	int nmtsks, rank; /* default MPI variables */
-	long unsigned int mStart, mEnd; /* index of beginning and ending elements */
-	unsigned int groupSize; /* Number of elements to process, minus -1's */
-	long unsigned int aElems, bElems, cElems; /* Number of elements in matrix */
+	// Matrix variables
+	float *a,*b,*c; 							/* matrix (0,0) address */
+	float * local_a;							/* chunk of a to operate on */
+    float dot_prod; 							/* dot product result */
+    matrix_dimensions dim; 						/* matrix dimensions */
+    long unsigned int i,k; 					/* indexes */
+	long unsigned int mStart, mEnd; 			/* index of beginning and ending elements for subproblem */
+	long unsigned int aCount, bCount, cCount; 	/* Number of elements in matrix */
+
+	// MPI variables
+	int nmtsks, rank; 		/* default MPI variables */
+	unsigned int groupSize;	/* Number of elements to process */
 
 	/**
 	 * MPI initialization
 	 */
-	MPI_Init(&argc,&argv); /* initalize MPI environment */
-	MPI_Comm_size(MPI_COMM_WORLD,&nmtsks);/* find total number of tasks */
-	MPI_Comm_rank(MPI_COMM_WORLD,&rank); /* get task identity number */
+	MPI_Init(&argc,&argv); 					/* initalize MPI environment */
+	MPI_Comm_size(MPI_COMM_WORLD,&nmtsks);	/* find total number of tasks */
+	MPI_Comm_rank(MPI_COMM_WORLD,&rank); 	/* get task identity number */
 
     /**
      * Process 0 sets up the operands
@@ -166,16 +155,19 @@ int main( int argc, char *argv[])
 		/*
 			get matrix sizes
 		*/
-		get_index_size(argc,argv,&dim_l,&dim_m,&dim_n);
+		get_index_size(argc,argv,&dim.l,&dim.m,&dim.n);
+
+		aCount = (dim.l * dim.m);
+		bCount = (dim.m * dim.n);
+		cCount = (dim.l * dim.n);
 
 		// dynamically allocate from heap the numbers in the memory space
 		// for the a,b, and c matrices
-		a = new (nothrow) float[dim_l*dim_m];
-		b = new (nothrow) float[dim_m*dim_n];
-
+		a = new (nothrow) float[dim.l*dim.m];
+		b = new (nothrow) float[dim.m*dim.n];
 		if(a==0 || b==0)
 		{
-			cout <<"ERROR:  Insufficient Memory" << endl;
+			cout <<"ERROR:  Insufficient Memory" << endl << flush;
 			exit(1);
 		}
 
@@ -183,26 +175,24 @@ int main( int argc, char *argv[])
 		   initialize numbers matrix with random data
 		*/
 		srand48(SEED);
-		fill_matrix(a,dim_l,dim_m);
-		fill_matrix(b,dim_m,dim_n);
+		fill_matrix(a,dim.l,dim.m);
+		fill_matrix(b,dim.m,dim.n);
 
 		/*
 		  output numbers matrix
 		*/
-		/*cout << "A matrix =" << endl;
-		print_matrix(a,dim_l,dim_m);
-		cout << endl;
+		if (DEBUG)
+		{
+			cout << "A matrix =" << endl;
+			print_matrix(a,dim.l,dim.m);
+			cout << endl;
 
-		cout << "B matrix =" << endl;
-		print_matrix(b,dim_m,dim_n);
-		cout << endl;*/
-	}
+			cout << "B matrix =" << endl;
+			print_matrix(b,dim.m,dim.n);
+			cout << endl;
+		}
 
-	/*
-    Start recording the execution time
-    */
-    if (rank == 0)
-	{
+		// Start recording the execution time
 		TIMER_CLEAR;
 		TIMER_START;
 	}
@@ -210,25 +200,26 @@ int main( int argc, char *argv[])
 	/**
 	 * Disseminate matrix dimensions and operands
 	 */
-	MPI_Bcast(&dim_l, 1, MPI_INT, 0, MPI_COMM_WORLD);
-	MPI_Bcast(&dim_m, 1, MPI_INT, 0, MPI_COMM_WORLD);
-	MPI_Bcast(&dim_n, 1, MPI_INT, 0, MPI_COMM_WORLD);
-	aElems = (dim_l * dim_m);
-	bElems = (dim_m * dim_n);
-	cElems = (dim_l * dim_n);
+	MPI_Bcast(&dim, (sizeof(dim)/sizeof(unsigned int)), MPI_UNSIGNED, 0, MPI_COMM_WORLD);
 	if (rank != 0)
 	{
-		a = new (nothrow) float[aElems];
-		b = new (nothrow) float[bElems];
+		aCount = (dim.l * dim.m);
+		bCount = (dim.m * dim.n);
+		cCount = (dim.l * dim.n);
+		b = new (nothrow) float[bCount];
+		if(b==0)
+		{
+			cout <<"ERROR:  Insufficient Memory" << endl << flush;
+			exit(1);
+		}
 	}
-	MPI_Barrier(MPI_COMM_WORLD);
-	MPI_Bcast(a, aElems, MPI_FLOAT, 0, MPI_COMM_WORLD);
-	MPI_Bcast(b, bElems, MPI_FLOAT, 0, MPI_COMM_WORLD);
+	MPI_Bcast(b, bCount, MPI_FLOAT, 0, MPI_COMM_WORLD); /* Every process gets a full copy of b */
+
 
 	/**
 	 * Calculate subproblem indexes
 	 */
-	groupSize = (cElems / nmtsks);
+	groupSize = (cCount / nmtsks);
 	mStart = (groupSize * rank);
 	mEnd = (mStart + groupSize) - 1;
 
@@ -238,19 +229,54 @@ int main( int argc, char *argv[])
 	 */
 	if (rank == (nmtsks-1))
 	{
-		mEnd = (cElems-1);
+		mEnd = (cCount-1);
 		groupSize = (mEnd+1) - mStart;
 	}
 
 	/**
+	 * Send only rows of matrix a that are needed
+	 * A 5000x5000 matrix is 25000000 elements
+	 * which with float is 100,000,000 bytes.
+	 * I'm suddenly a little memory conscious.
+	 *
+	 * Need two arrays for scatterv:
+	 * - Starting element in matrix a to send
+	 * - Length of segment from matrix a to send
+	 */
+	int vSizes[nmtsks]; /* Size of segment */
+	int vDisps[nmtsks]; /* Offset of segment from 0 */
+	int elemStart, elemEnd;
+	unsigned int rootPartialA = (aCount / nmtsks); /* is the same for rank 0->(n-2) */
+	unsigned int lastPartialA = (aCount - (rootPartialA * (nmtsks-1)));
+	for (i=0; i<nmtsks; ++i)
+	{
+		elemStart = ((i*rootPartialA))/dim.m*dim.m;
+		if (i == (nmtsks-1))
+		{
+			elemEnd = ((((i*rootPartialA)-1)+rootPartialA)/dim.m)*dim.m + (dim.m-1);
+		} else {
+			elemEnd = ((((i*rootPartialA)-1)+lastPartialA)/dim.m)*dim.m + (dim.m-1);
+		}
+		vSizes[i] = (elemEnd - elemStart) + 1;
+		vDisps[i] = (elemStart);
+	}
+
+	local_a = new (nothrow) float[vSizes[rank]];
+	if(local_a==0)
+	{
+		cout <<"ERROR:  Insufficient Memory" << endl << flush;
+		exit(1);
+	}
+
+	MPI_Scatterv(a, vSizes, vDisps, MPI_FLOAT, local_a, vSizes[rank], MPI_FLOAT, 0, MPI_COMM_WORLD);
+
+	/**
 	 * Create resulting matrix
-	 * Trying to save a little bit of memory on C.
-	 * I would rather have avoided pushing all of A and B
-	 * to each process. Oh well.
+	 * Trying to save a little bit of memory on matrix C.
 	 */
 	if (rank == 0)
 	{
-		c = new (nothrow) float[dim_l*dim_n];
+		c = new (nothrow) float[dim.l*dim.n];
 	}
 	else
 	{
@@ -258,54 +284,27 @@ int main( int argc, char *argv[])
 	}
 	if (c == 0)
 	{
-		cout <<"ERROR:  Insufficient Memory" << endl;
+		cout <<"ERROR:  Insufficient Memory" << endl << flush;
 		exit(1);
 	}
 
-//	cout << flush;
-//	MPI_Barrier(MPI_COMM_WORLD);
-//	sleep(rank); // coordinate IO
-//
-//	cout << " MPI Rank is " << rank
-//	<< " group: " << groupSize
-//	<< " start: " << mStart
-//	<< " end: " << mEnd
-//	<< endl << flush ;
-
 	// multiply local part of matrix
-    // i -> dim_l
-    //  j -> dim_n
-    //   k -> dim_m
 	int cIndex = 0;
 	for (i=0; i < groupSize; ++i)
 	{
 		long unsigned int elem = (mStart + i);
-		int a_row = (elem / dim_n);
-		int b_col = (elem % dim_n);
+		int a_row = (elem/dim.n);
+		int a_row_local= a_row - (vDisps[rank]/dim.m);
+		int b_col = (elem % dim.n);
+
 		dot_prod = 0.0;
-		for (k=0; k<dim_m; k++)
+		for (k=0; k<dim.m; k++)
 		{
-			dot_prod += A(a_row,k)*B(k,b_col);
+			dot_prod += *cartesian(local_a, dim.m, a_row_local, k) * *cartesian(b, dim.n, k, b_col); // A(a_row,k)*B(k,b_col);
 		}
 		c[cIndex] = dot_prod;
 		cIndex++;
 	}
-
-//	cout << flush;
-//    MPI_Barrier(MPI_COMM_WORLD);
-//   sleep(rank); // coordinate IO
-//
-//	cout << endl
-//		<< "I am " << rank
-//		<< " C = " << endl;
-//    for (i = 0; i < groupSize; ++i)
-//	{
-//		cout << c[i] << ", ";
-//	}
-//	cout << flush;
-//
-//	MPI_Finalize();
-//	return(0);
 
 	MPI_Status status;
 	if (rank == 0)
@@ -314,7 +313,7 @@ int main( int argc, char *argv[])
 		{
 			MPI_Recv(&c[groupSize*mpitask], groupSize, MPI_FLOAT, mpitask, 123, MPI_COMM_WORLD, &status);
 		}
-		MPI_Recv(&c[groupSize*(nmtsks-1)], groupSize+(cElems % nmtsks), MPI_FLOAT, nmtsks-1, 123, MPI_COMM_WORLD, &status);
+		MPI_Recv(&c[groupSize*(nmtsks-1)], groupSize+(cCount % nmtsks), MPI_FLOAT, nmtsks-1, 123, MPI_COMM_WORLD, &status);
 	} else {
 		MPI_Send(c, groupSize, MPI_FLOAT, 0, 123, MPI_COMM_WORLD);
 	}
@@ -322,6 +321,7 @@ int main( int argc, char *argv[])
 	/**
 	 * Proc 0 outputs results
 	 */
+	 MPI_Barrier(MPI_COMM_WORLD);
     if (rank == 0)
 	{
 		/*
@@ -329,8 +329,11 @@ int main( int argc, char *argv[])
 		*/
 		TIMER_STOP;
 
-		/*cout << "C matrix =" << endl;
-		print_matrix(c,dim_l,dim_n);*/
+		if (DEBUG)
+		{
+			cout << "C matrix =" << endl;
+			print_matrix(c,dim.l,dim.n);
+		}
 		cout << endl;
 		cout << "time=" << setprecision(8) <<  TIMER_ELAPSED/1000000.0
 			 << " seconds" << endl;
