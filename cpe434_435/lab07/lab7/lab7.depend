@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1443633809 source:/home/berocs/Documents/uah/cpe434_435/lab06/lab6/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<unistd.h>
+	<ctype.h>
+	<fcntl.h>
+	<sys/types.h>
+	<sys/wait.h>
+	<sys/ipc.h>
+	<sys/shm.h>
+	<sys/msg.h>
+
