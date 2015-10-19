@@ -155,6 +155,7 @@ int main( int argc, char *argv[] )
 				{
 					// 10 seconds has elapsed
 					printf("\nIt's been over 10 seconds, halting both processes.");
+					printf("\nParent is PID %d", parentPid);
 					fflush(stdout);
 					kill(childPid, SIGTERM);
 					wait(&status);
@@ -170,7 +171,7 @@ int main( int argc, char *argv[] )
 		}
 		if (termHere == 1)
 		{
-			printf("\nChild process is PID %d", getpid());
+			printf("\nChild process is PID %d\n", getpid());
 			fflush(stdout);
 			exit(SIGTERM);
 		}
