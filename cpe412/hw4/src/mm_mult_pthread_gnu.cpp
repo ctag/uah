@@ -20,6 +20,8 @@ using namespace std;
 #include <sys/time.h>
 #include <pthread.h>
 
+#define DEBUG 0
+
 #define MX_SZ 320
 #define SEED 2397           /* random number seed */
 #define MAX_VALUE  100.0    /* maximum size of array elements A, and B */
@@ -157,9 +159,8 @@ void * twork (void * args)
 */
 int main( int argc, char *argv[])
 {
-   float dot_prod;
    int dim_l,dim_n,dim_m;
-   int i,j,k;
+   int i;
    float *a,*b,*c;
    int tcount;
    pthread_t * tids;
@@ -191,7 +192,9 @@ int main( int argc, char *argv[])
 
    /*
      output numbers matrix
-   *
+   */
+   if (DEBUG)
+   {
    cout << "A matrix =" << endl;
    print_matrix(a,dim_l,dim_m);
    cout << endl;
@@ -199,7 +202,7 @@ int main( int argc, char *argv[])
    cout << "B matrix =" << endl;
    print_matrix(b,dim_m,dim_n);
    cout << endl;
-   */
+   }
 
    /*
    Start recording the execution time
@@ -243,9 +246,12 @@ int main( int argc, char *argv[])
    */
    TIMER_STOP;
 
-   //cout << "C matrix =" << endl;
-   //print_matrix(c,dim_l,dim_n);
+   if (DEBUG)
+   {
+   cout << "C matrix =" << endl;
+   print_matrix(c,dim_l,dim_n);
    cout << endl;
+   }
    cout << "time=" << setprecision(8) <<  TIMER_ELAPSED/1000000.0
         << " seconds" << endl;
 
