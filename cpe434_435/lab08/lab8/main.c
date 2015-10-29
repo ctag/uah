@@ -27,7 +27,7 @@
 #include <pthread.h>
 
 #define PARALLEL 1 /* Flag for compilation */
-#define QUANTA 0.0000005 /* float point error */
+#define QUANTA 0.00000005 /* float point error */
 
 typedef struct thread_data {
 	unsigned int intervals;
