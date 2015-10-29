@@ -1,0 +1,131 @@
+#!/bin/bash
+#execution commands for 1 serial process
+./mm_mult_serial_gnu 200 > mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 400 >> mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 600 >> mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 800 >> mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 1000 >>mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 1200 >>mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 1400 >>mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 1600 >>mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 1800 >>mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 2000 >>mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 2200 >>mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 2400 >>mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 2600 >>mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 2800 >>mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 3000 >>mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 3200 >>mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 3400 >>mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 3600 >>mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 3800 >>mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 4000 >>mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 4200 >>mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 4400 >>mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 4600 >>mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 4800 >>mm_serial_gnu_1.txt
+./mm_mult_serial_gnu 5000 >>mm_serial_gnu_1.txt
+#execution commands for 2 POSIX threads
+./mm_mult_pthread_gnu 2 200 > mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 400 >> mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 600 >> mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 800 >> mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 1000 >>mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 1200 >>mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 1400 >>mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 1600 >>mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 1800 >>mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 2000 >>mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 2200 >>mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 2400 >>mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 2600 >>mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 2800 >>mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 3000 >>mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 3200 >>mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 3400 >>mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 3600 >>mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 3800 >>mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 4000 >>mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 4200 >>mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 4400 >>mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 4600 >>mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 4800 >>mm_pthread_gnu_2.txt
+./mm_mult_pthread_gnu 2 5000 >>mm_pthread_gnu_2.txt
+#execution commands for 4 POSIX threads
+./mm_mult_pthread_gnu 4 200 > mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 400 >> mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 600 >> mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 800 >> mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 1000 >>mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 1200 >>mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 1400 >>mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 1600 >>mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 1800 >>mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 2000 >>mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 2200 >>mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 2400 >>mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 2600 >>mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 2800 >>mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 3000 >>mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 3200 >>mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 3400 >>mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 3600 >>mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 3800 >>mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 4000 >>mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 4200 >>mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 4400 >>mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 4600 >>mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 4800 >>mm_pthread_gnu_4.txt
+./mm_mult_pthread_gnu 4 5000 >>mm_pthread_gnu_4.txt
+#execution commands for 6 POSIX threads 
+./mm_mult_pthread_gnu 6 200 > mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 400 >> mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 600 >> mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 800 >> mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 1000 >>mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 1200 >>mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 1400 >>mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 1600 >>mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 1800 >>mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 2000 >>mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 2200 >>mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 2400 >>mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 2600 >>mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 2800 >>mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 3000 >>mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 3200 >>mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 3400 >>mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 3600 >>mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 3800 >>mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 4000 >>mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 4200 >>mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 4400 >>mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 4600 >>mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 4800 >>mm_pthread_gnu_6.txt
+./mm_mult_pthread_gnu 6 5000 >>mm_pthread_gnu_6.txt
+#execution commands for 8 POSIX threads
+./mm_mult_pthread_gnu 8 200 > mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 400 >> mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 600 >> mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 800 >> mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 1000 >>mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 1200 >>mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 1400 >>mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 1600 >>mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 1800 >>mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 2000 >>mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 2200 >>mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 2400 >>mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 2600 >>mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 2800 >>mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 3000 >>mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 3200 >>mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 3400 >>mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 3600 >>mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 3800 >>mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 4000 >>mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 4200 >>mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 4400 >>mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 4600 >>mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 4800 >>mm_pthread_gnu_8.txt
+./mm_mult_pthread_gnu 8 5000 >>mm_pthread_gnu_8.txt
