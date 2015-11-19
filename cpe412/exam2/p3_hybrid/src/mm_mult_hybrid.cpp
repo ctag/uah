@@ -136,6 +136,7 @@ void worker (float * local_a, float * b, float * c, unsigned int groupSize, \
 	int i;
 	//cout << "rank: " << rank << ", tcount: " << *tcount << endl;
 	//fflush(stdout);
+	#pragma omp parallel for num_threads(*tcount) reduction(+: c)
 	for (i=0; i < groupSize; ++i)
 	{
 		long unsigned int elem = (mStart + i);
@@ -146,7 +147,7 @@ void worker (float * local_a, float * b, float * c, unsigned int groupSize, \
 		float dot_prod = 0.0;
 		int k;
 
-#		pragma omp parallel for num_threads(*tcount) reduction(+: dot_prod)
+//#		pragma omp parallel for num_threads(*tcount) reduction(+: dot_prod)
 		for (k=0; k<dim.m; k++)
 		{
 			dot_prod += *cartesian(local_a, dim.m, a_row_local, k) * *cartesian(b, dim.n, k, b_col); // A(a_row,k)*B(k,b_col);
