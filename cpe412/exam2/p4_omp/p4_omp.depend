@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1447826635 source:/home/berocs/git/uah/cpe412/exam2/p4_omp/main.c
+	<stdio.h>
+	<stdlib.h>
+	<omp.h>
+	<math.h>
+
