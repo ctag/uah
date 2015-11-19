@@ -10,7 +10,7 @@
 //      g++ mm_mult_serial.cpp -o mm_mult_serial_gcc -O3 -lm
 //   intel compiler
 //      icc mm_mult_serial.cpp -o mm_mult_serial_intel -O3 -lm
-// Note: to compile a parallel MPI program version which is named 
+// Note: to compile a parallel MPI program version which is named
 //   mm_mult_MPI.cpp
 //   then execute the following commands
 //      module load openmpi
@@ -23,7 +23,7 @@
 /*
    This program is designed to perform matrix matrix multiplication
    A x B = C, where A is an lxm matrix, B is a m x n matrix and
-   C is a l x n matrix. The program is designed to be a template 
+   C is a l x n matrix. The program is designed to be a template
    serial program that can be expanded into a parallel multiprocess
    and/or a multi-threaded program.
 
@@ -35,13 +35,13 @@
    The program is executed using one or three command line parameters.
    These parameters represent the dimension of the matrices. If only
    one parameter is used then then it is assumed that square matrices are
-   to be created and multiplied together that have the specified 
+   to be created and multiplied together that have the specified
    dimension. In cases where three command line parameters are entered
    then the first parameter is the l dimension, the second the m, and
    the third is the n dimension.
 
    To execute:
-   mm_mult_serial [l_parameter] <m_parameter n_parameter] 
+   mm_mult_serial [l_parameter] <m_parameter n_parameter]
 */
 
 using namespace std;
@@ -66,9 +66,9 @@ using namespace std;
 struct timeval tv1,tv2;
 
 /*
-This declaration facilitates the creation of a two dimensional 
+This declaration facilitates the creation of a two dimensional
 dynamically allocated arrays (i.e. the lxm A array, the mxn B
-array, and the lxn C array).  It allows pointer arithmetic to 
+array, and the lxn C array).  It allows pointer arithmetic to
 be applied to a single data stream that can be dynamically allocated.
 To address the element at row x, and column y you would use the
 following notation:  A(x,y),B(x,y), or C(x,y), respectively.
@@ -82,7 +82,7 @@ float *a,*b,*c;
 #define C(i,j) *(c+i*dim_n+j)
 
 /*
-   Routine to retrieve the data size of the numbers array from the 
+   Routine to retrieve the data size of the numbers array from the
    command line or by prompting the user for the information
 */
 void get_index_size(int argc,char *argv[],int *dim_l,int *dim_m,int *dim_n) {
@@ -111,7 +111,7 @@ void get_index_size(int argc,char *argv[],int *dim_l,int *dim_m,int *dim_n) {
 /*
    Routine that fills the number matrix with Random Data with values
    between 0 and MAX_VALUE
-   This simulates in some way what might happen if there was a 
+   This simulates in some way what might happen if there was a
    single sequential data acquisition source such as a single file
 */
 void fill_matrix(float *array,int dim_m,int dim_n)
@@ -125,7 +125,7 @@ void fill_matrix(float *array,int dim_m,int dim_n)
 }
 
 /*
-   Routine that outputs the matrices to the screen 
+   Routine that outputs the matrices to the screen
 */
 void print_matrix(float *array,int dim_m,int dim_n)
 {
@@ -148,13 +148,13 @@ int main( int argc, char *argv[])
    int dim_l,dim_n,dim_m;
    int i,j,k;
 
-   /* 
+   /*
    get matrix sizes
    */
    get_index_size(argc,argv,&dim_l,&dim_m,&dim_n);
-  
+
    // dynamically allocate from heap the numbers in the memory space
-   // for the a,b, and c matrices 
+   // for the a,b, and c matrices
    a = new (nothrow) float[dim_l*dim_m];
    b = new (nothrow) float[dim_m*dim_n];
    c = new (nothrow) float[dim_l*dim_n];
@@ -162,10 +162,10 @@ int main( int argc, char *argv[])
      cout <<"ERROR:  Insufficient Memory" << endl;
      exit(1);
    }
-   
+
    /*
       initialize numbers matrix with random data
-   */ 
+   */
    srand48(SEED);
    fill_matrix(a,dim_l,dim_m);
    fill_matrix(b,dim_m,dim_n);
@@ -200,10 +200,10 @@ int main( int argc, char *argv[])
          C(i,j) = dot_prod;
       }
    }
-   
+
    /*
       stop recording the execution time
-   */ 
+   */
    TIMER_STOP;
 
    if (DEBUG)
@@ -212,7 +212,7 @@ int main( int argc, char *argv[])
       print_matrix(c,dim_l,dim_n);
    }
    cout << endl;
-   cout << "time=" << setprecision(8) <<  TIMER_ELAPSED/1000000.0 
+   cout << "time=" << setprecision(8) <<  TIMER_ELAPSED/1000000.0
         << " seconds" << endl;
 
 }
