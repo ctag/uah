@@ -28,7 +28,7 @@ using namespace std;
 #include <math.h>
 #include <omp.h>
 
-#define DEBUG true			/* whether to output matrices or not */
+#define DEBUG false			/* whether to output matrices or not */
 #define MX_SZ 320
 #define SEED 2397           /* random number seed */
 #define MAX_VALUE  100.0    /* maximum size of array elements A, and B */
@@ -61,11 +61,11 @@ float * cartesian (float * matrix, int row_sz, int row, int col)
    Routine to retrieve the data size of the numbers array from the
    command line or by prompting the user for the information
 */
-void get_index_size(int argc, char *argv[], int * tcount, unsigned int *dim_l, unsigned int *dim_m, unsigned int *dim_n)
+void get_index_size(int argc, char *argv[], unsigned int * tcount, unsigned int *dim_l, unsigned int *dim_m, unsigned int *dim_n)
 {
     if(argc!=3 && argc!=5)
     {
-        cout<<"usage:  mm_mult_serial [l_dimension] <m_dimension n_dimmension>"
+        cout<<"usage:  mm_mult_hybrid [thread_count] [l_dimension] <m_dimension n_dimmension>"
             << endl;
         exit(1);
     }
@@ -166,7 +166,7 @@ int main( int argc, char *argv[])
     long unsigned int i,k; 					/* indexes */
 	long unsigned int mStart, mEnd; 			/* index of beginning and ending elements for subproblem */
 	long unsigned int aCount, bCount, cCount; 	/* Number of elements in matrix */
-	int tcount;
+	unsigned int tcount;
 
 	// MPI variables
 	int nmtsks, rank; 		/* default MPI variables */

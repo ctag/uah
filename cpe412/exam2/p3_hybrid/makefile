@@ -1,4 +1,4 @@
-all: mm_mult_hybrid
+all: mm_mult_hybrid mm_mult_serial_gnu
 	
 mm_mult_serial_gnu:
 	g++ src/mm_mult_serial.cpp -o bin/mm_mult_serial_gnu -O3 -lm -Wall
