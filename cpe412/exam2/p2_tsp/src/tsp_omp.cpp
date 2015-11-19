@@ -179,7 +179,7 @@ void permutation(unsigned int *perm, unsigned long int perm_num,
         }
     }
 }
-void tour_search(unsigned int nm_cities,int city_cost_matrix[][MX_CITIES])
+void tour_search(unsigned int nm_cities,int city_cost_matrix[][MX_CITIES], int thread_count)
 {
     // create a permutation matrix that list the cities in tour visit order
     // This one dimensional matrix is called perm_order and it holds the
@@ -191,7 +191,7 @@ void tour_search(unsigned int nm_cities,int city_cost_matrix[][MX_CITIES])
     // of the perm_order matrix and this city will be the final destination
     // city that is present in slot nm_cities - 2
     unsigned long int total_tours=num_perms(nm_cities-1);
-#	pragma omp parallel for num_threads(2)
+#	pragma omp parallel for num_threads(thread_count)
     for (unsigned long int tour_nm=0; tour_nm<total_tours; tour_nm++)
     {
         unsigned int perm_order[MX_CITIES];
@@ -214,28 +214,18 @@ void tour_search(unsigned int nm_cities,int city_cost_matrix[][MX_CITIES])
 }
 
 // routine to obtain the number of cities from the user
-// via the command line or by prompting the user for input
+// via the command line
 unsigned int get_city_number(int argc,char *argv[])
 {
     int num_cities;
-    if (argc==2)
+    if (argc==3)
     {
-        num_cities = atoi(argv[1]);
+        num_cities = atoi(argv[2]);
     }
     else
     {
-        if (argc==1)
-        {
-            // input number of cities
-            cout << "Enter number of cities:" << endl;
-            cin >> num_cities;
-            cout << endl;
-        }
-        else
-        {
-            cout << "usage: tsp_serial <number of cities>" << endl;
-            exit(1);
-        }
+        cout << "usage: tsp_serial <number of threads> <number of cities>" << endl;
+        exit(1);
     }
     if ((num_cities<2) || (num_cities>MX_CITIES))
     {
@@ -245,14 +235,34 @@ unsigned int get_city_number(int argc,char *argv[])
     return (unsigned int) num_cities;
 }
 
+// Get the number of threads from arguments
+unsigned int get_thread_count(int argc,char *argv[])
+{
+    int thread_count;
+    if (argc==3)
+    {
+        thread_count = atoi(argv[1]);
+    }
+    else
+    {
+        cout << "usage: tsp_serial <number of threads> <number of cities>" << endl;
+        exit(1);
+    }
+    return (unsigned int) thread_count;
+}
+
 int main(int argc, char *argv[])
 {
 
     int city_cost_matrix[MX_CITIES][MX_CITIES];
     unsigned int num_cities;
+    int thread_count;
 
     // get number of cities from the user
     num_cities = get_city_number(argc,argv);
+
+    // get number of threads from the user
+    thread_count = get_thread_count(argc, argv);
 
     // fill city cost matrix
     fill_cost_matrix(city_cost_matrix,num_cities);
@@ -265,7 +275,7 @@ int main(int argc, char *argv[])
 
     // search through all possible orderings of the
     // cities
-    tour_search(num_cities,city_cost_matrix);
+    tour_search(num_cities,city_cost_matrix,thread_count);
 
     TIMER_STOP;
     // print city visit order
