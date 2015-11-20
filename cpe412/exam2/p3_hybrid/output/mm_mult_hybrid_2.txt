@@ -1,0 +1,10 @@
+
+time=120.25668 seconds
+
+time=120.8072 seconds
+
+time=120.22888 seconds
+
+time=120.80248 seconds
+
+time=120.90869 seconds

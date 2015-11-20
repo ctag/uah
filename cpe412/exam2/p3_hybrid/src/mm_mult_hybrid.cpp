@@ -136,7 +136,7 @@ void worker (float * local_a, float * b, float * c, unsigned int groupSize, \
 	int i;
 	//cout << "rank: " << rank << ", tcount: " << *tcount << endl;
 	//fflush(stdout);
-	#pragma omp parallel for num_threads(*tcount) reduction(+: c)
+	#pragma omp parallel for num_threads(*tcount)
 	for (i=0; i < groupSize; ++i)
 	{
 		long unsigned int elem = (mStart + i);
@@ -384,11 +384,11 @@ int main( int argc, char *argv[])
 			 << " seconds" << endl;
 	}
 
-	free(a);
+	/*free(a);
 	free(b);
 	free(c);
 	free(local_a);
-	free(tcount);
+	free(tcount);*/
 
 	MPI_Finalize();
 
