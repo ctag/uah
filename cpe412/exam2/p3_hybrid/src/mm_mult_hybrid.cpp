@@ -132,7 +132,6 @@ void print_matrix(float *array,int dim_m,int dim_n)
 void worker (float * local_a, float * b, float * c, unsigned int groupSize, \
 			long unsigned int mStart, matrix_dimensions dim, int vDisps[],  int rank, unsigned int * tcount)
 {
-	int cIndex = 0;
 	int i;
 	//cout << "rank: " << rank << ", tcount: " << *tcount << endl;
 	//fflush(stdout);
@@ -143,17 +142,14 @@ void worker (float * local_a, float * b, float * c, unsigned int groupSize, \
 		int a_row = (elem/dim.n);
 		int a_row_local= a_row - (vDisps[rank]/dim.m);
 		int b_col = (elem % dim.n);
-
 		float dot_prod = 0.0;
 		int k;
 
-//#		pragma omp parallel for num_threads(*tcount) reduction(+: dot_prod)
 		for (k=0; k<dim.m; k++)
 		{
 			dot_prod += *cartesian(local_a, dim.m, a_row_local, k) * *cartesian(b, dim.n, k, b_col); // A(a_row,k)*B(k,b_col);
 		}
-		c[cIndex] = dot_prod;
-		cIndex++;
+		c[i] = dot_prod;
 	}
 }
 
@@ -326,27 +322,6 @@ int main( int argc, char *argv[])
 		cout <<"ERROR:  Insufficient Memory" << endl << flush;
 		exit(1);
 	}
-
-	// multiply local part of matrix
-//	int cIndex = 0;
-//	for (i=0; i < groupSize; ++i)
-//	{
-//		long unsigned int elem = (mStart + i);
-//		int a_row = (elem/dim.n);
-//		int a_row_local= a_row - (vDisps[rank]/dim.m);
-//		int b_col = (elem % dim.n);
-//
-//		dot_prod = 0.0;
-//		for (k=0; k<dim.m; k++)
-//		{
-//			dot_prod += *cartesian(local_a, dim.m, a_row_local, k) * *cartesian(b, dim.n, k, b_col); // A(a_row,k)*B(k,b_col);
-//		}
-//		c[cIndex] = dot_prod;
-//		cIndex++;
-//	}
-
-//void worker (float * local_a, float * b, float * c, unsigned int groupSize, \
-//			long unsigned int mStart, matrix_dimensions dim, int vDisps[],  int rank)
 
 	//cout << "MAIN rank: " << rank << ", tcount: " << *tcount << endl;
 	worker(local_a, b, c, groupSize, mStart, dim, vDisps, rank, tcount);
