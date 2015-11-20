@@ -130,10 +130,13 @@ void print_matrix(float *array,int dim_m,int dim_n)
 	pThreads worker commands
 */
 void worker (float * local_a, float * b, float * c, unsigned int groupSize, \
-			long unsigned int mStart, matrix_dimensions dim, int vDisps[],  int rank, int tcount)
+			long unsigned int mStart, matrix_dimensions dim, int vDisps[],  int rank, unsigned int * tcount)
 {
 	int cIndex = 0;
 	int i;
+	//cout << "rank: " << rank << ", tcount: " << *tcount << endl;
+	//fflush(stdout);
+	#pragma omp parallel for num_threads(*tcount) reduction(+: c)
 	for (i=0; i < groupSize; ++i)
 	{
 		long unsigned int elem = (mStart + i);
@@ -143,7 +146,8 @@ void worker (float * local_a, float * b, float * c, unsigned int groupSize, \
 
 		float dot_prod = 0.0;
 		int k;
-#		pragma omp parallel for num_threads(tcount) reduction(+: dot_prod)
+
+//#		pragma omp parallel for num_threads(*tcount) reduction(+: dot_prod)
 		for (k=0; k<dim.m; k++)
 		{
 			dot_prod += *cartesian(local_a, dim.m, a_row_local, k) * *cartesian(b, dim.n, k, b_col); // A(a_row,k)*B(k,b_col);
@@ -166,7 +170,7 @@ int main( int argc, char *argv[])
     long unsigned int i,k; 					/* indexes */
 	long unsigned int mStart, mEnd; 			/* index of beginning and ending elements for subproblem */
 	long unsigned int aCount, bCount, cCount; 	/* Number of elements in matrix */
-	unsigned int tcount;
+	unsigned int * tcount;
 
 	// MPI variables
 	int nmtsks, rank; 		/* default MPI variables */
@@ -179,6 +183,8 @@ int main( int argc, char *argv[])
 	MPI_Comm_size(MPI_COMM_WORLD,&nmtsks);	/* find total number of tasks */
 	MPI_Comm_rank(MPI_COMM_WORLD,&rank); 	/* get task identity number */
 
+	tcount = new (nothrow) unsigned int;
+
     /**
      * Process 0 sets up the operands
      */
@@ -187,7 +193,7 @@ int main( int argc, char *argv[])
 		/*
 			get matrix sizes AND THREAD COUNT
 		*/
-		get_index_size(argc,argv,&tcount,&dim.l,&dim.m,&dim.n);
+		get_index_size(argc,argv,tcount,&dim.l,&dim.m,&dim.n);
 
 		aCount = (dim.l * dim.m);
 		bCount = (dim.m * dim.n);
@@ -246,6 +252,7 @@ int main( int argc, char *argv[])
 		}
 	}
 	MPI_Bcast(b, bCount, MPI_FLOAT, 0, MPI_COMM_WORLD); /* Every process gets a full copy of b */
+	MPI_Bcast(tcount, 1, MPI_UNSIGNED, 0, MPI_COMM_WORLD);
 
 
 	/**
@@ -341,6 +348,7 @@ int main( int argc, char *argv[])
 //void worker (float * local_a, float * b, float * c, unsigned int groupSize, \
 //			long unsigned int mStart, matrix_dimensions dim, int vDisps[],  int rank)
 
+	//cout << "MAIN rank: " << rank << ", tcount: " << *tcount << endl;
 	worker(local_a, b, c, groupSize, mStart, dim, vDisps, rank, tcount);
 
 	MPI_Status status;
@@ -376,6 +384,11 @@ int main( int argc, char *argv[])
 			 << " seconds" << endl;
 	}
 
+	free(a);
+	free(b);
+	free(c);
+	free(local_a);
+	free(tcount);
 
 	MPI_Finalize();
 
