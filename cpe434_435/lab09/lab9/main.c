@@ -21,6 +21,9 @@
 #include <sys/shm.h> 	// SHM - message queue
 #include <sys/msg.h>	// MSG - Message Queues
 #include <sys/time.h>	// For measuring execution time
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
 #include <signal.h>
 #include <time.h>
 #include <math.h>
@@ -84,8 +87,15 @@ int strToInt (char * string)
 	return(atoi(string));
 }
 
+void error(char *msg)
+{
+    perror(msg);
+    exit(1);
+}
+
 int main()
 {
+	int sockfd, newsockfd, portno, clilen, n;
 
 	// Get number of threads
 	printf("\nPlease enter the number of threads to execute >");
