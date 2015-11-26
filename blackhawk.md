@@ -6,13 +6,35 @@
 #### List of working software
 
 * Byobu
-* Tmux
+* tmux
+* gnu screen
 * openMPI
-* libevents library
+* htop
+* cmake
+* ffmpeg
+* cmatrix
+* gcc-4.7.4 (in /tmp/gcc-4.7.4)
+* cloc
+* tig
+
+#### List of tried but not working software
+
+* task, but couldn't get cmake working with me
+* rtorrent
+* qalc (can't find source)
+* cowsay (not C based)
+
+#### List of libraries available
+
+* libevents
+* gmp
+* mpc
+* mpfr
+* libuuid
 
 #### Usage
 
-To access software built by myself, follow from here:
+To access this software anthology, follow from here:
 
 1. Open your bashrc file:
 <pre>
@@ -31,7 +53,7 @@ The dot and space at the beginning of the line instruct your shell to "source" m
 To build these programs:
 
 * byobu needs tmux needs libevents
-* openmpi doesn't need anything extra
+* gcc needs mpc needs mpfr needs gmp
 
 libevents:
 
