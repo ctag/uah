@@ -17,8 +17,8 @@ using namespace std;
 #include <omp.h>
 #include <mpi.h>
 
-#define DEBUG true			/* whether to output lists or not */
-#define FILES true			/* whether to output to files or not */
+#define DEBUG false			/* whether to output lists or not */
+#define FILES false			/* whether to output to files or not */
 #define MX_SZ 320
 #define SEED 2397           /* random number seed */
 #define MAX_VALUE  100.0    /* maximum size of array elements A, and B */
@@ -223,6 +223,7 @@ int main( int argc, char *argv[])
 		srand48(SEED);
 		for (i = 0; i < global_size; i++)
 		{
+			//global_data[i] = (long int)(drand48()*1000.0); // smaller numbers
 			global_data[i] = (long int)lrand48();
 		}
 
