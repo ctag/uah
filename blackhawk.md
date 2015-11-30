@@ -16,6 +16,7 @@
 * gcc-4.7.4 (in /tmp/gcc-4.7.4)
 * cloc
 * tig
+* qemu
 
 #### List of tried but not working software
 
