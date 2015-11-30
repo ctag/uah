@@ -236,9 +236,12 @@ int main( int argc, char *argv[])
 		fprintf(fp_sub, "# Sub-task Sorted Data\n");
 
 		// Write random to files
-		for (i = 0; i < global_size; i++)
+		if (FILES)
 		{
-			fprintf(fp_rand, "%ld\n", global_data[i]);
+			for (i = 0; i < global_size; i++)
+			{
+				fprintf(fp_rand, "%ld\n", global_data[i]);
+			}
 		}
 
 		// output data
