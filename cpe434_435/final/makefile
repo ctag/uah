@@ -3,11 +3,11 @@ all: mergesort_mpi mergesort_serial mergesort_mpi_recursive mergesort_serial_rec
 	
 mergesort_mpi:
 		export OMPI_CXX=g++
-		mpic++ src/mergesort_mpi.cpp -o bin/mergesort_mpi -lm -O3 -Wall
+		mpic++ src/mergesort_mpi.cpp -o bin/mergesort_mpi -fopenmp -lm -O3 -Wall
 
 mergesort_mpi_recursive:
 		export OMPI_CXX=g++
-		mpic++ src/mergesort_mpi_recursive.cpp -o bin/mergesort_mpi_recursive -lm -O3 -Wall
+		mpic++ src/mergesort_mpi_recursive.cpp -o bin/mergesort_mpi_recursive -fopenmp -lm -O3 -Wall
 
 mergesort_serial:
 	g++ src/mergesort_serial.cpp -o bin/mergesort_serial -Wall -g

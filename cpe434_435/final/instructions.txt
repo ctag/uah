@@ -8,7 +8,7 @@ The server program runs on one machine,reads an array of size 4M elements (could
 
 each client receive the sub-array from the server ,then it must sort the sub array using merge sort.the client should creates a number of threads to speed up the process of sorting (minimum two threads ).then it will send the result back to the server.
 
- 
+
 
 The server must waits until receive all sorted sub arrays from all clients ,then sort the sub sorted arrays int  a final  sorted array and store the result in a file.
 

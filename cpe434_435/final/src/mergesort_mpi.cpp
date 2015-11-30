@@ -17,7 +17,8 @@ using namespace std;
 #include <omp.h>
 #include <mpi.h>
 
-#define DEBUG true			/* whether to output matrices or not */
+#define DEBUG true			/* whether to output lists or not */
+#define FILES true			/* whether to output to files or not */
 #define MX_SZ 320
 #define SEED 2397           /* random number seed */
 #define MAX_VALUE  100.0    /* maximum size of array elements A, and B */
@@ -39,95 +40,89 @@ void swap (long int * data, long int first, long int second)
 void merge (long int * data, long int low, long int middle, long int high)
 {
 	long int lsize, rsize, lindex, rindex, dindex, i;
-		lsize = (middle-low)+1;
-		rsize = (high-(middle+1))+1;
-		lindex = 0;
-		rindex = 0;
-		dindex = low;
-		//printf("low: %ld, middle: %ld, high: %ld. ", low, middle, high);
-		//printf("lsize: %ld, rsize: %ld\n", lsize, rsize);
-		long int * ltmp;
-		long int * rtmp;
-		ltmp = (long int *)malloc(sizeof(long int) * lsize);
-		if (ltmp == NULL)
+	lsize = (middle-low)+1;
+	rsize = (high-(middle+1))+1;
+	lindex = 0;
+	rindex = 0;
+	//printf("low: %ld, middle: %ld, high: %ld. ", low, middle, high);
+	//printf("lsize: %ld, rsize: %ld\n", lsize, rsize);
+	long int * ltmp;
+	long int * rtmp;
+	ltmp = (long int *)malloc(sizeof(long int) * lsize);
+	if (ltmp == NULL)
+	{
+		printf("Error allocating ltmp memory!\n");
+		exit(EXIT_FAILURE);
+	}
+	rtmp = (long int *)malloc(sizeof(long int) * rsize);
+	if (rtmp == NULL)
+	{
+		printf("Error allocating rtmp memory!\n");
+		exit(EXIT_FAILURE);
+	}
+	for (i = 0; i < lsize; i++)
+	{
+		ltmp[i] = data[low+i];
+	}
+	for (i = 0; i < rsize; i++)
+	{
+		rtmp[i] = data[middle+1+i];
+	}
+	for (dindex = low; dindex <= high; dindex++)
+	{
+		if (lindex >= lsize)
 		{
-			printf("Error allocating ltmp memory!\n");
-			exit(EXIT_FAILURE);
+			//printf("Data #%ld = l>size rtmp [%ld]%ld\n", dindex, rindex, rtmp[rindex]);
+			data[dindex] = rtmp[rindex];
+			//dindex++;
+			rindex++;
+			continue;
 		}
-		rtmp = (long int *)malloc(sizeof(long int) * rsize);
-		if (rtmp == NULL)
+		if (rindex >= rsize)
 		{
-			printf("Error allocating rtmp memory!\n");
-			exit(EXIT_FAILURE);
+			//printf("Data #%ld = r>size ltmp [%ld]%ld\n", dindex, lindex, ltmp[lindex]);
+			data[dindex] = ltmp[lindex];
+			//dindex++;
+			lindex++;
+			continue;
 		}
-		for (i = 0; i < lsize; i++)
+		if (ltmp[lindex] < rtmp[rindex])
 		{
-			ltmp[i] = data[low+i];
+			//printf("Data #%ld = ltmp [%ld]%ld\n", dindex, lindex, ltmp[lindex]);
+			data[dindex] = ltmp[lindex];
+			//dindex++;
+			lindex++;
 		}
-		for (i = 0; i < rsize; i++)
+		else
 		{
-			if ((middle+1+i) > high)
-			{
-				printf("middle: %ld, %ld, %ld, %ld\n", middle, i, middle+1+i, high);
-				fflush(stdout);
-			}
-			rtmp[i] = data[middle+1+i];
+			//printf("Data #%ld = rtmp [%ld]%ld\n", dindex, rindex, rtmp[rindex]);
+			data[dindex] = rtmp[rindex];
+			//dindex++;
+			rindex++;
 		}
-		while (dindex <= high)
-		{
-			if (lindex >= lsize)
-			{
-				//printf("Data #%ld = l>size rtmp [%ld]%ld\n", dindex, rindex, rtmp[rindex]);
-				data[dindex] = rtmp[rindex];
-				dindex++;
-				rindex++;
-				continue;
-			}
-			if (rindex >= rsize)
-			{
-				//printf("Data #%ld = r>size ltmp [%ld]%ld\n", dindex, lindex, ltmp[lindex]);
-				data[dindex] = ltmp[lindex];
-				dindex++;
-				lindex++;
-				continue;
-			}
-			if (ltmp[lindex] < rtmp[rindex])
-			{
-				//printf("Data #%ld = ltmp [%ld]%ld\n", dindex, lindex, ltmp[lindex]);
-				data[dindex] = ltmp[lindex];
-				dindex++;
-				lindex++;
-			}
-			else
-			{
-				//printf("Data #%ld = rtmp [%ld]%ld\n", dindex, rindex, rtmp[rindex]);
-				data[dindex] = rtmp[rindex];
-				dindex++;
-				rindex++;
-			}
-		}
-		/*
-		printf("ltmp: ");
-		for (i = 0; i < lsize; i++)
-		{
-			printf("[%ld]%ld, ", i, ltmp[i]);
-		}
-		printf("\n");
-		printf("rtmp: ");
-		for (i = 0; i < rsize; i++)
-		{
-			printf("[%ld]%ld, ", i, rtmp[i]);
-		}
-		printf("\n");
-		printf("data: ");
-		for (i = low; i <= high; i++)
-		{
-			printf("[%ld]%ld, ", i, data[i]);
-		}
-		printf("\n");
-		*/
-		free(ltmp);
-		free(rtmp);
+	}
+	/*
+	printf("ltmp: ");
+	for (i = 0; i < lsize; i++)
+	{
+		printf("[%ld]%ld, ", i, ltmp[i]);
+	}
+	printf("\n");
+	printf("rtmp: ");
+	for (i = 0; i < rsize; i++)
+	{
+		printf("[%ld]%ld, ", i, rtmp[i]);
+	}
+	printf("\n");
+	printf("data: ");
+	for (i = low; i <= high; i++)
+	{
+		printf("[%ld]%ld, ", i, data[i]);
+	}
+	printf("\n");
+	*/
+	free(ltmp);
+	free(rtmp);
 }
 
 int isdone (long int * data, long int low, long int high)
@@ -145,14 +140,19 @@ long int min (long int n1, long int n2)
 	return (n1<n2) ? n1 : n2;
 }
 
-void sort(long int * data, long int size)
+void sort(long int * data, long int size, unsigned int tcount = 1)
 {
 	// Variables
-	long int currentSize;
+	long int currentSize, power, powerHigh;
 	long int low;
+	powerHigh = floor(log2(size));
+	printf("power high: %ld\n", powerHigh);
 
-	for (currentSize=1; currentSize < size; currentSize = 2*currentSize)
+#	pragma omp parallel for num_threads(tcount)
+	for (power=0; power <= powerHigh; power++)
 	{
+		currentSize = pow(2, power);
+		//printf("power: %ld, %ld\n", power, currentSize);
 		//printf("Current Size: %ld\n", currentSize);
 		for (low=0; low<(size-currentSize); low += 2*currentSize)
 		{
@@ -175,7 +175,10 @@ int main( int argc, char *argv[])
     long int i; 		/* indexes */
 	long int *global_data, *local_data; 	/* random array */
 	long int global_size, local_size, local_start;
-	//unsigned int *tcount;
+	unsigned int *tcount;
+	FILE *fp_rand, *fp_sub, *fp_sorted;
+	char * sub_name, * sub_rank;
+	const char * sub_base = "data/sub_";
 
 	// MPI variables
 	int nmtsks, rank; 		/* default MPI variables */
@@ -187,7 +190,8 @@ int main( int argc, char *argv[])
 	MPI_Comm_size(MPI_COMM_WORLD,&nmtsks);	/* find total number of tasks */
 	MPI_Comm_rank(MPI_COMM_WORLD,&rank); 	/* get task identity number */
 
-	//tcount = new (nothrow) unsigned int;
+	tcount = new (nothrow) unsigned int;
+	*tcount = 1;
 
 	/**
 	 * Rank 0 sets the stage
@@ -196,14 +200,15 @@ int main( int argc, char *argv[])
 	 */
 	if (rank == 0)
 	{
-		if (argc != 2)
+		if (argc != 3)
 		{
-			printf("Usage: ./mergesort_serial <data_count>");
+			printf("Usage: ./mergesort_serial <num_threads> <data_count>");
 			exit(EXIT_FAILURE);
 		}
 		else
 		{
-			global_size = (long int)atol(argv[1]);
+			*tcount = (unsigned int)atoi(argv[1]);
+			global_size = (long int)atol(argv[2]);
 		}
 
 		// Instantiate memory
@@ -219,6 +224,20 @@ int main( int argc, char *argv[])
 		for (i = 0; i < global_size; i++)
 		{
 			global_data[i] = (long int)lrand48();
+		}
+
+		// Open output files
+		fp_rand = fopen("data/random.txt","w");
+		fp_sorted = fopen("data/sorted.txt","w");
+		fp_sub = fopen("data/sub.txt", "w");
+		fprintf(fp_rand, "# Random Data\n");
+		fprintf(fp_sorted, "# Sorted Data\n");
+		fprintf(fp_sub, "# Sub-task Sorted Data\n");
+
+		// Write random to files
+		for (i = 0; i < global_size; i++)
+		{
+			fprintf(fp_rand, "%ld\n", global_data[i]);
 		}
 
 		// output data
@@ -300,7 +319,7 @@ int main( int argc, char *argv[])
 //		printf("\n");
 //	}
 
-	sort(local_data, local_size);
+	sort(local_data, local_size, *tcount);
 
 //	int tmpRank = 0;
 //	while (tmpRank < nmtsks)
@@ -323,15 +342,41 @@ int main( int argc, char *argv[])
 	{
 		if (rank == 0)
 		{
+			if (FILES)
+				fprintf(fp_sub, "Rank: %d\n", rank);
 			for (i = 0; i < local_size; i++)
 			{
 				global_data[i] = local_data[i];
+				if (FILES)
+					fprintf(fp_sub, "%ld\n", global_data[i]);
 			}
+			if (FILES)
+				fprintf(fp_sub, "\n\n");
 			for (int mpitask = 1; mpitask < (nmtsks-1); ++mpitask)
 			{
 				MPI_Recv(&global_data[local_size*mpitask], local_size, MPI_LONG, mpitask, 123, MPI_COMM_WORLD, &status);
+				// Write sub to files
+				if (FILES)
+				{
+					fprintf(fp_sub, "Rank: %d\n", mpitask);
+					for (i = 0; i < local_size; i++)
+					{
+						fprintf(fp_sub, "%ld\n", global_data[(local_size*mpitask)+i]);
+					}
+					fprintf(fp_sub, "\n\n");
+				}
 			}
 			MPI_Recv(&global_data[local_size*(nmtsks-1)], lastPartial, MPI_LONG, nmtsks-1, 123, MPI_COMM_WORLD, &status);
+			// Write sub to files
+			if (FILES)
+			{
+				fprintf(fp_sub, "Rank: %d\n", (nmtsks-1));
+				for (i = 0; i < local_size; i++)
+				{
+					fprintf(fp_sub, "%ld\n", global_data[local_size*(nmtsks-1)+i]);
+				}
+				fprintf(fp_sub, "\n\n");
+			}
 		} else {
 			MPI_Send(local_data, local_size, MPI_LONG, 0, 123, MPI_COMM_WORLD);
 		}
@@ -353,6 +398,16 @@ int main( int argc, char *argv[])
 	if (rank==0)
 	{
 		TIMER_STOP;
+
+		// Write sorted to files
+		for (i = 0; i < global_size; i++)
+		{
+			fprintf(fp_sorted, "%ld\n", global_data[i]);
+		}
+
+		fclose(fp_rand);
+		fclose(fp_sorted);
+		fclose(fp_sub);
 
 		if (DEBUG)
 		{

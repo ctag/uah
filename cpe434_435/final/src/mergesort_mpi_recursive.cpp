@@ -23,7 +23,6 @@ using namespace std;
 #include <unistd.h>
 #include <math.h>
 #include <omp.h>
-#include <mpi.h>
 
 #define DEBUG true			/* whether to output matrices or not */
 #define MX_SZ 320
