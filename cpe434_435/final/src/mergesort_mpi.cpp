@@ -146,7 +146,7 @@ void sort(long int * data, long int size, unsigned int tcount = 1)
 	long int currentSize, power, powerHigh;
 	long int low;
 	powerHigh = floor(log2(size));
-	printf("power high: %ld\n", powerHigh);
+	//printf("power high: %ld\n", powerHigh);
 
 #	pragma omp parallel for num_threads(tcount)
 	for (power=0; power <= powerHigh; power++)
@@ -400,9 +400,12 @@ int main( int argc, char *argv[])
 		TIMER_STOP;
 
 		// Write sorted to files
-		for (i = 0; i < global_size; i++)
+		if (FILES)
 		{
-			fprintf(fp_sorted, "%ld\n", global_data[i]);
+			for (i = 0; i < global_size; i++)
+			{
+				fprintf(fp_sorted, "%ld\n", global_data[i]);
+			}
 		}
 
 		fclose(fp_rand);
