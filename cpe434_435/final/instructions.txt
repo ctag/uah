@@ -1,0 +1,31 @@
+CPE 435 Final
+
+All ,
+
+You need to write two programs ,Server and client .The server should be start first then :
+
+The server program runs on one machine,reads an array of size 4M elements (could be integers ) randomly ,then divides the array into n sub-arrays (minimum two) and send each sub array to one of the client (clients should running on different machines ).
+
+each client receive the sub-array from the server ,then it must sort the sub array using merge sort.the client should creates a number of threads to speed up the process of sorting (minimum two threads ).then it will send the result back to the server.
+
+
+
+The server must waits until receive all sorted sub arrays from all clients ,then sort the sub sorted arrays int  a final  sorted array and store the result in a file.
+
+ 
+
+You should save each sub array into a file and save the sorted one in another file. 
+
+Undergraduate Student can use pthread or openmp  or MPI.
+
+Graduates students must use openmp,MPI
+
+Students can work in groups (Maximum two ),provided that the works divide evenly.
+
+Time for demonstration the result will be same as the lab scheduled time.please send me email before. 
+
+all students must complete their works before Dec 1,2015.
+
+ 
+
+Good luck
