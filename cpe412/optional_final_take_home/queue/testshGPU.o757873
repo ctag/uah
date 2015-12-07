@@ -1,0 +1,69 @@
+####################################################################
+#         Alabama Supercomputer Center - PBS Prologue
+# Your job id is : 757873
+# Your job name is : testshGPU
+# Your job's queue is : class
+# Your username for this job is : uahcls16
+# Your group    for this job is : classq
+# Your job was allocated: 
+#	1 CPU  on dmc1
+#	1 GPUs on dmc1
+# Your job started at : Sun Dec  6 21:45:01 CST 2015
+####################################################################
+Using GPU 3
+setting dmc scratch directory
+ 
+============================================================
+=====         Summary of your script job               =====
+============================================================
+  The script file is:  test.sh
+  The time limit is  01:00:00  HH:MM:SS.
+  The target directory is:  /home/uahcls16/uah/cpe412/optional_final_take_home/queue
+  The working directory is:  /scratch-local/uahcls16.testshGPU.757873
+  The memory limit is:  1gb
+  The job will start running after:  201512062144.47
+  Look for:  testshGPU  in queue:  class
+ 
+GPU number 3 is assigned to this job
+libcupti.so not found
+
+Accelerator Kernel Timing data
+/mnt/homeapps/home/uahcls16/uah/cpe412/optional_final_take_home/src/laplace2d_acc_a14.cpp
+  main  NVIDIA  devicenum=0
+    time(us): 61,505
+    74: data region reached 1 time
+        74: data copyin transfers: 8
+             device time(us): total=22,422 max=2,811 min=2,796 avg=2,802
+    78: compute region reached 1000 times
+        78: data copyin transfers: 1000
+             device time(us): total=4,957 max=269 min=3 avg=4
+        82: kernel launched 1000 times
+            grid: [16x32]  block: [32x16]
+            elapsed time(us): total=3,148,606 max=3,329 min=3,107 avg=3,148
+        82: reduction kernel launched 1000 times
+            grid: [1]  block: [256]
+            elapsed time(us): total=25,704 max=54 min=18 avg=25
+        82: data copyout transfers: 1000
+             device time(us): total=14,020 max=43 min=10 avg=14
+        92: kernel launched 1000 times
+            grid: [16x32]  block: [32x16]
+            elapsed time(us): total=2,413,612 max=2,460 min=2,355 avg=2,413
+    100: data region reached 1 time
+        100: data copyout transfers: 9
+             device time(us): total=20,106 max=2,516 min=18 avg=2,234
+####################################################################
+# Your job finished at : Sun Dec  6 21:45:15 CST 2015
+# Your job id is : 757873
+# Your job name is : testshGPU
+# Your job's queue is : class
+# Your username for this job is : uahcls16
+# Your group    for this job is : classq
+# Your job requested : cput=01:00:00,gres=tgpus:1,mem=1gb,neednodes=1:gpu,nodes=1:gpu,walltime=01:29:00
+# Your job used : cput=00:00:00,mem=0kb,vmem=0kb,walltime=00:00:15
+# Your job's cpu utilization : 0%
+# Your job's memory utilization (mem) :  0.00%
+# WARNING: GPU utilization data may be inaccurate for short jobs
+# Your job's GPU utilization : Avg 0 %, Max 0 %
+# Your job's GPU max memory usage : 14 MB
+#         Alabama Supercomputer Center - PBS Epilogue
+####################################################################

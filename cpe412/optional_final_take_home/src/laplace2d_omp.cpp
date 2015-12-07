@@ -83,7 +83,7 @@ int main(int argc, char** argv)
     {
         error = 0.0;
 
-        #pragma omp parallel for reduction(+:error)
+        #pragma omp parallel for reduction(+:error) num_threads(8)
         for( int j = 1; j < n-1; j++)
         {
             for( int i = 1; i < m-1; i++ )
@@ -94,7 +94,7 @@ int main(int argc, char** argv)
             }
         }
         
-        #pragma omp parallel for 
+        #pragma omp parallel for num_threads(8)
         for( int j = 1; j < n-1; j++)
         {
             for( int i = 1; i < m-1; i++ )

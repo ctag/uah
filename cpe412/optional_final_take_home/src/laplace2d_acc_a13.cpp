@@ -69,7 +69,8 @@ int main(int argc, char** argv)
     
    StartTimer();
    int iter = 0;
-    
+   
+#pragma acc data copy(A) create (Anew)
    while ( error > tol && iter < iter_max ) {
       error = 0.0;
 

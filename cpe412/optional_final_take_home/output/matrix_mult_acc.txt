@@ -1,0 +1,5 @@
+time=18.019915 seconds
+time=17.99979 seconds
+time=18.044754 seconds
+time=18.000913 seconds
+time=18.002406 seconds

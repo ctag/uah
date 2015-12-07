@@ -1,0 +1,123 @@
+####################################################################
+#         Alabama Supercomputer Center - PBS Prologue
+# Your job id is : 758043
+# Your job name is : queuematrixmul
+# Your job's queue is : class
+# Your username for this job is : uahcls16
+# Your group    for this job is : classq
+# Your job was allocated: 
+#	1 CPU  on dmc1
+#	1 GPUs on dmc1
+# Your job started at : Mon Dec  7 07:10:32 CST 2015
+####################################################################
+Using GPU 0
+setting dmc scratch directory
+ 
+============================================================
+=====         Summary of your script job               =====
+============================================================
+  The script file is:  queue_matrix_mult_acc.sh
+  The time limit is  01:00:00  HH:MM:SS.
+  The target directory is:  /home/uahcls16/uah/cpe412/optional_final_take_home/queue
+  The working directory is:  /scratch-local/uahcls16.queuematrixmul.758043
+  The memory limit is:  1gb
+  The job will start running after:  201512070710.10
+  Look for:  queuematrixmul  in queue:  class
+ 
+GPU number 0 is assigned to this job
+libcupti.so not found
+
+Accelerator Kernel Timing data
+/mnt/homeapps/home/uahcls16/uah/cpe412/optional_final_take_home/src/matrix_mult_acc.cpp
+  main  NVIDIA  devicenum=0
+    time(us): 121,190
+    227: compute region reached 1 time
+        231: kernel launched 1 time
+            grid: [8000x8000]  block: [128]
+            elapsed time(us): total=17,342,533 max=17,342,533 min=17,342,533 avg=17,342,533
+    227: data region reached 1 time
+        227: data copyin transfers: 32
+             device time(us): total=82,696 max=2,739 min=714 avg=2,584
+    240: data region reached 1 time
+        240: data copyout transfers: 16
+             device time(us): total=38,494 max=2,544 min=675 avg=2,405
+libcupti.so not found
+
+Accelerator Kernel Timing data
+/mnt/homeapps/home/uahcls16/uah/cpe412/optional_final_take_home/src/matrix_mult_acc.cpp
+  main  NVIDIA  devicenum=0
+    time(us): 121,216
+    227: compute region reached 1 time
+        231: kernel launched 1 time
+            grid: [8000x8000]  block: [128]
+            elapsed time(us): total=17,343,037 max=17,343,037 min=17,343,037 avg=17,343,037
+    227: data region reached 1 time
+        227: data copyin transfers: 32
+             device time(us): total=82,714 max=2,740 min=704 avg=2,584
+    240: data region reached 1 time
+        240: data copyout transfers: 16
+             device time(us): total=38,502 max=2,559 min=676 avg=2,406
+libcupti.so not found
+
+Accelerator Kernel Timing data
+/mnt/homeapps/home/uahcls16/uah/cpe412/optional_final_take_home/src/matrix_mult_acc.cpp
+  main  NVIDIA  devicenum=0
+    time(us): 122,386
+    227: compute region reached 1 time
+        231: kernel launched 1 time
+            grid: [8000x8000]  block: [128]
+            elapsed time(us): total=17,343,002 max=17,343,002 min=17,343,002 avg=17,343,002
+    227: data region reached 1 time
+        227: data copyin transfers: 32
+             device time(us): total=83,886 max=2,801 min=716 avg=2,621
+    240: data region reached 1 time
+        240: data copyout transfers: 16
+             device time(us): total=38,500 max=2,568 min=674 avg=2,406
+libcupti.so not found
+
+Accelerator Kernel Timing data
+/mnt/homeapps/home/uahcls16/uah/cpe412/optional_final_take_home/src/matrix_mult_acc.cpp
+  main  NVIDIA  devicenum=0
+    time(us): 121,038
+    227: compute region reached 1 time
+        231: kernel launched 1 time
+            grid: [8000x8000]  block: [128]
+            elapsed time(us): total=17,340,971 max=17,340,971 min=17,340,971 avg=17,340,971
+    227: data region reached 1 time
+        227: data copyin transfers: 32
+             device time(us): total=82,652 max=2,737 min=704 avg=2,582
+    240: data region reached 1 time
+        240: data copyout transfers: 16
+             device time(us): total=38,386 max=2,551 min=676 avg=2,399
+libcupti.so not found
+
+Accelerator Kernel Timing data
+/mnt/homeapps/home/uahcls16/uah/cpe412/optional_final_take_home/src/matrix_mult_acc.cpp
+  main  NVIDIA  devicenum=0
+    time(us): 120,924
+    227: compute region reached 1 time
+        231: kernel launched 1 time
+            grid: [8000x8000]  block: [128]
+            elapsed time(us): total=17,340,795 max=17,340,795 min=17,340,795 avg=17,340,795
+    227: data region reached 1 time
+        227: data copyin transfers: 32
+             device time(us): total=82,526 max=2,727 min=705 avg=2,578
+    240: data region reached 1 time
+        240: data copyout transfers: 16
+             device time(us): total=38,398 max=2,550 min=675 avg=2,399
+####################################################################
+# Your job finished at : Mon Dec  7 07:12:21 CST 2015
+# Your job id is : 758043
+# Your job name is : queuematrixmul
+# Your job's queue is : class
+# Your username for this job is : uahcls16
+# Your group    for this job is : classq
+# Your job requested : cput=01:00:00,gres=tgpus:1,mem=1gb,neednodes=1:gpu,nodes=1:gpu,walltime=01:29:00
+# Your job used : cput=00:01:17,mem=654432kb,vmem=164495624kb,walltime=00:01:49
+# Your job's cpu utilization : 70%
+# Your job's memory utilization (mem) : 62.41%
+# WARNING: GPU utilization data may be inaccurate for short jobs
+# Your job's GPU utilization : Avg 0 %, Max 0 %
+# Your job's GPU max memory usage : 13 MB
+#         Alabama Supercomputer Center - PBS Epilogue
+####################################################################

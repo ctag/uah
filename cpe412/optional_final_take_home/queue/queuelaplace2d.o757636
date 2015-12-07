@@ -1,0 +1,42 @@
+####################################################################
+#         Alabama Supercomputer Center - PBS Prologue
+# Your job id is : 757636
+# Your job name is : queuelaplace2d
+# Your job's queue is : class
+# Your username for this job is : uahcls16
+# Your group    for this job is : classq
+# Your job was allocated: 
+#	8 CPUs on dmc156
+# Your job started at : Sun Dec  6 16:26:27 CST 2015
+####################################################################
+setting dmc scratch directory
+ 
+============================================================
+=====         Summary of your script job               =====
+============================================================
+  The script file is:  queue_laplace2d_omp.sh
+  The time limit is  16:00:00  HH:MM:SS.
+  The target directory is:  /home/uahcls16/uah/cpe412/optional_final_take_home/queue
+  The working directory is:  /scratch-local/uahcls16.queuelaplace2d.757636
+  The memory limit is:  8gb
+  The job will start running after:  201512061625.20
+  Look for:  queuelaplace2d  in queue:  class
+ 
+module: Command not found.
+export: Command not found.
+export: Command not found.
+export: Command not found.
+export: Command not found.
+####################################################################
+# Your job finished at : Sun Dec  6 16:44:13 CST 2015
+# Your job id is : 757636
+# Your job name is : queuelaplace2d
+# Your job's queue is : class
+# Your username for this job is : uahcls16
+# Your group    for this job is : classq
+# Your job requested : cput=16:00:00,mem=8gb,neednodes=1:ppn=8,nodes=1:ppn=8,walltime=03:00:00
+# Your job used : cput=02:15:39,mem=269328kb,vmem=384568kb,walltime=00:17:46
+# Your job's parallel cpu utilization : 95%
+# Your job's memory utilization (mem) :  3.21%
+#         Alabama Supercomputer Center - PBS Epilogue
+####################################################################

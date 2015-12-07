@@ -179,7 +179,7 @@ void print_matrix_trans(float *array,int dim_m,int dim_n)
    MAIN ROUTINE: summation of a number list
 */
 int main( int argc, char *argv[]) {
-   float *a,*b,*c,dot_prod;
+   float *a,*b,*restrict c,dot_prod;
    int dim_l,dim_n,dim_m;
    int i,j,k;
 
@@ -221,16 +221,24 @@ int main( int argc, char *argv[]) {
    */
    TIMER_CLEAR;
    TIMER_START;
-   // add #pragam acc as necessary
+  
+#pragma acc data copyin(a[0:dim_l*dim_n+1], b[0:dim_m*dim_n+1]), create(c[0:dim_l*dim_n+1]), copyout(c[0:dim_l*dim_n+1])
+#pragma acc kernels
+{
+#pragma acc loop independent, gang(8000)
    for (i=0;i<dim_l;i++) {
+#pragma acc loop
       for (j=0;j<dim_n;j++) {
          dot_prod = 0.0;
+#pragma acc loop
          for (k=0;k<dim_m;k++) {
             dot_prod += A(i,k)*B(k,j);
          }
          C(i,j) = dot_prod;
       }
    }
+}
+
    /*
       stop recording the execution time
    */ 
