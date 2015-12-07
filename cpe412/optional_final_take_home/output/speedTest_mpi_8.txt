@@ -1,0 +1,10 @@
+Sent 524288 int, each 4, total of 2097152 bytes to rank 1
+Time = 0.018171172
+Sent 524288 int, each 4, total of 2097152 bytes to rank 2
+Time = 0.018137731
+Sent 524288 int, each 4, total of 2097152 bytes to rank 3
+Time = 0.018166963
+Sent 524288 int, each 4, total of 2097152 bytes to rank 4
+Time = 0.018170271
+Sent 524288 int, each 4, total of 2097152 bytes to rank 5
+Time = 0.018171598
