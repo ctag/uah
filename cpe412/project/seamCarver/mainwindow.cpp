@@ -511,7 +511,7 @@ void MainWindow::serialGenBrightness()
 void MainWindow::serialGenEnergy()
 {
     // Variables
-    int energy, energyx, energyy, a, b, c, d, f, g, h, i;
+    int energy, energyx, energyy, a, b, c, d, f, g, h, i, energyPixel;
 
     // Instantiation
     energyGrid.clear();
@@ -539,9 +539,11 @@ void MainWindow::serialGenEnergy()
             energyx = a + (2*d) + g - c - (2*f) - i;
             energyy = a + (2*b) + c - g - (2*h) - i;
             energy = sqrt((energyx * energyx) + (energyy * energyy));
-
+            energyPixel = abs(energy);
+            if (energyPixel > 255)
+                energyPixel = 255;
             setEnergy(x, y, energy);
-            energyImage->setPixel(x, y, QColor::fromRgb(energy/10, energy/10, energy/10).rgb());
+            energyImage->setPixel(x, y, QColor::fromRgb(energyPixel, energyPixel, energyPixel).rgb());
         }
     }
 }
