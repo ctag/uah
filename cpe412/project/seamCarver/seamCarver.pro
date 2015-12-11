@@ -19,5 +19,5 @@ HEADERS  += mainwindow.h
 
 FORMS    += mainwindow.ui
 
-QMAKE_CXXFLAGS += -fopenmp -pthread -fopenacc
-LIBS += -fopenmp -pthread -fopenacc
+QMAKE_CXXFLAGS += -fopenmp -pthread -O3
+LIBS += -fopenmp -pthread
