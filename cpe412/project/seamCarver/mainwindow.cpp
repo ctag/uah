@@ -14,6 +14,9 @@ MainWindow::MainWindow(QWidget *parent) :
     origImage = new QImage();
     origPix = new QPixmap();
     origScene = new QGraphicsScene(this);
+    resizeImage = new QImage();
+    resizePix = new QPixmap();
+    resizeScene = new QGraphicsScene(this);
     energyImage = new QImage();
     energyPix = new QPixmap();
     energyScene = new QGraphicsScene(this);
@@ -23,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Connect the QGraphicsScene variables to the UI
     ui->graphicsView_orig->setScene(origScene);
+    ui->graphicsView_resize->setScene(resizeScene);
     ui->graphicsView_energy->setScene(energyScene);
     ui->graphicsView_mod->setScene(modScene);
 
@@ -83,6 +87,16 @@ void MainWindow::doProcResize()
     qApp->processEvents(); // Force ui update
 
     modWidth = ui->spinBox_x->value();
+
+    // Resize image without seam carving
+    //free(resizeImage);
+    *resizeImage = origImage->scaled(modWidth, origHeigth, Qt::IgnoreAspectRatio);
+    *resizePix = QPixmap::fromImage(*resizeImage);
+    resizeScene->clear();
+    resizeScene->addPixmap(*resizePix);
+    resizeScene->setSceneRect(resizePix->rect());
+    ui->graphicsView_resize->show();
+
     if (ui->radioButton_algSerial->isChecked()) // Serial processing
     {
         // Start timer
@@ -181,6 +195,11 @@ void MainWindow::doProcResize()
     modScene->addPixmap(*modPix);
     modScene->setSceneRect(modPix->rect());
     ui->graphicsView_mod->show();
+
+    // Save modified files to disk
+    resizeImage->save((imagePath+"-resize.jpg"), 0, 100);
+    energyImage->save((imagePath+"-energy.jpg"), 0, 100);
+    modImage->save((imagePath+"-mod.jpg"), 0, 100);
 
     // Indicate processing end
     ui->pushButton_doResize->setEnabled(1);
@@ -754,9 +773,6 @@ void MainWindow::ompGenBrightness()
 
 void MainWindow::ompGenEnergy()
 {
-    // Variables
-    int energy, energyx, energyy, a, b, c, d, f, g, h, i;
-
     // Instantiation
     energyGrid.clear();
     energyGrid.resize(origWidth * origHeigth);
@@ -770,6 +786,9 @@ void MainWindow::ompGenEnergy()
     #pragma omp parallel for num_threads(threadCount)
     for (int x = 0; x < origWidth; x++)
     {
+        // I'm glad we went over this in class, I spent way too long wondering why values weren't right,
+        // when it was because each thread was sharing them.
+        int energy, energyx, energyy, a, b, c, d, f, g, h, i, pixelEnergy;
         for (int y = 0; y < origHeigth; y++)
         {
             a = getBrightness(x-1, y-1);
@@ -786,7 +805,12 @@ void MainWindow::ompGenEnergy()
             energy = sqrt((energyx * energyx) + (energyy * energyy));
 
             setEnergy(x, y, energy);
-            energyImage->setPixel(x, y, QColor::fromRgb(energy/10, energy/10, energy/10).rgb());
+            pixelEnergy = abs(energy);
+            if (pixelEnergy > 255)
+                pixelEnergy = 255;
+            energyImage->setPixel(x, y, QColor::fromRgb(pixelEnergy, pixelEnergy, pixelEnergy).rgb());
+//#pragma omp critical
+            //ui->textBrowser_console->append(", " + QString::number(energy));
         }
     }
 }
@@ -906,8 +930,12 @@ void MainWindow::ompGenMask()
         int y, pathX;
         int left, middle, right;
 
-        pathX = getLowestPathIndex(0, origWidth-1);
-        for (y = origHeigth-1; y >0; y--)
+#pragma omp critical
+        {
+            pathX = getLowestPathIndex(0, origWidth-1);
+            setMask(pathX, (origHeigth-1), 1);
+        }
+        for (y = origHeigth-1; y > 0; y--)
         {
 #pragma     omp critical
             setMask(pathX, y, 1);
@@ -927,7 +955,7 @@ void MainWindow::ompGenMask()
                     pathX = getNearestLateral(pathX, y-1);
                 }
             }
-            else if (pathX == origImage->width()-1)
+            else if (pathX == origWidth-1)
             {
                 // edge case right
                 left = getPath(pathX-1, y-1);
@@ -974,9 +1002,17 @@ void MainWindow::ompGenMask()
         for (int y = 0; y < origHeigth; y++)
         {
             if (getMask(x, y))
-                energyImage->setPixel(x, y, QColor::fromRgb(150, 0, 150).rgb());
+                energyImage->setPixel(x, y, QColor::fromRgb(150, 0, 150, 150).rgb());
         }
     }
+
+    int counter = 0;
+    for (int x = 0; x < origImage->width(); x++)
+    {
+        if (getMask(x,795))
+            counter++;
+    }
+    ui->textBrowser_console->append("Data: "+QString::number(counter));
 }
 
 void MainWindow::ompGenMod()
@@ -999,7 +1035,10 @@ void MainWindow::ompGenMod()
                 continue;
             }
             if (modX >= modWidth)
-                qDebug() << "problem";
+            {
+                //qDebug() << "problem";
+                break;
+            }
             modImage->setPixel(modX, y, origImage->pixel(x, y));
             modX++;
         }
@@ -1026,7 +1065,7 @@ void * MainWindow::pthreadManager()
 
     pthread_mutex_lock(&mutex);
     rank = threadRankAssign;
-    qDebug() << "Hello from rank " << rank;
+    //qDebug() << "Hello from rank " << rank;
     threadRankAssign++;
     pthread_mutex_unlock(&mutex);
 
@@ -1129,6 +1168,7 @@ void MainWindow::pthreadGenEnergy(int rank)
     // Variables
     int energy, energyx, energyy, a, b, c, d, f, g, h, i;
     int xStart, xSlice;
+    int energyPixel;
 
     xSlice = (origWidth / threadCount);
     xStart = (xSlice * (rank));
@@ -1158,7 +1198,10 @@ void MainWindow::pthreadGenEnergy(int rank)
 
             pthread_mutex_lock(&mutex);
             setEnergy(x, y, energy);
-            energyImage->setPixel(x, y, QColor::fromRgb(energy/10, energy/10, energy/10).rgb());
+            energyPixel = abs(energy);
+            if (energyPixel > 255)
+                energyPixel = 255;
+            energyImage->setPixel(x, y, QColor::fromRgb(energyPixel, energyPixel, energyPixel).rgb());
             pthread_mutex_unlock(&mutex);
         }
     }
@@ -1268,7 +1311,10 @@ void MainWindow::pthreadGenMask(int rank)
 
     for (seamCount = 0; seamCount < seamTarget; seamCount++)
     {
+        pthread_mutex_lock(&mutex);
         pathX = getLowestPathIndex(0, origWidth-1);
+        setMask(pathX, y, 1);
+        pthread_mutex_unlock(&mutex);
         for (y = origHeigth-1; y >0; y--)
         {
             setMask(pathX, y, 1);

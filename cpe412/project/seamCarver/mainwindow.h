@@ -82,6 +82,9 @@ private:
     QImage * origImage;
     QPixmap * origPix;
     QGraphicsScene * origScene;
+    QImage * resizeImage;
+    QPixmap * resizePix;
+    QGraphicsScene * resizeScene;
     QImage * energyImage;
     QPixmap * energyPix;
     QGraphicsScene * energyScene;

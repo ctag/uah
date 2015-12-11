@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_settings">
        <attribute name="title">
@@ -124,6 +124,16 @@
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QGraphicsView" name="graphicsView_orig"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_resize">
+       <attribute name="title">
+        <string>Resized</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_7">
+        <item>
+         <widget class="QGraphicsView" name="graphicsView_resize"/>
         </item>
        </layout>
       </widget>
