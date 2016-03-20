@@ -1,0 +1,1177 @@
+
+======================
+Simulation # 1
+--------------------------------------------------
+Checking time slot: 0
+--------------------------------------------------
+num 15705	station: 0 backing off to slot 2  collisions: 1
+num 28154	station: 1 backing off to slot 1  collisions: 1
+num 5639	station: 2 backing off to slot 2  collisions: 1
+num 25860	station: 3 backing off to slot 1  collisions: 1
+num 26332	station: 4 backing off to slot 1  collisions: 1
+num 26615	station: 5 backing off to slot 2  collisions: 1
+num 11872	station: 6 backing off to slot 1  collisions: 1
+num 17581	station: 7 backing off to slot 2  collisions: 1
+num 10067	station: 8 backing off to slot 2  collisions: 1
+num 708	station: 9 backing off to slot 1  collisions: 1
+num 13906	station: 10 backing off to slot 1  collisions: 1
+num 9784	station: 11 backing off to slot 1  collisions: 1
+num 20043	station: 12 backing off to slot 2  collisions: 1
+num 5816	station: 13 backing off to slot 1  collisions: 1
+num 14249	station: 14 backing off to slot 2  collisions: 1
+num 265	station: 15 backing off to slot 2  collisions: 1
+num 3950	station: 16 backing off to slot 1  collisions: 1
+num 2613	station: 17 backing off to slot 2  collisions: 1
+num 22433	station: 18 backing off to slot 2  collisions: 1
+num 18350	station: 19 backing off to slot 1  collisions: 1
+--------------------------------------------------
+Checking time slot: 1
+--------------------------------------------------
+num 14819	station: 1 backing off to slot 5  collisions: 2
+num 30109	station: 3 backing off to slot 3  collisions: 2
+num 11482	station: 4 backing off to slot 4  collisions: 2
+num 29779	station: 6 backing off to slot 5  collisions: 2
+num 16841	station: 9 backing off to slot 3  collisions: 2
+num 28359	station: 10 backing off to slot 5  collisions: 2
+num 29283	station: 11 backing off to slot 5  collisions: 2
+num 11403	station: 13 backing off to slot 5  collisions: 2
+num 21797	station: 16 backing off to slot 3  collisions: 2
+num 10226	station: 19 backing off to slot 4  collisions: 2
+--------------------------------------------------
+Checking time slot: 2
+--------------------------------------------------
+num 20180	station: 0 backing off to slot 3  collisions: 2
+num 4735	station: 2 backing off to slot 6  collisions: 2
+num 5613	station: 5 backing off to slot 4  collisions: 2
+num 25819	station: 7 backing off to slot 6  collisions: 2
+num 30595	station: 8 backing off to slot 6  collisions: 2
+num 31945	station: 12 backing off to slot 4  collisions: 2
+num 19667	station: 14 backing off to slot 6  collisions: 2
+num 9699	station: 15 backing off to slot 6  collisions: 2
+num 16758	station: 17 backing off to slot 5  collisions: 2
+num 29734	station: 18 backing off to slot 5  collisions: 2
+--------------------------------------------------
+Checking time slot: 3
+--------------------------------------------------
+num 10407	station: 0 backing off to slot 11  collisions: 3
+num 30664	station: 3 backing off to slot 4  collisions: 3
+num 6750	station: 9 backing off to slot 10  collisions: 3
+num 30450	station: 16 backing off to slot 6  collisions: 3
+--------------------------------------------------
+Checking time slot: 4
+--------------------------------------------------
+num 3712	station: 3 backing off to slot 5  collisions: 4
+num 20999	station: 4 backing off to slot 12  collisions: 3
+num 30716	station: 5 backing off to slot 9  collisions: 3
+num 7662	station: 12 backing off to slot 11  collisions: 3
+num 23612	station: 19 backing off to slot 9  collisions: 3
+--------------------------------------------------
+Checking time slot: 5
+--------------------------------------------------
+num 20381	station: 1 backing off to slot 11  collisions: 3
+num 26012	station: 3 backing off to slot 34  collisions: 5
+num 5664	station: 6 backing off to slot 6  collisions: 3
+num 17722	station: 10 backing off to slot 8  collisions: 3
+num 4726	station: 11 backing off to slot 12  collisions: 3
+num 2675	station: 13 backing off to slot 9  collisions: 3
+num 1796	station: 17 backing off to slot 10  collisions: 3
+num 317	station: 18 backing off to slot 11  collisions: 3
+--------------------------------------------------
+Checking time slot: 6
+--------------------------------------------------
+num 31958	station: 2 backing off to slot 13  collisions: 3
+num 13199	station: 6 backing off to slot 22  collisions: 4
+num 22115	station: 7 backing off to slot 10  collisions: 3
+num 9417	station: 8 backing off to slot 8  collisions: 3
+num 611	station: 14 backing off to slot 10  collisions: 3
+num 26850	station: 15 backing off to slot 9  collisions: 3
+num 15030	station: 16 backing off to slot 13  collisions: 4
+--------------------------------------------------
+Checking time slot: 7
+--------------------------------------------------
+==> No transmission
+--------------------------------------------------
+Checking time slot: 8
+--------------------------------------------------
+num 26430	station: 8 backing off to slot 23  collisions: 4
+num 24677	station: 10 backing off to slot 14  collisions: 4
+--------------------------------------------------
+Checking time slot: 9
+--------------------------------------------------
+num 14207	station: 5 backing off to slot 25  collisions: 4
+num 13329	station: 13 backing off to slot 11  collisions: 4
+num 1608	station: 15 backing off to slot 18  collisions: 4
+num 30965	station: 19 backing off to slot 15  collisions: 4
+--------------------------------------------------
+Checking time slot: 10
+--------------------------------------------------
+num 10295	station: 7 backing off to slot 18  collisions: 4
+num 12015	station: 9 backing off to slot 26  collisions: 4
+num 28861	station: 14 backing off to slot 24  collisions: 4
+num 17045	station: 17 backing off to slot 16  collisions: 4
+--------------------------------------------------
+Checking time slot: 11
+--------------------------------------------------
+num 9697	station: 0 backing off to slot 13  collisions: 4
+num 32573	station: 1 backing off to slot 25  collisions: 4
+num 5277	station: 12 backing off to slot 25  collisions: 4
+num 7645	station: 13 backing off to slot 41  collisions: 5
+num 7468	station: 18 backing off to slot 24  collisions: 4
+--------------------------------------------------
+Checking time slot: 12
+--------------------------------------------------
+num 28889	station: 4 backing off to slot 22  collisions: 4
+num 28026	station: 11 backing off to slot 23  collisions: 4
+--------------------------------------------------
+Checking time slot: 13
+--------------------------------------------------
+num 712	station: 0 backing off to slot 22  collisions: 5
+num 1785	station: 2 backing off to slot 23  collisions: 4
+num 12981	station: 16 backing off to slot 35  collisions: 5
+--------------------------------------------------
+Checking time slot: 14
+--------------------------------------------------
+	Station 10 has successfully transmitted
+	in slot number 14 which is 716.8 micro seconds
+	Simulation required 84 numbers
+======================
+
+======================
+Simulation # 2
+--------------------------------------------------
+Checking time slot: 0
+--------------------------------------------------
+num 5439	station: 0 backing off to slot 2  collisions: 1
+num 4460	station: 1 backing off to slot 1  collisions: 1
+num 14777	station: 2 backing off to slot 2  collisions: 1
+num 5756	station: 3 backing off to slot 1  collisions: 1
+num 3651	station: 4 backing off to slot 2  collisions: 1
+num 27976	station: 5 backing off to slot 1  collisions: 1
+num 27871	station: 6 backing off to slot 2  collisions: 1
+num 13068	station: 7 backing off to slot 1  collisions: 1
+num 28587	station: 8 backing off to slot 2  collisions: 1
+num 21953	station: 9 backing off to slot 2  collisions: 1
+num 28098	station: 10 backing off to slot 1  collisions: 1
+num 22249	station: 11 backing off to slot 2  collisions: 1
+num 13862	station: 12 backing off to slot 1  collisions: 1
+num 9537	station: 13 backing off to slot 2  collisions: 1
+num 2811	station: 14 backing off to slot 2  collisions: 1
+num 15470	station: 15 backing off to slot 1  collisions: 1
+num 7734	station: 16 backing off to slot 1  collisions: 1
+num 13106	station: 17 backing off to slot 1  collisions: 1
+num 27485	station: 18 backing off to slot 2  collisions: 1
+num 3827	station: 19 backing off to slot 2  collisions: 1
+--------------------------------------------------
+Checking time slot: 1
+--------------------------------------------------
+num 30152	station: 1 backing off to slot 2  collisions: 2
+num 4415	station: 3 backing off to slot 5  collisions: 2
+num 3632	station: 5 backing off to slot 2  collisions: 2
+num 2661	station: 7 backing off to slot 3  collisions: 2
+num 12060	station: 10 backing off to slot 2  collisions: 2
+num 11100	station: 12 backing off to slot 2  collisions: 2
+num 31550	station: 15 backing off to slot 4  collisions: 2
+num 7319	station: 16 backing off to slot 5  collisions: 2
+num 11813	station: 17 backing off to slot 3  collisions: 2
+--------------------------------------------------
+Checking time slot: 2
+--------------------------------------------------
+num 568	station: 0 backing off to slot 3  collisions: 2
+num 20300	station: 1 backing off to slot 7  collisions: 3
+num 17252	station: 2 backing off to slot 3  collisions: 2
+num 5028	station: 4 backing off to slot 3  collisions: 2
+num 2309	station: 5 backing off to slot 8  collisions: 3
+num 23008	station: 6 backing off to slot 3  collisions: 2
+num 8679	station: 8 backing off to slot 6  collisions: 2
+num 30285	station: 9 backing off to slot 4  collisions: 2
+num 18112	station: 10 backing off to slot 3  collisions: 3
+num 21747	station: 11 backing off to slot 6  collisions: 2
+num 26104	station: 12 backing off to slot 3  collisions: 3
+num 7297	station: 13 backing off to slot 4  collisions: 2
+num 17077	station: 14 backing off to slot 4  collisions: 2
+num 15585	station: 18 backing off to slot 4  collisions: 2
+num 21160	station: 19 backing off to slot 3  collisions: 2
+--------------------------------------------------
+Checking time slot: 3
+--------------------------------------------------
+num 26614	station: 0 backing off to slot 10  collisions: 3
+num 18396	station: 2 backing off to slot 8  collisions: 3
+num 3862	station: 4 backing off to slot 10  collisions: 3
+num 1580	station: 6 backing off to slot 8  collisions: 3
+num 31503	station: 7 backing off to slot 11  collisions: 3
+num 31348	station: 10 backing off to slot 8  collisions: 4
+num 5407	station: 12 backing off to slot 19  collisions: 4
+num 28887	station: 17 backing off to slot 11  collisions: 3
+num 2995	station: 19 backing off to slot 7  collisions: 3
+--------------------------------------------------
+Checking time slot: 4
+--------------------------------------------------
+num 9040	station: 9 backing off to slot 5  collisions: 3
+num 31548	station: 13 backing off to slot 9  collisions: 3
+num 15055	station: 14 backing off to slot 12  collisions: 3
+num 20140	station: 15 backing off to slot 9  collisions: 3
+num 30330	station: 18 backing off to slot 7  collisions: 3
+--------------------------------------------------
+Checking time slot: 5
+--------------------------------------------------
+num 22374	station: 3 backing off to slot 12  collisions: 3
+num 31953	station: 9 backing off to slot 7  collisions: 4
+num 30898	station: 16 backing off to slot 8  collisions: 3
+--------------------------------------------------
+Checking time slot: 6
+--------------------------------------------------
+num 9906	station: 8 backing off to slot 9  collisions: 3
+num 16437	station: 11 backing off to slot 12  collisions: 3
+--------------------------------------------------
+Checking time slot: 7
+--------------------------------------------------
+num 3159	station: 1 backing off to slot 15  collisions: 4
+num 12215	station: 9 backing off to slot 31  collisions: 5
+num 6678	station: 18 backing off to slot 14  collisions: 4
+num 11838	station: 19 backing off to slot 22  collisions: 4
+--------------------------------------------------
+Checking time slot: 8
+--------------------------------------------------
+num 9732	station: 2 backing off to slot 13  collisions: 4
+num 24790	station: 5 backing off to slot 15  collisions: 4
+num 818	station: 6 backing off to slot 11  collisions: 4
+num 3068	station: 10 backing off to slot 37  collisions: 5
+num 32087	station: 16 backing off to slot 16  collisions: 4
+--------------------------------------------------
+Checking time slot: 9
+--------------------------------------------------
+num 17895	station: 8 backing off to slot 17  collisions: 4
+num 18654	station: 13 backing off to slot 24  collisions: 4
+num 20479	station: 15 backing off to slot 25  collisions: 4
+--------------------------------------------------
+Checking time slot: 10
+--------------------------------------------------
+num 11742	station: 0 backing off to slot 25  collisions: 4
+num 4282	station: 4 backing off to slot 21  collisions: 4
+--------------------------------------------------
+Checking time slot: 11
+--------------------------------------------------
+num 24342	station: 6 backing off to slot 34  collisions: 5
+num 13322	station: 7 backing off to slot 22  collisions: 4
+num 3017	station: 17 backing off to slot 21  collisions: 4
+--------------------------------------------------
+Checking time slot: 12
+--------------------------------------------------
+num 22922	station: 3 backing off to slot 23  collisions: 4
+num 18730	station: 11 backing off to slot 23  collisions: 4
+num 31904	station: 14 backing off to slot 13  collisions: 4
+--------------------------------------------------
+Checking time slot: 13
+--------------------------------------------------
+num 25917	station: 2 backing off to slot 43  collisions: 5
+num 27770	station: 14 backing off to slot 40  collisions: 5
+--------------------------------------------------
+Checking time slot: 14
+--------------------------------------------------
+	Station 18 has successfully transmitted
+	in slot number 14 which is 716.8 micro seconds
+	Simulation required 85 numbers
+======================
+
+======================
+Simulation # 3
+--------------------------------------------------
+Checking time slot: 0
+--------------------------------------------------
+num 30684	station: 0 backing off to slot 1  collisions: 1
+num 8204	station: 1 backing off to slot 1  collisions: 1
+num 15142	station: 2 backing off to slot 1  collisions: 1
+num 28247	station: 3 backing off to slot 2  collisions: 1
+num 30579	station: 4 backing off to slot 2  collisions: 1
+num 14328	station: 5 backing off to slot 1  collisions: 1
+num 26377	station: 6 backing off to slot 2  collisions: 1
+num 7717	station: 7 backing off to slot 2  collisions: 1
+num 30765	station: 8 backing off to slot 2  collisions: 1
+num 29536	station: 9 backing off to slot 1  collisions: 1
+num 19933	station: 10 backing off to slot 2  collisions: 1
+num 4675	station: 11 backing off to slot 2  collisions: 1
+num 8607	station: 12 backing off to slot 2  collisions: 1
+num 29665	station: 13 backing off to slot 2  collisions: 1
+num 29465	station: 14 backing off to slot 2  collisions: 1
+num 9425	station: 15 backing off to slot 2  collisions: 1
+num 32734	station: 16 backing off to slot 1  collisions: 1
+num 28785	station: 17 backing off to slot 2  collisions: 1
+num 27320	station: 18 backing off to slot 1  collisions: 1
+num 18620	station: 19 backing off to slot 1  collisions: 1
+--------------------------------------------------
+Checking time slot: 1
+--------------------------------------------------
+num 16496	station: 0 backing off to slot 2  collisions: 2
+num 6294	station: 1 backing off to slot 4  collisions: 2
+num 22902	station: 2 backing off to slot 4  collisions: 2
+num 8070	station: 5 backing off to slot 4  collisions: 2
+num 19617	station: 9 backing off to slot 3  collisions: 2
+num 25920	station: 16 backing off to slot 2  collisions: 2
+num 30992	station: 18 backing off to slot 2  collisions: 2
+num 5579	station: 19 backing off to slot 5  collisions: 2
+--------------------------------------------------
+Checking time slot: 2
+--------------------------------------------------
+num 25056	station: 0 backing off to slot 3  collisions: 3
+num 24141	station: 3 backing off to slot 4  collisions: 2
+num 581	station: 4 backing off to slot 4  collisions: 2
+num 22973	station: 6 backing off to slot 4  collisions: 2
+num 32346	station: 7 backing off to slot 5  collisions: 2
+num 15723	station: 8 backing off to slot 6  collisions: 2
+num 18452	station: 10 backing off to slot 3  collisions: 2
+num 30157	station: 11 backing off to slot 4  collisions: 2
+num 30051	station: 12 backing off to slot 6  collisions: 2
+num 12061	station: 13 backing off to slot 4  collisions: 2
+num 5106	station: 14 backing off to slot 5  collisions: 2
+num 28049	station: 15 backing off to slot 4  collisions: 2
+num 8830	station: 16 backing off to slot 9  collisions: 3
+num 25039	station: 17 backing off to slot 6  collisions: 2
+num 32724	station: 18 backing off to slot 7  collisions: 3
+--------------------------------------------------
+Checking time slot: 3
+--------------------------------------------------
+num 17437	station: 0 backing off to slot 17  collisions: 4
+num 21937	station: 9 backing off to slot 5  collisions: 3
+num 29422	station: 10 backing off to slot 10  collisions: 3
+--------------------------------------------------
+Checking time slot: 4
+--------------------------------------------------
+num 26862	station: 1 backing off to slot 11  collisions: 3
+num 21903	station: 2 backing off to slot 12  collisions: 3
+num 25439	station: 3 backing off to slot 12  collisions: 3
+num 21414	station: 4 backing off to slot 11  collisions: 3
+num 7755	station: 5 backing off to slot 8  collisions: 3
+num 9167	station: 6 backing off to slot 12  collisions: 3
+num 27709	station: 11 backing off to slot 10  collisions: 3
+num 30657	station: 13 backing off to slot 6  collisions: 3
+num 17238	station: 15 backing off to slot 11  collisions: 3
+--------------------------------------------------
+Checking time slot: 5
+--------------------------------------------------
+num 14558	station: 7 backing off to slot 12  collisions: 3
+num 23809	station: 9 backing off to slot 7  collisions: 4
+num 15462	station: 14 backing off to slot 12  collisions: 3
+num 20137	station: 19 backing off to slot 7  collisions: 3
+--------------------------------------------------
+Checking time slot: 6
+--------------------------------------------------
+num 16098	station: 8 backing off to slot 9  collisions: 3
+num 6836	station: 12 backing off to slot 11  collisions: 3
+num 20718	station: 13 backing off to slot 21  collisions: 4
+num 6303	station: 17 backing off to slot 14  collisions: 3
+--------------------------------------------------
+Checking time slot: 7
+--------------------------------------------------
+num 6414	station: 9 backing off to slot 22  collisions: 5
+num 3673	station: 18 backing off to slot 17  collisions: 4
+num 24755	station: 19 backing off to slot 11  collisions: 4
+--------------------------------------------------
+Checking time slot: 8
+--------------------------------------------------
+	Station 5 has successfully transmitted
+	in slot number 8 which is 409.6 micro seconds
+	Simulation required 66 numbers
+======================
+
+======================
+Simulation # 4
+--------------------------------------------------
+Checking time slot: 0
+--------------------------------------------------
+num 3803	station: 0 backing off to slot 2  collisions: 1
+num 957	station: 1 backing off to slot 2  collisions: 1
+num 4048	station: 2 backing off to slot 1  collisions: 1
+num 8909	station: 3 backing off to slot 2  collisions: 1
+num 29006	station: 4 backing off to slot 1  collisions: 1
+num 12878	station: 5 backing off to slot 1  collisions: 1
+num 1181	station: 6 backing off to slot 2  collisions: 1
+num 28962	station: 7 backing off to slot 1  collisions: 1
+num 30315	station: 8 backing off to slot 2  collisions: 1
+num 23118	station: 9 backing off to slot 1  collisions: 1
+num 25616	station: 10 backing off to slot 1  collisions: 1
+num 24409	station: 11 backing off to slot 2  collisions: 1
+num 12253	station: 12 backing off to slot 2  collisions: 1
+num 18287	station: 13 backing off to slot 2  collisions: 1
+num 13056	station: 14 backing off to slot 1  collisions: 1
+num 20008	station: 15 backing off to slot 1  collisions: 1
+num 27455	station: 16 backing off to slot 2  collisions: 1
+num 7997	station: 17 backing off to slot 2  collisions: 1
+num 17897	station: 18 backing off to slot 2  collisions: 1
+num 11925	station: 19 backing off to slot 2  collisions: 1
+--------------------------------------------------
+Checking time slot: 1
+--------------------------------------------------
+num 22555	station: 2 backing off to slot 5  collisions: 2
+num 8939	station: 4 backing off to slot 5  collisions: 2
+num 27387	station: 5 backing off to slot 5  collisions: 2
+num 9924	station: 7 backing off to slot 2  collisions: 2
+num 25037	station: 9 backing off to slot 3  collisions: 2
+num 1455	station: 10 backing off to slot 5  collisions: 2
+num 30642	station: 14 backing off to slot 4  collisions: 2
+num 31340	station: 15 backing off to slot 2  collisions: 2
+--------------------------------------------------
+Checking time slot: 2
+--------------------------------------------------
+num 7869	station: 0 backing off to slot 4  collisions: 2
+num 1547	station: 1 backing off to slot 6  collisions: 2
+num 23327	station: 3 backing off to slot 6  collisions: 2
+num 11672	station: 6 backing off to slot 3  collisions: 2
+num 2504	station: 7 backing off to slot 3  collisions: 3
+num 27375	station: 8 backing off to slot 6  collisions: 2
+num 20582	station: 11 backing off to slot 5  collisions: 2
+num 31510	station: 12 backing off to slot 5  collisions: 2
+num 7486	station: 13 backing off to slot 5  collisions: 2
+num 21763	station: 15 backing off to slot 6  collisions: 3
+num 27705	station: 16 backing off to slot 4  collisions: 2
+num 5033	station: 17 backing off to slot 4  collisions: 2
+num 12113	station: 18 backing off to slot 4  collisions: 2
+num 20553	station: 19 backing off to slot 4  collisions: 2
+--------------------------------------------------
+Checking time slot: 3
+--------------------------------------------------
+num 29443	station: 6 backing off to slot 7  collisions: 3
+num 24366	station: 7 backing off to slot 18  collisions: 4
+num 6073	station: 9 backing off to slot 5  collisions: 3
+--------------------------------------------------
+Checking time slot: 4
+--------------------------------------------------
+num 9731	station: 0 backing off to slot 8  collisions: 3
+num 11606	station: 14 backing off to slot 11  collisions: 3
+num 760	station: 16 backing off to slot 5  collisions: 3
+num 17728	station: 17 backing off to slot 5  collisions: 3
+num 29503	station: 18 backing off to slot 12  collisions: 3
+num 12685	station: 19 backing off to slot 10  collisions: 3
+--------------------------------------------------
+Checking time slot: 5
+--------------------------------------------------
+num 7515	station: 2 backing off to slot 9  collisions: 3
+num 5674	station: 4 backing off to slot 8  collisions: 3
+num 7304	station: 5 backing off to slot 6  collisions: 3
+num 17439	station: 9 backing off to slot 21  collisions: 4
+num 30711	station: 10 backing off to slot 13  collisions: 3
+num 8760	station: 11 backing off to slot 6  collisions: 3
+num 15313	station: 12 backing off to slot 7  collisions: 3
+num 29283	station: 13 backing off to slot 9  collisions: 3
+num 16629	station: 16 backing off to slot 11  collisions: 4
+num 16860	station: 17 backing off to slot 18  collisions: 4
+--------------------------------------------------
+Checking time slot: 6
+--------------------------------------------------
+num 19842	station: 1 backing off to slot 9  collisions: 3
+num 28302	station: 3 backing off to slot 13  collisions: 3
+num 19365	station: 5 backing off to slot 12  collisions: 4
+num 14450	station: 8 backing off to slot 9  collisions: 3
+num 16116	station: 11 backing off to slot 11  collisions: 4
+num 18107	station: 15 backing off to slot 18  collisions: 4
+--------------------------------------------------
+Checking time slot: 7
+--------------------------------------------------
+num 21936	station: 6 backing off to slot 8  collisions: 4
+num 5111	station: 12 backing off to slot 15  collisions: 4
+--------------------------------------------------
+Checking time slot: 8
+--------------------------------------------------
+num 13044	station: 0 backing off to slot 13  collisions: 4
+num 26969	station: 4 backing off to slot 18  collisions: 4
+num 17224	station: 6 backing off to slot 17  collisions: 5
+--------------------------------------------------
+Checking time slot: 9
+--------------------------------------------------
+num 830	station: 1 backing off to slot 24  collisions: 4
+num 23644	station: 2 backing off to slot 22  collisions: 4
+num 8822	station: 8 backing off to slot 16  collisions: 4
+num 6903	station: 13 backing off to slot 17  collisions: 4
+--------------------------------------------------
+Checking time slot: 10
+--------------------------------------------------
+	Station 19 has successfully transmitted
+	in slot number 10 which is 512 micro seconds
+	Simulation required 76 numbers
+======================
+
+======================
+Simulation # 5
+--------------------------------------------------
+Checking time slot: 0
+--------------------------------------------------
+num 607	station: 0 backing off to slot 2  collisions: 1
+num 20428	station: 1 backing off to slot 1  collisions: 1
+num 7663	station: 2 backing off to slot 2  collisions: 1
+num 18335	station: 3 backing off to slot 2  collisions: 1
+num 17163	station: 4 backing off to slot 2  collisions: 1
+num 20348	station: 5 backing off to slot 1  collisions: 1
+num 25850	station: 6 backing off to slot 1  collisions: 1
+num 22838	station: 7 backing off to slot 1  collisions: 1
+num 27652	station: 8 backing off to slot 1  collisions: 1
+num 10521	station: 9 backing off to slot 2  collisions: 1
+num 20781	station: 10 backing off to slot 2  collisions: 1
+num 3644	station: 11 backing off to slot 1  collisions: 1
+num 25834	station: 12 backing off to slot 1  collisions: 1
+num 17297	station: 13 backing off to slot 2  collisions: 1
+num 20274	station: 14 backing off to slot 1  collisions: 1
+num 9927	station: 15 backing off to slot 2  collisions: 1
+num 4371	station: 16 backing off to slot 2  collisions: 1
+num 15808	station: 17 backing off to slot 1  collisions: 1
+num 29292	station: 18 backing off to slot 1  collisions: 1
+num 18821	station: 19 backing off to slot 2  collisions: 1
+--------------------------------------------------
+Checking time slot: 1
+--------------------------------------------------
+num 31924	station: 1 backing off to slot 2  collisions: 2
+num 14631	station: 5 backing off to slot 5  collisions: 2
+num 7989	station: 6 backing off to slot 3  collisions: 2
+num 4267	station: 7 backing off to slot 5  collisions: 2
+num 27676	station: 8 backing off to slot 2  collisions: 2
+num 2191	station: 11 backing off to slot 5  collisions: 2
+num 21491	station: 12 backing off to slot 5  collisions: 2
+num 28506	station: 14 backing off to slot 4  collisions: 2
+num 25835	station: 17 backing off to slot 5  collisions: 2
+num 30313	station: 18 backing off to slot 3  collisions: 2
+--------------------------------------------------
+Checking time slot: 2
+--------------------------------------------------
+num 2641	station: 0 backing off to slot 4  collisions: 2
+num 26443	station: 1 backing off to slot 6  collisions: 3
+num 17973	station: 2 backing off to slot 4  collisions: 2
+num 10304	station: 3 backing off to slot 3  collisions: 2
+num 12010	station: 4 backing off to slot 5  collisions: 2
+num 2368	station: 8 backing off to slot 3  collisions: 3
+num 30652	station: 9 backing off to slot 3  collisions: 2
+num 5093	station: 10 backing off to slot 4  collisions: 2
+num 25206	station: 13 backing off to slot 5  collisions: 2
+num 25536	station: 15 backing off to slot 3  collisions: 2
+num 15614	station: 16 backing off to slot 5  collisions: 2
+num 13220	station: 19 backing off to slot 3  collisions: 2
+--------------------------------------------------
+Checking time slot: 3
+--------------------------------------------------
+num 29181	station: 3 backing off to slot 9  collisions: 3
+num 8681	station: 6 backing off to slot 5  collisions: 3
+num 30517	station: 8 backing off to slot 9  collisions: 4
+num 16687	station: 9 backing off to slot 11  collisions: 3
+num 18608	station: 15 backing off to slot 4  collisions: 3
+num 2120	station: 18 backing off to slot 4  collisions: 3
+num 32495	station: 19 backing off to slot 11  collisions: 3
+--------------------------------------------------
+Checking time slot: 4
+--------------------------------------------------
+num 15132	station: 0 backing off to slot 9  collisions: 3
+num 20942	station: 2 backing off to slot 11  collisions: 3
+num 31651	station: 10 backing off to slot 8  collisions: 3
+num 29763	station: 14 backing off to slot 8  collisions: 3
+num 28931	station: 15 backing off to slot 8  collisions: 4
+num 3150	station: 18 backing off to slot 19  collisions: 4
+--------------------------------------------------
+Checking time slot: 5
+--------------------------------------------------
+num 24671	station: 4 backing off to slot 13  collisions: 3
+num 31122	station: 5 backing off to slot 8  collisions: 3
+num 24641	station: 6 backing off to slot 7  collisions: 4
+num 20409	station: 7 backing off to slot 7  collisions: 3
+num 24190	station: 11 backing off to slot 12  collisions: 3
+num 22186	station: 12 backing off to slot 8  collisions: 3
+num 23050	station: 13 backing off to slot 8  collisions: 3
+num 17865	station: 16 backing off to slot 7  collisions: 3
+num 7391	station: 17 backing off to slot 13  collisions: 3
+--------------------------------------------------
+Checking time slot: 6
+--------------------------------------------------
+	Station 1 has successfully transmitted
+	in slot number 6 which is 307.2 micro seconds
+	Simulation required 64 numbers
+======================
+
+======================
+Simulation # 6
+--------------------------------------------------
+Checking time slot: 0
+--------------------------------------------------
+num 586	station: 0 backing off to slot 1  collisions: 1
+num 29875	station: 1 backing off to slot 2  collisions: 1
+num 9759	station: 2 backing off to slot 2  collisions: 1
+num 31238	station: 3 backing off to slot 1  collisions: 1
+num 2200	station: 4 backing off to slot 1  collisions: 1
+num 2198	station: 5 backing off to slot 1  collisions: 1
+num 24007	station: 6 backing off to slot 2  collisions: 1
+num 17815	station: 7 backing off to slot 2  collisions: 1
+num 15418	station: 8 backing off to slot 1  collisions: 1
+num 20420	station: 9 backing off to slot 1  collisions: 1
+num 26496	station: 10 backing off to slot 1  collisions: 1
+num 13167	station: 11 backing off to slot 2  collisions: 1
+num 4339	station: 12 backing off to slot 2  collisions: 1
+num 12336	station: 13 backing off to slot 1  collisions: 1
+num 15287	station: 14 backing off to slot 2  collisions: 1
+num 4066	station: 15 backing off to slot 1  collisions: 1
+num 27468	station: 16 backing off to slot 1  collisions: 1
+num 3461	station: 17 backing off to slot 2  collisions: 1
+num 2949	station: 18 backing off to slot 2  collisions: 1
+num 24463	station: 19 backing off to slot 2  collisions: 1
+--------------------------------------------------
+Checking time slot: 1
+--------------------------------------------------
+num 32393	station: 0 backing off to slot 3  collisions: 2
+num 6099	station: 3 backing off to slot 5  collisions: 2
+num 16367	station: 4 backing off to slot 5  collisions: 2
+num 30747	station: 5 backing off to slot 5  collisions: 2
+num 30740	station: 8 backing off to slot 2  collisions: 2
+num 4008	station: 9 backing off to slot 2  collisions: 2
+num 22169	station: 10 backing off to slot 3  collisions: 2
+num 20158	station: 13 backing off to slot 4  collisions: 2
+num 27059	station: 15 backing off to slot 5  collisions: 2
+num 7266	station: 16 backing off to slot 4  collisions: 2
+--------------------------------------------------
+Checking time slot: 2
+--------------------------------------------------
+num 27549	station: 1 backing off to slot 4  collisions: 2
+num 27645	station: 2 backing off to slot 4  collisions: 2
+num 4374	station: 6 backing off to slot 5  collisions: 2
+num 4540	station: 7 backing off to slot 3  collisions: 2
+num 26116	station: 8 backing off to slot 7  collisions: 3
+num 6574	station: 9 backing off to slot 9  collisions: 3
+num 6738	station: 11 backing off to slot 5  collisions: 2
+num 17355	station: 12 backing off to slot 6  collisions: 2
+num 24389	station: 14 backing off to slot 4  collisions: 2
+num 22156	station: 17 backing off to slot 3  collisions: 2
+num 5007	station: 18 backing off to slot 6  collisions: 2
+num 18117	station: 19 backing off to slot 4  collisions: 2
+--------------------------------------------------
+Checking time slot: 3
+--------------------------------------------------
+num 2555	station: 0 backing off to slot 7  collisions: 3
+num 9346	station: 7 backing off to slot 6  collisions: 3
+num 30453	station: 10 backing off to slot 9  collisions: 3
+num 17843	station: 17 backing off to slot 7  collisions: 3
+--------------------------------------------------
+Checking time slot: 4
+--------------------------------------------------
+num 13412	station: 1 backing off to slot 9  collisions: 3
+num 25153	station: 2 backing off to slot 6  collisions: 3
+num 21304	station: 13 backing off to slot 5  collisions: 3
+num 16361	station: 14 backing off to slot 6  collisions: 3
+num 16849	station: 16 backing off to slot 6  collisions: 3
+num 20929	station: 19 backing off to slot 6  collisions: 3
+--------------------------------------------------
+Checking time slot: 5
+--------------------------------------------------
+num 22460	station: 3 backing off to slot 10  collisions: 3
+num 448	station: 4 backing off to slot 6  collisions: 3
+num 18909	station: 5 backing off to slot 11  collisions: 3
+num 20432	station: 6 backing off to slot 6  collisions: 3
+num 4456	station: 11 backing off to slot 6  collisions: 3
+num 8310	station: 13 backing off to slot 12  collisions: 4
+num 7822	station: 15 backing off to slot 12  collisions: 3
+--------------------------------------------------
+Checking time slot: 6
+--------------------------------------------------
+num 31515	station: 2 backing off to slot 18  collisions: 4
+num 15577	station: 4 backing off to slot 16  collisions: 4
+num 2603	station: 6 backing off to slot 18  collisions: 4
+num 26393	station: 7 backing off to slot 16  collisions: 4
+num 19951	station: 11 backing off to slot 22  collisions: 4
+num 7143	station: 12 backing off to slot 14  collisions: 3
+num 19741	station: 14 backing off to slot 20  collisions: 4
+num 26525	station: 16 backing off to slot 20  collisions: 4
+num 13882	station: 18 backing off to slot 9  collisions: 3
+num 4328	station: 19 backing off to slot 15  collisions: 4
+--------------------------------------------------
+Checking time slot: 7
+--------------------------------------------------
+num 18147	station: 0 backing off to slot 11  collisions: 4
+num 3270	station: 8 backing off to slot 14  collisions: 4
+num 9335	station: 17 backing off to slot 15  collisions: 4
+--------------------------------------------------
+Checking time slot: 8
+--------------------------------------------------
+==> No transmission
+--------------------------------------------------
+Checking time slot: 9
+--------------------------------------------------
+num 3496	station: 1 backing off to slot 18  collisions: 4
+num 5826	station: 9 backing off to slot 12  collisions: 4
+num 18681	station: 10 backing off to slot 19  collisions: 4
+num 1182	station: 18 backing off to slot 24  collisions: 4
+--------------------------------------------------
+Checking time slot: 10
+--------------------------------------------------
+	Station 3 has successfully transmitted
+	in slot number 10 which is 512 micro seconds
+	Simulation required 76 numbers
+======================
+
+======================
+Simulation # 7
+--------------------------------------------------
+Checking time slot: 0
+--------------------------------------------------
+num 23669	station: 0 backing off to slot 2  collisions: 1
+num 32093	station: 1 backing off to slot 2  collisions: 1
+num 26335	station: 2 backing off to slot 2  collisions: 1
+num 12205	station: 3 backing off to slot 2  collisions: 1
+num 15686	station: 4 backing off to slot 1  collisions: 1
+num 10416	station: 5 backing off to slot 1  collisions: 1
+num 367	station: 6 backing off to slot 2  collisions: 1
+num 5378	station: 7 backing off to slot 1  collisions: 1
+num 10864	station: 8 backing off to slot 1  collisions: 1
+num 19276	station: 9 backing off to slot 1  collisions: 1
+num 25810	station: 10 backing off to slot 1  collisions: 1
+num 15321	station: 11 backing off to slot 2  collisions: 1
+num 27586	station: 12 backing off to slot 1  collisions: 1
+num 864	station: 13 backing off to slot 1  collisions: 1
+num 14068	station: 14 backing off to slot 1  collisions: 1
+num 10395	station: 15 backing off to slot 2  collisions: 1
+num 3467	station: 16 backing off to slot 2  collisions: 1
+num 7693	station: 17 backing off to slot 2  collisions: 1
+num 30346	station: 18 backing off to slot 1  collisions: 1
+num 10610	station: 19 backing off to slot 1  collisions: 1
+--------------------------------------------------
+Checking time slot: 1
+--------------------------------------------------
+num 27434	station: 4 backing off to slot 4  collisions: 2
+num 24104	station: 5 backing off to slot 2  collisions: 2
+num 24492	station: 7 backing off to slot 2  collisions: 2
+num 31762	station: 8 backing off to slot 4  collisions: 2
+num 9483	station: 9 backing off to slot 5  collisions: 2
+num 27763	station: 10 backing off to slot 5  collisions: 2
+num 8329	station: 12 backing off to slot 3  collisions: 2
+num 12979	station: 13 backing off to slot 5  collisions: 2
+num 821	station: 14 backing off to slot 3  collisions: 2
+num 27010	station: 18 backing off to slot 4  collisions: 2
+num 14161	station: 19 backing off to slot 3  collisions: 2
+--------------------------------------------------
+Checking time slot: 2
+--------------------------------------------------
+num 24490	station: 0 backing off to slot 5  collisions: 2
+num 26335	station: 1 backing off to slot 6  collisions: 2
+num 7729	station: 2 backing off to slot 4  collisions: 2
+num 3927	station: 3 backing off to slot 6  collisions: 2
+num 9253	station: 5 backing off to slot 8  collisions: 3
+num 18145	station: 6 backing off to slot 4  collisions: 2
+num 4294	station: 7 backing off to slot 9  collisions: 3
+num 14631	station: 11 backing off to slot 6  collisions: 2
+num 29010	station: 15 backing off to slot 5  collisions: 2
+num 23570	station: 16 backing off to slot 5  collisions: 2
+num 7673	station: 17 backing off to slot 4  collisions: 2
+--------------------------------------------------
+Checking time slot: 3
+--------------------------------------------------
+num 11563	station: 12 backing off to slot 7  collisions: 3
+num 18389	station: 14 backing off to slot 9  collisions: 3
+num 8537	station: 19 backing off to slot 5  collisions: 3
+--------------------------------------------------
+Checking time slot: 4
+--------------------------------------------------
+num 25631	station: 2 backing off to slot 12  collisions: 3
+num 28784	station: 4 backing off to slot 5  collisions: 3
+num 12004	station: 6 backing off to slot 9  collisions: 3
+num 557	station: 8 backing off to slot 10  collisions: 3
+num 26363	station: 17 backing off to slot 8  collisions: 3
+num 22615	station: 18 backing off to slot 12  collisions: 3
+--------------------------------------------------
+Checking time slot: 5
+--------------------------------------------------
+num 27991	station: 0 backing off to slot 13  collisions: 3
+num 17699	station: 4 backing off to slot 9  collisions: 4
+num 14339	station: 9 backing off to slot 9  collisions: 3
+num 26986	station: 10 backing off to slot 8  collisions: 3
+num 27182	station: 13 backing off to slot 12  collisions: 3
+num 9334	station: 15 backing off to slot 12  collisions: 3
+num 2547	station: 16 backing off to slot 9  collisions: 3
+num 7393	station: 19 backing off to slot 7  collisions: 4
+--------------------------------------------------
+Checking time slot: 6
+--------------------------------------------------
+num 10155	station: 1 backing off to slot 10  collisions: 3
+num 29558	station: 3 backing off to slot 13  collisions: 3
+num 21555	station: 11 backing off to slot 10  collisions: 3
+--------------------------------------------------
+Checking time slot: 7
+--------------------------------------------------
+num 1877	station: 12 backing off to slot 13  collisions: 4
+num 23125	station: 19 backing off to slot 29  collisions: 5
+--------------------------------------------------
+Checking time slot: 8
+--------------------------------------------------
+num 29284	station: 5 backing off to slot 13  collisions: 4
+num 5805	station: 10 backing off to slot 22  collisions: 4
+num 32379	station: 17 backing off to slot 20  collisions: 4
+--------------------------------------------------
+Checking time slot: 9
+--------------------------------------------------
+num 14661	station: 4 backing off to slot 15  collisions: 5
+num 10099	station: 6 backing off to slot 13  collisions: 4
+num 14242	station: 7 backing off to slot 12  collisions: 4
+num 10903	station: 9 backing off to slot 17  collisions: 4
+num 902	station: 14 backing off to slot 16  collisions: 4
+num 21916	station: 16 backing off to slot 22  collisions: 4
+--------------------------------------------------
+Checking time slot: 10
+--------------------------------------------------
+num 22466	station: 1 backing off to slot 13  collisions: 4
+num 19291	station: 8 backing off to slot 22  collisions: 4
+num 30453	station: 11 backing off to slot 16  collisions: 4
+--------------------------------------------------
+Checking time slot: 11
+--------------------------------------------------
+==> No transmission
+--------------------------------------------------
+Checking time slot: 12
+--------------------------------------------------
+num 15330	station: 2 backing off to slot 15  collisions: 4
+num 15307	station: 7 backing off to slot 24  collisions: 5
+num 9690	station: 13 backing off to slot 23  collisions: 4
+num 15887	station: 15 backing off to slot 28  collisions: 4
+num 8902	station: 18 backing off to slot 19  collisions: 4
+--------------------------------------------------
+Checking time slot: 13
+--------------------------------------------------
+num 32305	station: 0 backing off to slot 15  collisions: 4
+num 11110	station: 1 backing off to slot 20  collisions: 5
+num 26601	station: 3 backing off to slot 23  collisions: 4
+num 13876	station: 5 backing off to slot 34  collisions: 5
+num 5328	station: 6 backing off to slot 30  collisions: 5
+num 21015	station: 12 backing off to slot 37  collisions: 5
+--------------------------------------------------
+Checking time slot: 14
+--------------------------------------------------
+==> No transmission
+--------------------------------------------------
+Checking time slot: 15
+--------------------------------------------------
+num 23211	station: 0 backing off to slot 27  collisions: 5
+num 7876	station: 2 backing off to slot 20  collisions: 5
+num 28409	station: 4 backing off to slot 73  collisions: 6
+--------------------------------------------------
+Checking time slot: 16
+--------------------------------------------------
+num 598	station: 11 backing off to slot 39  collisions: 5
+num 4666	station: 14 backing off to slot 43  collisions: 5
+--------------------------------------------------
+Checking time slot: 17
+--------------------------------------------------
+	Station 9 has successfully transmitted
+	in slot number 17 which is 870.4 micro seconds
+	Simulation required 92 numbers
+======================
+
+======================
+Simulation # 8
+--------------------------------------------------
+Checking time slot: 0
+--------------------------------------------------
+num 17196	station: 0 backing off to slot 1  collisions: 1
+num 2476	station: 1 backing off to slot 1  collisions: 1
+num 27791	station: 2 backing off to slot 2  collisions: 1
+num 13712	station: 3 backing off to slot 1  collisions: 1
+num 8281	station: 4 backing off to slot 2  collisions: 1
+num 27402	station: 5 backing off to slot 1  collisions: 1
+num 28373	station: 6 backing off to slot 2  collisions: 1
+num 18380	station: 7 backing off to slot 1  collisions: 1
+num 8877	station: 8 backing off to slot 2  collisions: 1
+num 6509	station: 9 backing off to slot 2  collisions: 1
+num 19282	station: 10 backing off to slot 1  collisions: 1
+num 30793	station: 11 backing off to slot 2  collisions: 1
+num 28975	station: 12 backing off to slot 2  collisions: 1
+num 5805	station: 13 backing off to slot 2  collisions: 1
+num 28478	station: 14 backing off to slot 1  collisions: 1
+num 11537	station: 15 backing off to slot 2  collisions: 1
+num 21113	station: 16 backing off to slot 2  collisions: 1
+num 5400	station: 17 backing off to slot 1  collisions: 1
+num 27424	station: 18 backing off to slot 1  collisions: 1
+num 30015	station: 19 backing off to slot 2  collisions: 1
+--------------------------------------------------
+Checking time slot: 1
+--------------------------------------------------
+num 4937	station: 0 backing off to slot 3  collisions: 2
+num 5767	station: 1 backing off to slot 5  collisions: 2
+num 23849	station: 3 backing off to slot 3  collisions: 2
+num 18814	station: 5 backing off to slot 4  collisions: 2
+num 11095	station: 7 backing off to slot 5  collisions: 2
+num 12096	station: 10 backing off to slot 2  collisions: 2
+num 9257	station: 14 backing off to slot 3  collisions: 2
+num 18971	station: 17 backing off to slot 5  collisions: 2
+num 7737	station: 18 backing off to slot 3  collisions: 2
+--------------------------------------------------
+Checking time slot: 2
+--------------------------------------------------
+num 9855	station: 2 backing off to slot 6  collisions: 2
+num 23637	station: 4 backing off to slot 4  collisions: 2
+num 24933	station: 6 backing off to slot 4  collisions: 2
+num 12331	station: 8 backing off to slot 6  collisions: 2
+num 18661	station: 9 backing off to slot 4  collisions: 2
+num 5877	station: 10 backing off to slot 8  collisions: 3
+num 20612	station: 11 backing off to slot 3  collisions: 2
+num 13295	station: 12 backing off to slot 6  collisions: 2
+num 1483	station: 13 backing off to slot 6  collisions: 2
+num 6225	station: 15 backing off to slot 4  collisions: 2
+num 22172	station: 16 backing off to slot 3  collisions: 2
+num 7992	station: 19 backing off to slot 3  collisions: 2
+--------------------------------------------------
+Checking time slot: 3
+--------------------------------------------------
+num 25507	station: 0 backing off to slot 7  collisions: 3
+num 20197	station: 3 backing off to slot 9  collisions: 3
+num 4199	station: 11 backing off to slot 11  collisions: 3
+num 31313	station: 14 backing off to slot 5  collisions: 3
+num 15908	station: 16 backing off to slot 8  collisions: 3
+num 15737	station: 18 backing off to slot 5  collisions: 3
+num 19658	station: 19 backing off to slot 6  collisions: 3
+--------------------------------------------------
+Checking time slot: 4
+--------------------------------------------------
+num 21308	station: 4 backing off to slot 9  collisions: 3
+num 10393	station: 5 backing off to slot 6  collisions: 3
+num 16905	station: 6 backing off to slot 6  collisions: 3
+num 26246	station: 9 backing off to slot 11  collisions: 3
+num 16160	station: 15 backing off to slot 5  collisions: 3
+--------------------------------------------------
+Checking time slot: 5
+--------------------------------------------------
+num 7986	station: 1 backing off to slot 8  collisions: 3
+num 12292	station: 7 backing off to slot 10  collisions: 3
+num 27256	station: 14 backing off to slot 14  collisions: 4
+num 20083	station: 15 backing off to slot 9  collisions: 4
+num 21549	station: 17 backing off to slot 11  collisions: 3
+num 13459	station: 18 backing off to slot 9  collisions: 4
+--------------------------------------------------
+Checking time slot: 6
+--------------------------------------------------
+num 27820	station: 2 backing off to slot 11  collisions: 3
+num 31404	station: 5 backing off to slot 19  collisions: 4
+num 4329	station: 6 backing off to slot 16  collisions: 4
+num 19986	station: 8 backing off to slot 9  collisions: 3
+num 10968	station: 12 backing off to slot 7  collisions: 3
+num 22990	station: 13 backing off to slot 13  collisions: 3
+num 25863	station: 19 backing off to slot 14  collisions: 4
+--------------------------------------------------
+Checking time slot: 7
+--------------------------------------------------
+num 31580	station: 0 backing off to slot 20  collisions: 4
+num 3517	station: 12 backing off to slot 21  collisions: 4
+--------------------------------------------------
+Checking time slot: 8
+--------------------------------------------------
+num 27346	station: 1 backing off to slot 11  collisions: 4
+num 5037	station: 10 backing off to slot 22  collisions: 4
+num 25690	station: 16 backing off to slot 19  collisions: 4
+--------------------------------------------------
+Checking time slot: 9
+--------------------------------------------------
+num 2570	station: 3 backing off to slot 20  collisions: 4
+num 30545	station: 4 backing off to slot 11  collisions: 4
+num 13119	station: 8 backing off to slot 25  collisions: 4
+num 6770	station: 15 backing off to slot 28  collisions: 5
+num 29090	station: 18 backing off to slot 12  collisions: 5
+--------------------------------------------------
+Checking time slot: 10
+--------------------------------------------------
+	Station 7 has successfully transmitted
+	in slot number 10 which is 512 micro seconds
+	Simulation required 76 numbers
+======================
+
+======================
+Simulation # 9
+--------------------------------------------------
+Checking time slot: 0
+--------------------------------------------------
+num 29027	station: 0 backing off to slot 2  collisions: 1
+num 22507	station: 1 backing off to slot 2  collisions: 1
+num 15980	station: 2 backing off to slot 1  collisions: 1
+num 17568	station: 3 backing off to slot 1  collisions: 1
+num 132	station: 4 backing off to slot 1  collisions: 1
+num 117	station: 5 backing off to slot 2  collisions: 1
+num 11046	station: 6 backing off to slot 1  collisions: 1
+num 16293	station: 7 backing off to slot 2  collisions: 1
+num 8104	station: 8 backing off to slot 1  collisions: 1
+num 23338	station: 9 backing off to slot 1  collisions: 1
+num 10781	station: 10 backing off to slot 2  collisions: 1
+num 28187	station: 11 backing off to slot 2  collisions: 1
+num 12119	station: 12 backing off to slot 2  collisions: 1
+num 24240	station: 13 backing off to slot 1  collisions: 1
+num 23239	station: 14 backing off to slot 2  collisions: 1
+num 10755	station: 15 backing off to slot 2  collisions: 1
+num 28569	station: 16 backing off to slot 2  collisions: 1
+num 10457	station: 17 backing off to slot 2  collisions: 1
+num 21723	station: 18 backing off to slot 2  collisions: 1
+num 18791	station: 19 backing off to slot 2  collisions: 1
+--------------------------------------------------
+Checking time slot: 1
+--------------------------------------------------
+num 3553	station: 2 backing off to slot 3  collisions: 2
+num 20536	station: 3 backing off to slot 2  collisions: 2
+num 22309	station: 4 backing off to slot 3  collisions: 2
+num 30899	station: 6 backing off to slot 5  collisions: 2
+num 25573	station: 8 backing off to slot 3  collisions: 2
+num 15231	station: 9 backing off to slot 5  collisions: 2
+num 702	station: 13 backing off to slot 4  collisions: 2
+--------------------------------------------------
+Checking time slot: 2
+--------------------------------------------------
+num 23350	station: 0 backing off to slot 5  collisions: 2
+num 28350	station: 1 backing off to slot 5  collisions: 2
+num 7472	station: 3 backing off to slot 3  collisions: 3
+num 19672	station: 5 backing off to slot 3  collisions: 2
+num 24610	station: 7 backing off to slot 5  collisions: 2
+num 29979	station: 10 backing off to slot 6  collisions: 2
+num 2884	station: 11 backing off to slot 3  collisions: 2
+num 9410	station: 12 backing off to slot 5  collisions: 2
+num 30111	station: 14 backing off to slot 6  collisions: 2
+num 3002	station: 15 backing off to slot 5  collisions: 2
+num 20456	station: 16 backing off to slot 3  collisions: 2
+num 13636	station: 17 backing off to slot 3  collisions: 2
+num 11106	station: 18 backing off to slot 5  collisions: 2
+num 11026	station: 19 backing off to slot 5  collisions: 2
+--------------------------------------------------
+Checking time slot: 3
+--------------------------------------------------
+num 24417	station: 2 backing off to slot 5  collisions: 3
+num 6525	station: 3 backing off to slot 17  collisions: 4
+num 23145	station: 4 backing off to slot 5  collisions: 3
+num 15890	station: 5 backing off to slot 6  collisions: 3
+num 29764	station: 8 backing off to slot 8  collisions: 3
+num 1132	station: 11 backing off to slot 8  collisions: 3
+num 11691	station: 16 backing off to slot 7  collisions: 3
+num 7454	station: 17 backing off to slot 10  collisions: 3
+--------------------------------------------------
+Checking time slot: 4
+--------------------------------------------------
+	Station 13 has successfully transmitted
+	in slot number 4 which is 204.8 micro seconds
+	Simulation required 49 numbers
+======================
+
+======================
+Simulation # 10
+--------------------------------------------------
+Checking time slot: 0
+--------------------------------------------------
+num 22856	station: 0 backing off to slot 1  collisions: 1
+num 30483	station: 1 backing off to slot 2  collisions: 1
+num 11007	station: 2 backing off to slot 2  collisions: 1
+num 10624	station: 3 backing off to slot 1  collisions: 1
+num 20024	station: 4 backing off to slot 1  collisions: 1
+num 9138	station: 5 backing off to slot 1  collisions: 1
+num 3429	station: 6 backing off to slot 2  collisions: 1
+num 2487	station: 7 backing off to slot 2  collisions: 1
+num 9840	station: 8 backing off to slot 1  collisions: 1
+num 26780	station: 9 backing off to slot 1  collisions: 1
+num 30837	station: 10 backing off to slot 2  collisions: 1
+num 17312	station: 11 backing off to slot 1  collisions: 1
+num 13684	station: 12 backing off to slot 1  collisions: 1
+num 22679	station: 13 backing off to slot 2  collisions: 1
+num 14523	station: 14 backing off to slot 2  collisions: 1
+num 16569	station: 15 backing off to slot 2  collisions: 1
+num 32089	station: 16 backing off to slot 2  collisions: 1
+num 11867	station: 17 backing off to slot 2  collisions: 1
+num 19571	station: 18 backing off to slot 2  collisions: 1
+num 19777	station: 19 backing off to slot 2  collisions: 1
+--------------------------------------------------
+Checking time slot: 1
+--------------------------------------------------
+num 25503	station: 0 backing off to slot 5  collisions: 2
+num 30677	station: 3 backing off to slot 3  collisions: 2
+num 30803	station: 4 backing off to slot 5  collisions: 2
+num 17153	station: 5 backing off to slot 3  collisions: 2
+num 4434	station: 8 backing off to slot 4  collisions: 2
+num 21180	station: 9 backing off to slot 2  collisions: 2
+num 275	station: 11 backing off to slot 5  collisions: 2
+num 1430	station: 12 backing off to slot 4  collisions: 2
+--------------------------------------------------
+Checking time slot: 2
+--------------------------------------------------
+num 22313	station: 1 backing off to slot 4  collisions: 2
+num 11966	station: 2 backing off to slot 5  collisions: 2
+num 8884	station: 6 backing off to slot 3  collisions: 2
+num 12401	station: 7 backing off to slot 4  collisions: 2
+num 9681	station: 9 backing off to slot 4  collisions: 3
+num 19891	station: 10 backing off to slot 6  collisions: 2
+num 23025	station: 13 backing off to slot 4  collisions: 2
+num 29705	station: 14 backing off to slot 4  collisions: 2
+num 29030	station: 15 backing off to slot 5  collisions: 2
+num 26454	station: 16 backing off to slot 5  collisions: 2
+num 32192	station: 17 backing off to slot 3  collisions: 2
+num 6102	station: 18 backing off to slot 5  collisions: 2
+num 20466	station: 19 backing off to slot 5  collisions: 2
+--------------------------------------------------
+Checking time slot: 3
+--------------------------------------------------
+num 30262	station: 3 backing off to slot 10  collisions: 3
+num 23415	station: 5 backing off to slot 11  collisions: 3
+num 1383	station: 6 backing off to slot 11  collisions: 3
+num 20173	station: 17 backing off to slot 9  collisions: 3
+--------------------------------------------------
+Checking time slot: 4
+--------------------------------------------------
+num 5170	station: 1 backing off to slot 7  collisions: 3
+num 17952	station: 7 backing off to slot 5  collisions: 3
+num 19495	station: 8 backing off to slot 12  collisions: 3
+num 17037	station: 9 backing off to slot 18  collisions: 4
+num 4755	station: 12 backing off to slot 8  collisions: 3
+num 6504	station: 13 backing off to slot 5  collisions: 3
+num 9773	station: 14 backing off to slot 10  collisions: 3
+--------------------------------------------------
+Checking time slot: 5
+--------------------------------------------------
+num 2664	station: 0 backing off to slot 6  collisions: 3
+num 4540	station: 2 backing off to slot 10  collisions: 3
+num 26926	station: 4 backing off to slot 12  collisions: 3
+num 7098	station: 7 backing off to slot 16  collisions: 4
+num 25720	station: 11 backing off to slot 6  collisions: 3
+num 27201	station: 13 backing off to slot 7  collisions: 4
+num 8528	station: 15 backing off to slot 6  collisions: 3
+num 15265	station: 16 backing off to slot 7  collisions: 3
+num 6399	station: 18 backing off to slot 13  collisions: 3
+num 17413	station: 19 backing off to slot 11  collisions: 3
+--------------------------------------------------
+Checking time slot: 6
+--------------------------------------------------
+num 27666	station: 0 backing off to slot 9  collisions: 4
+num 16081	station: 10 backing off to slot 8  collisions: 3
+num 4536	station: 11 backing off to slot 15  collisions: 4
+num 17923	station: 15 backing off to slot 10  collisions: 4
+--------------------------------------------------
+Checking time slot: 7
+--------------------------------------------------
+num 13018	station: 1 backing off to slot 18  collisions: 4
+num 798	station: 13 backing off to slot 38  collisions: 5
+num 11610	station: 16 backing off to slot 18  collisions: 4
+--------------------------------------------------
+Checking time slot: 8
+--------------------------------------------------
+num 12443	station: 10 backing off to slot 20  collisions: 4
+num 6901	station: 12 backing off to slot 14  collisions: 4
+--------------------------------------------------
+Checking time slot: 9
+--------------------------------------------------
+num 32076	station: 0 backing off to slot 22  collisions: 5
+num 9937	station: 17 backing off to slot 11  collisions: 4
+--------------------------------------------------
+Checking time slot: 10
+--------------------------------------------------
+num 30316	station: 2 backing off to slot 23  collisions: 4
+num 691	station: 3 backing off to slot 14  collisions: 4
+num 30110	station: 14 backing off to slot 25  collisions: 4
+num 2718	station: 15 backing off to slot 41  collisions: 5
+--------------------------------------------------
+Checking time slot: 11
+--------------------------------------------------
+num 18643	station: 5 backing off to slot 15  collisions: 4
+num 16837	station: 6 backing off to slot 17  collisions: 4
+num 19756	station: 17 backing off to slot 24  collisions: 5
+num 23398	station: 19 backing off to slot 18  collisions: 4
+--------------------------------------------------
+Checking time slot: 12
+--------------------------------------------------
+num 23342	station: 4 backing off to slot 27  collisions: 4
+num 29529	station: 8 backing off to slot 22  collisions: 4
+--------------------------------------------------
+Checking time slot: 13
+--------------------------------------------------
+	Station 18 has successfully transmitted
+	in slot number 13 which is 665.6 micro seconds
+	Simulation required 83 numbers
+======================
+Required 751 numbers
+Average Time for transmit: 542.72 micro Seconds
+Average slot number for transmit: 10.6
+

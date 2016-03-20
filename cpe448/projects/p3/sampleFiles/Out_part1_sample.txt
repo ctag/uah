@@ -1,0 +1,64 @@
+--------------------------------------------------
+Checking time slot: 0
+	station 0: backing off to slot 2  collisions: 1
+	station 1: backing off to slot 1  collisions: 1
+	station 2: backing off to slot 2  collisions: 1
+	station 3: backing off to slot 1  collisions: 1
+	station 4: backing off to slot 2  collisions: 1
+--------------------------------------------------
+
+--------------------------------------------------
+Checking time slot: 1
+	station 1: backing off to slot 2  collisions: 2
+	station 3: backing off to slot 3  collisions: 2
+--------------------------------------------------
+
+--------------------------------------------------
+Checking time slot: 2
+	station 0: backing off to slot 3  collisions: 2
+	station 1: backing off to slot 3  collisions: 3
+	station 2: backing off to slot 5  collisions: 2
+	station 4: backing off to slot 4  collisions: 2
+--------------------------------------------------
+
+--------------------------------------------------
+Checking time slot: 3
+	station 0: backing off to slot 6  collisions: 3
+	station 1: backing off to slot 9  collisions: 4
+	station 3: backing off to slot 8  collisions: 3
+--------------------------------------------------
+
+--------------------------------------------------     <===  This is the answer for part1a.
+Checking time slot: 4                                  <===  The rest of the output is 
+Station 4 has successfully transmitted                 <===  For part1b.
+in slot number 4 which is 204.8 micro seconds
+--------------------------------------------------
+
+--------------------------------------------------
+Checking time slot: 5
+Station 2 has successfully transmitted
+in slot number 5 which is 256 micro seconds
+--------------------------------------------------
+
+--------------------------------------------------
+Checking time slot: 6
+Station 0 has successfully transmitted
+in slot number 6 which is 307.2 micro seconds
+--------------------------------------------------
+
+--------------------------------------------------
+Checking time slot: 7
+No transmissions attempted in this slot
+--------------------------------------------------
+
+--------------------------------------------------
+Checking time slot: 8
+Station 3 has successfully transmitted
+in slot number 8 which is 409.6 micro seconds
+--------------------------------------------------
+
+--------------------------------------------------
+Checking time slot: 9
+Station 1 has successfully transmitted
+in slot number 9 which is 460.8 micro seconds
+Program is terminating - read in 14 numbers
