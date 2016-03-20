@@ -36,6 +36,7 @@ PATH=$PATH:/sbin # Get access to root level commands
 LESS="${LESS} -R" # Get less to handle color chars right
 stty rows 40 # Chosen to work with my laptop's screen
 stty cols 120 # Can also be tweaked
+export CONCURRENCY_LEVEL=8 # for make-kpkg
 </pre>
 
 In `/etc/inittab` near the bottom

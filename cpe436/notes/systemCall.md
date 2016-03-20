@@ -1,4 +1,4 @@
-# Creating a System Call
+### Creating a System Call
 
 ## Method 1
 
@@ -7,19 +7,27 @@ Works on:
 
 ### Modify system call table entry
 
-Add your system call to the end of the list in `arch/i386/kernel/entry.S`
+Add your system call to the end of the list in `arch/i386/kernel/entry.S` or `arch/i386/kernel/syscall_table.S`
 
 The entry will take the form:
-<pre>
-	.long sys_bero_test
-</pre>
+```
+.long sys_bero_test
+```
 
 Next create a system call stub in `include/asm-i386/unistd.h`
 
 The entry will take the form:
-<pre>
-    #define __NR_bero_test		289
-</pre>
+```
+#define __NR_bero_test		289
+```
+
+### Update main Makefile
+
+Update the top level makefile to find your syscall source:
+
+```
+core-y          += kernel/ mm/ fs/ ipc/ security/ crypto/ bero/
+```
 
 ### Create source files
 
@@ -27,8 +35,8 @@ I place mine in a top level directory called `bero`
 
 This takes three files:
 
-`bero/test.c`
-<pre>
+*bero/test.c*
+```
 #include "test.h"
 #include <linux/kernel.h> /* for printk */
 
@@ -36,10 +44,10 @@ asmlinkage long sys_bero_test (int arg1) {
 	printk(KERN_INFO "bero_test system call.");
     return(arg1 + 1);
 }
-</pre>
+```
 
-`bero/test.h`
-<pre>
+*bero/test.h*
+```
 #ifndef __LINUX_BERO_TEST_H
 #define __LINUX_BERO_TEST_H
 
@@ -49,19 +57,19 @@ asmlinkage long sys_bero_test (int arg1) {
 _syscall1(long, bero_test, int, arg1);
 
 #endif
-</pre>
+```
 
-`bero/Makefile`
-<pre>
+*bero/Makefile*
+```
 obj-y := bero_test.o
-</pre>
+```
 
 ### Create C program
 
 Now you have to interact with the system call from userspace.
 
-`main.c`
-<pre>
+*main.c*
+```
 #include <stdio.h>
 #include <linux/kernel.h>
 #include <sys/syscall.h>
@@ -80,7 +88,7 @@ int main(int argc, char *argv[])
         printf("System call returned %ld\n", a);
         return 0;
 }
-</pre>
+```
 
 ## Links
 
