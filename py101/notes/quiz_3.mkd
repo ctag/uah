@@ -1,0 +1,30 @@
+quiz 2 review
+
+* Chapter 3
+	* Central nervous system: brain and spinal cord
+	* Peripheral nervous system: connects CNS to the rest of the body.
+	* Somatic nervous system: associated with activities traditionally thought of as conscious or voluntary.
+	* Autonomic nervous system: controls organs and glands; generally considered to be outside the realm of voluntary control. Can be divided up into Sympathetic and Parasympathetic nervous systems.
+		* Sympathetic nervous system: Involved with preparing the body for stress-related activities.
+		* Parasympathetic nervous system: Associated with returning the body to routine, day-to-day operations.
+	* Lateralization: Specialization between hemispheres of the brain.
+	* The two hemispheres are connected by the corpus callosum.
+	* Brain lobes: 
+		* frontal, located in the front, involved in reasoning, motor control, emotion, language.
+		* parietal, behind frontal lobe, involved in processing information from senses.
+		* temporal, located on the side of the brain, associated with hearing, memory, emotion.
+		* occipital, back of the brain, contains primary visual cortex.
+	* Limbic system: emotion, memory, smell.
+	* Cerebellum: part of hindbrain, works with muscles, tendons, joints to control balance, coordination, movement, and motor skills.
+	* neurons
+	* Synapse: space between neurons.
+	* Membrane potential: provides energy for signal between neurons.
+	* Resting potential: The membrane's potential held in a state of readiness.
+	* 
+* resting/action potential
+* synapses
+* neuron communication
+* neurotransmitters
+* brain / nervous system divisions
+* structures of the brain
+* 
