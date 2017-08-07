@@ -1,0 +1,110 @@
+
+Have your TA initial here ________________
+
+==============================
+/home/student/csb0019/CPE112_SPR13/Project_02
+==============================
+.:
+csb0019.txt
+Part1a/
+Part1b/
+Project_02_output.bash*
+Project2_part1.txt
+
+./Part1a:
+Part1a_bk/
+Project2_part1a.txt
+
+./Part1a/Part1a_bk:
+Project2_part1a.txt.cp
+
+./Part1b:
+Part1b_2/
+
+./Part1b/Part1b_2:
+Project2_part1.txt
+==============================
+Project2_part1.txt
+// ****************************************
+// Program Title: Sample header file
+// Project File: Project2_part1b.txt
+// Name: Christopher Bero
+// Course Section: CPE-112-03
+// Lab Section: 01
+// Due Date: 01/22/13
+// program description: Description of
+// What the program does.
+// ****************************************
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+return 0;
+}
+==============================
+Part1a/Project2_part1a.txt
+// ****************************************
+// Program Title: Sample header file
+// Project File: Project2_part1a.txt
+// Name: Christopher Bero
+// Course Section: CPE-112-03
+// Lab Section: 01
+// Due Date: 01/22/13
+// program description: Description of
+// What the program does.
+// ****************************************
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+return 0;
+}
+==============================
+Part1a/Part1a_bk/Project2_part1a.txt.cp
+// ****************************************
+// Program Title: Sample header file
+// Project File: Project2_part1a.txt.cp
+// Name: Christopher Bero
+// Course Section: CPE-112-03
+// Lab Section: 01
+// Due Date: 01/22/13
+// program description: Description of
+// What the program does.
+// ****************************************
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+return 0;
+}
+==============================
+Part1b/Part1b_2/Project2_part1.txt
+// ****************************************
+// Program Title: Sample header file
+// Project File: Project2_part1b.txt
+// Name: Christopher Bero
+// Course Section: CPE-112-03
+// Lab Section: 01
+// Due Date: 01/22/13
+// program description: Description of
+// What the program does.
+// ****************************************
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+return 0;
+}
+==============================

@@ -1,0 +1,8 @@
+Washington George 90 -1
+Jefferson Thomas 80 -1
+Franklin Benjamin 70 -1
+Lincoln Abe 60	-1
+Stewart Jimmy 59 -1
+
+
+

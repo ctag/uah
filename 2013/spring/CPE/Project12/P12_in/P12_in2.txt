@@ -1,0 +1,10 @@
+Washington George 100 99 -1
+Jefferson Thomas 90 83 -1
+Franklin Benjamin 80 74 -1
+Lincoln Abraham 100 42 -1
+Madison Madison 70 60 -1
+Wilson Woodrow 50 34 -1
+Hoover Herbert 50 99 -1
+Jackson Andrew 75 98 -1
+A1B2C3D4E5F6G7 Z1X2Y3W4V5U6 45 76 -1
+Stewart Jimmy	55 65 -1

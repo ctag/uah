@@ -1,0 +1,196 @@
+{
+	"blocks":[
+	{
+		"tag" : "[1]",
+		"inputs": "",
+		"outputs": "(OW)",
+		"dialog": "You are raised on a farm, doing nothing but boring tasks all day."
+	},	
+	{
+		"tag" : "[2]",
+		"inputs": "",
+		"outputs": "(OW)",
+		"dialog": "You live a simple live on the edge of a small settlement. You spend your days helping your father around the farm."
+	},
+	{
+		"tag" : "[3]",
+		"inputs": "(OW)",
+		"outputs": "(CA)",
+		"dialog": "One day you find a pair of droids on a mission to find a great general. They ask you to help."
+	},
+	{
+		"tag" : "[4]",
+		"inputs": "(OW)",
+		"outputs": "(CA)",
+		"dialog": "One afternoon three men of the town guard come to your home and demand to speak with your father. After a heated argument you see them men dragging your father off with them. He struggles and manages to get free for long enough to run up to you and slip you a key."
+	},
+	{
+		"tag" : "[5]",
+		"inputs": "(CA)",
+		"outputs": "(RC)",
+		"dialog": "Your family says not to worry, after all you have chores to take care of. The cows 'mooo' emphatically."
+	},
+	{
+		"tag" : "[6]",
+		"inputs": "(CA)",
+		"outputs": "(RC)",
+		"dialog": "You are distraught but there is work to do around the farm. Surely things will work out; your family would want you to keep working."
+	},
+	{
+		"tag" : "[7]",
+		"inputs": "(RC)",
+		"outputs": "(MM)",
+		"dialog": "The call to adventure it to great however, you decide to try the quest anyway. Along the way you find the General who decides to teach you his ways."
+	},
+	{
+		"tag" : "[8]",
+		"inputs": "(RC)",
+		"outputs": "(MM)",
+		"dialog": "Suddenly in a blast of smoke a man appears behind you and addresses you directly. 'Come with me if you wish to know what is becoming of this world.'"
+	},
+	{
+		"tag" : "[9]",
+		"inputs": "(MM)",
+		"outputs": "(CT)",
+		"dialog": "Your mentor’s training helps a lot. He’s kinda like Mr. Miyagi."
+	},
+	{
+		"tag" : "[10]",
+		"inputs": "(MM)",
+		"outputs": "(CT)",
+		"dialog": "Your mentor trains you in the way of magic; teaching you anything and everything he knows."
+	},
+	{
+		"tag" : "[11]",
+		"inputs": "(MM)",
+		"outputs": "(CT)",
+		"dialog": " Your mentor’s training helps a lot. He’s kinda like Mr. Miyagi."
+	},
+	{
+		"tag" : "[12]",
+		"inputs": "(MM)",
+		"outputs": "(CT)",
+		"dialog": "Your mentor trains you in hand to hand combat."
+	},
+	{
+		"tag" : "[13]",
+		"inputs": "(MM)",
+		"outputs": "(CT)",
+		"dialog": "Your mentor is aggravated at your lack of progress and punishes you."
+	},
+	{
+		"tag" : "[14]",
+		"inputs": "(CT)",
+		"outputs": "(TAE)",
+		"dialog": "You meet a space captain. You decide he is your friend. "
+	},
+	{
+		"tag" : "[15]",
+		"inputs": "(CT)",
+		"outputs": "(TAE)",
+		"dialog": "You meet a strong warrior in the local tavern."
+	},
+	{
+		"tag" : "[16]",
+		"inputs": "(CT)",
+		"outputs": "(TAE)",
+		"dialog": "You meet a disheveled rogue in the local market. You notice him trying to pickpocket an elderly farmer. After calling him out he attempts to escape in the crowd."
+	},
+	{
+		"tag" : "[17]",
+		"inputs": "(TAE)",
+		"outputs": "(AP)",
+		"dialog": "You find out there is a rebellion."
+	},
+	{
+		"tag" : "[18]",
+		"inputs": "(TAE)",
+		"outputs": "(AP)",
+		"dialog": "You learn of dark sorceries in the town over."
+	},
+	{
+		"tag" : "[19]",
+		"inputs": "(TAE)",
+		"outputs": "(AP)",
+		"dialog": "A letter comes by post of a far away kingdom in need of help."
+	},
+	{
+		"tag" : "[20]",
+		"inputs": "(AP)",
+		"outputs": "(TO)",
+		"dialog": "You arrive at your destination, ready for anything and everything to go wrong. <Insert more story>"
+	},
+	{
+		"tag" : "[21]",
+		"inputs": "(AP)",
+		"outputs": "(TO)",
+		"dialog": "When you arrive you’re greeted by a large fleet of guardsmen. <Insert more story>"
+	},
+	{
+		"tag" : "[22]",
+		"inputs": "(AP)",
+		"outputs": "(TO)",
+		"dialog": "After getting lost numerous times, you finally manage to get there. <Insert more story>"
+	},
+	{
+		"tag" : "[23]",
+		"inputs": "(TO)",
+		"outputs": "(TR)",
+		"dialog": "You are awarded by the queen."
+	},
+	{
+		"tag" : "[24]",
+		"inputs": "(TO)",
+		"outputs": "(TR)",
+		"dialog": "You have been knighted as a reward for your valiant conquest."
+	},
+	{
+		"tag" : "[25]",
+		"inputs": "(TO)",
+		"outputs": "(TR)",
+		"dialog": "Though fame and fortune cannot undo what has been, it definitely doesn’t hurt."
+	},
+	{
+		"tag" : "[26]",
+		"inputs": "(TR)",
+		"outputs": "(RB)",
+		"dialog": "You begin your journey back home."
+	},
+	{
+		"tag" : "[27]",
+		"inputs": "(TR)",
+		"outputs": "(RB)",
+		"dialog": "Traveling home won’t be easy, but life never is."
+	},
+	{
+		"tag" : "[28]",
+		"inputs": "(TR)",
+		"outputs": "(RB)",
+		"dialog": "You grow weary of your travels and dream of home. Dreamlike thoughts of the sweet embrace of your familiar bed lulls you into an arduous journey home."
+	},
+	{
+		"tag" : "[30]",
+		"inputs": "(RB)",
+		"outputs": "(TRE)",
+		"dialog": "You thought you were dead but your weren’t. Surprise!"
+	},
+	{
+		"tag" : "[31]",
+		"inputs": "(RB)",
+		"outputs": "(TRE)",
+		"dialog": "Your closest ally jumps into the pit, sacrificing themselves for the greater good."
+	},
+	{
+		"tag" : "[32]",
+		"inputs": "(TRE)",
+		"outputs": "(RWE)",
+		"dialog": "You rest easy knowing the world is a better place."
+	},
+	{
+		"tag" : "[33]",
+		"inputs": "(TRE)",
+		"outputs": "(RWE)",
+		"dialog": "Not much can stop you know. The journey has made you a stronger human being."
+	},
+	]
+}
